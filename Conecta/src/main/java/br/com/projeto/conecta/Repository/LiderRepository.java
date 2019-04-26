@@ -1,4 +1,4 @@
-package br.com.projeto.conecta.Repository;
+package br.com.projeto.conecta.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

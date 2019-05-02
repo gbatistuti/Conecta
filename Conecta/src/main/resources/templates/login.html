@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>TOTVS | Login</title>
+	<link rel="icon" type="imagem/png" href="static/img/logo_totvs.png" />
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link href="static/css/Style.css" 
+		th:href="@{static/css/Style.css}" rel="stylesheet"/>
+</head>
+
+<body>
+<div>
+		<form th:action="@{/login}" th:object="${lider}" method="post" >
+			<input class="input" id="Login" th:field="*{email}" type="text" aria-label="Email" placeholder="Email">
+			<br><br>
+			<input class="input" id="Password" th:field="*{senha}" type="password" aria-label="Senha" placeholder="Senha">
+			<br><br>
+			<button class="button" name="button">Entrar</button>
+			<br><br>
+			<a class="ancora" href="#"> Ainda não é cadastrado?</a>
+		</form>
+    </div>
+
+</body>
+</html>

@@ -17,13 +17,12 @@ public class Lider extends Usuarios{
 //	private Integer id;
 	
 	private String unidade;
-	
+
+
 	public Lider(String email, String senha, Integer codigo, String nome, String unidade, String tipo) {
 		super(email, senha, codigo, nome);
 		this.unidade = unidade;
 	}
-
-
 
 //	   @OneToOne
 //	   @JoinColumn(name = "FK_USUARIO")

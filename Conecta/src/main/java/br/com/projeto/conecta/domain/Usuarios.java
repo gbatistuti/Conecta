@@ -21,7 +21,7 @@ public abstract class Usuarios extends Credenciais implements Serializable{
 	private Integer codigo;
 	private String nome;
 	private String tipo;
-	
+
 	public Usuarios(String email, String senha, Integer codigo, String nome) {
 		super(email, senha);
 		this.codigo = codigo;

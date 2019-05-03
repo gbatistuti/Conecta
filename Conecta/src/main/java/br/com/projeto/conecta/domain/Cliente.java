@@ -1,9 +1,9 @@
 package br.com.projeto.conecta.domain;
 
+import java.util.List;
+
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
@@ -13,6 +13,9 @@ import javax.persistence.Table;
 public class Cliente extends Usuarios{
 	
 	private String telefone;
+	
+	@OneToMany(mappedBy = "cliente")
+	private List<Projeto> projeto;
 
 	public Cliente(String email, String senha, Integer idUsuario, String codigo, String nome, String grupo,
 			String telefone) {

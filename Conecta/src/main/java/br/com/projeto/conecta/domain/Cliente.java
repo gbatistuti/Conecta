@@ -16,6 +16,9 @@ public class Cliente extends Usuarios{
 	
 	@OneToMany(mappedBy = "cliente")
 	private List<Projeto> projeto;
+	
+	public Cliente() {
+	}
 
 	public Cliente(String email, String senha, Integer idUsuario, String codigo, String nome, String grupo,
 			String telefone) {

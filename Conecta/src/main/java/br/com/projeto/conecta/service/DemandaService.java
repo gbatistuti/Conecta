@@ -25,8 +25,8 @@ public class DemandaService {
 		demandaRepository.deleteById(id);
 	}
 	
-	public void editar(Integer id) {
-		demandaRepository.updateById(id);
-	}
+//	public void editar(Integer id) {
+//		demandaRepository.updateById(id);
+//	}
 
 }

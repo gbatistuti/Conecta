@@ -21,16 +21,21 @@ public class Demanda {
 	private String titulo;
 	private String descricao;
 	private Date dataHora;
+	private String status;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "ID_PROJETO")
+	@JoinColumn(name = "idProjeto")
 	private Projeto projeto;
+	
+	public Demanda() {
+	}
 
-	public Demanda(Integer idDemanda, String titulo, String descricao, Date dataHora, Projeto projeto) {
+	public Demanda(Integer idDemanda, String titulo, String descricao, Date dataHora, String status, Projeto projeto) {
 		this.idDemanda = idDemanda;
 		this.titulo = titulo;
 		this.descricao = descricao;
 		this.dataHora = dataHora;
+		this.status = status;
 		this.projeto = projeto;
 	}
 
@@ -66,6 +71,14 @@ public class Demanda {
 		this.dataHora = dataHora;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	public Projeto getProjeto() {
 		return projeto;
 	}
@@ -73,6 +86,7 @@ public class Demanda {
 	public void setProjeto(Projeto projeto) {
 		this.projeto = projeto;
 	}
+
 	
 	
 	

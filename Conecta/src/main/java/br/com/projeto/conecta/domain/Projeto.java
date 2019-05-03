@@ -19,7 +19,8 @@ public class Projeto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idProjeto;
-	private Integer codigoProjeto;
+	private String codigoProjeto;
+	private String nome;
 	private String produto;
 	private String modulo;
 	private String coordenador;
@@ -32,16 +33,18 @@ public class Projeto {
 	@OneToMany(mappedBy = "projeto")
 	private List<Demanda> demanda;
 
-	public Projeto(Integer idProjeto, Integer codigoProjeto, String produto, String modulo, String coordenador,
-			Integer qtdBho, Cliente cliente, List<Demanda> demanda) {
+	public Projeto() {
+	}
+	public Projeto(Integer idProjeto, String codigoProjeto, String nome, String produto, String modulo, String coordenador,
+			Integer qtdBho, Cliente cliente) {
 		this.idProjeto = idProjeto;
 		this.codigoProjeto = codigoProjeto;
+		this.nome = nome;
 		this.produto = produto;
 		this.modulo = modulo;
 		this.coordenador = coordenador;
 		this.qtdBho = qtdBho;
 		this.cliente = cliente;
-		this.demanda = demanda;
 	}
 
 	public Integer getIdProjeto() {
@@ -52,11 +55,17 @@ public class Projeto {
 		this.idProjeto = idProjeto;
 	}
 
-	public Integer getCodigoProjeto() {
+	public String getCodigoProjeto() {
 		return codigoProjeto;
 	}
 
-	public void setCodigoProjeto(Integer codigoProjeto) {
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	public void setCodigoProjeto(String codigoProjeto) {
 		this.codigoProjeto = codigoProjeto;
 	}
 

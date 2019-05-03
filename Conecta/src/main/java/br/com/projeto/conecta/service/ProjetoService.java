@@ -26,8 +26,8 @@ public class ProjetoService {
 		projetoRepository.deleteById(id);
 	}
 	
-	public void editar(Integer id) {
-		projetoRepository.updateById(id);
-	}
+//	public void editar(Integer id) {
+//		projetoRepository.updateById(id);
+//	}
 
 }

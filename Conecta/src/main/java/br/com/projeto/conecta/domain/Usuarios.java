@@ -22,6 +22,9 @@ public class Usuarios extends Credenciais implements Serializable{
 	private String nome;
 	private String grupo;
 	
+	public Usuarios() {
+	}
+	
 	public Usuarios(String email, String senha, Integer idUsuario, String codigo, String nome, String grupo) {
 		super(email, senha);
 		this.idUsuario = idUsuario;

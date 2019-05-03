@@ -3,10 +3,14 @@ package br.com.projeto.conecta.domain;
 import java.sql.Time;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -23,15 +27,12 @@ public class Disponiveis {
 	
 	private Date data;
 	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "ID_RECURSO")
+	private Consultor consultor;
 	
-	
-	
-
-	public Disponiveis(Integer idDisponivel, Time horaInicio, Time horaFim, Date data) {
-		this.idDisponivel = idDisponivel;
-		this.horaInicio = horaInicio;
-		this.horaFim = horaFim;
-		this.data = data;
+	public Disponiveis() {
+		
 	}
 
 	public Integer getIdDisponivel() {

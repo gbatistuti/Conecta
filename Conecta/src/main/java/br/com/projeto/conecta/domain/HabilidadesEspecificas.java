@@ -1,11 +1,14 @@
 package br.com.projeto.conecta.domain;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -15,34 +18,51 @@ public class HabilidadesEspecificas {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer idHabilidadeEspecifico;
+	private Integer idHabilidadeEspecifica;
 	
-	private String habilidadeEspecifico;
+	private String nomeHabilidadeEspecifica;
 
 	@ManyToOne(cascade = CascadeType.ALL)
-
 	@JoinColumn(name = "ID_HABILIDADES_PRINCIPAIS")
-
 	private HabilidadesPrincipais habilidadesPrincipais;
-
-	public HabilidadesEspecificas(Integer idHabilidadeEspecifico, String habilidadeEspecifico) {
-		this.idHabilidadeEspecifico = idHabilidadeEspecifico;
-		this.habilidadeEspecifico = habilidadeEspecifico;
+	
+	@ManyToMany(mappedBy = "habilidadesEspecificas")
+	private List<Consultor> consultor;
+	
+	public HabilidadesEspecificas() {
+		
 	}
 
-	public Integer getIdHabilidadeEspecifico() {
-		return idHabilidadeEspecifico;
+	public Integer getIdHabilidadeEspecifica() {
+		return idHabilidadeEspecifica;
 	}
 
-	public void setIdHabilidadeEspecifico(Integer idHabilidadeEspecifico) {
-		this.idHabilidadeEspecifico = idHabilidadeEspecifico;
+	public void setIdHabilidadeEspecifica(Integer idHabilidadeEspecifica) {
+		this.idHabilidadeEspecifica = idHabilidadeEspecifica;
 	}
 
-	public String getHabilidadeEspecifico() {
-		return habilidadeEspecifico;
+	public String getNomeHabilidadeEspecifica() {
+		return nomeHabilidadeEspecifica;
 	}
 
-	public void setHabilidadeEspecifico(String habilidadeEspecifico) {
-		this.habilidadeEspecifico = habilidadeEspecifico;
+	public void setNomeHabilidadeEspecifica(String nomeHabilidadeEspecifica) {
+		this.nomeHabilidadeEspecifica = nomeHabilidadeEspecifica;
 	}
+
+	public HabilidadesPrincipais getHabilidadesPrincipais() {
+		return habilidadesPrincipais;
+	}
+
+	public void setHabilidadesPrincipais(HabilidadesPrincipais habilidadesPrincipais) {
+		this.habilidadesPrincipais = habilidadesPrincipais;
+	}
+
+	public List<Consultor> getConsultor() {
+		return consultor;
+	}
+
+	public void setConsultor(List<Consultor> consultor) {
+		this.consultor = consultor;
+	}	
+	
 }

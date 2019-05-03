@@ -17,18 +17,10 @@ public class HabilidadesPrincipais {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idHabilidadePrincipal;
 	
-	private String habilidadePrincipal;
+	private String nomeHabilidadePrincipal;
 
 	@OneToMany(mappedBy = "habilidadesPrincipais")
 	private List<HabilidadesEspecificas> habilidadesEspecificas;
-
-
-	public HabilidadesPrincipais(Integer idHabilidadePrincipal, String habilidadePrincipal,
-			List<HabilidadesEspecificas> habilidadesEspecificas) {
-		this.idHabilidadePrincipal = idHabilidadePrincipal;
-		this.habilidadePrincipal = habilidadePrincipal;
-		this.habilidadesEspecificas = habilidadesEspecificas;
-	}
 
 	public Integer getIdHabilidadePrincipal() {
 		return idHabilidadePrincipal;
@@ -38,12 +30,12 @@ public class HabilidadesPrincipais {
 		this.idHabilidadePrincipal = idHabilidadePrincipal;
 	}
 
-	public String getHabilidadePrincipal() {
-		return habilidadePrincipal;
+	public String getNomeHabilidadePrincipal() {
+		return nomeHabilidadePrincipal;
 	}
 
-	public void setHabilidadePrincipal(String habilidadePrincipal) {
-		this.habilidadePrincipal = habilidadePrincipal;
+	public void setNomeHabilidadePrincipal(String nomeHabilidadePrincipal) {
+		this.nomeHabilidadePrincipal = nomeHabilidadePrincipal;
 	}
 
 	public List<HabilidadesEspecificas> getHabilidadesEspecificas() {
@@ -53,5 +45,5 @@ public class HabilidadesPrincipais {
 	public void setHabilidadesEspecificas(List<HabilidadesEspecificas> habilidadesEspecificas) {
 		this.habilidadesEspecificas = habilidadesEspecificas;
 	}
-	
+
 }

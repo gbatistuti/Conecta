@@ -20,7 +20,9 @@ public class HabilidadesEspecificas {
 	private String habilidadeEspecifico;
 
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "ID_HABILIDADESPRINCIPAIS")
+
+	@JoinColumn(name = "ID_HABILIDADES_PRINCIPAIS")
+
 	private HabilidadesPrincipais habilidadesPrincipais;
 
 	public HabilidadesEspecificas(Integer idHabilidadeEspecifico, String habilidadeEspecifico) {

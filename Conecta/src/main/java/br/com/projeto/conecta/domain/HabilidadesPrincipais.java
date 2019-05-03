@@ -21,8 +21,37 @@ public class HabilidadesPrincipais {
 
 	@OneToMany(mappedBy = "habilidadesPrincipais")
 	private List<HabilidadesEspecificas> habilidadesEspecificas;
-	
-	
-	
+
+
+	public HabilidadesPrincipais(Integer idHabilidadePrincipal, String habilidadePrincipal,
+			List<HabilidadesEspecificas> habilidadesEspecificas) {
+		this.idHabilidadePrincipal = idHabilidadePrincipal;
+		this.habilidadePrincipal = habilidadePrincipal;
+		this.habilidadesEspecificas = habilidadesEspecificas;
+	}
+
+	public Integer getIdHabilidadePrincipal() {
+		return idHabilidadePrincipal;
+	}
+
+	public void setIdHabilidadePrincipal(Integer idHabilidadePrincipal) {
+		this.idHabilidadePrincipal = idHabilidadePrincipal;
+	}
+
+	public String getHabilidadePrincipal() {
+		return habilidadePrincipal;
+	}
+
+	public void setHabilidadePrincipal(String habilidadePrincipal) {
+		this.habilidadePrincipal = habilidadePrincipal;
+	}
+
+	public List<HabilidadesEspecificas> getHabilidadesEspecificas() {
+		return habilidadesEspecificas;
+	}
+
+	public void setHabilidadesEspecificas(List<HabilidadesEspecificas> habilidadesEspecificas) {
+		this.habilidadesEspecificas = habilidadesEspecificas;
+	}
 	
 }

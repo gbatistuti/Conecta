@@ -19,6 +19,5 @@ public class ClienteHomeController {
 	public String listar(ModelMap model) {
 		model.addAttribute("disponiveis", consultorRepository.findAll());
 		return "/clientehome";
-	}
-	
+	}	
 }

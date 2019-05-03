@@ -16,6 +16,8 @@ public class Consultor extends Usuarios{
 	private String cargo;
 	private Float preco;
 	
+	
+	
 	public Consultor(String email, String senha, Integer idUsuario, String codigo, String nome, String grupo,
 			String unidade, String cargo, Float preco) {
 		super(email, senha, idUsuario, codigo, nome, grupo);

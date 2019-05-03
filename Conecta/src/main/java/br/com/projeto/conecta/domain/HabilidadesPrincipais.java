@@ -22,7 +22,7 @@ public class HabilidadesPrincipais {
 	@OneToMany(mappedBy = "habilidadesPrincipais")
 	private List<HabilidadesEspecificas> habilidadesEspecificas;
 	
-	@man
+	
 	
 	
 }

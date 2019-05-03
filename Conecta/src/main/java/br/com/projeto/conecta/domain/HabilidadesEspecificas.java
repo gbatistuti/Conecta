@@ -1,7 +1,5 @@
 package br.com.projeto.conecta.domain;
 
-import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,7 +20,7 @@ public class HabilidadesEspecificas {
 	private String habilidadeEspecifico;
 
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "ID_")
+	@JoinColumn(name = "ID_HABILIDADESPRINCIPAIS")
 	private HabilidadesPrincipais habilidadesPrincipais;
 
 	public HabilidadesEspecificas(Integer idHabilidadeEspecifico, String habilidadeEspecifico) {

@@ -22,6 +22,10 @@ public class Disponiveis {
 	private Time horaFim;
 	
 	private Date data;
+	
+	
+	
+	
 
 	public Disponiveis(Integer idDisponivel, Time horaInicio, Time horaFim, Date data) {
 		this.idDisponivel = idDisponivel;

@@ -11,21 +11,54 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "usuarios")
+@Table(name = "USUARIOS")
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Usuarios extends Credenciais implements Serializable{
+public class Usuarios extends Credenciais implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idUsuario;
 	
-	private Integer codigo;
+	private String codigo;
 	private String nome;
-	private String tipo;
-
-	public Usuarios(String email, String senha, Integer codigo, String nome) {
+	private String grupo;
+	
+	public Usuarios(String email, String senha, Integer idUsuario, String codigo, String nome, String grupo) {
 		super(email, senha);
+		this.idUsuario = idUsuario;
 		this.codigo = codigo;
 		this.nome = nome;
+		this.grupo = grupo;
 	}
-	
+
+	public Integer getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(Integer idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getGrupo() {
+		return grupo;
+	}
+
+	public void setGrupo(String grupo) {
+		this.grupo = grupo;
+	}
 }

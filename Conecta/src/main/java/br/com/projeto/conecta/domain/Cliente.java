@@ -8,22 +8,24 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="clientes")
+@Table(name="CLIENTES")
 @PrimaryKeyJoinColumn(name="idUsuario")
 public class Cliente extends Usuarios{
-//	@Id
-//	@GeneratedValue(strategy = GenerationType.IDENTITY)
-//	private Integer id;
 	
 	private String telefone;
 
-	public Cliente(String email, String senha, Integer codigo, String nome, String telefone) {
-		super(email, senha, codigo, nome);
+	public Cliente(String email, String senha, Integer idUsuario, String codigo, String nome, String grupo,
+			String telefone) {
+		super(email, senha, idUsuario, codigo, nome, grupo);
+		this.telefone = telefone;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
 	
-//	   @OneToOne
-//	   @JoinColumn(name = "FK_USUARIO")
-//	   private Usuarios usuarios;
-
 }

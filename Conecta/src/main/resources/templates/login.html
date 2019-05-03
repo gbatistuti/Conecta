@@ -12,7 +12,7 @@
 
 <body>
 <div>
-		<form th:action="@{/login}" th:object="${lider}" method="post" >
+		<form th:action="@{/login}" th:object="${usuarios}" method="post" >
 			<input class="input" id="Login" th:field="*{email}" type="text" aria-label="Email" placeholder="Email">
 			<br><br>
 			<input class="input" id="Password" th:field="*{senha}" type="password" aria-label="Senha" placeholder="Senha">

@@ -8,24 +8,23 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "lideres")
+@Table(name = "LIDERES")
 @PrimaryKeyJoinColumn(name="idUsuario")
 public class Lider extends Usuarios{
 	
-//	@Id
-//	@GeneratedValue(strategy = GenerationType.IDENTITY)
-//	private Integer id;
-	
 	private String unidade;
 
-
-	public Lider(String email, String senha, Integer codigo, String nome, String unidade, String tipo) {
-		super(email, senha, codigo, nome);
+	public Lider(String email, String senha, Integer idUsuario, String codigo, String nome, String grupo,
+			String unidade) {
+		super(email, senha, idUsuario, codigo, nome, grupo);
 		this.unidade = unidade;
 	}
 
-//	   @OneToOne
-//	   @JoinColumn(name = "FK_USUARIO")
-//	   private Usuarios usuarios;
-	
+	public String getUnidade() {
+		return unidade;
+	}
+
+	public void setUnidade(String unidade) {
+		this.unidade = unidade;
+	}
 }

@@ -5,6 +5,31 @@
 <title> Home | Cliente</title>
 </head>
 <body>
-
+<div>
+	<table>
+		<thead>
+			<tr>
+				<th>Consultor</th>
+				<th>hora fim</th>
+				<th>habilidade Principal</th>
+				<th>habilidade Especifica</th>
+				<th>seleção</th>
+			</tr>			
+		</thead>
+		<tbody>
+			<tr th:each ="d : ${disponiveis}">
+				<td th:text="${d.horaFim}"></td>
+				<td th:text="${d.consultor.habilidadesEspecificas.}"></td>
+				<td th:text="${d.projeto.produto}"></td>
+				<td th:text="${d.projeto.nome}"></td>
+				<td th:text="${d.descricao}"></td>
+				<td>
+					<button type="button">
+					</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	</div>
 </body>
 </html>

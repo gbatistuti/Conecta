@@ -19,7 +19,7 @@ public class Consultor extends Usuarios {
 	private String cargo;
 	private Float preco;
 	
-	@OneToMany(mappedBy = "recursos")
+	@OneToMany(mappedBy = "consultor")
 	private List<Disponiveis> disponiveis;
 	
 	@ManyToMany

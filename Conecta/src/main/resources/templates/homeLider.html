@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Home | Lider</title>
@@ -18,7 +18,7 @@
 			</tr>			
 		</thead>
 		<tbody>
-			<tr th:each ="d : ${demandas}">
+			<tr th:each = "d : ${demandas}">
 				<td th:text="${d.idDemanda}"></td>
 				<td th:text="${d.titulo}"></td>
 				<td th:text="${d.projeto.produto}"></td>

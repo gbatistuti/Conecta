@@ -14,6 +14,7 @@ public class Lider extends Usuarios{
 	
 	private String unidade;
 
+
 	public Lider(String email, String senha, Integer idUsuario, String codigo, String nome, String grupo,
 			String unidade) {
 		super(email, senha, idUsuario, codigo, nome, grupo);

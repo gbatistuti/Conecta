@@ -11,7 +11,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "RECURSOS")
+@Table(name = "CONSULTORES")
 @PrimaryKeyJoinColumn(name = "idUsuario")
 public class Consultor extends Usuarios {
 
@@ -25,9 +25,17 @@ public class Consultor extends Usuarios {
 	@ManyToMany
 	@JoinTable(name = "HABILIDADES_ESPECIFICAS_TEM_RECURSOS", joinColumns = {
 			@JoinColumn(name = "idUsuario") }, inverseJoinColumns = {
-			@JoinColumn(name = "idHabilidadeEspecifico") })
+			@JoinColumn(name = "idHabilidadeEspecifica") })
 	private List<HabilidadesEspecificas> habilidadesEspecificas;
 	
+	public List<HabilidadesEspecificas> getHabilidadesEspecificas() {
+		return habilidadesEspecificas;
+	}
+
+	public void setHabilidadesEspecificas(List<HabilidadesEspecificas> habilidadesEspecificas) {
+		this.habilidadesEspecificas = habilidadesEspecificas;
+	}
+
 	public Consultor() {}
 
 	public Consultor(String email, String senha, Integer idUsuario, String codigo, String nome, String grupo,

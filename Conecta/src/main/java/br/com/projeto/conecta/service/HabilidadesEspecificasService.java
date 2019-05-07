@@ -20,4 +20,6 @@ public class HabilidadesEspecificasService {
 	public List<HabilidadesEspecificas> buscarTodos(){
 		return habilidadesEspecificasRepository.findAll();
 	}
+	
+
 }

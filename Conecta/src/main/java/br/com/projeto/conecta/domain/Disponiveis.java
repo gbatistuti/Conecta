@@ -27,13 +27,19 @@ public class Disponiveis {
 	private Date data;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "ID_RECURSO")
+	@JoinColumn(name = "idUsuario")
 	private Consultor consultor;
 	
-	public Disponiveis() {
-		
+	public Disponiveis() {}
+	
+	public Disponiveis(Integer idDisponivel, Time horaInicio, Time horaFim, Date data, Consultor consultor) {
+		this.idDisponivel = idDisponivel;
+		this.horaInicio = horaInicio;
+		this.horaFim = horaFim;
+		this.data = data;
+		this.consultor = consultor;
 	}
-
+	
 	public Integer getIdDisponivel() {
 		return idDisponivel;
 	}
@@ -64,6 +70,14 @@ public class Disponiveis {
 
 	public void setData(Date data) {
 		this.data = data;
+	}
+
+	public Consultor getConsultor() {
+		return consultor;
+	}
+
+	public void setConsultor(Consultor consultor) {
+		this.consultor = consultor;
 	}
 	
 	

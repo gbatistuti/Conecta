@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Home | Lider</title>
@@ -10,10 +10,10 @@
 		<thead>
 			<tr>
 				<th>Cod</th>
-				<th>Título</th>
+				<th>Título da Demanda</th>
 				<th>Produto</th>
 				<th>Projeto</th>
-				<th>Descrição</th>
+				<th>Descrição da Demanda</th>
 				<th>Candidatar</th>
 			</tr>			
 		</thead>
@@ -22,11 +22,10 @@
 				<td th:text="${d.idDemanda}"></td>
 				<td th:text="${d.titulo}"></td>
 				<td th:text="${d.projeto.produto}"></td>
-				<td th:text="${d.projeto.nome}"></td>
+				<td th:text="${d.projeto.cliente.nome}"></td>
 				<td th:text="${d.descricao}"></td>
 				<td>
-					<button type="button">
-					</button>
+					<button type="button">Candidatar-se</button>
 				</td>
 			</tr>
 		</tbody>

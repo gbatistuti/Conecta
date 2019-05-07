@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Gerenciamento de Projetos | Líder</title>
+</head>
+<body>
+	<div>
+	<table>
+		<thead>
+			<tr>
+				<th>Cod. Projeto</th>
+				<th>Projeto</th>
+				<th>Cód. Cliente</th>
+				<th>Cliente</th>
+				<th>BHO</th>
+			</tr>			
+		</thead>
+		<tbody>
+			<tr th:each ="p : ${projetos}">
+				<td th:text="${p.codigoProjeto}"></td>
+				<td th:text="${p.nome}"></td>
+				<td th:text="${p.cliente.codigo}"></td>
+				<td th:text="${p.cliente.nome}"></td>
+				<td th:text="${p.qtdBho}"></td>
+				<td>
+					<button type="button">Botão</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	</div>
+</body>
+</html>

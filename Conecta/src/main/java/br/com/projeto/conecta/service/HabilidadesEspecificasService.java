@@ -16,10 +16,11 @@ public class HabilidadesEspecificasService {
 	@Autowired
 	private HabilidadesEspecificasRepository habilidadesEspecificasRepository;
 	
-	@Transactional
 	public List<HabilidadesEspecificas> buscarTodos(){
 		return habilidadesEspecificasRepository.findAll();
 	}
+	
+	//public List<HabilidadesEspecificas> buscarPorId(intege)
 	
 
 }

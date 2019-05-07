@@ -12,17 +12,15 @@ import br.com.projeto.conecta.service.HabilidadesEspecificasService;
 public class HomeClienteController {
 
 	@Autowired
-	//private ConsultorService consultorService;
 	private DisponivelService disponivelService;
+	@Autowired
 	private HabilidadesEspecificasService habilidadesEspecificasService;
 	
 	@GetMapping("/homeCliente")
-	public String listar(ModelMap model) {
-		//model.addAttribute("disponiveis",disponivelService.buscarTodos());
-		//model.addAttribute("habilidadesEspecificas", habilidadesEspecificasService.buscarComId(id);
+	public String listarDisponiveis(ModelMap model) {
+		model.addAttribute("disponiveis",disponivelService.buscarTodos());
 		model.addAttribute("habilidadesEspecificas", habilidadesEspecificasService.buscarTodos());
 		return "homeCliente";
 	}
 	
-
 }

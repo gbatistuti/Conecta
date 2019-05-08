@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.projeto.conecta.domain.Disponiveis;
+import br.com.projeto.conecta.domain.HabilidadesEspecificas;
 import br.com.projeto.conecta.repository.DisponivelRepository;
 
 @Service

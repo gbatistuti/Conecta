@@ -19,7 +19,7 @@ public class HomeClienteController {
 	@GetMapping("/homeCliente")
 	public String listarDisponiveis(ModelMap model) {
 		model.addAttribute("disponiveis",disponivelService.buscarTodos());
-		model.addAttribute("habilidadesEspecificas", habilidadesEspecificasService.buscarTodos());
+//		model.addAttribute("habilidadesEspecificas", habilidadesEspecificasService.buscarPorConsultorDisponivel());
 		return "homeCliente";
 	}
 	

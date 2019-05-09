@@ -13,11 +13,12 @@ import javax.persistence.Table;
 public class Lider extends Usuarios{
 	
 	private String unidade;
+	
+	public Lider() {
+	}
 
-
-	public Lider(String email, String senha, Integer idUsuario, String codigo, String nome, String grupo,
-			String unidade) {
-		super(email, senha, idUsuario, codigo, nome, grupo);
+	public Lider(Integer idUsuario, String codigo, String nome, String grupo, Credenciais credenciais, String unidade) {
+		super(idUsuario, codigo, nome, grupo, credenciais);
 		this.unidade = unidade;
 	}
 

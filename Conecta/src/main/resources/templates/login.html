@@ -13,9 +13,9 @@
 <body>
 <div>
 		<form th:action="@{/login}" th:object="${usuarios}" method="post" >
-			<input class="input" id="Login" th:field="*{email}" type="text" aria-label="Email" placeholder="Email">
+			<input class="input" id="Login" th:field="*{credenciais.email}" type="text" aria-label="Email" placeholder="Email">
 			<br><br>
-			<input class="input" id="Password" th:field="*{senha}" type="password" aria-label="Senha" placeholder="Senha">
+			<input class="input" id="Password" th:field="*{credenciais.senha}" type="password" aria-label="Senha" placeholder="Senha">
 			<br><br>
 			<button class="button" name="button">Entrar</button>
 			<br><br>

@@ -28,24 +28,16 @@ public class Consultor extends Usuarios {
 			@JoinColumn(name = "idHabilidadeEspecifica") })
 	private List<HabilidadesEspecificas> habilidadesEspecificas;
 	
-	public List<HabilidadesEspecificas> getHabilidadesEspecificas() {
-		return habilidadesEspecificas;
+	public Consultor() {
 	}
 
-	public void setHabilidadesEspecificas(List<HabilidadesEspecificas> habilidadesEspecificas) {
-		this.habilidadesEspecificas = habilidadesEspecificas;
-	}
-
-	public Consultor() {}
-
-	public Consultor(String email, String senha, Integer idUsuario, String codigo, String nome, String grupo,
-			String unidade, String cargo, Float preco) {
-		super(email, senha, idUsuario, codigo, nome, grupo);
+	public Consultor(Integer idUsuario, String codigo, String nome, String grupo, Credenciais credenciais, String unidade, String cargo, Float preco) {
+		super(idUsuario, codigo, nome, grupo, credenciais);
 		this.unidade = unidade;
 		this.cargo = cargo;
 		this.preco = preco;
 	}
-
+	
 	public String getUnidade() {
 		return unidade;
 	}
@@ -68,5 +60,21 @@ public class Consultor extends Usuarios {
 
 	public void setPreco(Float preco) {
 		this.preco = preco;
+	}
+
+	public List<Disponiveis> getDisponiveis() {
+		return disponiveis;
+	}
+
+	public void setDisponiveis(List<Disponiveis> disponiveis) {
+		this.disponiveis = disponiveis;
+	}
+
+	public List<HabilidadesEspecificas> getHabilidadesEspecificas() {
+		return habilidadesEspecificas;
+	}
+
+	public void setHabilidadesEspecificas(List<HabilidadesEspecificas> habilidadesEspecificas) {
+		this.habilidadesEspecificas = habilidadesEspecificas;
 	}
 }

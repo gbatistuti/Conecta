@@ -1,9 +1,9 @@
 package br.com.projeto.conecta.domain;
 
-import javax.persistence.MappedSuperclass;
+import javax.persistence.Embeddable;
 
-@MappedSuperclass
-public abstract class Credenciais {
+@Embeddable
+public class Credenciais {
 	private String email;
 	private String senha;
 	

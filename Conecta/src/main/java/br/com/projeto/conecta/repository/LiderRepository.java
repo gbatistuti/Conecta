@@ -13,7 +13,7 @@ public interface LiderRepository extends JpaRepository<Lider, Integer>{
 //	@Query("from Lider")
 //	public boolean contemLider(String email, String senha);
 	
-	@Query(value="select l.id from Lider l where l.email = :email and l.senha = :senha")
+	@Query(value="select l.id from Lider l where l.credenciais.email = :email and l.credenciais.senha = :senha")
 	Integer contemLider(@Param("email") String email, @Param("senha") String senha);
 	
 }

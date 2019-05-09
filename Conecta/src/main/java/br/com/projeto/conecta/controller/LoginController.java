@@ -24,7 +24,7 @@ public class LoginController {
 	@PostMapping("/login")
 	public String efetuarLogin(@ModelAttribute(name="usuarios") Usuarios usuarios, Model model) {
 		
-		Integer idUsuarioLogado = segurancaLogin.permitirAcesso(usuarios.getEmail(), usuarios.getSenha());
+		Integer idUsuarioLogado = segurancaLogin.permitirAcesso(usuarios.getCredenciais().getEmail(), usuarios.getCredenciais().getSenha());
 		 if(idUsuarioLogado != -1) {
 			 String grupoUsuarioLogado = segurancaLogin.validarGrupo(idUsuarioLogado);
 			 if(grupoUsuarioLogado.equals("lider"))return "homeLider";
@@ -37,7 +37,7 @@ public class LoginController {
 	
 	@GetMapping("/login")
 	public String exibirPaginaDeLogin(Model model) {
-		model.addAttribute(new Usuarios(null, null, null, null, null, null));
+		model.addAttribute(new Usuarios(null, null, null, null, null));
 		return "login";
 	}
 }

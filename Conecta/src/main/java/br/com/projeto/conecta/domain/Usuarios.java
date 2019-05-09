@@ -2,6 +2,7 @@ package br.com.projeto.conecta.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,7 +14,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "USUARIOS")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Usuarios extends Credenciais implements Serializable{
+public class Usuarios implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idUsuario;
@@ -22,15 +23,19 @@ public class Usuarios extends Credenciais implements Serializable{
 	private String nome;
 	private String grupo;
 	
+	@Embedded
+	private Credenciais credenciais;
+	
 	public Usuarios() {
 	}
-	
-	public Usuarios(String email, String senha, Integer idUsuario, String codigo, String nome, String grupo) {
-		super(email, senha);
+
+	public Usuarios(Integer idUsuario, String codigo, String nome, String grupo, Credenciais credenciais) {
+		super();
 		this.idUsuario = idUsuario;
 		this.codigo = codigo;
 		this.nome = nome;
 		this.grupo = grupo;
+		this.credenciais = credenciais;
 	}
 
 	public Integer getIdUsuario() {
@@ -63,5 +68,13 @@ public class Usuarios extends Credenciais implements Serializable{
 
 	public void setGrupo(String grupo) {
 		this.grupo = grupo;
+	}
+
+	public Credenciais getCredenciais() {
+		return credenciais;
+	}
+
+	public void setCredenciais(Credenciais credenciais) {
+		this.credenciais = credenciais;
 	}
 }

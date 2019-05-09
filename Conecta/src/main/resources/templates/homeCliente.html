@@ -11,7 +11,7 @@
 				<tr>
 					<th>Consultor</th>
 					<th>hora fim</th>
-<!-- 					<th>habilidade Principal</th> -->
+					<th>habilidade Principal</th>
 					<th>habilidade Especifica</th>
 					<th>seleção</th>
 				</tr>
@@ -24,6 +24,7 @@
 						<table>
 							<tbody>
 								<tr th:each="h : ${d.consultor.habilidadesEspecificas}">
+									<td th:text="${h.habilidadesPrincipais.nomeHabilidadePrincipal}"></td>								
 									<td th:text="${h.nomeHabilidadeEspecifica}"></td>
 								</tr>
 							</tbody>

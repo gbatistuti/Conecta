@@ -6,9 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import br.com.projeto.conecta.domain.Cliente;
-import br.com.projeto.conecta.domain.Consultor;
-import br.com.projeto.conecta.domain.Lider;
 import br.com.projeto.conecta.domain.Usuarios;
 import br.com.projeto.conecta.infra.SegurancaLogin;
 
@@ -29,9 +26,9 @@ public class LoginController {
 			 String grupoUsuarioLogado = segurancaLogin.validarGrupo(idUsuarioLogado);
 			 if(grupoUsuarioLogado.equals("lider"))return "homeLider";
 			 else if (grupoUsuarioLogado.equals("consultor"))return "homeConsultor";
-			 else if(grupoUsuarioLogado.equals("cliente"))return "homeCliente";
+			 else if(grupoUsuarioLogado.equals("cliente"))return "redirect:/homeCliente";
 		 }
-		 return "login";
+		 return "paginaDeErro";
 
 	}
 	

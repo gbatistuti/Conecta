@@ -8,4 +8,6 @@ import br.com.projeto.conecta.domain.Agendamento;
 @Repository
 public interface AgendamentoRepository extends JpaRepository<Agendamento, Integer> {
 
+	
+	
 }

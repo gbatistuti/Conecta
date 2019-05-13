@@ -33,6 +33,8 @@ public class Agendamento {
 		this.pedido = pedido;
 		this.consultor = consultor;
 	}
+	
+	
 
 	public Integer getIdAgendamento() {
 		return idAgendamento;

@@ -9,23 +9,27 @@
 	<table>
 		<thead>
 			<tr>
-				<th>Cod</th>
-				<th>Título da Demanda</th>
-				<th>Produto</th>
+				<th>Cod</th>				
+				<th>Título do Agendamento</th>
+				<th>Descrição do Agendamento</th>
 				<th>Projeto</th>
-				<th>Descrição da Demanda</th>
-				<th>Candidatar</th>
+				<th>Produto</th>
+				<th>Consultor</th>
+				<th>Horas</th>
+				<th>aprovar</th>
 			</tr>			
 		</thead>
 		<tbody>
-			<tr th:each = "d : ${demandas}">
-				<td th:text="${d.idDemanda}"></td>
-				<td th:text="${d.titulo}"></td>
-				<td th:text="${d.projeto.produto}"></td>
-				<td th:text="${d.projeto.cliente.nome}"></td>
-				<td th:text="${d.descricao}"></td>
+			<tr th:each = "a : ${agendamento}">
+				<td th:text="${a.idAgendamento}"></td>
+				<td th:text="${a.pedido.titulo}"></td>
+				<td th:text="${a.pedido.descricao}"></td>
+				<td th:text="${a.pedido.projeto.nome}"></td>
+				<td th:text="${a.pedido.projeto.produto}"></td>
+				<td th:text="${a.consultor.nome}"></td>
+				<td th:text="${a.pedido.sugestaoDeHoras}"></td>
 				<td>
-					<button type="button">Candidatar-se</button>
+					<button type="button">Aprovar</button>
 				</td>
 			</tr>
 		</tbody>

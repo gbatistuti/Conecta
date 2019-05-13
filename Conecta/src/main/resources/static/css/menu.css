@@ -1,0 +1,131 @@
+body{
+    background-image: url("../img/menu/fundo1.png");
+    background-size: cover;
+	background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin: 0px 0px 0px 0px;
+
+}
+
+li{
+    display: inline;
+    margin: 0px;
+    padding: 0px;
+    color:#EA9B3E;
+}
+ul{
+    height: 45px;
+}
+
+#menu{
+    top: 0px;
+    background-color: black;
+    color: white;
+    margin-top: 0px;
+    padding: 0px;
+    margin-bottom: 0px;
+    height: 45px;
+}
+
+#listaMenu{
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    margin-top: auto;
+}
+
+#linhaInferior{
+    padding: 2px;
+    background-color: #29B6C5;
+    margin: 0px;
+}
+
+#logo{
+    padding-left: 10.5px;
+    padding-top: 1px;
+    padding-bottom: 5px;
+}
+
+#icon{
+    position: relative;
+    margin-bottom:9px;
+}
+
+#sair{
+    float: right;
+    position: inherit;
+    margin-top: 9px;
+    margin-right: 15px;
+    color:#EA9B3E;
+    font-family: 'Lato', sans-serif;
+    font-size: 20px
+}
+
+#userIcon{
+    position: relative;
+    float: right;
+    border: 0px;
+    box-shadow: -3px 3px 6px rgba(0, 0, 0, 0.8)
+}
+
+#linhaInferior{
+    margin-bottom: 5px;
+}
+
+#selecaoDeCor{
+    display: none;
+    position: relative;
+    float: right;
+}
+
+#caixaDeSelecao{
+    width: 162px;
+    height: 230px;
+    position: absolute;
+    top: 50px;
+    left: 30px;
+}
+
+#corDosPaineis{
+	color: #EA9B3E;
+	font-family: 'Lato';
+	margin-left: 28px;
+}
+
+#fundoSelecaoCor{
+
+}
+
+.linhaDeSeparacaoMenu{
+    margin: 0px;
+    padding: 0px;
+}
+
+.itemMenu{
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
+    height: 5px;
+}
+
+.selecaoCorDosPaineis{
+	border: 1px solid white;
+	height: 16px;
+	width: 16px;
+	border-radius: 50px;
+	margin-left: 30px;
+	margin-top: 20px;
+	margin-right: 1px;
+	padding: 0px;
+	background-color: orange;
+}
+
+
+.imagenSelecaoCorDosPaines{
+	float: right;
+	top:0px;
+	margin-top: -5px;
+	margin-right: -50px;
+	position:relative;
+}
+
+

@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "PROJETOS")
 public class Projeto {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idProjeto;
@@ -24,26 +24,27 @@ public class Projeto {
 	private String produto;
 	private String modulo;
 	private String coordenador;
-	private Integer qtdBho;
-	
+	private Integer qtdCreditos;
+
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "ID_CLIENTE")
 	private Cliente cliente;
-	
+
 	@OneToMany(mappedBy = "projeto")
-	private List<Demanda> demanda;
+	private List<Pedido> pedido;
 
 	public Projeto() {
 	}
-	public Projeto(Integer idProjeto, String codigoProjeto, String nome, String produto, String modulo, String coordenador,
-			Integer qtdBho, Cliente cliente) {
+
+	public Projeto(Integer idProjeto, String codigoProjeto, String nome, String produto, String modulo,
+			String coordenador, Integer qtdCreditos, Cliente cliente) {
 		this.idProjeto = idProjeto;
 		this.codigoProjeto = codigoProjeto;
 		this.nome = nome;
 		this.produto = produto;
 		this.modulo = modulo;
 		this.coordenador = coordenador;
-		this.qtdBho = qtdBho;
+		this.qtdCreditos = qtdCreditos;
 		this.cliente = cliente;
 	}
 
@@ -62,9 +63,11 @@ public class Projeto {
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 	public void setCodigoProjeto(String codigoProjeto) {
 		this.codigoProjeto = codigoProjeto;
 	}
@@ -93,12 +96,12 @@ public class Projeto {
 		this.coordenador = coordenador;
 	}
 
-	public Integer getQtdBho() {
-		return qtdBho;
+	public Integer getQtdCreditos() {
+		return qtdCreditos;
 	}
 
-	public void setQtdBho(Integer qtdBho) {
-		this.qtdBho = qtdBho;
+	public void setQtdCreditos(Integer qtdCreditos) {
+		this.qtdCreditos = qtdCreditos;
 	}
 
 	public Cliente getCliente() {
@@ -109,15 +112,12 @@ public class Projeto {
 		this.cliente = cliente;
 	}
 
-	public List<Demanda> getDemanda() {
-		return demanda;
+	public List<Pedido> getPedido() {
+		return pedido;
 	}
 
-	public void setDemanda(List<Demanda> demanda) {
-		this.demanda = demanda;
+	public void setPedido(List<Pedido> pedido) {
+		this.pedido = pedido;
 	}
-	
-	
-	
 
 }

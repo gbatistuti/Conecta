@@ -18,27 +18,30 @@ public class Consultor extends Usuarios {
 
 	private String unidade;
 	private String cargo;
-	private Float preco;
-	
+	private Float creditosPorHora;
+
 	@OneToMany(mappedBy = "consultor")
 	private List<Disponiveis> disponiveis;
-	
+
 	@ManyToMany
 	@JoinTable(name = "HABILIDADES_ESPECIFICAS_TEM_RECURSOS", joinColumns = {
-			@JoinColumn(name = "idUsuario") }, inverseJoinColumns = {
-			@JoinColumn(name = "idHabilidadeEspecifica") })
+			@JoinColumn(name = "idUsuario") }, inverseJoinColumns = { @JoinColumn(name = "idHabilidadeEspecifica") })
 	private List<HabilidadesEspecificas> habilidadesEspecificas;
-	
+
+	@OneToMany(mappedBy = "consultor")
+	private List<Agendamento> agendamento;
+
 	public Consultor() {
 	}
 
-	public Consultor(Integer idUsuario, String codigo, String nome, String grupo, Credenciais credenciais, String unidade, String cargo, Float preco) {
+	public Consultor(Integer idUsuario, String codigo, String nome, String grupo, Credenciais credenciais,
+			String unidade, String cargo, Float creditosPorHora) {
 		super(idUsuario, codigo, nome, grupo, credenciais);
 		this.unidade = unidade;
 		this.cargo = cargo;
-		this.preco = preco;
+		this.creditosPorHora = creditosPorHora;
 	}
-	
+
 	public String getUnidade() {
 		return unidade;
 	}
@@ -55,12 +58,20 @@ public class Consultor extends Usuarios {
 		this.cargo = cargo;
 	}
 
-	public Float getPreco() {
-		return preco;
+	public Float getCreditosPorHora() {
+		return creditosPorHora;
 	}
 
-	public void setPreco(Float preco) {
-		this.preco = preco;
+	public void setCreditosPorHora(Float creditosPorHora) {
+		this.creditosPorHora = creditosPorHora;
+	}
+
+	public List<Agendamento> getAgendamento() {
+		return agendamento;
+	}
+
+	public void setAgendamento(List<Agendamento> agendamento) {
+		this.agendamento = agendamento;
 	}
 
 	public List<Disponiveis> getDisponiveis() {

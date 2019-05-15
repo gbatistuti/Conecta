@@ -1,11 +1,18 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="UTF-8">
 <title>Home | Cliente</title>
 </head>
 <body>
 	<div>
+		<h1>
+			Logged user: <span sec:authentication="username">Bob</span>, Bem vindo ao	sistema!
+		</h1>
+	</div>
+	<div>
+		<h2>Lista de disponibilidade</h2>
 		<table>
 			<thead>
 				<tr>
@@ -24,7 +31,8 @@
 						<table>
 							<tbody>
 								<tr th:each="h : ${d.consultor.habilidadesEspecificas}">
-									<td th:text="${h.habilidadesPrincipais.nomeHabilidadePrincipal}"></td>								
+									<td
+										th:text="${h.habilidadesPrincipais.nomeHabilidadePrincipal}"></td>
 									<td th:text="${h.nomeHabilidadeEspecifica}"></td>
 								</tr>
 							</tbody>

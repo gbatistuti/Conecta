@@ -5,7 +5,9 @@ import java.util.Collection;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -33,12 +35,20 @@ public class ConectaUserDetailsService implements UserDetailsService {
 		if (usuario == null) {
 			throw new UsernameNotFoundException("Usuário não encontrado!!");
 		}
-		
+
 		return new User(usuario.getUsername(), usuario.getPassword(), usuario.getAuthorities());
 	}
 
 	public Collection<? extends GrantedAuthority> authorities(Usuarios usuario) {
 		return authorities(grupoRepository.findByUsuariosIn(usuario));
+	}
+
+	public Integer getCurrentUserId() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = (User) auth.getPrincipal();
+		String userName =  user.getUsername();
+		Integer usuarioLogado = usuariosRepository.findByEmail(userName).getIdUsuario();
+		return usuarioLogado;
 	}
 
 }

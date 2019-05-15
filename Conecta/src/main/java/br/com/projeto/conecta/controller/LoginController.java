@@ -14,6 +14,8 @@ public class LoginController {
 	public String index(HttpSession session, HttpServletRequest request, ModelMap modelMap) {
 
 		if (request.isUserInRole("ROLE_CLIENTE")) {
+			String id = request.getRequestedSessionId();
+			System.out.println(id);
 			return "redirect:/homeCliente";
 		} else if (request.isUserInRole("ROLE_CONSULTOR")) {
 			return "redirect:/homeConsultor";

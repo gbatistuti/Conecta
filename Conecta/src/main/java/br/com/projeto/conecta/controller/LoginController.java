@@ -1,40 +1,32 @@
 package br.com.projeto.conecta.controller;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
-import br.com.projeto.conecta.domain.Usuarios;
-import br.com.projeto.conecta.infra.SegurancaLogin;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class LoginController {
-	
-	private final SegurancaLogin segurancaLogin;
-	
-	public LoginController(SegurancaLogin segurancaLogin) {
-		this.segurancaLogin = segurancaLogin;
-	}
 
-	@PostMapping("/login")
-	public String efetuarLogin(@ModelAttribute(name="usuarios") Usuarios usuarios, Model model) {
+	@GetMapping("/")
+	public String index(HttpSession session, HttpServletRequest request, ModelMap modelMap) {
+
+		if (request.isUserInRole("ROLE_CLIENTE")) {
+			return "redirect:/homeCliente";
+		} else if (request.isUserInRole("ROLE_CONSULTOR")) {
+			return "redirect:/homeConsultor";
+		} else if (request.isUserInRole("ROLE_LIDER")) {
+			return "redirect:/homeLider";
+		}
 		
-		Integer idUsuarioLogado = segurancaLogin.permitirAcesso(usuarios.getCredenciais().getEmail(), usuarios.getCredenciais().getSenha());
-		 if(idUsuarioLogado != -1) {
-			 String grupoUsuarioLogado = segurancaLogin.validarGrupo(idUsuarioLogado);
-			 if(grupoUsuarioLogado.equals("lider"))return "homeLider";
-			 else if (grupoUsuarioLogado.equals("consultor"))return "homeConsultor";
-			 else if(grupoUsuarioLogado.equals("cliente"))return "redirect:/homeCliente";
-		 }
-		 return "paginaDeErro";
-
+		return "paginaDeErro";
 	}
-	
+
 	@GetMapping("/login")
-	public String exibirPaginaDeLogin(Model model) {
-		model.addAttribute(new Usuarios(null, null, null, null, null));
+	public String login() {
 		return "login";
 	}
+
 }

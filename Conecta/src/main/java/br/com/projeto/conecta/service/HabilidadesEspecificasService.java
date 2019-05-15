@@ -27,15 +27,4 @@ public class HabilidadesEspecificasService {
 		return habilidadesEspecificasRepository.findAll();
 	}
 	
-//	public List<String> buscarPorConsultorDisponivel(){
-//		listaDisponiveis =  disponivelService.buscarTodos();
-//		
-//		for (Disponiveis disponiveis : listaDisponiveis) {
-//			Integer idDisponivel = disponiveis.getConsultor().getIdUsuario();
-//			
-//			//listaNomeHabilidadesEspecificas.add(habilidadesEspecificasRepository.buscaHabilidadesEspecificasPorIdDisponivel(idDisponivel));
-//			
-//		}
-//		return listaNomeHabilidadesEspecificas;
-//	}
 }

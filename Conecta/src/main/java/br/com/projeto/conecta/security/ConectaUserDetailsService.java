@@ -1,0 +1,44 @@
+package br.com.projeto.conecta.security;
+
+import java.util.Collection;
+
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Repository;
+
+import br.com.projeto.conecta.domain.Usuarios;
+import br.com.projeto.conecta.repository.GrupoRepository;
+import br.com.projeto.conecta.repository.UsuariosRepository;
+
+@Repository
+@Transactional
+public class ConectaUserDetailsService implements UserDetailsService {
+
+	@Autowired
+	private UsuariosRepository usuariosRepository;
+
+	@Autowired
+	private GrupoRepository grupoRepository;
+
+	@Override
+	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+		Usuarios usuario = usuariosRepository.findByEmail(userName);
+
+		if (usuario == null) {
+			throw new UsernameNotFoundException("Usuário não encontrado!!");
+		}
+		
+		return new User(usuario.getUsername(), usuario.getPassword(), usuario.getAuthorities());
+	}
+
+	public Collection<? extends GrantedAuthority> authorities(Usuarios usuario) {
+		return authorities(grupoRepository.findByUsuariosIn(usuario));
+	}
+
+}

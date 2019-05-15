@@ -34,13 +34,6 @@ public class Consultor extends Usuarios {
 	public Consultor() {
 	}
 
-	public Consultor(Integer idUsuario, String codigo, String nome, String grupo, Credenciais credenciais,
-			String unidade, String cargo, Float creditosPorHora) {
-		super(idUsuario, codigo, nome, grupo, credenciais);
-		this.unidade = unidade;
-		this.cargo = cargo;
-		this.creditosPorHora = creditosPorHora;
-	}
 
 	public String getUnidade() {
 		return unidade;

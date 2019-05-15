@@ -20,11 +20,7 @@ public class Cliente extends Usuarios{
 	public Cliente() {
 	}
 
-	public Cliente(Integer idUsuario, String codigo, String nome, String grupo, Credenciais credenciais, String telefone) {
-		super(idUsuario, codigo, nome, grupo, credenciais);
-		this.telefone = telefone;
-	}
-
+	
 	public String getTelefone() {
 		return telefone;
 	}

@@ -1,5 +1,6 @@
 package br.com.projeto.conecta.service;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -18,7 +19,8 @@ public class DisponivelService {
 	
 	@Transactional
 	public List<Disponiveis> buscarTodos(){
-		return disponivelRepository.findAll();
+		Date data = new Date();
+		return disponivelRepository.findByDate(data);
 	}
 	
 }

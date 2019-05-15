@@ -1,17 +1,15 @@
 package br.com.projeto.conecta.controller;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class LoginController {
 
 	@GetMapping("/")
-	public String index(HttpSession session, HttpServletRequest request, ModelMap modelMap) {
+	public String index(HttpServletRequest request) {
 
 		if (request.isUserInRole("ROLE_CLIENTE")) {
 			String id = request.getRequestedSessionId();

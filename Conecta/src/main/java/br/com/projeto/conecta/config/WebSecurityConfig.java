@@ -20,9 +20,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 		.authorizeRequests()
 			.antMatchers("/resuorces/**", "/webjars/**").permitAll()
-			.antMatchers("/homeCliente").hasRole("CLIENTE")
-			.antMatchers("/homeLider").hasRole("LIDER")
-			.antMatchers("/homeConsultor").hasRole("CONSULTOR")
+			.antMatchers("/homeCliente/**").hasRole("CLIENTE")
+			.antMatchers("/homeLider/**").hasRole("LIDER")
+			.antMatchers("/homeConsultor/**").hasRole("CONSULTOR")
 			.anyRequest().authenticated()
 		.and()
 			.formLogin()

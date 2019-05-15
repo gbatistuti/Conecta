@@ -16,17 +16,23 @@
 		<table>
 			<thead>
 				<tr>
+					<th>Cód.</th>
 					<th>Consultor</th>
+					<th>Hora início</th>
 					<th>Hora fim</th>
+					<th>Créditos / h</th>
 					<th>Habilidade Principal</th>
 					<th>Habilidade Especifica</th>
-					<th>Selecionar</th>
+<!-- 				<th>Selecionar</th> -->
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="d : ${disponiveis}">
+					<td th:text="${d.consultor.idUsuario}"></td>
 					<td th:text="${d.consultor.nome}"></td>
+					<td th:text="${d.horaInicio}"></td>
 					<td th:text="${d.horaFim}"></td>
+					<td th:text="${d.consultor.creditosPorHora}"></td>
 					<td>
 						<table>
 							<tbody>
@@ -39,7 +45,7 @@
 						</table>
 					</td>
 
-					<td><button type="button">Botão</button></td>
+<!-- 					<td><button type="button">Botão</button></td> -->
 				</tr>
 			</tbody>
 		</table>

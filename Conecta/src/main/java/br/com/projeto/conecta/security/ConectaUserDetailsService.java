@@ -50,5 +50,10 @@ public class ConectaUserDetailsService implements UserDetailsService {
 		Integer usuarioLogado = usuariosRepository.findByEmail(userName).getIdUsuario();
 		return usuarioLogado;
 	}
+	
+	public Usuarios getCurrentUser() {
+		return usuariosRepository.getById(getCurrentUserId()) ;
+	}
+
 
 }

@@ -13,10 +13,14 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import br.com.projeto.conecta.security.ConectaUserDetailsService;
 
 @Entity
 @Table(name = "USUARIOS")
@@ -33,7 +37,7 @@ public class Usuarios implements Serializable, UserDetails {
 	@ManyToMany
 	@JoinTable(name = "usuarios_grupos", joinColumns = @JoinColumn(name = "idUsuario", referencedColumnName = "idUsuario"), inverseJoinColumns = @JoinColumn(name = "idGrupo", referencedColumnName = "nomeGrupo"))
 	private List<Grupo> grupo;
-
+	
 	public Usuarios() {
 	}
 
@@ -125,5 +129,5 @@ public class Usuarios implements Serializable, UserDetails {
 		// TODO Auto-generated method stub
 		return true;
 	}
-
+	
 }

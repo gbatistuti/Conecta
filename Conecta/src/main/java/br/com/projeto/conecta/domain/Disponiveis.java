@@ -1,8 +1,7 @@
 package br.com.projeto.conecta.domain;
 
-import java.sql.Date;
+import java.util.Date;
 import java.sql.Time;
-//import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -11,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 @Entity
@@ -80,6 +80,12 @@ public class Disponiveis {
 	public void setConsultor(Consultor consultor) {
 		this.consultor = consultor;
 	}
+	
+	@PrePersist
+	public void data() {
+		this.data = new Date();
+	}
+	
 	
 	
 

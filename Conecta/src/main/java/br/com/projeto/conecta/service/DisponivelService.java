@@ -22,5 +22,10 @@ public class DisponivelService {
 		Date data = new Date();
 		return disponivelRepository.findByDate(data);
 	}
+
+	public void salvarApontamento(Disponiveis disponiveis) {
+		disponivelRepository.save(disponiveis);
+		
+	}
 	
 }

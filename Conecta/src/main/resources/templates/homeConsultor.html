@@ -30,8 +30,8 @@
 					<td th:text="${p.idPedido}"></td>
 					<td th:text="${p.titulo}"></td>
 					<td th:text="${p.descricao}"></td>
-					<td th:text="${p.projeto.nome}"></td>
-					<td th:text="${p.projeto.produto}"></td>
+<!-- 					<td th:text="${p.projeto.nome}"></td> -->
+<!-- 					<td th:text="${p.projeto.produto}"></td> -->
 					<td th:text="${p.sugestaoDeHoras}"></td>
 					<td>
 						<button type="button">Candidatar-se</button>
@@ -44,17 +44,28 @@
 	<div>
 		<h2>Apontar Ociosidade</h2>
 
-		<form action="/homeConsultor/apontar" method="POST">
+		<form action="/homeConsultor/apontar" method="POST" th:object="${usuario}">
 			<label>Hora início:</label> 
 			<input type="text" name="horaInicio">
 			<label>Hora fim:</label> 
 			<input type="text" name="horaFim"> 
-			<input th:text="${userLogado}" type="text" name="idUsuario">
-			<button type="submit">Apontar</button>
+			<input th:text="${usuario} "type="text" name="idUsuario">
+			<button type="submit">Gravar</button>
 
 			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 		</form>
-
+	</div>
+	
+	
+	<br>
+	<br>
+	<br>
+	
+	<div>
+		<form action="/logout" method="post">
+			<button type="submit">Sair</button>
+			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+		</form>
 	</div>
 
 </body>

@@ -17,4 +17,9 @@ public class AgendamentoService {
 	public List<Agendamento> BuscarTodos() {
 		return agendamentoRepository.findAll();
 	}
+	
+	public boolean salvarAgendamento(Agendamento agendamento) {
+		agendamentoRepository.save(agendamento);
+		return true;
+	}
 }

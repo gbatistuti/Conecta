@@ -28,14 +28,11 @@ public class Agendamento {
 	public Agendamento() {
 	}
 
-	public Agendamento(Integer idAgendamento, Pedido pedido, Consultor consultor) {
-		this.idAgendamento = idAgendamento;
+	public Agendamento(Pedido pedido, Consultor consultor) {
 		this.pedido = pedido;
 		this.consultor = consultor;
 	}
 	
-	
-
 	public Integer getIdAgendamento() {
 		return idAgendamento;
 	}

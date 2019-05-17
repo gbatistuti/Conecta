@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.projeto.conecta.domain.Agendamento;
 import br.com.projeto.conecta.domain.Pedido;
 import br.com.projeto.conecta.repository.PedidoRepository;
 
@@ -16,5 +17,9 @@ public class PedidoService {
 	
 	public List<Pedido> buscarTodos(){
 		return pedidoRepository.findAll();
+	}
+	
+	public void salvarPedido(Pedido pedido) {
+		pedidoRepository.save(pedido);
 	}
 }

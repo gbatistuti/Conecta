@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 @Entity
@@ -21,7 +22,7 @@ public class Pedido {
 
 	private String descricao;
 
-	private String Status;
+	private String status;
 	
 	private int sugestaoDeHoras;
 
@@ -32,11 +33,11 @@ public class Pedido {
 	public Pedido() {
 	};
 
-	public Pedido(Integer idPedido, String titulo, String descricao, String status, Projeto projeto) {
-		this.idPedido = idPedido;
+	public Pedido(String titulo, String descricao, String status, Projeto projeto) {
+		status = "aguardando";
 		this.titulo = titulo;
 		this.descricao = descricao;
-		Status = status;
+		this.status = status;
 		this.projeto = projeto;
 	}
 
@@ -65,11 +66,11 @@ public class Pedido {
 	}
 
 	public String getStatus() {
-		return Status;
+		return status;
 	}
 
 	public void setStatus(String status) {
-		Status = status;
+		this.status = status;
 	}
 
 	public Projeto getProjeto() {
@@ -88,6 +89,9 @@ public class Pedido {
 		this.sugestaoDeHoras = sugestaoDeHoras;
 	}
 	
-	
+	@PrePersist
+	public void status() {
+		this.status = "aguardando";
+	}
 
 }

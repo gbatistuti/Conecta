@@ -2,26 +2,34 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<meta charset="UTF-8">
-	<title>TOTVS | Login</title>
-	<link rel="icon" type="imagem/png" href="static/img/logo_totvs.png" />
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<link href="static/css/Style.css" 
-		th:href="@{static/css/Style.css}" rel="stylesheet"/>
+<meta charset="UTF-8">
+<title>Conecta | LOGIN</title>
 </head>
-
 <body>
-<div>
-		<form th:action="@{/login}" th:object="${usuarios}" method="post" >
-			<input class="input" id="Login" th:field="*{credenciais.email}" type="text" aria-label="Email" placeholder="Email">
-			<br><br>
-			<input class="input" id="Password" th:field="*{credenciais.senha}" type="password" aria-label="Senha" placeholder="Senha">
-			<br><br>
-			<button class="button" name="button">Entrar</button>
-			<br><br>
-			<a class="ancora" href="#"> Ainda não é cadastrado?</a>
+	<div>
+		<form action="/login" method="post">
+			<div>
+				<input name="username" placeholder="Usuário" />
+			</div>
+
+			<div>
+				<input type="password" name="password" placeholder="Senha" />
+			</div>
+
+			<div>
+				<button class="btn btn-primary btn-block">Entrar</button>
+			</div>
+
+			<div>
+				<input type="checkbox" id="remember-me" name="remember-me" /> <label
+					for="remember-me">Lembrar?</label>
+			</div>
+
+			<input type="hidden" th:name="${_csrf.parameterName}"
+				th:value="${_csrf.token}" />
 		</form>
-    </div>
+
+	</div>
 
 </body>
 </html>

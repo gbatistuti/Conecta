@@ -1,0 +1,61 @@
+package br.com.projeto.conecta.controller;
+
+import javax.persistence.EntityManager;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import br.com.projeto.conecta.domain.Agendamento;
+import br.com.projeto.conecta.domain.Consultor;
+import br.com.projeto.conecta.domain.Pedido;
+import br.com.projeto.conecta.security.ConectaUserDetailsService;
+import br.com.projeto.conecta.service.AgendamentoService;
+import br.com.projeto.conecta.service.DisponivelService;
+import br.com.projeto.conecta.service.PedidoService;
+import br.com.projeto.conecta.service.ProjetoService;
+
+@Controller
+@RequestMapping("/homeCliente")
+public class ClienteController {
+
+	@Autowired
+	private DisponivelService disponivelService;
+	@Autowired
+	private AgendamentoService agendamentoService;
+	@Autowired
+	private PedidoService pedidoService;
+	@Autowired
+	private ProjetoService projetoService;
+	@Autowired
+	private ConectaUserDetailsService sessao;
+	
+	@GetMapping
+	public String listarDisponiveis(ModelMap model) {
+		model.addAttribute("disponiveis",disponivelService.buscarTodos());
+		model.addAttribute("projeto",projetoService.buscarPor(sessao.getCurrentUserId()));
+		model.addAttribute("pedido", new Pedido());
+		model.addAttribute("agendamento", new Agendamento());
+		return "homeCliente";
+	}
+	
+	@PostMapping("/criarpedido")
+	public String criarPedido(@ModelAttribute(name="pedido") Pedido pedido, Model model) {
+		pedidoService.salvarPedido(pedido);
+		return "redirect:/homeCliente";
+	}
+	
+	@PostMapping("/criaragendamento")
+	public String criarAgendamento(Pedido pedido, Agendamento agendamento, Model model) {
+		pedidoService.salvarPedido(pedido);
+		agendamento.setPedido(pedido);
+		agendamentoService.salvarAgendamento(agendamento);
+		
+		return "redirect:/homeCliente";
+	}
+}

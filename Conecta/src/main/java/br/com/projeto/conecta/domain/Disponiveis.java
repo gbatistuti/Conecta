@@ -1,7 +1,8 @@
 package br.com.projeto.conecta.domain;
 
-import java.util.Date;
+import java.sql.Date;
 import java.sql.Time;
+import java.util.Calendar;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -12,8 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
-
-import br.com.projeto.conecta.security.ConectaUserDetailsService;
 
 @Entity
 @Table(name = "DISPONIVEIS")
@@ -85,16 +84,9 @@ public class Disponiveis {
 	
 	@PrePersist
 	public void data() {
-		this.data = new Date();
+		Calendar calendar = Calendar.getInstance();
+		this.data = new Date(calendar.getTime().getTime());
+		
 	}
-	
-//	@PrePersist
-//	public void consultor() {
-//		ConectaUserDetailsService conecta = new ConectaUserDetailsService();
-//		this.consultor = conecta.getCurrentConsultor();
-//	}
-	
-	
-	
 
 }

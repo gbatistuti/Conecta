@@ -1,6 +1,6 @@
 package br.com.projeto.conecta.controller;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,21 +26,19 @@ public class ConsultorController {
 	@Autowired
 	private DisponivelService disponivelService;
 
+
 	@GetMapping
-	public String listarPedidos(ModelMap model) {
+	public String listarPedidos(ModelMap model, HttpServletRequest request) {
+		Usuarios usuario = conecta.getCurrentUser(); 
 		model.addAttribute("pedido", pedidoService.buscarTodos());
+		request.setAttribute("nome", usuario.getNome());
+		request.setAttribute("id", usuario.getIdUsuario());
 		return "homeConsultor";
 	}
 	
 	@PostMapping("/apontar")
-	public String salvarApontamento(ModelMap model, Disponiveis disponiveis, HttpSession session) {
-	
-		Usuarios usuario = conecta.getCurrentUser(); 
-		
-		session.setAttribute("usuario", usuario);
-		model.addAttribute("usuario", usuario);
-		
-		System.out.println(usuario.getIdUsuario());
+	public String salvarApontamento(Disponiveis disponiveis) {
+		disponiveis.setConsultor(conecta.getCurrentConsultor());
 		disponivelService.salvarApontamento(disponiveis);
 		return "redirect:/homeConsultor";
 	}

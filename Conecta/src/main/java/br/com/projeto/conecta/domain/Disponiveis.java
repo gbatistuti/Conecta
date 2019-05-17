@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
+import br.com.projeto.conecta.security.ConectaUserDetailsService;
+
 @Entity
 @Table(name = "DISPONIVEIS")
 public class Disponiveis {
@@ -40,7 +42,7 @@ public class Disponiveis {
 		this.data = data;
 		this.consultor = consultor;
 	}
-	
+
 	public Integer getIdDisponivel() {
 		return idDisponivel;
 	}
@@ -85,6 +87,12 @@ public class Disponiveis {
 	public void data() {
 		this.data = new Date();
 	}
+	
+//	@PrePersist
+//	public void consultor() {
+//		ConectaUserDetailsService conecta = new ConectaUserDetailsService();
+//		this.consultor = conecta.getCurrentConsultor();
+//	}
 	
 	
 	

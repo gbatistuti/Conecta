@@ -1,6 +1,6 @@
 package br.com.projeto.conecta.controller;
 
-import javax.persistence.EntityManager;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.projeto.conecta.domain.Agendamento;
-import br.com.projeto.conecta.domain.Consultor;
 import br.com.projeto.conecta.domain.Pedido;
+import br.com.projeto.conecta.domain.Usuarios;
 import br.com.projeto.conecta.security.ConectaUserDetailsService;
 import br.com.projeto.conecta.service.AgendamentoService;
 import br.com.projeto.conecta.service.DisponivelService;
@@ -36,7 +36,9 @@ public class ClienteController {
 	private ConectaUserDetailsService sessao;
 	
 	@GetMapping
-	public String listarDisponiveis(ModelMap model) {
+	public String listarDisponiveis(ModelMap model, HttpServletRequest request) {
+		Usuarios usuario = sessao.getCurrentUser(); 
+		request.setAttribute("nome", usuario.getNome());
 		model.addAttribute("disponiveis",disponivelService.buscarTodos());
 		model.addAttribute("projeto",projetoService.buscarPor(sessao.getCurrentUserId()));
 		model.addAttribute("pedido", new Pedido());

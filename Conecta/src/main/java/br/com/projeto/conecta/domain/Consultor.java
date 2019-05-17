@@ -33,7 +33,13 @@ public class Consultor extends Usuarios {
 
 	public Consultor() {
 	}
-
+	
+	public Consultor(String email, String senha, String codigo, String nome, List<Grupo> grupo, String unidade, String cargo, Float creditosPorHora) {
+		super(email, senha, codigo, nome, grupo);
+		this.unidade = unidade;
+		this.cargo = cargo;
+		this.creditosPorHora = creditosPorHora;
+	}
 
 	public String getUnidade() {
 		return unidade;

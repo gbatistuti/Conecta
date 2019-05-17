@@ -22,6 +22,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Table(name = "USUARIOS")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Usuarios implements Serializable, UserDetails {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idUsuario;
@@ -35,6 +36,14 @@ public class Usuarios implements Serializable, UserDetails {
 	private List<Grupo> grupo;
 
 	public Usuarios() {
+	}
+	
+	public Usuarios(String email, String senha, String codigo, String nome, List<Grupo> grupo) {
+		this.email = email;
+		this.senha = senha;
+		this.codigo = codigo;
+		this.nome = nome;
+		this.grupo = grupo;
 	}
 
 	public Integer getIdUsuario() {

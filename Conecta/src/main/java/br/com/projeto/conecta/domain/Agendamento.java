@@ -33,8 +33,6 @@ public class Agendamento {
 		this.consultor = consultor;
 	}
 	
-	
-
 	public Integer getIdAgendamento() {
 		return idAgendamento;
 	}

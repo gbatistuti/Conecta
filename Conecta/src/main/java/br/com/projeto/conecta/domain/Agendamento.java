@@ -24,6 +24,10 @@ public class Agendamento {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "ID_CONSULTOR")
 	private Consultor consultor;
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "ID_CRIADO_POR")
+	private Usuarios criadoPor;
 
 	public Agendamento() {
 	}
@@ -55,6 +59,14 @@ public class Agendamento {
 
 	public void setConsultor(Consultor consultor) {
 		this.consultor = consultor;
+	}
+
+	public Usuarios getCriadoPor() {
+		return criadoPor;
+	}
+
+	public void setCriadoPor(Usuarios criadoPor) {
+		this.criadoPor = criadoPor;
 	}
 
 }

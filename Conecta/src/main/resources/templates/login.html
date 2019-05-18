@@ -6,6 +6,12 @@
 <title>Conecta | LOGIN</title>
 </head>
 <body>
+	<div th:if="${param.logout}">
+		<div>Até logo!</div>
+	</div>
+	<div th:if="${param.error}">
+		<div>Usuário e/ou senha inválidos!</div>
+	</div>
 	<div>
 		<form action="/login" method="post">
 			<div>

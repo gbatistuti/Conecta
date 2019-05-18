@@ -26,21 +26,30 @@ public class ConsultorController {
 	@Autowired
 	private DisponivelService disponivelService;
 
-
 	@GetMapping
 	public String listarPedidos(ModelMap model, HttpServletRequest request) {
-		Usuarios usuario = conecta.getCurrentUser(); 
+		Usuarios usuario = conecta.getCurrentUser();
 		model.addAttribute("pedido", pedidoService.buscarTodos());
 		request.setAttribute("nome", usuario.getNome());
 		request.setAttribute("id", usuario.getIdUsuario());
 		return "homeConsultor";
 	}
-	
+
 	@PostMapping("/apontar")
 	public String salvarApontamento(Disponiveis disponiveis) {
-		disponiveis.setConsultor(conecta.getCurrentConsultor());
-		disponivelService.salvarApontamento(disponiveis);
-		return "redirect:/homeConsultor";
+		
+		if (disponivelService.validaApontamento() == null) {
+			disponiveis.setConsultor(conecta.getCurrentConsultor());
+			disponivelService.salvarApontamento(disponiveis);
+			return "redirect:/homeConsultor?sucesso";
+		}
+		return "redirect:/homeConsultor?falha";
 	}
-	
+
+	@PostMapping("/candidatar")
+	public String candidatarAoPedido() {
+
+		return "homeConsultor?candidatado";
+	}
+
 }

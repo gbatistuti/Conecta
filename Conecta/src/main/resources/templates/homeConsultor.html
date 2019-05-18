@@ -52,6 +52,17 @@
 	<div>
 		<h2>Apontar Ociosidade</h2>
 
+		<div th:if="${param.sucesso}">
+			<div>Apontamento realizado com sucesso!</div>
+			<br>
+			<br>
+		</div>
+		<div th:if="${param.falha}">
+			<div>Não é possível apontar duas vezes no mesmo dia!</div>
+			<br>
+			<br>
+		</div>
+
 		<form action="/homeConsultor/apontar" method="POST">
 
 			<label>Hora início:</label> <input type="text" name="horaInicio">
@@ -70,11 +81,11 @@
 	<br>
 
 	<div>
-	
+
 		<h2>Candidaturas</h2>
-		
-		
-		
+
+
+
 	</div>
 
 	<br>

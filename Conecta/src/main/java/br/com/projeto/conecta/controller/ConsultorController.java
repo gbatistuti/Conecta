@@ -36,6 +36,7 @@ public class ConsultorController {
 	public String listarPedidos(ModelMap model, HttpServletRequest request) {
 		Usuarios usuario = sessao.getCurrentUser();
 		model.addAttribute("pedido", pedidoService.buscarTodos());
+		model.addAttribute("pedidoCandidatado", agendamentoService.buscarCandidaturasByUsuario());
 		request.setAttribute("nome", usuario.getNome());
 		return "homeConsultor";
 	}

@@ -19,6 +19,7 @@ public class Agendamento {
 	private Integer idAgendamento;
 
 	@OneToOne
+	@JoinColumn(name = "ID_PEDIDO")
 	private Pedido pedido;
 
 	@ManyToOne(cascade = CascadeType.ALL)

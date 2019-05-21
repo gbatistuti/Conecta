@@ -45,7 +45,10 @@ public class Usuarios implements Serializable, UserDetails {
 	private List<Grupo> grupo;
 	
 	@OneToMany(mappedBy = "criadoPor")
-	private List<Agendamento> agendamentos; 
+	private List<Agendamento> agendamentos;
+	
+	@OneToMany(mappedBy = "criadoPor")
+	private List<Pedido> pedidos;
 	
 	public Usuarios() {
 	}

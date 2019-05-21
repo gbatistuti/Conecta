@@ -27,8 +27,14 @@ public class Pedido {
 	
 	private int sugestaoDeHoras;
 	
+	private String origem;
+	
 	@OneToOne(mappedBy = "pedido")
 	private Agendamento agendamento;
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "ID_CRIADO_POR")
+	private Usuarios criadoPor;
 
 	public Agendamento getAgendamento() {
 		return agendamento;
@@ -101,9 +107,24 @@ public class Pedido {
 		this.sugestaoDeHoras = sugestaoDeHoras;
 	}
 	
+	public String getOrigem() {
+		return origem;
+	}
+
+	public void setOrigem(String origem) {
+		this.origem = origem;
+	}
+
+	public Usuarios getCriadoPor() {
+		return criadoPor;
+	}
+	
+	public void setCriadoPor(Usuarios criadoPor) {
+		this.criadoPor = criadoPor;
+	}
+
 	@PrePersist
 	public void status() {
 		this.status = "aguardando";
 	}
-
 }

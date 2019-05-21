@@ -47,14 +47,18 @@ public class ClienteController {
 	}
 	
 	@PostMapping("/criarpedido")
-	public String criarPedido(@ModelAttribute(name="pedido") Pedido pedido, Model model) {
+	public String criarPedido(Pedido pedido, Model model) {
+		Usuarios usuario = sessao.getCurrentUser();
+		pedido.setCriadoPor(usuario);
+		pedido.setOrigem("pedido");
 		pedidoService.salvarPedido(pedido);
 		return "redirect:/homeCliente";
 	}
 	
 	@PostMapping("/criaragendamento")
 	public String criarAgendamento(Pedido pedido, Agendamento agendamento, Model model) {
-		Usuarios usuario = sessao.getCurrentUser(); 
+		Usuarios usuario = sessao.getCurrentUser();
+		pedido.setOrigem("agendamento");
 		pedidoService.salvarPedido(pedido);
 		agendamento.setPedido(pedido);
 		agendamento.setCriadoPor(usuario);

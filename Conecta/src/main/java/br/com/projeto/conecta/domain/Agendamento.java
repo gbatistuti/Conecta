@@ -29,6 +29,8 @@ public class Agendamento {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "ID_CRIADO_POR")
 	private Usuarios criadoPor;
+	
+	private String origem;
 
 	public Agendamento() {
 	}
@@ -70,4 +72,11 @@ public class Agendamento {
 		this.criadoPor = criadoPor;
 	}
 
+	public String getOrigem() {
+		return origem;
+	}
+
+	public void setOrigem(String origem) {
+		this.origem = origem;
+	}
 }

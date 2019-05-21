@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
@@ -31,6 +32,9 @@ public class Disponiveis {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "idUsuario")
 	private Consultor consultor;
+	
+	@OneToOne(mappedBy = "disponiveis")
+	private Alocacoes alocacoes;
 	
 	public Disponiveis() {}
 	
@@ -80,8 +84,16 @@ public class Disponiveis {
 
 	public void setConsultor(Consultor consultor) {
 		this.consultor = consultor;
-	}
+	}	
 	
+	public Alocacoes getAlocacoes() {
+		return alocacoes;
+	}
+
+	public void setAlocacoes(Alocacoes alocacoes) {
+		this.alocacoes = alocacoes;
+	}
+
 	@PrePersist
 	public void data() {
 		Calendar calendar = Calendar.getInstance();

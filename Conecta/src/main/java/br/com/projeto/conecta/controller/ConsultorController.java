@@ -22,23 +22,22 @@ public class ConsultorController {
 	@Autowired
 	private PedidoService pedidoService;
 	@Autowired
-	private ConectaUserDetailsService conecta;
+	private ConectaUserDetailsService sessao;
 	@Autowired
 	private DisponivelService disponivelService;
 
 
 	@GetMapping
 	public String listarPedidos(ModelMap model, HttpServletRequest request) {
-		Usuarios usuario = conecta.getCurrentUser(); 
+		Usuarios usuario = sessao.getCurrentUser(); 
 		model.addAttribute("pedido", pedidoService.buscarTodos());
 		request.setAttribute("nome", usuario.getNome());
-		request.setAttribute("id", usuario.getIdUsuario());
 		return "homeConsultor";
 	}
 	
 	@PostMapping("/apontar")
 	public String salvarApontamento(Disponiveis disponiveis) {
-		disponiveis.setConsultor(conecta.getCurrentConsultor());
+		disponiveis.setConsultor(sessao.getCurrentConsultor());
 		disponivelService.salvarApontamento(disponiveis);
 		return "redirect:/homeConsultor";
 	}

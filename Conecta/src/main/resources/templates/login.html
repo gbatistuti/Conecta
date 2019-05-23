@@ -3,33 +3,38 @@
 
 <head>
 <meta charset="UTF-8">
-<title>Conecta | LOGIN</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+<title> Conecta | LOGIN</title>
+
+<link rel="icon" type="imagem/png" href="../static/img/logo.png" th:href="@{../static/img/logo.png}"/>
+    
+<link href="../static/css/DesignL.css" 
+th:href="@{../static/css/DesignL.css}" rel="stylesheet"/>
 </head>
 <body>
-	<div th:if="${param.logout}">
+	<!--   Deixar Invisivel - colocar Js. para exibir
+        <div th:if="${param.logout}">
 		<div>Até logo!</div>
-	</div>
+	</div>-->
+    <!-- Deixar Invisivel - pós validação de campo
 	<div th:if="${param.error}">
 		<div>Usuário e/ou senha inválidos!</div>
-	</div>
-	<div>
-		<form action="/login" method="post">
+	</div> -->
+	<div class="div">
+		<form name ="formLogin" action="inicio.html" method="post">
 			<div>
-				<input name="username" placeholder="Usuário" />
+				<input name="username" placeholder="Usuário" type="email" class="iconInputUsername" maxlength="45"/>
+	           <br><br>
+				<input name="password" type="password"  placeholder="Senha" class="iconInputPassword focus" maxlength="45"/>
+                <br><br>
+				<button name="Button" class="button border">Login</button>
 			</div>
 
-			<div>
-				<input type="password" name="password" placeholder="Senha" />
-			</div>
-
-			<div>
-				<button class="btn btn-primary btn-block">Entrar</button>
-			</div>
-
-			<div>
+			<!--<div>
 				<input type="checkbox" id="remember-me" name="remember-me" /> <label
 					for="remember-me">Lembrar?</label>
-			</div>
+			</div>-->
 
 			<input type="hidden" th:name="${_csrf.parameterName}"
 				th:value="${_csrf.token}" />

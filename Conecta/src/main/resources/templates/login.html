@@ -7,10 +7,10 @@
     
 <title> Conecta | LOGIN</title>
 
-<link rel="icon" type="imagem/png" href="../static/img/logo.png" th:href="@{../static/img/logo.png}"/>
+<link rel="icon" type="imagem/png" href="../static/img/logo.png" th:href="@{/img/logo.png}"/>
     
-<link href="../static/css/DesignL.css" 
-th:href="@{../static/css/DesignL.css}" rel="stylesheet"/>
+<link rel="stylesheet" type="text/css" href="../static/css/DesignL.css" th:href="@{/css/DesignL.css}" />
+
 </head>
 <body>
 	<!--   Deixar Invisivel - colocar Js. para exibir
@@ -22,7 +22,7 @@ th:href="@{../static/css/DesignL.css}" rel="stylesheet"/>
 		<div>Usuário e/ou senha inválidos!</div>
 	</div> -->
 	<div class="div">
-		<form name ="formLogin" action="inicio.html" method="post">
+		<form name ="formLogin" action="/login" method="post">
 			<div>
 				<input name="username" placeholder="Usuário" type="email" class="iconInputUsername" maxlength="45"/>
 	           <br><br>

@@ -20,7 +20,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 		.authorizeRequests()
-			.antMatchers("/resuorces/**", "/webjars/**").permitAll()
+			.antMatchers("/resources/**", "/webjars/**").permitAll()
 			.antMatchers("/homeCliente/**").hasRole("CLIENTE")
 			.antMatchers("/homeLider/**").hasRole("LIDER")
 			.antMatchers("/homeConsultor/**").hasRole("CONSULTOR")

@@ -21,10 +21,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 		.authorizeRequests()
 			.antMatchers("/resources/**", "/webjars/**").permitAll()
+			.antMatchers("/css/**", "/img/**", "/bootstrap/**", "/js/**").permitAll()
 			.antMatchers("/homeCliente/**").hasRole("CLIENTE")
 			.antMatchers("/homeLider/**").hasRole("LIDER")
 			.antMatchers("/homeConsultor/**").hasRole("CONSULTOR")
-			.antMatchers("/homeCliente/criarpedido").hasRole("CLIENTE")
 			.anyRequest().authenticated()
 		.and()
 			.formLogin()

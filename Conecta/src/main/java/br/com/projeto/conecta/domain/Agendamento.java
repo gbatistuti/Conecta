@@ -11,16 +11,12 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "AGENDAMENTO")
+@Table(name = "AGENDAMENTOS")
 public class Agendamento {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idAgendamento;
-
-	@OneToOne
-	@JoinColumn(name = "ID_PEDIDO")
-	private Pedido pedido;
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "ID_CONSULTOR")
@@ -29,13 +25,19 @@ public class Agendamento {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "ID_CRIADO_POR")
 	private Usuarios criadoPor;
+	
+	@OneToOne
+	@JoinColumn(name = "ID_PEDIDO")
+	private Pedido pedido;
 
 	public Agendamento() {
 	}
 
-	public Agendamento(Pedido pedido, Consultor consultor) {
-		this.pedido = pedido;
+	public Agendamento(Integer idAgendamento, Consultor consultor, Usuarios criadoPor, Pedido pedido) {
+		this.idAgendamento = idAgendamento;
 		this.consultor = consultor;
+		this.criadoPor = criadoPor;
+		this.pedido = pedido;
 	}
 	
 	public Integer getIdAgendamento() {
@@ -44,14 +46,6 @@ public class Agendamento {
 
 	public void setIdAgendamento(Integer idAgendamento) {
 		this.idAgendamento = idAgendamento;
-	}
-
-	public Pedido getPedido() {
-		return pedido;
-	}
-
-	public void setPedido(Pedido pedido) {
-		this.pedido = pedido;
 	}
 
 	public Consultor getConsultor() {
@@ -70,4 +64,11 @@ public class Agendamento {
 		this.criadoPor = criadoPor;
 	}
 
+	public Pedido getPedido() {
+		return pedido;
+	}
+
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
+	}
 }

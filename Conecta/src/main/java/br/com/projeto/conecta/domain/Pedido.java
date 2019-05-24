@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "PEDIDOS")
 public class Pedido {
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idPedido;
@@ -23,36 +23,41 @@ public class Pedido {
 
 	private String descricao;
 
+	private int sugestaoDeHoras;
+
 	private String status;
 	
-	private int sugestaoDeHoras;
+	private String origem;
 	
-	@OneToOne(mappedBy = "pedido")
-	private Agendamento agendamento;
-
-	public Agendamento getAgendamento() {
-		return agendamento;
-	}
-
-	public void setAgendamento(Agendamento agendamento) {
-		this.agendamento = agendamento;
-	}
+	private boolean candidatura;
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "ID_PROJETO")
 	private Projeto projeto;
 
-	public Pedido() {
-	};
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "ID_CRIADO_POR")
+	private Usuarios criadoPor;
+	
+	@OneToOne(mappedBy = "pedido")
+	private Agendamento agendamento;
 
-	public Pedido(String titulo, String descricao, String status, Projeto projeto) {
-		status = "aguardando";
-		this.titulo = titulo;
-		this.descricao = descricao;
-		this.status = status;
-		this.projeto = projeto;
+	public Pedido() {
 	}
 
+	public Pedido(Integer idPedido, String titulo, String descricao, int sugestaoDeHoras, String status, String origem,
+			boolean candidatura, Projeto projeto, Usuarios criadoPor) {
+		this.idPedido = idPedido;
+		this.titulo = titulo;
+		this.descricao = descricao;
+		this.sugestaoDeHoras = sugestaoDeHoras;
+		this.status = status;
+		this.origem = origem;
+		this.candidatura = candidatura;
+		this.projeto = projeto;
+		this.criadoPor = criadoPor;
+	}
+	
 	public Integer getIdPedido() {
 		return idPedido;
 	}
@@ -77,22 +82,6 @@ public class Pedido {
 		this.descricao = descricao;
 	}
 
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public Projeto getProjeto() {
-		return projeto;
-	}
-
-	public void setProjeto(Projeto projeto) {
-		this.projeto = projeto;
-	}
-
 	public int getSugestaoDeHoras() {
 		return sugestaoDeHoras;
 	}
@@ -101,9 +90,57 @@ public class Pedido {
 		this.sugestaoDeHoras = sugestaoDeHoras;
 	}
 	
-	@PrePersist
-	public void status() {
-		this.status = "aguardando";
+	public String getStatus() {
+		return status;
+	}
+	
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
+	public String getOrigem() {
+		return origem;
+	}
+
+	public void setOrigem(String origem) {
+		this.origem = origem;
+	}
+	
+	public Projeto getProjeto() {
+		return projeto;
+	}
+	
+	public void setProjeto(Projeto projeto) {
+		this.projeto = projeto;
+	}
+
+	public Usuarios getCriadoPor() {
+		return criadoPor;
+	}
+	
+	public void setCriadoPor(Usuarios criadoPor) {
+		this.criadoPor = criadoPor;
+	}
+	
+	public Agendamento getAgendamento() {
+		return agendamento;
+	}
+
+	public void setAgendamento(Agendamento agendamento) {
+		this.agendamento = agendamento;
+	}
+
+	public boolean isCandidatura() {
+		return candidatura;
+	}
+
+	public void setCandidatura(boolean candidatura) {
+		this.candidatura = candidatura;
+	}
+
+	@PrePersist
+	public void prePersist() {
+		this.status = "aguardando";
+		this.candidatura = false;
+	}
 }

@@ -34,6 +34,7 @@ public class ConsultorController {
 
 	@GetMapping
 	public String listarPedidos(ModelMap model, HttpServletRequest request) {
+
 		Usuarios usuario = sessao.getCurrentUser();
 		model.addAttribute("pedido", pedidoService.buscarTodos());
 		model.addAttribute("pedidoCandidatado", agendamentoService.buscarCandidaturasByUsuario());
@@ -50,6 +51,7 @@ public class ConsultorController {
 			return "redirect:/homeConsultor?sucesso";
 		}
 		return "redirect:/homeConsultor?falha";
+
 	}
 
 	@PostMapping("/candidatar")

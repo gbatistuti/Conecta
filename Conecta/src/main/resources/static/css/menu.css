@@ -50,6 +50,21 @@
     font-size: 20px
 }
 
+#menuSeparacaoADireita{
+    float: right;
+    position: inherit;
+}
+
+#menuSaldacao{
+    float: right;
+    position: inherit;
+    margin-top: 9px;
+    margin-right: 15px;
+    color:#EA9B3E;
+    font-family: 'Lato', sans-serif;
+    font-size: 20px
+}
+
 #menuLinhaInferior{
     padding: 2px;
     background-color: #29B6C5;

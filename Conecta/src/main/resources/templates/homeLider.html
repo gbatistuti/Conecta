@@ -2,10 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-<meta charset="UTF-8">
-<title>Home | Lider</title>
+	<meta charset="UTF-8">
+	<title>Home | Lider</title>
+	<th:block th:replace="fragments/head :: head"></th:block>
 </head>
-<body>
+<body id="menuBody" style="background-image:url('img/menu/fundo1.png')">
+	<div th:replace="fragments/menu :: menu"></div>
 	<div>
 		<h1>
 			<span sec:authentication="principal.nome"></span>, Bem vindo ao	sistema!

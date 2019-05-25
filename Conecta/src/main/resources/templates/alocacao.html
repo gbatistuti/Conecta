@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<th:block th:replace="fragments/head :: head"></th:block>
 </head>
-<body>
+<body id="menuBody" style="background-image:url('img/menu/fundo1.png')">
+	<div th:replace="fragments/menu :: menu"></div>
 	<div>
 		<table>
 			<thead>

@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gerenciamento de Projetos | Líder</title>
-
-<link rel="icon" type="imagem/png" href="../static/img/logo.png" th:href="@{../static/img/logo.png}"/>
-    
-<link href="../static/css/DesignP.css" 
-th:href="@{../static/css/DesignP.css}" rel="stylesheet"/>
+	<title>Gerenciamento de Projetos | Líder</title>
+	<link rel="icon" type="imagem/png" href="../static/img/logo.png" th:href="@{../static/img/logo.png}"/>
+	<link href="../static/css/DesignP.css" 
+	th:href="@{../static/css/DesignP.css}" rel="stylesheet"/>
+	<th:block th:replace="fragments/head :: head"></th:block>
 </head>
-<body>
+<body id="menuBody" style="background-image:url('img/menu/fundo1.png')">
+	<div th:replace="fragments/menu :: menu"></div>
 	<div>
 	<table>
 		<thead>

@@ -5,41 +5,26 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-<title> Conecta | LOGIN</title>
+<title> Conecta | Login</title>
 
-<link rel="icon" type="imagem/png" href="../static/img/logo.png" th:href="@{../static/img/logo.png}"/>
+<link rel="icon" type="imagem/png" href="../static/img/logo.png" th:href="@{/img/logo.png}"/>
     
-<link href="../static/css/DesignL.css" 
-th:href="@{../static/css/DesignL.css}" rel="stylesheet"/>
+<link rel="stylesheet" type="text/css" href="../static/css/login.css" th:href="@{/css/login.css}" />
+
 </head>
 <body>
-	<!--   Deixar Invisivel - colocar Js. para exibir
-        <div th:if="${param.logout}">
-		<div>Até logo!</div>
-	</div>-->
-    <!-- Deixar Invisivel - pós validação de campo
-	<div th:if="${param.error}">
-		<div>Usuário e/ou senha inválidos!</div>
-	</div> -->
-	<div class="div">
-		<form name ="formLogin" action="inicio.html" method="post">
-			<div>
-				<input name="username" placeholder="Usuário" type="email" class="iconInputUsername" maxlength="45"/>
+	<div id="divForm">
+		<form name ="formLogin" id="formLogin" action="/login" method="post">
+				<input name="username" id="email" placeholder="Email" type="email" class="borda focus" maxlength="45"/>
 	           <br><br>
-				<input name="password" type="password"  placeholder="Senha" class="iconInputPassword focus" maxlength="45"/>
+				<input name="password" id="password" type="password"  placeholder="Senha" class="borda focus" maxlength="45"/>
                 <br><br>
 				<button name="Button" class="button border">Login</button>
-			</div>
-
-			<!--<div>
-				<input type="checkbox" id="remember-me" name="remember-me" /> <label
-					for="remember-me">Lembrar?</label>
-			</div>-->
+			
 
 			<input type="hidden" th:name="${_csrf.parameterName}"
 				th:value="${_csrf.token}" />
 		</form>
-
 	</div>
 
 </body>

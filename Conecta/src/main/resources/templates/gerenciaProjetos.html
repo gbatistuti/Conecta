@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gerenciamento de Projetos | Líder</title>
-
-<link rel="icon" type="imagem/png" href="../static/img/logo.png" th:href="@{../static/img/logo.png}"/>
     
-<link href="../static/css/DesignP.css" 
-th:href="@{../static/css/DesignP.css}" rel="stylesheet"/>
+<title>Gerenciamento de Projetos | Líder</title>
+<link rel="icon" type="imagem/png" href="../static/img/logo.png" th:href="@{/img/logo.png}"/>
+    
+<link type="text/css" href="../static/css/gestaoDeProjetos.css" 
+th:href="@{/css/gestaoDeProjetos.css}" rel="stylesheet"/>
 </head>
 <body>
-	<div>
+	<div >
 	<table>
 		<thead>
 			<tr>
-				<th>Código do Projeto</th>
+				<th>Código do Projeto </th>
 				<th>Projeto</th>
 				<th>Código do Cliente</th>
 				<th>Cliente</th>
-				<th>Horas   </th>
+				<th>Horas</th>
                 <th>        </th>
 			</tr>			
 		</thead>
@@ -31,7 +31,7 @@ th:href="@{../static/css/DesignP.css}" rel="stylesheet"/>
 				<td th:text="${p.cliente.nome}"></td>
 				<td th:text="${p.qtdCreditos}"> <div class="divP"><label>aaaa</label></div></td>
 				<td>
-                    <button type="button: hover" class="">Atualizar</button>				
+                    <button class="button: hover" >Atualizar</button>				
                 </td>
 			</tr>
                 

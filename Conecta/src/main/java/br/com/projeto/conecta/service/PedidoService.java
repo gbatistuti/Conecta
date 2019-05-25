@@ -3,6 +3,7 @@ package br.com.projeto.conecta.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import br.com.projeto.conecta.domain.Pedido;
@@ -22,6 +23,7 @@ public class PedidoService {
 		pedidoRepository.save(pedido);
 	}
 	
+	@Cacheable("pedidosFiltradosCache")
 	public List<Pedido> filtrarPorOrigemECandidatura () {
 		return pedidoRepository.getPedidoFiltrado();
 	}

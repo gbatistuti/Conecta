@@ -6,6 +6,7 @@ import javax.transaction.Transactional;
 
 import org.hibernate.validator.internal.util.privilegedactions.GetMethods;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -58,10 +59,12 @@ public class ConectaUserDetailsService implements UserDetailsService {
 		return usuarioLogado;
 	}
 	
+	@Cacheable("userCache")
 	public Usuarios getCurrentUser() {
 		return usuariosRepository.getById(getCurrentUserId()) ;
 	}
 	
+	@Cacheable("consultorCache")
 	public Consultor getCurrentConsultor() {
 		return consultorRepository.getById(getCurrentUserId()) ;
 	}

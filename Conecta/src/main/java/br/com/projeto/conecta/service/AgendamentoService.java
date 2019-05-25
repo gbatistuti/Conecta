@@ -3,6 +3,7 @@ package br.com.projeto.conecta.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import br.com.projeto.conecta.domain.Agendamento;
 import br.com.projeto.conecta.domain.Consultor;
@@ -27,6 +28,7 @@ public class AgendamentoService {
 		return true;
 	}
 
+	@Cacheable("cacdidaturasCache")
 	public List<Agendamento> buscarCandidaturasByUsuario() {
 		Consultor consultor = sessao.getCurrentConsultor();
 		return agendamentoRepository.findByConsultor(consultor);

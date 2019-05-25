@@ -6,11 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import br.com.projeto.conecta.domain.Agendamento;
+import br.com.projeto.conecta.domain.Alocacoes;
 import br.com.projeto.conecta.domain.Usuarios;
 import br.com.projeto.conecta.security.ConectaUserDetailsService;
 import br.com.projeto.conecta.service.AgendamentoService;
+import br.com.projeto.conecta.service.AlocacaoService;
 import br.com.projeto.conecta.service.DisponivelService;
 import br.com.projeto.conecta.service.PedidoService;
 import br.com.projeto.conecta.service.ProjetoService;
@@ -25,6 +29,10 @@ public class LiderController {
 	private AgendamentoService agendamentoService;
 	@Autowired
 	private DisponivelService disponivelService;
+	@Autowired
+	private AlocacaoService alocacaoService;
+	@Autowired
+	private ConectaUserDetailsService sessao;
 	
 	
 	@GetMapping
@@ -34,6 +42,13 @@ public class LiderController {
 		model.addAttribute("disponiveis", disponivelService.buscarTodos());
 		request.setAttribute("nome", usuario.getNome());
 		return "homeLider";
+	}
+	
+	@PostMapping("/aprovar")
+	public String aprovarAgendamento(Alocacoes alocacoes) {
+		alocacoes.setCriadoPor(sessao.getCurrentLider());
+		alocacaoService.salvarAlocacao(alocacoes);
+		return "redirect:/homeLider";
 	}
 	
 //	@GetMapping

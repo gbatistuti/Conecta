@@ -22,11 +22,12 @@ public class Alocacoes {
 
 	@OneToOne
 	@JoinColumn(name = "ID_DISPONIVEL")
-	private Disponiveis disponiveis;
+	private Disponiveis disponiveis;//morrer
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "ID_LIDER")
-	private Lider lider;
+	private Lider CriadoPor;
+	
 
 	public Integer getIdAlocacao() {
 		return idAlocacao;
@@ -52,12 +53,12 @@ public class Alocacoes {
 		this.disponiveis = disponiveis;
 	}
 
-	public Lider getLider() {
-		return lider;
+	public Lider getCriadoPor() {
+		return CriadoPor;
 	}
 
-	public void setLider(Lider lider) {
-		this.lider = lider;
+	public void setCriadoPor(Lider criadoPor) {
+		CriadoPor = criadoPor;
 	}
 
 }

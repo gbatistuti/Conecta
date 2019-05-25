@@ -16,9 +16,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
 
 import br.com.projeto.conecta.domain.Consultor;
+import br.com.projeto.conecta.domain.Lider;
 import br.com.projeto.conecta.domain.Usuarios;
 import br.com.projeto.conecta.repository.ConsultorRepository;
 import br.com.projeto.conecta.repository.GrupoRepository;
+import br.com.projeto.conecta.repository.LiderRepository;
 import br.com.projeto.conecta.repository.UsuariosRepository;
 
 @Repository
@@ -33,6 +35,8 @@ public class ConectaUserDetailsService implements UserDetailsService {
 	
 	@Autowired
 	private ConsultorRepository consultorRepository;
+	
+	@Autowired LiderRepository liderRepository;
 	
 
 	@Override
@@ -66,5 +70,8 @@ public class ConectaUserDetailsService implements UserDetailsService {
 		return consultorRepository.getById(getCurrentUserId()) ;
 	}
 	
+	public Lider getCurrentLider() {
+		return liderRepository.getById(getCurrentUserId());
+	}
 
 }

@@ -4,7 +4,12 @@
 			<a><img id="menuLogo" th:src="@{/img/menu/logo.png}" alt="TotvsConecta"/></a>
 			<img class="menuLinhaDeSeparacaoMenu" th:src="@{img/menu/linhaDeSeparacaoMenu.png}"/>
 			<img id="menuUserIcon" onclick="VisibilidadePainelUser()" th:src='@{/img/menu/userIcon.png}'></a>
-			<span id="menuSair">Sair</span>
+			<div id="menuDivSair">
+				<form action="/logout" method="post">
+					<button id="menuSair" type="submit">Sair</button>
+					<input type="hidden" th:name="${_csrf.parameterName}"th:value="${_csrf.token}" />
+				</form>
+			</div>
 			<img id = "menuSeparacaoADireita"class="menuLinhaDeSeparacaoMenu" th:src="@{img/menu/linhaDeSeparacaoMenu.png}" />
 			<div id="menuSaldacao">
 				<label>Seja bem vindo </label><label th:text="${#httpServletRequest.getAttribute('nome')}"></label>

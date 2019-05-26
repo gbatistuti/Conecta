@@ -4,15 +4,16 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Home | Lider</title>
+	
+	<!--Sera substituido pelo fragmento head que contem associaçoes para menu funcionar-->
 	<th:block th:replace="fragments/head :: head"></th:block>
 </head>
 <body id="menuBody" style="background-image:url('img/menu/fundo1.png')">
+	
+	<!--Sera substituido pelo fragmento do menu-->
 	<div th:replace="fragments/menu :: menu"></div>
-	<div>
-		<h1>
-			<span sec:authentication="principal.nome"></span>, Bem vindo ao	sistema!
-		</h1>
-	</div>
+	<!-- Todos id e class de menu começam com menuAlgumacoisa então evite usar menu na frente de seus ids ou class-->
+	
 	<div>
 	<h2>Aprovações</h2>
 	<table>

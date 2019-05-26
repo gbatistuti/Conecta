@@ -3,10 +3,16 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
+	
+	<!--Sera substituido pelo fragmento head que contem associaçoes para menu funcionar-->
 	<th:block th:replace="fragments/head :: head"></th:block>
 </head>
 <body id="menuBody" style="background-image:url('/img/menu/fundo1.png')!important">
+
+	<!--Sera substituido pelo fragmento do menu-->
 	<div th:replace="fragments/menu :: menu"></div>
+	<!-- Todos id e class de menu começam com menuAlgumacoisa então evite usar menu na frente de seus ids ou class-->
+	
 	<div>
 		<table>
 			<thead>

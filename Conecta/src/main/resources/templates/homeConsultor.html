@@ -4,19 +4,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Home | Consultor</title>
+
+<!--Sera substituido pelo fragmento head que contem associaçoes para menu funcionar-->
 <th:block th:replace="fragments/head :: head"></th:block>
 
 </head>
 <body id="menuBody" style="background-image:url('img/menu/fundo1.png')">
+	
+	<!--Sera substituido pelo fragmento do menu-->
 	<div th:replace="fragments/menuSemBotao :: menu"></div>
-	<div>
-		<h1>
-			<label>Seja bem vindo </label><label th:text="${#httpServletRequest.getAttribute('nome')}"></label>
-				
-		</h1>
-
-
-	</div>
+	<!-- Todos id e class de menu começam com menuAlgumacoisa então evite usar menu na frente de seus ids ou class-->
 
 	<div>
 		<h2>Pedidos</h2>

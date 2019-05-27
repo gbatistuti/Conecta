@@ -15,7 +15,7 @@ function imagem4(){
 }
 
 function VisibilidadePainelUser(){
-    var painel = document.getElementById("selecaoDeCor")
+    var painel = document.getElementById("menuSelecaoDeCor")
     if(painel.style.display == 'unset'){
         painel.style.display = 'none';
     }else{

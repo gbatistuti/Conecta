@@ -17,17 +17,18 @@ public class Alocacoes {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idAlocacao;
-
-	private Integer horas;
+	
+	private String motivo;
 
 	@OneToOne
-	@JoinColumn(name = "ID_DISPONIVEL")
-	private Disponiveis disponiveis;//morrer
+	@JoinColumn(name = "ID_AGENDAMENTO")
+	private Agendamento agendamento;
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "ID_LIDER")
 	private Lider CriadoPor;
 	
+	public Alocacoes() {}
 
 	public Integer getIdAlocacao() {
 		return idAlocacao;
@@ -37,28 +38,28 @@ public class Alocacoes {
 		this.idAlocacao = idAlocacao;
 	}
 
-	public Integer getHoras() {
-		return horas;
-	}
-
-	public void setHoras(Integer horas) {
-		this.horas = horas;
-	}
-
-	public Disponiveis getDisponiveis() {
-		return disponiveis;
-	}
-
-	public void setDisponiveis(Disponiveis disponiveis) {
-		this.disponiveis = disponiveis;
-	}
-
 	public Lider getCriadoPor() {
 		return CriadoPor;
 	}
 
 	public void setCriadoPor(Lider criadoPor) {
 		CriadoPor = criadoPor;
+	}
+
+	public String getMotivo() {
+		return motivo;
+	}
+
+	public void setMotivo(String motivo) {
+		this.motivo = motivo;
+	}
+
+	public Agendamento getAgendamento() {
+		return agendamento;
+	}
+
+	public void setAgendamento(Agendamento agendamento) {
+		this.agendamento = agendamento;
 	}
 
 }

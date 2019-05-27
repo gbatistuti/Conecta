@@ -86,18 +86,21 @@
 		</table>
 	</div>
 	<div>
-	<!-- parte para terminar e fazer a parte de aprovar e reprovar	-->
-	<h2>Avaliação</h2> 
-		<form action=""method="post">
-		<label>Motivo</label>
-		<input>
+		<!-- parte para terminar e fazer a parte de aprovar e reprovar	-->
+		<h2>Avaliação</h2>
+		<form action="/homeLider/aprovar" method="post" th:object="${alocacoes}">
+			<label>Id do Agendamento:</label>
+			<input name="agendamento"> 
+			<label>Motivo:</label>
+			<input name="motivo">
+			<button type="submit">Aprovar</button>
+			<input type="hidden" th:name="${_csrf.parameterName}"
+				th:value="${_csrf.token}" />
 		</form>
 	</div>
 	<div>
 		<form action="/logout" method="post">
 			<button type="submit">Sair</button>
-			<input type="hidden" th:name="${_csrf.parameterName}"
-				th:value="${_csrf.token}" />
 		</form>
 	</div>
 </body>

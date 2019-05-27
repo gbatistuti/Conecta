@@ -30,6 +30,9 @@ public class Agendamento {
 	@OneToOne
 	@JoinColumn(name = "ID_PEDIDO")
 	private Pedido pedido;
+	
+	@OneToOne(mappedBy = "agendamento")
+	private Alocacoes alocacoes;
 
 	public Agendamento() {
 	}
@@ -80,4 +83,13 @@ public class Agendamento {
 	public void setPedido(Pedido pedido) {
 		this.pedido = pedido;
 	}
+
+	public Alocacoes getAlocacoes() {
+		return alocacoes;
+	}
+
+	public void setAlocacoes(Alocacoes alocacoes) {
+		this.alocacoes = alocacoes;
+	}
+	
 }

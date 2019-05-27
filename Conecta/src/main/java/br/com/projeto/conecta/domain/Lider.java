@@ -14,7 +14,7 @@ public class Lider extends Usuarios {
 
 	private String unidade;
 
-	@OneToMany(mappedBy = "lider")
+	@OneToMany(mappedBy = "CriadoPor")
 	private List<Alocacoes> alocacao;
 
 	public Lider() {

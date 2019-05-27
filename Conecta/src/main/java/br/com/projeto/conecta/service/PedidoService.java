@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.projeto.conecta.domain.Agendamento;
 import br.com.projeto.conecta.domain.Pedido;
 import br.com.projeto.conecta.repository.PedidoRepository;
 
@@ -14,7 +13,7 @@ public class PedidoService {
 	
 	@Autowired
 	PedidoRepository pedidoRepository;
-	
+
 	public List<Pedido> buscarTodos(){
 		return pedidoRepository.findAll();
 	}
@@ -22,4 +21,13 @@ public class PedidoService {
 	public void salvarPedido(Pedido pedido) {
 		pedidoRepository.save(pedido);
 	}
+	
+	public List<Pedido> filtrarPorOrigemECandidatura () {
+		return pedidoRepository.getPedidoFiltrado();
+	}
+	
+	public Pedido getPedido(Integer id) {
+		return pedidoRepository.getOne(id);
+	}
+
 }

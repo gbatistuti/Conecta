@@ -34,6 +34,28 @@ th:href="@{/css/gestaoDeProjetos.css}" rel="stylesheet"/>
                     <button class="button: hover" >Atualizar</button>				
                 </td>
 			</tr>
+            
+            	<tr th:each ="p : ${projetos}">
+				<td th:text="${p.codigoProjeto}"></td>
+				<td th:text="${p.nome}"></td>
+				<td th:text="${p.cliente.codigo}"></td>
+				<td th:text="${p.cliente.nome}"></td>
+				<td th:text="${p.qtdCreditos}"> <div class="divP"><label>aaaa</label></div></td>
+				<td> 
+                    <button class="button: hover" >Atualizar</button>				
+                </td>
+			</tr>
+            	<tr th:each ="p : ${projetos}">
+				<td th:text="${p.codigoProjeto}"></td>
+				<td th:text="${p.nome}"></td>
+				<td th:text="${p.cliente.codigo}"></td>
+				<td th:text="${p.cliente.nome}"></td>
+				<td th:text="${p.qtdCreditos}"> <div class="divP"><label>aaaa</label></div></td>
+				<td> 
+                    <button class="button: hover" >Atualizar</button>				
+                </td>
+			</tr>
+
                 
 		</tbody>
 	</table>

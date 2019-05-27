@@ -17,8 +17,8 @@
 	<!-- Todos id e class de menu começam com menuAlgumacoisa então evite usar menu na frente de seus ids ou class-->
 	
 	<div id="aDireita">
-		<div>
-			<h2>Apontar Ociosidade</h2>
+		<div class="fundo">
+			<h2 >Apontar Ociosidade</h2>
 	
 			<div th:if="${param.sucesso}">
 				<div>Apontamento realizado com sucesso!</div>
@@ -38,8 +38,7 @@
 			</form>
 		</div>
 	
-		<div>
-	
+		<div class="fundo">
 			<h2>Candidaturas</h2>
 			<table>
 				<thead>
@@ -64,18 +63,18 @@
 	</div>
 	
 	<div id="pedidosFundo" class="fundo">
-		<div id="pedidos">
-			<h2 id="h2Pedidos">Pedidos</h2>
-			<table id="tabela">
-				<thead>
+		<h2 id="h2Pedidos">Pedidos em aberto</h2>
+		<div class="rolagem">
+			<table id="pedidosTable">
+				<thead id="descricaoTabela">
 					<tr>
-						<th>Cod</th>
-						<th>Título do Pedido</th>
-						<th>Descrição</th>
-						<th>Projeto</th>
-						<th>Produto</th>
-						<th>Horas</th>
-						<th>Candidatar</th>
+						<th class="tituloDeDescricaoDaTabela">Cod</th>
+						<th class="tituloDeDescricaoDaTabela">Título do Pedido</th>
+						<th class="tituloDeDescricaoDaTabela">Descrição</th>
+						<th class="tituloDeDescricaoDaTabela">Projeto</th>
+						<th class="tituloDeDescricaoDaTabela">Produto</th>
+						<th class="tituloDeDescricaoDaTabela">Horas</th>
+						<th class="tituloDeDescricaoDaTabela">Candidatar</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -88,7 +87,8 @@
 						<td th:text="${p.sugestaoDeHoras}"></td>
 						<td>
 							<form action="/homeConsultor/candidatar" method="POST">
-								<button type="submit" name="idPedido" th:value="${p.idPedido}">Candidatar-se</button>
+								<button id="candidatarSe" class="botao" type="submit"
+									name="idPedido" th:value="${p.idPedido}">Candidatar-se</button>
 								<input type="hidden" th:name="${_csrf.parameterName}"
 									th:value="${_csrf.token}" />
 							</form>

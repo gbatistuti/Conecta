@@ -48,6 +48,7 @@ public class LiderController {
 	public String aprovarAgendamento(Alocacoes alocacoes) {
 		alocacoes.setCriadoPor(sessao.getCurrentLider());
 		alocacaoService.salvarAlocacao(alocacoes);
+		alocacoes.se
 		return "redirect:/homeLider";
 	}
 	

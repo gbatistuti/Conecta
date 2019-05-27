@@ -34,8 +34,9 @@ public class ConsultorController {
 
 	@GetMapping
 	public String listarPedidos(ModelMap model, HttpServletRequest request) {
+
 		Usuarios usuario = sessao.getCurrentUser();
-		model.addAttribute("pedido", pedidoService.buscarTodos());
+		model.addAttribute("pedido", pedidoService.filtrarPorOrigemECandidatura());
 		model.addAttribute("pedidoCandidatado", agendamentoService.buscarCandidaturasByUsuario());
 		request.setAttribute("nome", usuario.getNome());
 		return "homeConsultor";
@@ -50,13 +51,23 @@ public class ConsultorController {
 			return "redirect:/homeConsultor?sucesso";
 		}
 		return "redirect:/homeConsultor?falha";
+
 	}
 
 	@PostMapping("/candidatar")
 	public String candidatarAoPedido(Agendamento agendamento, Pedido pedido) {
+		
+		if (disponivelService.validaApontamento() == null) {
+			return "redirect:/homeConsultor?falha2";
+//			colocar mensagem de 'necessário apontamento'
+		}
+		
 		Consultor consultor = sessao.getCurrentConsultor();
+		Pedido pedidoCandidatado = pedidoService.getPedido(pedido.getIdPedido());
+		pedidoCandidatado.setCandidatura(true);
+		pedidoService.salvarPedido(pedidoCandidatado);
 		agendamento.setConsultor(consultor);
-		agendamento.setPedido(pedido);
+		agendamento.setPedido(pedidoCandidatado);
 		agendamento.setCriadoPor(consultor);
 		agendamentoService.salvarAgendamento(agendamento);
 		return "redirect:/homeConsultor?candidatado";

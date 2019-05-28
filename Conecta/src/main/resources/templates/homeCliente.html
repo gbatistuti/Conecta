@@ -111,7 +111,7 @@
 					<tr>
 						<th>Cod</th>
 						<th>Título do Pedido</th>
-						<th>Nome do Projeto</th>
+						<th>Projeto</th>
 						<th>Status</th>
 					</tr>
 				</thead>
@@ -124,6 +124,30 @@
 					</tr>
 				</tbody>
 			</table>
+		</div>
+		
+		<div>
+		<table>
+			<thead>
+				<tr>
+					<th>Cod</th>				
+					<th>Título do Agendamento</th>
+					<th>Projeto</th>
+					<th>Status</th>
+				</tr>			
+			</thead>
+			<tbody>
+				<tr th:each = "a : ${agendamentosCriados}">
+					<td th:text="${a.idAgendamento}"></td>
+					<td th:text="${a.pedido.titulo}"></td>
+					<td th:text="${a.pedido.projeto.nome}"></td>
+					<td th:text="${a.pedido.status}"></td>
+					<td>
+						<button type="button">Aprovar</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
 		</div>
 </body>
 </html>

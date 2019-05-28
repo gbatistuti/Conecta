@@ -1,7 +1,7 @@
 package br.com.projeto.conecta.domain;
 
 import java.sql.Date;
-import java.sql.Time;
+import java.time.LocalTime;
 import java.util.Calendar;
 
 import javax.persistence.CascadeType;
@@ -22,9 +22,9 @@ public class Disponiveis {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idDisponivel;
 	
-	private Time horaInicio;
+	private LocalTime horaInicio;
 	
-	private Time horaFim;
+	private LocalTime horaFim;
 	
 	private Date data;
 	
@@ -34,7 +34,7 @@ public class Disponiveis {
 	
 	public Disponiveis() {}
 	
-	public Disponiveis(Integer idDisponivel, Time horaInicio, Time horaFim, Date data, Consultor consultor) {
+	public Disponiveis(Integer idDisponivel, LocalTime horaInicio, LocalTime horaFim, Date data, Consultor consultor) {
 		this.idDisponivel = idDisponivel;
 		this.horaInicio = horaInicio;
 		this.horaFim = horaFim;
@@ -50,19 +50,19 @@ public class Disponiveis {
 		this.idDisponivel = idDisponivel;
 	}
 
-	public Time getHoraInicio() {
+	public LocalTime getHoraInicio() {
 		return horaInicio;
 	}
 
-	public void setHoraInicio(Time horaInicio) {
+	public void setHoraInicio(LocalTime horaInicio) {
 		this.horaInicio = horaInicio;
 	}
 
-	public Time getHoraFim() {
+	public LocalTime getHoraFim() {
 		return horaFim;
 	}
 
-	public void setHoraFim(Time horaFim) {
+	public void setHoraFim(LocalTime horaFim) {
 		this.horaFim = horaFim;
 	}
 

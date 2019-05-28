@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import br.com.projeto.conecta.domain.Pedido;
 import br.com.projeto.conecta.domain.Usuarios;
 import br.com.projeto.conecta.repository.PedidoRepository;
-import br.com.projeto.conecta.security.ConectaUserDetailsService;
 
 @Service
 public class PedidoService {
@@ -23,9 +22,18 @@ public class PedidoService {
 	public void salvarPedido(Pedido pedido) {
 		pedidoRepository.save(pedido);
 	}
-
+	
+	public List<Pedido> filtrarPorOrigemECandidatura () {
+		return pedidoRepository.getPedidoFiltrado();
+	}
+	
+	public Pedido getPedido(Integer id) {
+		return pedidoRepository.getOne(id);
+	}
+	
 	public List<Pedido> buscarPedidosPorUsuario(Usuarios usuario) {
 		return pedidoRepository.findByCliente(usuario);
 	}
-
+	
+	
 }

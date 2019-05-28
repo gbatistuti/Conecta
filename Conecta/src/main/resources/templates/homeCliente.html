@@ -54,30 +54,6 @@
 		</table>
 		
 		<div>
-			<h2>Pedido</h2>
-			<form action="/homeCliente/criarpedido" method="post" th:object="${pedido}">
-				<Label>Título</Label>
-				<input name="titulo">
-				<Label>Descrição</Label>
-				<input name="descricao">
-				<Label>Sugestão de Horas</Label>
-				<input name="sugestaoDeHoras">
-				
-				<select th:field="*{projeto}" name="idProjeto">
-					<option value="">Escolha o projeto</option>
-					<option th:each="p : ${projeto}"
-							th:value="${p.idProjeto}"
-							th:text="${p.idProjeto + ' - ' + p.nome}">
-					</option>
-				</select>
-				<input type="submit" value="Salvar">
-				
-				<input type="hidden" th:name="${_csrf.parameterName}"
-				th:value="${_csrf.token}" />
-			</form>
-		</div>
-		
-		<div>
 			<h2>Agendamento</h2>
 
 			<form action="/homeCliente/criaragendamento" method="post">
@@ -106,13 +82,77 @@
 		</div>
 		
 		<div>
+			<h2>Pedido</h2>
+			<form action="/homeCliente/criarpedido" method="post" th:object="${pedido}">
+				<Label>Título</Label>
+				<input name="titulo">
+				<Label>Descrição</Label>
+				<input name="descricao">
+				<Label>Sugestão de Horas</Label>
+				<input name="sugestaoDeHoras">
+				
+				<select th:field="*{projeto}" name="idProjeto">
+					<option value="">Escolha o projeto</option>
+					<option th:each="p : ${projeto}"
+							th:value="${p.idProjeto}"
+							th:text="${p.idProjeto + ' - ' + p.nome}">
+					</option>
+				</select>
+				<input type="submit" value="Salvar">
+				
+				<input type="hidden" th:name="${_csrf.parameterName}"
+				th:value="${_csrf.token}" />
+			</form>
+		</div>
+		
+		<div>
+			<table>
+				<thead>
+					<tr>
+						<th>Cod</th>
+						<th>Título do Pedido</th>
+						<th>Projeto</th>
+						<th>Status</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="p : ${pedidosRealizados}">
+						<td th:text="${p.idPedido}"></td>
+						<td th:text="${p.titulo}"></td>
+						<td th:text="${p.projeto.nome}"></td>
+						<td th:text="${p.status}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+		<div>
+		<table>
+			<thead>
+				<tr>
+					<th>Cod</th>				
+					<th>Título do Agendamento</th>
+					<th>Projeto</th>
+					<th>Status</th>
+				</tr>			
+			</thead>
+			<tbody>
+				<tr th:each = "a : ${agendamentosCriados}">
+					<td th:text="${a.idAgendamento}"></td>
+					<td th:text="${a.pedido.titulo}"></td>
+					<td th:text="${a.pedido.projeto.nome}"></td>
+					<td th:text="${a.pedido.status}"></td>
+				</tr>
+			</tbody>
+		</table>
+		</div>
+		
+		<div>
 			<form action="/logout" method="post">
 				<button type="submit">Sair</button>
 				<input type="hidden" th:name="${_csrf.parameterName}"
 					th:value="${_csrf.token}" />
 			</form>
 		</div>
-		
-	</div>
 </body>
 </html>

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.projeto.conecta.domain.Pedido;
+import br.com.projeto.conecta.domain.Usuarios;
 import br.com.projeto.conecta.repository.PedidoRepository;
 
 @Service
@@ -29,5 +30,10 @@ public class PedidoService {
 	public Pedido getPedido(Integer id) {
 		return pedidoRepository.getOne(id);
 	}
-
+	
+	public List<Pedido> buscarPedidosPorUsuario(Usuarios usuario) {
+		return pedidoRepository.findByCliente(usuario);
+	}
+	
+	
 }

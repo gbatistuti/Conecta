@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import br.com.projeto.conecta.domain.Agendamento;
 import br.com.projeto.conecta.domain.Consultor;
+import br.com.projeto.conecta.domain.Usuarios;
 import br.com.projeto.conecta.repository.AgendamentoRepository;
 import br.com.projeto.conecta.security.ConectaUserDetailsService;
 
@@ -31,5 +32,8 @@ public class AgendamentoService {
 		Consultor consultor = sessao.getCurrentConsultor();
 		return agendamentoRepository.findByConsultor(consultor);
 	}
-	
+
+	public List<Agendamento> buscarAgendamentosPorUsuario(Usuarios usuario) {
+		return agendamentoRepository.findByCliente(usuario);
+	}
 }

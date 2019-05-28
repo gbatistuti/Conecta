@@ -1,21 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="UTF-8">
-	<title>Home | Lider</title>
-	
-	<!--Sera substituido pelo fragmento head que contem associaçoes para menu funcionar-->
-	<th:block th:replace="fragments/head :: head"></th:block>
+<meta charset="UTF-8">
+<title>Home | Lider</title>
 </head>
-<body id="menuBody" style="background-image:url('img/menu/fundo1.png')">
-	
-	<!--Sera substituido pelo fragmento do menu-->
-	<div th:replace="fragments/menu :: menu"></div>
-	<!-- Todos id e class de menu começam com menuAlgumacoisa então evite usar menu na frente de seus ids ou class-->
-	
+<body>
 	<div>
-	<h2>Aprovações</h2>
 	<table>
 		<thead>
 			<tr>

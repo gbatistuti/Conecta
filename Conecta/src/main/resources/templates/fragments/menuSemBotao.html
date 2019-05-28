@@ -1,0 +1,30 @@
+<!-- MENU-->
+    <nav th:fragment="menu">
+		<div id="menu">
+			<a><img id="menuLogo" th:src="@{/img/menu/logo.png}" alt="TotvsConecta"/></a>
+			<img class="menuLinhaDeSeparacaoMenu" th:src="@{img/menu/linhaDeSeparacaoMenu.png}"/>
+			<img id="menuUserIcon" onclick="VisibilidadePainelUser()" th:src='@{/img/menu/userIcon.png}'></a>
+			<div id="menuDivSair">
+				<form action="/logout" method="post">
+					<button id="menuSair" type="submit">Sair</button>
+					<input type="hidden" th:name="${_csrf.parameterName}"th:value="${_csrf.token}" />
+				</form>
+			</div>
+			<img id = "menuSeparacaoADireita"class="menuLinhaDeSeparacaoMenu" th:src="@{img/menu/linhaDeSeparacaoMenu.png}" />
+			<div id="menuSaldacao">
+				<label>Seja bem vindo </label><label th:text="${#httpServletRequest.getAttribute('nome')}"></label>
+			</div>
+		</div>
+		<div id="menuLinhaInferior"></div>
+		<div id="menuSelecaoDeCor">
+		   <div id="menuCaixaDeSelecao">
+			   <span id="menuCorDosPaineis">Cor dos paineis</span>
+			   <div class="menuSelecaoCorDosPaineis" onclick="imagem1()"> <img class="menuImagenSelecaoCorDosPaines" th:src="@{/img/menu/painel1.png}"></div>
+			   <div class="menuSelecaoCorDosPaineis" onclick="imagem2()"> <img class="menuImagenSelecaoCorDosPaines" th:src="@{/img/menu/painel2.png}"></div>
+			   <div class="menuSelecaoCorDosPaineis" onclick="imagem3()"> <img class="menuImagenSelecaoCorDosPaines" th:src="@{/img/menu/painel3.png}"></div>
+			   <div class="menuSelecaoCorDosPaineis" onclick="imagem4()"> <img class="menuImagenSelecaoCorDosPaines" th:src="@{/img/menu/painel4.png}"></div>
+			</div>
+			<img th:src="@{/img/menu/caixaDeSelecaoDeCor.png}">
+		</div>
+	</nav>
+	<!-- MENU-->

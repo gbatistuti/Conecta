@@ -1,0 +1,21 @@
+body
+{
+background-image:url("/Img/SucessoDoCliente.jpg");
+    
+}
+.input
+{
+    border-radius: 10%;
+    height: 20%;
+    width: 10%;
+}
+.button{
+    
+background: blue;
+font-family: sans-serif;
+color: azure;
+background-color: aqua;
+border-radius: 10%;
+height: 20%;
+width: 10%;
+}

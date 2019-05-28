@@ -14,36 +14,39 @@
 	<div th:replace="fragments/menu :: menu"></div>
 	<!-- Todos id e class de menu começam com menuAlgumacoisa então evite usar menu na frente de seus ids ou class-->
 	
-	<div>
+	<div id="fundoUmaTabelaNaPaginaToda"class="fundo">
 	<h2>Aprovações</h2>
-	<table>
-		<thead>
-			<tr>
-				<th>Cod</th>				
-				<th>Título do Agendamento</th>
-				<th>Descrição do Agendamento</th>
-				<th>Projeto</th>
-				<th>Produto</th>
-				<th>Consultor</th>
-				<th>Horas</th>
-				<th>aprovar</th>
-			</tr>			
-		</thead>
-		<tbody>
-			<tr th:each = "a : ${agendamento}">
-				<td th:text="${a.idAgendamento}"></td>
-				<td th:text="${a.pedido.titulo}"></td>
-				<td th:text="${a.pedido.descricao}"></td>
-				<td th:text="${a.pedido.projeto.nome}"></td>
-				<td th:text="${a.pedido.projeto.produto}"></td>
-				<td th:text="${a.consultor.nome}"></td>
-				<td th:text="${a.pedido.sugestaoDeHoras}"></td>
-				<td>
-					<button type="button">Aprovar</button>
-				</td>
-			</tr>
-		</tbody>
-	</table>
+	
+	<div id="rolagemUmaTabelaNaPaginaToda" class="rolagem">
+		<table>
+			<thead>
+				<tr>
+					<th class="tituloDeDescricaoDaTabela">Cod</th>				
+					<th>Título do Agendamento</th>
+					<th>Descrição do Agendamento</th>
+					<th>Projeto</th>
+					<th>Produto</th>
+					<th>Consultor</th>
+					<th>Horas</th>
+					<th>aprovar</th>
+				</tr>			
+			</thead>
+			<tbody>
+				<tr th:each = "a : ${agendamento}">
+					<td th:text="${a.idAgendamento}"></td>
+					<td th:text="${a.pedido.titulo}"></td>
+					<td th:text="${a.pedido.descricao}"></td>
+					<td th:text="${a.pedido.projeto.nome}"></td>
+					<td th:text="${a.pedido.projeto.produto}"></td>
+					<td th:text="${a.consultor.nome}"></td>
+					<td th:text="${a.pedido.sugestaoDeHoras}"></td>
+					<td>
+						<button type="button">Aprovar</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 	</div>
 </body>
 </html>

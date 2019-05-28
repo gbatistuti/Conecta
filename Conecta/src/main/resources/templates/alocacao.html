@@ -13,31 +13,34 @@
 	<div th:replace="fragments/menu :: menu"></div>
 	<!-- Todos id e class de menu começam com menuAlgumacoisa então evite usar menu na frente de seus ids ou class-->
 	
-	<div>
-		<table>
-			<thead>
-				<tr>
-					<th>Cod</th>
-					<th>Título do Pedido</th>
-					<th>Descrição do Pedido</th>
-					<th>Cliente</th>
-					<th>Produto</th>
-					<th>Selecionar</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="p : ${pedidos}">
-					<td th:text="${p.idPedido}"></td>
-					<td th:text="${p.titulo}"></td>
-					<td th:text="${p.descricao}"></td>
-					<td th:text="${p.projeto.cliente.nome}"></td>
-					<td th:text="${p.projeto.produto}"></td>
-					<td>
-						<button type="button">Selecionar</button>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+	<div id="fundoUmaTabelaNaPaginaToda"class="fundo">
+		<h2>Pedidos</h2>
+		<div id="rolagemUmaTabelaNaPaginaToda" class="rolagem">
+			<table>
+				<thead>
+					<tr>
+						<th>Cod</th>
+						<th>Título do Pedido</th>
+						<th>Descrição do Pedido</th>
+						<th>Cliente</th>
+						<th>Produto</th>
+						<th>Selecionar</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="p : ${pedidos}">
+						<td th:text="${p.idPedido}"></td>
+						<td th:text="${p.titulo}"></td>
+						<td th:text="${p.descricao}"></td>
+						<td th:text="${p.projeto.cliente.nome}"></td>
+						<td th:text="${p.projeto.produto}"></td>
+						<td>
+							<button type="button">Selecionar</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
 </body>
 </html>

@@ -31,4 +31,5 @@ public class AgendamentoService {
 		Consultor consultor = sessao.getCurrentConsultor();
 		return agendamentoRepository.findByConsultor(consultor);
 	}
+	
 }

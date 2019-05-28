@@ -15,4 +15,7 @@ public interface AgendamentoRepository extends JpaRepository<Agendamento, Intege
 
 	@Query("select u from Agendamento u where u.criadoPor = :consultor")
 	List<Agendamento> findByConsultor(@Param("consultor")Consultor consultor);
+	
+	@Query("update Agendamento u set u.pedido.status where u.idAgendamento = :idAgendamento")
+	void alterarStatusParaAprovado(@Param("idAgendamento") int IdAgendamento);
 }

@@ -32,11 +32,11 @@ public class Pedido {
 	
 	private boolean candidatura;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ID_PROJETO")
 	private Projeto projeto;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ID_CRIADO_POR")
 	private Usuarios criadoPor;
 	

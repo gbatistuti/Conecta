@@ -28,7 +28,7 @@ public class Disponiveis {
 	
 	private Date data;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "idUsuario")
 	private Consultor consultor;
 	

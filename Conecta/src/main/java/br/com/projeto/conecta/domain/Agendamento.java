@@ -33,8 +33,7 @@ public class Agendamento {
 	public Agendamento() {
 	}
 
-	public Agendamento(Integer idAgendamento, Consultor consultor, Usuarios criadoPor, Pedido pedido) {
-		this.idAgendamento = idAgendamento;
+	public Agendamento(Consultor consultor, Usuarios criadoPor, Pedido pedido) {
 		this.consultor = consultor;
 		this.criadoPor = criadoPor;
 		this.pedido = pedido;

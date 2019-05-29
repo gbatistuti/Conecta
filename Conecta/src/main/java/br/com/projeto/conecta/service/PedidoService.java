@@ -23,7 +23,7 @@ public class PedidoService {
 		pedidoRepository.save(pedido);
 	}
 	
-	@Cacheable("pedidosFiltradosCache")
+	//@Cacheable("pedidosFiltradosCache")
 	public List<Pedido> filtrarPorOrigemECandidatura () {
 		return pedidoRepository.getPedidoFiltrado();
 	}

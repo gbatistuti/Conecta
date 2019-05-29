@@ -28,7 +28,7 @@ public class AgendamentoService {
 		return true;
 	}
 
-	@Cacheable("cacdidaturasCache")
+	//@Cacheable("cacdidaturasCache")
 	public List<Agendamento> buscarCandidaturasByUsuario() {
 		Consultor consultor = sessao.getCurrentConsultor();
 		return agendamentoRepository.findByConsultor(consultor);

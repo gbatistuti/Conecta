@@ -22,8 +22,8 @@ public class CacheConfig {
 		cacheList.add(new ConcurrentMapCache("userCache"));
 		cacheList.add(new ConcurrentMapCache("consultorCache"));
 		//cacheList.add(new ConcurrentMapCache("disponivelCache"));
-		cacheList.add(new ConcurrentMapCache("pedidosFiltradosCache"));
-		cacheList.add(new ConcurrentMapCache("cacdidaturasCache"));
+		//cacheList.add(new ConcurrentMapCache("pedidosFiltradosCache"));
+		//cacheList.add(new ConcurrentMapCache("cacdidaturasCache"));
 		cacheManager.setCaches(cacheList);
 		return cacheManager;
 	}

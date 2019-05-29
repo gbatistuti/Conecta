@@ -26,7 +26,6 @@ public class Agendamento {
 	@JoinColumn(name = "ID_CRIADO_POR")
 	private Usuarios criadoPor;
 	
-	private String origem;
 	@OneToOne
 	@JoinColumn(name = "ID_PEDIDO")
 	private Pedido pedido;
@@ -66,14 +65,6 @@ public class Agendamento {
 
 	public void setCriadoPor(Usuarios criadoPor) {
 		this.criadoPor = criadoPor;
-	}
-
-	public String getOrigem() {
-		return origem;
-	}
-
-	public void setOrigem(String origem) {
-		this.origem = origem;
 	}
 	
 	public Pedido getPedido() {

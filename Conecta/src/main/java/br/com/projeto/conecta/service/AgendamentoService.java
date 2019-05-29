@@ -37,10 +37,6 @@ public class AgendamentoService {
 		return agendamentoRepository.findByCliente(usuario);
 	}
 	
-	public void alterarStatus(int idAgendamento) {
-		agendamentoRepository.alterarStatusParaAprovado(idAgendamento);
-	}
-	
 	public Agendamento getAgendamento(int id) {
 		return agendamentoRepository.getOne(id);
 	}

@@ -80,8 +80,8 @@ public class Disponiveis {
 
 	public void setConsultor(Consultor consultor) {
 		this.consultor = consultor;
-	}
-	
+	}	
+
 	@PrePersist
 	public void data() {
 		Calendar calendar = Calendar.getInstance();

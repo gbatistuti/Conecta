@@ -4,7 +4,6 @@ import java.util.Collection;
 
 import javax.transaction.Transactional;
 
-import org.hibernate.validator.internal.util.privilegedactions.GetMethods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.Authentication;
@@ -17,9 +16,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
 
 import br.com.projeto.conecta.domain.Consultor;
+import br.com.projeto.conecta.domain.Lider;
 import br.com.projeto.conecta.domain.Usuarios;
 import br.com.projeto.conecta.repository.ConsultorRepository;
 import br.com.projeto.conecta.repository.GrupoRepository;
+import br.com.projeto.conecta.repository.LiderRepository;
 import br.com.projeto.conecta.repository.UsuariosRepository;
 
 @Repository
@@ -34,6 +35,9 @@ public class ConectaUserDetailsService implements UserDetailsService {
 	
 	@Autowired
 	private ConsultorRepository consultorRepository;
+	
+	@Autowired 
+	LiderRepository liderRepository;
 	
 
 	@Override
@@ -69,5 +73,11 @@ public class ConectaUserDetailsService implements UserDetailsService {
 		return consultorRepository.getById(getCurrentUserId()) ;
 	}
 	
+	@Cacheable("liderCache")
+	public Lider getCurrentLider() {
+		return liderRepository.getById(getCurrentUserId());
+	}
+	
 
 }
+

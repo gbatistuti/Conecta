@@ -6,7 +6,6 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import br.com.projeto.conecta.domain.Consultor;
@@ -34,7 +33,6 @@ public class DisponivelService {
 	}
 	
 	@Transactional
-	//@Cacheable("disponivelCache")
 	public Disponiveis validaApontamento() {
 		Date data = new Date();
 		Consultor consultor = sessao.getCurrentConsultor();

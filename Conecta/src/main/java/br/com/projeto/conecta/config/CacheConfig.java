@@ -21,9 +21,7 @@ public class CacheConfig {
 		List<Cache> cacheList = new ArrayList<Cache>();
 		cacheList.add(new ConcurrentMapCache("userCache"));
 		cacheList.add(new ConcurrentMapCache("consultorCache"));
-		//cacheList.add(new ConcurrentMapCache("disponivelCache"));
-		//cacheList.add(new ConcurrentMapCache("pedidosFiltradosCache"));
-		//cacheList.add(new ConcurrentMapCache("cacdidaturasCache"));
+		cacheList.add(new ConcurrentMapCache("liderCache"));
 		cacheManager.setCaches(cacheList);
 		return cacheManager;
 	}

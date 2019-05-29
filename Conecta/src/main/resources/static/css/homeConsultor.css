@@ -8,14 +8,10 @@ label{
 	margin-right: 5x;
 }
 
-input{
+.horasInput{
 	margin-right: 5px;
 	height: 20px;
 	width: 100px;
-	border: solid;
-	border-width: 1.5px;
-	border-color: #ea9b3e;
-	border-radius: 20px;
 }
 
 #salvarOciosidade{

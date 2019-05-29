@@ -30,11 +30,11 @@
 			</div>
 			<div id="formularioDeOciosidade">
 				<form action="/homeConsultor/apontar" method="POST">
-					<label>Horario de inicio:</label> <input type="text" name="horaInicio">
+					<label>Horario de inicio:</label> <input class="horasInput" type="text" name="horaInicio">
 					<br>
 					<label>até</label>
 					<br>
-					<label>Hora de termino:</label> <input type="text" name="horaFim">
+					<label>Hora de termino:</label> <input class="horasInput" type="text" name="horaFim">
 					<br/>
 					<button id="salvarOciosidade"class="botao" type="submit">Apontar</button>
 					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />

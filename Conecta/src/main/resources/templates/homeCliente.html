@@ -56,15 +56,15 @@
 		<div>
 			<h2>Agendamento</h2>
 
-			<form action="/homeCliente/criaragendamento" method="post">
+			<form action="/homeCliente/criaragendamento" method="post" onsubmit="return validaForm(this);">
 				<Label>Título</Label>
-				<input type="text" th:field="${pedido.titulo}">
+				<input type="text" th:field="${pedido.titulo}" id="titulo">
 				<Label>Descrição</Label>
-				<input type="text" th:field="${pedido.descricao}">
+				<input type="text" th:field="${pedido.descricao}" id="descricao">
 				<Label>Sugestão de Horas</Label>
-				<input type="text" th:field="${pedido.sugestaoDeHoras}">
+				<input type="text" th:field="${pedido.sugestaoDeHoras}" id="horas">
 				
-				<select th:field="${pedido.projeto}" name="idProjeto">
+				<select th:field="${pedido.projeto}" name="idProjeto" id="projeto">
 					<option value="">Escolha o projeto</option>
 					<option th:each="p : ${projeto}"
 							th:value="${p.idProjeto}"
@@ -72,7 +72,8 @@
 					</option>
 				</select>
 				
-				<input type="text" th:field="${agendamento.consultor}">
+				<Label>Consultor</Label>
+				<input type="text" th:field="${agendamento.consultor}" id="consultor">
 				
 				<input type="submit" value="Salvar">
 				
@@ -154,5 +155,39 @@
 					th:value="${_csrf.token}" />
 			</form>
 		</div>
+		
+		<script type="text/javascript">
+			function validaForm(form) {
+				var validou = false;
+				
+				var campoTitulo = form.titulo;
+				var campoDescricao = form.descricao;
+				var campoHoras = form.horas;
+				var campoProjeto = form.projeto;
+				
+				var titulo = campoTitulo.value;
+				var descricao = campoDescricao.value;
+				var horas = campoHoras.value;
+				var projeto = campoProjeto.value;
+				
+				if(titulo.length == 0){
+					alert("TÍtulo não foi preenchido");
+					campoTitulo.focus();
+				}else if(descricao.length == 0){
+					alert("Descrição não foi preenchida");
+					campoDescricao.focus();
+				}else if(horas.length == 0){
+					alert("Quantidade de horas não foi preenchida");
+					campoHoras.focus();
+				}else if(projeto.length == 0){
+					alert("Projeto não foi preenchido");
+					campoProjeto.focus();
+				}else{
+					validou = true;
+				}
+				
+				return validou;
+			}
+</script>
 </body>
 </html>

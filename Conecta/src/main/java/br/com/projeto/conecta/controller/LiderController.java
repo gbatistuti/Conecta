@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,8 +16,6 @@ import br.com.projeto.conecta.security.ConectaUserDetailsService;
 import br.com.projeto.conecta.service.AgendamentoService;
 import br.com.projeto.conecta.service.AlocacaoService;
 import br.com.projeto.conecta.service.DisponivelService;
-import br.com.projeto.conecta.service.PedidoService;
-import br.com.projeto.conecta.service.ProjetoService;
 
 @Controller
 @RequestMapping("/homeLider")
@@ -46,8 +43,11 @@ public class LiderController {
 	}
 	
 	@PostMapping("/aprovar")
-	public String aprovarAgendamento(Alocacoes alocacoes) {
+	public String aprovarAgendamento(Alocacoes alocacoes, Agendamento agendamento) {
 		alocacoes.setCriadoPor(sessao.getCurrentLider());
+		Agendamento agendamentoAlterado = agendamentoService.getAgendamento(agendamento.getIdAgendamento());
+		agendamentoAlterado.getPedido().setStatus("aprovado");
+		agendamentoService.salvarAgendamento(agendamentoAlterado);
 		alocacaoService.salvarAlocacao(alocacoes);
 		return "redirect:/homeLider";
 	}

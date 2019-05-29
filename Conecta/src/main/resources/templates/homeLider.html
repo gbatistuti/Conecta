@@ -90,7 +90,7 @@
 		<h2>Avaliação</h2>
 		<form action="/homeLider/aprovar" method="post" th:object="${alocacoes}">
 			<label>Id do Agendamento:</label>
-			<input name="agendamento"> 
+			<input name="idAgendamento" th:value="${idAgendamento}"> 
 			<label>Motivo:</label>
 			<input name="motivo">
 			<button type="submit">Aprovar</button>

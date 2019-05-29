@@ -6,20 +6,20 @@
 
 	<title>Gerenciamento de Projetos | Líder</title>
 	<link rel="icon" type="imagem/png" href="../static/img/logo.png" th:href="@{../static/img/logo.png}"/>
-	<link href="../static/css/DesignP.css" 
-	th:href="@{../static/css/DesignP.css}" rel="stylesheet"/>
+	<link href="../static/css/gestaoDeProjetos.css" 
+	th:href="@{../static/css/gestaoDeProjetos.css}" rel="stylesheet"/>
 	
 	<!--Sera substituido pelo fragmento head que contem associaçoes para menu funcionar-->
 	<th:block th:replace="fragments/head :: head"></th:block>
 	
 </head>
-<body id="menuBody" style="background-image:url('/img/menu/fundo1.png')!important">
+<body id="menuBody" style="background-image:url(/img/menu/fundo1.png')!important">
 	
 	<!--Sera substituido pelo fragmento do menu-->
-	<div th:replace="fragments/menu :: menu"></div>
+	<div th:replace="fragments/menu :: menu"></div>-->
 	<!-- Todos id e class de menu começam com menuAlgumacoisa então evite usar menu na frente de seus ids ou class-->
 	
-	<div>
+	<div id="div">
 	<table>
 
 		<thead>

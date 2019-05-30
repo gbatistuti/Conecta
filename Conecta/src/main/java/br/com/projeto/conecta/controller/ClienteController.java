@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -43,6 +42,8 @@ public class ClienteController {
 		model.addAttribute("projeto",projetoService.buscarPor(sessao.getCurrentUserId()));
 		model.addAttribute("pedido", new Pedido());
 		model.addAttribute("agendamento", new Agendamento());
+		model.addAttribute("pedidosRealizados", pedidoService.buscarPedidosPorUsuario(usuario));
+		model.addAttribute("agendamentosCriados", agendamentoService.buscarAgendamentosPorUsuario(usuario));
 		return "homeCliente";
 	}
 	
@@ -58,6 +59,7 @@ public class ClienteController {
 	@PostMapping("/criaragendamento")
 	public String criarAgendamento(Pedido pedido, Agendamento agendamento, Model model) {
 		Usuarios usuario = sessao.getCurrentUser();
+		pedido.setCriadoPor(usuario);
 		pedido.setOrigem("agendamento");
 		pedidoService.salvarPedido(pedido);
 		agendamento.setPedido(pedido);

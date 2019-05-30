@@ -65,7 +65,7 @@
 			</thead>
 			<tbody>
 				<tr th:each="d : ${disponiveis}">
-					<td th:text="${d.consultor.idUsuario}"></td>
+					<td th:text="${d.idDisponivel}"></td>
 					<td th:text="${d.consultor.nome}"></td>
 					<td th:text="${d.horaInicio}"></td>
 					<td th:text="${d.horaFim}"></td>
@@ -94,7 +94,7 @@
 			<label>Motivo:</label>
 			<input name="motivo">
 			<label>Hora Inicio:</label>
-			<input name="horaInicio" th:value="${horaInicio}">
+			<input name="horaInicio" th:value = "${horaInicio}">
 			<label>Hora Fim:</label>
 			<input name ="horaFim" th:value = "${horaFim}">
 			<button type="submit">Aprovar</button>

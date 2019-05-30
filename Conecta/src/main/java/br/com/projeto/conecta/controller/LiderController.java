@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.projeto.conecta.domain.Agendamento;
 import br.com.projeto.conecta.domain.Alocacoes;
+import br.com.projeto.conecta.domain.Disponiveis;
 import br.com.projeto.conecta.domain.Usuarios;
 import br.com.projeto.conecta.security.ConectaUserDetailsService;
 import br.com.projeto.conecta.service.AgendamentoService;
@@ -37,18 +38,22 @@ public class LiderController {
 	public String listarAgendamentos(ModelMap model, HttpServletRequest request) {
 		Usuarios usuario = conecta.getCurrentUser();
 		model.addAttribute("agendamento", agendamentoService.BuscarPorStatus());
-		//model.addAttribute("agendamento", agendamentoService.BuscarTodos());
 		model.addAttribute("disponiveis", disponivelService.buscarTodos());
 		request.setAttribute("nome", usuario.getNome());
 		return "homeLider";
 	}
 	
 	@PostMapping("/aprovar")
-	public String aprovarAgendamento(Alocacoes alocacoes, Agendamento agendamento) {
+	public String aprovarAgendamento(Alocacoes alocacoes, Agendamento agendamento, Disponiveis disponivel) {
 		alocacoes.setCriadoPor(sessao.getCurrentLider());
 		Agendamento agendamentoAlterado = agendamentoService.getAgendamento(agendamento.getIdAgendamento());
 		agendamentoAlterado.getPedido().setStatus("aprovado");
 		agendamentoService.salvarAgendamento(agendamentoAlterado);
+		Disponiveis disponivelAlterado = disponivelService.getDisponivel(disponivel.getIdDisponivel());
+		disponivelAlterado.setHoraInicio(disponivel.getHoraInicio());
+		disponivelAlterado.setHoraFim(disponivel.getHoraFim());
+		disponivelService.salvarApontamento(disponivelAlterado);
+		alocacoes.setHoraInicio(horaInicio);
 		alocacaoService.salvarAlocacao(alocacoes);
 		return "redirect:/homeLider";
 	}

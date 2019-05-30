@@ -19,6 +19,7 @@
 	<div th:replace="fragments/menu :: menu"></div>-->
 	<!-- Todos id e class de menu começam com menuAlgumacoisa então evite usar menu na frente de seus ids ou class-->
 	
+<<<<<<< HEAD
 	<div id="div">
 	<table>
 
@@ -68,6 +69,37 @@
                 
 		</tbody>
 	</table>
+=======
+	<div id="fundoUmaTabelaNaPaginaToda"class="fundo">
+		<h2>Gerencia de projetos</h2>
+		<div id="rolagemUmaTabelaNaPaginaToda" class="rolagem">
+			<table>
+				<thead>
+					<tr>
+						<th>Código do Projeto</th>
+						<th>Projeto</th>
+						<th>Código do Cliente</th>
+						<th>Cliente</th>
+						<th>Horas   </th>
+		                <th>        </th>
+					</tr>			
+				</thead>
+				<tbody>
+					<tr th:each ="p : ${projetos}">
+						<td th:text="${p.codigoProjeto}"></td>
+						<td th:text="${p.nome}"></td>
+						<td th:text="${p.cliente.codigo}"></td>
+						<td th:text="${p.cliente.nome}"></td>
+						<td th:text="${p.qtdCreditos}"> <div class="divP"><label>aaaa</label></div></td>
+						<td>
+		                    <button type="button: hover" class="">Atualizar</button>				
+		                </td>
+					</tr>
+		                
+				</tbody>
+			</table>
+		</div>
+>>>>>>> 6f7d429dd0f52259d790862a47570ec5b250fe7e
 	</div>
 </body>
 </html>

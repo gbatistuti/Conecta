@@ -16,8 +16,8 @@
 	<div th:replace="fragments/menuSemBotao :: menu"></div>
 	<!-- Todos id e class de menu começam com menuAlgumacoisa então evite usar menu na frente de seus ids ou class-->
 	
-	<div id="aDireita">
-		<div class="fundo">
+	<div class="aDireita">
+		<div id="ApontarOciosidade" class="fundo">
 			<h2 >Apontar Ociosidade</h2>
 	
 			<div th:if="${param.sucesso}">
@@ -28,32 +28,38 @@
 				<div>Não é possível apontar duas vezes no mesmo dia!</div>
 				<br> <br>
 			</div>
-	
-			<form action="/homeConsultor/apontar" method="POST">
-				<label>Hora início:</label> <input type="text" name="horaInicio">
-				<br/>
-				<label>Hora fim:</label> <input type="text" name="horaFim">
-				<button type="submit">Gravar</button>
-				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-			</form>
+			<div id="formularioDeOciosidade">
+				<form action="/homeConsultor/apontar" method="POST">
+					<label>Horario de inicio:</label> <input class="horasInput" type="text" name="horaInicio">
+					<br>
+					<label>até</label>
+					<br>
+					<label>Hora de termino:</label> <input class="horasInput" type="text" name="horaFim">
+					<br/>
+					<button id="salvarOciosidade"class="botao" type="submit">Apontar</button>
+					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+				</form>
+			</div>
 		</div>
 	
-		<div class="fundo">
+		<div id="candidaturas" class="fundo">
 			<h2>Candidaturas</h2>
-			<table>
-				<thead>
-					<tr>
-						<th>Título do Pedido</th>
-						<th>Status</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="pC : ${pedidoCandidatado}">
-						<td th:text="${pC.pedido.titulo}"></td>
-						<td th:text="${pC.pedido.status}"></td>
-					</tr>
-				</tbody>
-			</table>
+			<div id="rolagemCandidaturas" class="rolagem">
+				<table id="table">
+					<thead class="descricaoTabela">
+						<tr>
+							<th class="tituloDeDescricaoDaTabela">Título do Pedido</th>
+							<th class="tituloDeDescricaoDaTabela">Status</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="pC : ${pedidoCandidatado}">
+							<td th:text="${pC.pedido.titulo}"></td>
+							<td th:text="${pC.pedido.status}"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 	
 		</div>
 	
@@ -63,10 +69,10 @@
 	</div>
 	
 	<div id="pedidosFundo" class="fundo">
-		<h2 id="h2Pedidos">Pedidos em aberto</h2>
-		<div class="rolagem">
-			<table id="pedidosTable">
-				<thead id="descricaoTabela">
+		<h2>Pedidos em aberto</h2>
+		<div id="rolagemPedidos" class="rolagem">
+			<table id="table">
+				<thead class="descricaoTabela">
 					<tr>
 						<th class="tituloDeDescricaoDaTabela">Cod</th>
 						<th class="tituloDeDescricaoDaTabela">Título do Pedido</th>
@@ -80,8 +86,8 @@
 				<tbody>
 					<tr th:each="p : ${pedido}">
 						<td th:text="${p.idPedido}"></td>
-						<td th:text="${p.titulo}"></td>
-						<td th:text="${p.descricao}"></td>
+						<td class="alinhadoAEsquerda" th:text="${p.titulo}"></td>
+						<td class="alinhadoAEsquerda" th:text="${p.descricao}"></td>
 						<td th:text="${p.projeto.nome}"></td>
 						<td th:text="${p.projeto.produto}"></td>
 						<td th:text="${p.sugestaoDeHoras}"></td>

@@ -44,31 +44,28 @@ public class ConsultorController {
 
 	@PostMapping("/apontar")
 	public String salvarApontamento(Disponiveis disponiveis) {
-		
+		Consultor consultor = sessao.getCurrentConsultor();
 		if (disponivelService.validaApontamento() == null) {
-			disponiveis.setConsultor(sessao.getCurrentConsultor());
+			disponiveis.setConsultor(consultor);
 			disponivelService.salvarApontamento(disponiveis);
 			return "redirect:/homeConsultor?sucesso";
 		}
 		return "redirect:/homeConsultor?falha";
-
 	}
 
 	@PostMapping("/candidatar")
 	public String candidatarAoPedido(Agendamento agendamento, Pedido pedido) {
-		
+
 		if (disponivelService.validaApontamento() == null) {
 			return "redirect:/homeConsultor?falha2";
-//			colocar mensagem de 'necessário apontamento'
+			// colocar mensagem de 'necessário apontamento'
 		}
-		
+
 		Consultor consultor = sessao.getCurrentConsultor();
 		Pedido pedidoCandidatado = pedidoService.getPedido(pedido.getIdPedido());
 		pedidoCandidatado.setCandidatura(true);
 		pedidoService.salvarPedido(pedidoCandidatado);
-		agendamento.setConsultor(consultor);
-		agendamento.setPedido(pedidoCandidatado);
-		agendamento.setCriadoPor(consultor);
+		agendamento = new Agendamento(consultor, consultor, pedidoCandidatado);
 		agendamentoService.salvarAgendamento(agendamento);
 		return "redirect:/homeConsultor?candidatado";
 	}

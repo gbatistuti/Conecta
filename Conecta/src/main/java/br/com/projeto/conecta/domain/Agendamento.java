@@ -1,6 +1,5 @@
 package br.com.projeto.conecta.domain;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,11 +17,11 @@ public class Agendamento {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idAgendamento;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "ID_CONSULTOR")
 	private Consultor consultor;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "ID_CRIADO_POR")
 	private Usuarios criadoPor;
 	
@@ -33,8 +32,7 @@ public class Agendamento {
 	public Agendamento() {
 	}
 
-	public Agendamento(Integer idAgendamento, Consultor consultor, Usuarios criadoPor, Pedido pedido) {
-		this.idAgendamento = idAgendamento;
+	public Agendamento(Consultor consultor, Usuarios criadoPor, Pedido pedido) {
 		this.consultor = consultor;
 		this.criadoPor = criadoPor;
 		this.pedido = pedido;

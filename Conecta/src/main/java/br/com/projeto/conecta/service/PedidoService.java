@@ -34,6 +34,5 @@ public class PedidoService {
 	public List<Pedido> buscarPedidosPorUsuario(Usuarios usuario) {
 		return pedidoRepository.findByCliente(usuario);
 	}
-	
-	
+
 }

@@ -27,10 +27,12 @@ public class DisponivelService {
 		return disponivelRepository.findByDate(data);
 	}
 
+	@Transactional
 	public void salvarApontamento(Disponiveis disponiveis) {
 		disponivelRepository.save(disponiveis);
 	}
 	
+	@Transactional
 	public Disponiveis validaApontamento() {
 		Date data = new Date();
 		Consultor consultor = sessao.getCurrentConsultor();

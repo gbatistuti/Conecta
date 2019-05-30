@@ -1,6 +1,5 @@
 package br.com.projeto.conecta.domain;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,26 +17,22 @@ public class Agendamento {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idAgendamento;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "ID_CONSULTOR")
 	private Consultor consultor;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "ID_CRIADO_POR")
 	private Usuarios criadoPor;
 	
 	@OneToOne
 	@JoinColumn(name = "ID_PEDIDO")
 	private Pedido pedido;
-	
-	@OneToOne(mappedBy = "agendamento")
-	private Alocacoes alocacoes;
 
 	public Agendamento() {
 	}
 
-	public Agendamento(Integer idAgendamento, Consultor consultor, Usuarios criadoPor, Pedido pedido) {
-		this.idAgendamento = idAgendamento;
+	public Agendamento(Consultor consultor, Usuarios criadoPor, Pedido pedido) {
 		this.consultor = consultor;
 		this.criadoPor = criadoPor;
 		this.pedido = pedido;
@@ -66,7 +61,7 @@ public class Agendamento {
 	public void setCriadoPor(Usuarios criadoPor) {
 		this.criadoPor = criadoPor;
 	}
-	
+
 	public Pedido getPedido() {
 		return pedido;
 	}
@@ -74,13 +69,4 @@ public class Agendamento {
 	public void setPedido(Pedido pedido) {
 		this.pedido = pedido;
 	}
-
-	public Alocacoes getAlocacoes() {
-		return alocacoes;
-	}
-
-	public void setAlocacoes(Alocacoes alocacoes) {
-		this.alocacoes = alocacoes;
-	}
-	
 }

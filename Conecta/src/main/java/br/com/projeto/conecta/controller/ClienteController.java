@@ -68,4 +68,12 @@ public class ClienteController {
 		
 		return "redirect:/homeCliente";
 	}
+	
+//	@GetMapping
+//	public String listarPedidosEAgendamentos(Pedido pedido, Agendamento agendamento, Model model) {
+//		Usuarios usuario = sessao.getCurrentUser();
+//		model.addAttribute("pedidosRealizados", pedidoService.buscarPedidosPorUsuario(usuario));
+//		model.addAttribute("agendamentosCriados", agendamentoService.buscarAgendamentosPorUsuario(usuario));
+//		return "clienteAcompanhamento";
+//	}
 }

@@ -38,5 +38,4 @@ public class DisponivelService {
 		Consultor consultor = sessao.getCurrentConsultor();
 		return disponivelRepository.findByUserAndDate(data, consultor);
 	}
-	
 }

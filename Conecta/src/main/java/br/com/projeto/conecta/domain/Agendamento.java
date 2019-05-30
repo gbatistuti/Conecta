@@ -18,8 +18,8 @@ public class Agendamento {
 	private Integer idAgendamento;
 
 	@ManyToOne
-	@JoinColumn(name = "ID_CONSULTOR")
-	private Consultor consultor;
+	@JoinColumn(name = "ID_DISPONIVEL")
+	private Disponiveis disponivel;
 	
 	@ManyToOne
 	@JoinColumn(name = "ID_CRIADO_POR")
@@ -32,8 +32,8 @@ public class Agendamento {
 	public Agendamento() {
 	}
 
-	public Agendamento(Consultor consultor, Usuarios criadoPor, Pedido pedido) {
-		this.consultor = consultor;
+	public Agendamento(Disponiveis disponivel, Usuarios criadoPor, Pedido pedido) {
+		this.disponivel= disponivel;
 		this.criadoPor = criadoPor;
 		this.pedido = pedido;
 	}
@@ -46,12 +46,12 @@ public class Agendamento {
 		this.idAgendamento = idAgendamento;
 	}
 
-	public Consultor getConsultor() {
-		return consultor;
+	public Disponiveis getDisponivel() {
+		return disponivel;
 	}
 
-	public void setConsultor(Consultor consultor) {
-		this.consultor = consultor;
+	public void setDisponivel(Disponiveis disponivel) {
+		this.disponivel = disponivel;
 	}
 
 	public Usuarios getCriadoPor() {

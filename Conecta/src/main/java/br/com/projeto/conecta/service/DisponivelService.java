@@ -41,5 +41,4 @@ public class DisponivelService {
 	public Disponiveis getDisponivel(int id) {
 		return disponivelRepository.getOne(id);
 	}
-	
 }

@@ -16,6 +16,7 @@ import br.com.projeto.conecta.domain.Pedido;
 import br.com.projeto.conecta.domain.Usuarios;
 import br.com.projeto.conecta.security.ConectaUserDetailsService;
 import br.com.projeto.conecta.service.AgendamentoService;
+import br.com.projeto.conecta.service.ConsultorService;
 import br.com.projeto.conecta.service.DisponivelService;
 import br.com.projeto.conecta.service.PedidoService;
 
@@ -56,16 +57,19 @@ public class ConsultorController {
 	@PostMapping("/candidatar")
 	public String candidatarAoPedido(Agendamento agendamento, Pedido pedido) {
 
-		if (disponivelService.validaApontamento() == null) {
+		Disponiveis disponivel = disponivelService.validaApontamento();
+		
+		if (disponivel == null) {
 			return "redirect:/homeConsultor?falha2";
 			// colocar mensagem de 'necessário apontamento'
 		}
-
+		
 		Consultor consultor = sessao.getCurrentConsultor();
 		Pedido pedidoCandidatado = pedidoService.getPedido(pedido.getIdPedido());
 		pedidoCandidatado.setCandidatura(true);
 		pedidoService.salvarPedido(pedidoCandidatado);
-		agendamento = new Agendamento(consultor, consultor, pedidoCandidatado);
+		
+		agendamento = new Agendamento(disponivel, consultor, pedidoCandidatado);
 		agendamentoService.salvarAgendamento(agendamento);
 		return "redirect:/homeConsultor?candidatado";
 	}

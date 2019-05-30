@@ -93,6 +93,10 @@
 			<input name="idAgendamento" th:value="${idAgendamento}"> 
 			<label>Motivo:</label>
 			<input name="motivo">
+			<label>Hora Inicio:</label>
+			<input name="horaInicio" th:value="${horaInicio}">
+			<label>Hora Fim:</label>
+			<input name ="horaFim" th:value = "${horaFim}">
 			<button type="submit">Aprovar</button>
 			<input type="hidden" th:name="${_csrf.parameterName}"
 				th:value="${_csrf.token}" />

@@ -41,4 +41,8 @@ public class AgendamentoService {
 		return agendamentoRepository.getOne(id);
 	}
 	
+	public List<Agendamento> BuscarPorStatus(){
+		return agendamentoRepository.findByStatus();
+	}
+	
 }

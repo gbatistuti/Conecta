@@ -1,5 +1,7 @@
 package br.com.projeto.conecta.controller;
 
+import java.util.Stack;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import br.com.projeto.conecta.security.ConectaUserDetailsService;
 import br.com.projeto.conecta.service.AgendamentoService;
 import br.com.projeto.conecta.service.AlocacaoService;
 import br.com.projeto.conecta.service.DisponivelService;
+import br.com.projeto.conecta.service.PedidoService;
 import br.com.projeto.conecta.service.RecusadoService;
 
 @Controller
@@ -35,6 +38,8 @@ public class LiderController {
 	private ConectaUserDetailsService sessao;
 	@Autowired
 	private RecusadoService recusadoService;
+	@Autowired
+	private PedidoService pedidoService;
 	
 	@GetMapping
 	public String listarAgendamentos(ModelMap model, HttpServletRequest request) {
@@ -76,37 +81,10 @@ public class LiderController {
 	    
 	}
 	
-//	@GetMapping
-//	public String ListarDisponiveis(ModelMap model) {
-//		model.addAttribute("disponiveis", disponivelService.buscarTodos());
-//		return "homeLider";
-//	}
-	
-	
-//	@Autowired
-//	private AgendamentoService agendamentoService;
-//	@Autowired
-//	private ProjetoService projetoService;
-//	@Autowired
-//	private PedidoService pedidoService;
-//
-//	@GetMapping
-//	public String ListarAgendamentos(ModelMap model) {
-//		model.addAttribute("agendamento", agendamentoService.BuscarTodos());
-//		return "homeLider";
-//	}
-//	
-//	@GetMapping("/gerenciaProjetos")
-//	public String listar(ModelMap model) {
-//		model.addAttribute("projetos", projetoService.buscarTodos());
-//		return "gerenciaProjetos";
-//	}
-//	
-//	@GetMapping("/totinhas")
-//	public String ListarDisponiveis(ModelMap model) {
-//		model.addAttribute("pedidos", pedidoService.buscarTodos());
-//		return "alocacao";
-//	}
-	
+	@GetMapping("/alocacao")
+	public String ListarDisponiveis(ModelMap model) {
+		model.addAttribute("pedidos", pedidoService.buscarPorStatus());
+		return "alocacao";
+	}
 	
 }

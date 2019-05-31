@@ -35,7 +35,12 @@
 						<td th:text="${p.projeto.cliente.nome}"></td>
 						<td th:text="${p.projeto.produto}"></td>
 						<td>
-							<button type="button">Selecionar</button>
+						<form action="/homeLider/alocacao/alocar" method="POST">
+						<input name="">
+							<button type="submit" name="IdPedido" th:value="${p.IdPedido}">Alocar</button>
+							<input type="hidden" th:name="${_csrf.parameterName}"
+									th:value="${_csrf.token}" />
+							</form>
 						</td>
 					</tr>
 				</tbody>
@@ -44,3 +49,14 @@
 	</div>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+

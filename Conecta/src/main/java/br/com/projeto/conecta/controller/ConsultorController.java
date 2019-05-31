@@ -35,17 +35,18 @@ public class ConsultorController {
 
 	@GetMapping
 	public String listarPedidos(ModelMap model, HttpServletRequest request) {
-
-		Usuarios usuario = sessao.getCurrentUser();
-		model.addAttribute("pedido", pedidoService.filtrarPorOrigemECandidatura());
+		//Usuarios usuario = sessao.getCurrentUser();
+		//model.addAttribute("pedido", pedidoService.filtrarPorOrigemECandidatura());
 		model.addAttribute("pedidoCandidatado", agendamentoService.buscarCandidaturasByUsuario());
-		request.setAttribute("nome", usuario.getNome());
+		//request.setAttribute("nome", usuario.getNome());
 		return "homeConsultor";
 	}
 
 	@PostMapping("/apontar")
 	public String salvarApontamento(Disponiveis disponiveis) {
-		Consultor consultor = sessao.getCurrentConsultor();
+		Integer idUsuarioLogado = sessao.getCurrentUserId();
+		Consultor consultor = new Consultor(idUsuarioLogado);
+		//Consultor consultor = sessao.getCurrentConsultor();
 		if (disponivelService.validaApontamento() == null) {
 			disponiveis.setConsultor(consultor);
 			disponivelService.salvarApontamento(disponiveis);
@@ -64,12 +65,14 @@ public class ConsultorController {
 			// colocar mensagem de 'necessário apontamento'
 		}
 		
-		Consultor consultor = sessao.getCurrentConsultor();
+//		Consultor consultor = sessao.getCurrentConsultor();
+		Usuarios usuario = sessao.getCurrentUser();
+		
 		Pedido pedidoCandidatado = pedidoService.getPedido(pedido.getIdPedido());
 		pedidoCandidatado.setCandidatura(true);
 		pedidoService.salvarPedido(pedidoCandidatado);
 		
-		agendamento = new Agendamento(disponivel, consultor, pedidoCandidatado);
+		agendamento = new Agendamento(disponivel, usuario, pedidoCandidatado);
 		agendamentoService.salvarAgendamento(agendamento);
 		return "redirect:/homeConsultor?candidatado";
 	}

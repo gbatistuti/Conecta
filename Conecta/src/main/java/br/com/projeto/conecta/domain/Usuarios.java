@@ -53,6 +53,10 @@ public class Usuarios implements Serializable, UserDetails {
 	public Usuarios() {
 	}
 	
+	public Usuarios(Integer idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+	
 	public Usuarios(String email, String senha, String codigo, String nome, List<Grupo> grupo) {
 		this.email = email;
 		this.senha = senha;

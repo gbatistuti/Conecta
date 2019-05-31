@@ -40,8 +40,8 @@ public class ClienteController {
 		request.setAttribute("nome", usuario.getNome());
 		model.addAttribute("disponiveis",disponivelService.buscarTodos());
 		model.addAttribute("projeto",projetoService.buscarPor(sessao.getCurrentUserId()));
-//		model.addAttribute("pedido", new Pedido());
-//		model.addAttribute("agendamento", new Agendamento());
+		model.addAttribute("pedido", new Pedido());
+		model.addAttribute("agendamento", new Agendamento());
 //		model.addAttribute("pedidosRealizados", pedidoService.buscarPedidosPorUsuario(usuario));
 //		model.addAttribute("agendamentosCriados", agendamentoService.buscarAgendamentosPorUsuario(usuario));
 		return "homeCliente";

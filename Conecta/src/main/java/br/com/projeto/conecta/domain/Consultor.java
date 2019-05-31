@@ -38,6 +38,10 @@ public class Consultor extends Usuarios {
 		this.creditosPorHora = creditosPorHora;
 	}
 
+	public Consultor(Integer idUsuario) {
+		super(idUsuario);
+	}
+
 	public String getUnidade() {
 		return unidade;
 	}

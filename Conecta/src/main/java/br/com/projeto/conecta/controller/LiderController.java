@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.projeto.conecta.domain.Agendamento;
 import br.com.projeto.conecta.domain.Alocacoes;
+import br.com.projeto.conecta.domain.Recusado;
 import br.com.projeto.conecta.domain.Usuarios;
 import br.com.projeto.conecta.security.ConectaUserDetailsService;
 import br.com.projeto.conecta.service.AgendamentoService;
 import br.com.projeto.conecta.service.AlocacaoService;
 import br.com.projeto.conecta.service.DisponivelService;
+import br.com.projeto.conecta.service.RecusadoService;
 
 @Controller
 @RequestMapping("/homeLider")
@@ -31,7 +33,8 @@ public class LiderController {
 	private AlocacaoService alocacaoService;
 	@Autowired
 	private ConectaUserDetailsService sessao;
-	
+	@Autowired
+	private RecusadoService recusadoService;
 	
 	@GetMapping
 	public String listarAgendamentos(ModelMap model, HttpServletRequest request) {
@@ -62,14 +65,16 @@ public class LiderController {
 		return "redirect:/homeLider";
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
+	@PostMapping("/reprovar")
+	public String reprovarAgendamento(Recusado recusado, Agendamento agendamento) {
+	    recusado.setCriadoPor(sessao.getCurrentUser());   
+	    recusadoService.salvarRecusado(recusado);
+	    Agendamento agendamentoAlterado = agendamentoService.getAgendamento(agendamento.getIdAgendamento());
+		agendamentoAlterado.getPedido().setStatus("recusado");
+		agendamentoService.salvarAgendamento(agendamentoAlterado);
+	    return "redirect:/homeLider";
+	    
+	}
 	
 //	@GetMapping
 //	public String ListarDisponiveis(ModelMap model) {

@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.projeto.conecta.domain.Agendamento;
 import br.com.projeto.conecta.domain.Alocacoes;
-import br.com.projeto.conecta.domain.Disponiveis;
 import br.com.projeto.conecta.domain.Usuarios;
 import br.com.projeto.conecta.security.ConectaUserDetailsService;
 import br.com.projeto.conecta.service.AgendamentoService;
@@ -44,19 +43,32 @@ public class LiderController {
 	}
 	
 	@PostMapping("/aprovar")
-	public String aprovarAgendamento(Alocacoes alocacoes, Agendamento agendamento, Disponiveis disponivel) {
+	public String aprovarAgendamento(Alocacoes alocacoes, Agendamento agendamento) {
 		alocacoes.setCriadoPor(sessao.getCurrentLider());
+		
+		alocacaoService.salvarAlocacao(alocacoes);
 		Agendamento agendamentoAlterado = agendamentoService.getAgendamento(agendamento.getIdAgendamento());
 		agendamentoAlterado.getPedido().setStatus("aprovado");
+		
+		float creditosDoProjeto = agendamentoAlterado.getPedido().getProjeto().getQtdCreditos();	
+		float creditosParaDescontar = alocacaoService.CreditosParaDescontar(agendamentoAlterado.getPedido().getSugestaoDeHoras(),
+		agendamentoAlterado.getDisponivel().getConsultor().getCreditosPorHora());
+		
+		agendamentoAlterado.getPedido().getProjeto().setQtdCreditos(creditosDoProjeto-creditosParaDescontar);
 		agendamentoService.salvarAgendamento(agendamentoAlterado);
-		Disponiveis disponivelAlterado = disponivelService.getDisponivel(disponivel.getIdDisponivel());
-		disponivelAlterado.setHoraInicio(disponivel.getHoraInicio());
-		disponivelAlterado.setHoraFim(disponivel.getHoraFim());
-		disponivelService.salvarApontamento(disponivelAlterado);
-		alocacoes.setHoraInicio(horaInicio);
-		alocacaoService.salvarAlocacao(alocacoes);
+		
+		//alocacoes.setHoraInicio(horaInicio);		
 		return "redirect:/homeLider";
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 //	@GetMapping
 //	public String ListarDisponiveis(ModelMap model) {

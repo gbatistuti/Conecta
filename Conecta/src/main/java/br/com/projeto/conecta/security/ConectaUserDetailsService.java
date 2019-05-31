@@ -77,7 +77,6 @@ public class ConectaUserDetailsService implements UserDetailsService {
 	public Lider getCurrentLider() {
 		return liderRepository.getById(getCurrentUserId());
 	}
-	
 
 }
 

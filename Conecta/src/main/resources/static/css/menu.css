@@ -1,0 +1,225 @@
+/* biblioteca */
+
+.aDireita{
+	float: right;
+	margin: 20px 20px 0px 20px;
+	width: 45vw;
+	height: 45hw;
+}
+
+#fundoUmaTabelaNaPaginaToda{
+	margin: 20px;
+	height: 80vh;
+}
+
+#rolagemUmaTabelaNaPaginaToda{
+	position:relative;
+	height: 70vh;
+}
+.fundo{
+	background-color: rgba(249,249,249,0.6);
+	box-shadow: inset 0 0 0 3000px rgba(255,255,255,0.3);
+	border-style: solid;
+	border-width: 1px;
+	border-color: black;
+	border-radius: 5px;
+	align-items: center;
+	text-align: center;
+	padding: 17px;
+	position: static;
+
+ 	/*filter: blur(10px);*/
+}
+
+h2{
+	font-size: 25px;
+	color:black;
+	margin-bottom: 20px;
+}
+
+.rolagem{
+	overflow: scroll;
+	overflow-x: auto;
+	border: solid;
+	border-width: 1px;
+		
+}
+
+table{
+	border-spacing: 0px;
+	width: 100%;
+	height: 75vh;
+	table-layout: auto;
+}
+
+th{
+ 	padding-bottom: 10px;
+ 	padding-top: 10px;
+ 	padding: 10px;
+ 	border: solid;
+	border-width: 1px;
+	border-top: 0px;
+	border-right: 0px;
+	border-left: 0px;
+	font-size: 16px;
+}
+
+tr:nth-child(even) {
+	background: #F2F2F2;
+}
+
+tr:nth-child(odd) {
+	background: white;
+}
+
+button{
+	background-color: rgba(13, 114, 156, 0.5);
+	border: none;
+	border-radius: 20px;
+	padding: 8px;
+	font-size: 13px;
+	margin-right: 3px;
+	cursor: pointer;
+	
+}
+
+input{
+	border: solid;
+	border-width: 1.5px;
+	border-color: #ea9b3e;
+	border-radius: 20px;
+}
+
+/* biblioteca */
+
+* {
+   margin: 0;
+   padding: 0;
+   font-family: 'Lato', sans-serif;
+   font-size: 15px;
+}
+#menuBody{
+    background-image: url("imagens/fundo1.png");
+    background-size: cover;
+	background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin: 0px 0px 0px 0px;
+
+}
+
+#menu{
+    top: 0px;
+    background-color: black;
+    color: white;
+    margin-top: 0px;
+    padding: 0px;
+    margin-bottom: 0px;
+    height: 45px;
+}
+
+#menuLogo{
+    padding-left: 10.5px;
+    padding-top: 1px;
+    padding-bottom: 5px;
+}
+
+.menuLinhaDeSeparacaoMenu{
+    margin: 0px;
+    padding: 0px;
+}
+
+.menuIcon{
+    position: relative;
+    margin-bottom:9px;
+}
+
+#menuUserIcon{
+    position: relative;
+    float: right;
+    border: 0px;
+    box-shadow: -3px 3px 6px rgba(0, 0, 0, 0.8)
+}
+
+#menuDivSair{
+    float: right;
+    position: inherit;
+    margin-top: 10px;
+    margin-right: 15px;
+    color:#EA9B3E;
+    font-family: 'Lato', sans-serif;
+    font-size: 20px;
+    
+}
+
+#menuSair{
+	padding: 0px;
+	background: none;
+	border:none;
+	cursor: pointer;
+	color:#EA9B3E;
+	font-family: 'Lato', sans-serif;
+    font-size: 20px;
+}
+
+#menuSeparacaoADireita{
+    float: right;
+    position: inherit;
+}
+
+#menuSaldacao{
+    float: right;
+    position: inherit;
+    margin-top: 9px;
+    margin-right: 15px;
+    color:#EA9B3E;
+    font-family: 'Lato', sans-serif;
+    font-size: 20px
+}
+
+#menuLinhaInferior{
+    padding: 2px;
+    background-color: #29B6C5;
+    margin: 0px;
+    margin-bottom: 5px;
+}
+
+#menuSelecaoDeCor{
+    display: none;
+    position: relative;
+    float: right;
+    z-index:99;
+}
+
+#menuCaixaDeSelecao{
+    width: 162px;
+    height: 230px;
+    position: absolute;
+    top: 50px;
+    left: 30px;
+}
+
+#menuCorDosPaineis{
+	color: #EA9B3E;
+	font-family: 'Lato';
+	margin-left: 28px;
+}
+
+.menuSelecaoCorDosPaineis{
+	border: 1px solid white;
+	height: 16px;
+	width: 16px;
+	border-radius: 50px;
+	margin-left: 30px;
+	margin-top: 20px;
+	margin-right: 1px;
+	padding: 0px;
+	background-color: orange;
+}
+
+.menuImagenSelecaoCorDosPaines{
+	float: right;
+	top:0px;
+	margin-top: -5px;
+	margin-right: -50px;
+	position:relative;
+}

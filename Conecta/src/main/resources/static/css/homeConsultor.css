@@ -1,0 +1,83 @@
+#ApontarOciosidade{
+	
+	height: 25vh;
+	margin-bottom: 34px;
+}
+
+label{
+	margin-right: 5x;
+}
+
+.horasInput{
+	margin-right: 5px;
+	height: 20px;
+	width: 100px;
+}
+
+#salvarOciosidade{
+	margin-top: 20px;
+	font-size: 15px;
+	padding-left: 50px;
+	padding-right: 50px;
+	background-color: #ea9b3e;
+	border: solid;
+	border-width: 1.5px;
+	border-color: rgba(234,155,62,0.5);
+}
+
+#salvarOciosidade:active{
+	margin-top: 20px;
+	font-size: 15px;
+	padding-left: 50px;
+	padding-right: 50px;
+	background-color: rgb(41,182,297);
+	border: solid;
+	border-width: 1.5px;
+	border-color: rgba(41,182,297,0.2);
+}
+
+#candidaturas{
+	height: 47.5vh;
+}
+
+#rolagemCandidaturas{
+	height: 39vh;
+}
+
+
+#pedidosFundo{
+	font-family: 20px;
+	padding: 17px;
+	height:83vh;
+	width: 45vw;
+	margin-top: 25px;
+	margin-left: 20px;
+}
+
+#pedidos{
+	align-items: center;
+	text-align: center;
+}
+
+h2{
+	font-size: 25px;
+	color:black;
+	margin-bottom: 20px;
+}
+
+#rolagemPedidos{
+	height: 75vh;
+	width: 45vw;
+}
+
+.alinhadoAEsquerda{
+	text-align:left;
+	margin-left: 5px;
+}
+
+.alinhadoADireita{
+	text-align:right;
+	margin-right: 5px;
+	padding: 10px;
+}
+

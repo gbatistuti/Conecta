@@ -47,6 +47,7 @@ public class LiderController {
 		alocacoes.setCriadoPor(sessao.getCurrentLider());
 		
 		alocacaoService.salvarAlocacao(alocacoes);
+		
 		Agendamento agendamentoAlterado = agendamentoService.getAgendamento(agendamento.getIdAgendamento());
 		agendamentoAlterado.getPedido().setStatus("aprovado");
 		

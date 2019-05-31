@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Home | Cliente</title>
+</head>
+<body>
+	<div>
+		<table>
+			<thead>
+				<tr>
+					<th>Consultor</th>
+					<th>Hora fim</th>
+					<th>Habilidade Principal</th>
+					<th>Habilidade Especifica</th>
+					<th>Selecionar</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="d : ${disponiveis}">
+					<td th:text="${d.consultor.nome}"></td>
+					<td th:text="${d.horaFim}"></td>
+					<td>
+						<table>
+							<tbody>
+								<tr th:each="h : ${d.consultor.habilidadesEspecificas}">
+									<td th:text="${h.habilidadesPrincipais.nomeHabilidadePrincipal}"></td>								
+									<td th:text="${h.nomeHabilidadeEspecifica}"></td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+
+					<td><button type="button">Botão</button></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

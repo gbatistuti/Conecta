@@ -2,11 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-<meta charset="UTF-8">
-<title>Home | Lider</title>
+	<meta charset="UTF-8">
+	<title>Home | Lider</title>
+	
+	<!--Sera substituido pelo fragmento head que contem associaçoes para menu funcionar-->
+	<th:block th:replace="fragments/head :: head"></th:block>
 </head>
 <body>
-	<div>
+<div>
 		<h1>
 			Seja bem vindo, <label
 				th:text="${#httpServletRequest.getAttribute('nome')}"></label>

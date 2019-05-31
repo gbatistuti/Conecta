@@ -1,5 +1,4 @@
 #ApontarOciosidade{
-	
 	height: 25vh;
 	margin-bottom: 34px;
 }
@@ -36,19 +35,17 @@
 }
 
 #candidaturas{
-	height: 47.5vh;
+	height: 54.5vh;
 }
 
 #rolagemCandidaturas{
-	height: 39vh;
+	height: 46vh;
 }
 
 
 #pedidosFundo{
 	font-family: 20px;
 	padding: 17px;
-	height:83vh;
-	width: 45vw;
 	margin-top: 25px;
 	margin-left: 20px;
 }
@@ -66,7 +63,6 @@ h2{
 
 #rolagemPedidos{
 	height: 75vh;
-	width: 45vw;
 }
 
 .alinhadoAEsquerda{

@@ -13,10 +13,10 @@
 <body id="menuBody" style="background-image:url('img/menu/fundo1.png')">
 	
 	<!--Sera substituido pelo fragmento do menu-->
-	<div th:replace="fragments/menuSemBotao :: menu"></div>
+	<div th:replace="fragments/menuConsultor :: menu"></div>
 	<!-- Todos id e class de menu começam com menuAlgumacoisa então evite usar menu na frente de seus ids ou class-->
 	
-	<div class="aDireita">
+	<div class="aDireita col-lg-4">
 		<div id="ApontarOciosidade" class="fundo">
 			<h2 >Apontar Ociosidade</h2>
 	
@@ -30,9 +30,9 @@
 			</div>
 			<div id="formularioDeOciosidade">
 				<form action="/homeConsultor/apontar" method="POST">
-					<label class="labelHorario">Horario de inicio:</label> <input class="inputHorario" type="text" placeholder="Ex:08:30" name="horaInicio">
+					<label class="labelHorario">Inicio:</label> <input class="inputHorario" type="text" placeholder="Ex:08:30" name="horaInicio">
 					<br>
-					<label class="labelHorario">Horario de termino:</label> <input class="inputHorario" type="text" placeholder="Ex:15:20" name="horaFim">
+					<label class="labelHorario">Termino:</label> <input class="inputHorario" type="text" placeholder="Ex:15:20" name="horaFim">
 					<br/>
 					<button id="salvarOciosidade"class="botao" type="submit">Enviar</button>
 					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
@@ -66,40 +66,42 @@
 		</div>
 	</div>
 	
-	<div id="pedidosFundo" class="fundo">
-		<h2>Pedidos em aberto</h2>
-		<div id="rolagemPedidos" class="rolagem">
-			<table id="table">
-				<thead class="descricaoTabela">
-					<tr>
-						<th class="tituloDeDescricaoDaTabela">Cod</th>
-						<th class="tituloDeDescricaoDaTabela">Título do Pedido</th>
-						<th class="tituloDeDescricaoDaTabela">Descrição</th>
-						<th class="tituloDeDescricaoDaTabela">Projeto</th>
-						<th class="tituloDeDescricaoDaTabela">Produto</th>
-						<th class="tituloDeDescricaoDaTabela">Horas</th>
-						<th class="tituloDeDescricaoDaTabela">Candidatar</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="p : ${pedido}">
-						<td th:text="${p.idPedido}"></td>
-						<td class="alinhadoAEsquerda" th:text="${p.titulo}"></td>
-						<td class="alinhadoAEsquerda" th:text="${p.descricao}"></td>
-						<td th:text="${p.projeto.nome}"></td>
-						<td th:text="${p.projeto.produto}"></td>
-						<td th:text="${p.sugestaoDeHoras}"></td>
-						<td>
-							<form action="/homeConsultor/candidatar" method="POST">
-								<button id="candidatarSe" class="botao" type="submit"
-									name="idPedido" th:value="${p.idPedido}">Candidatar-se</button>
-								<input type="hidden" th:name="${_csrf.parameterName}"
-									th:value="${_csrf.token}" />
-							</form>
-						</td>
-					</tr>
-				</tbody>
-			</table>
+	<div class="aEsquerda col-lg-8">
+		<div id="pedidosFundo" class="fundo">
+			<h2>Pedidos em aberto</h2>
+			<div id="rolagemPedidos" class="rolagem">
+				<table id="table">
+					<thead class="descricaoTabela">
+						<tr>
+							<th class="tituloDeDescricaoDaTabela">Cod</th>
+							<th class="tituloDeDescricaoDaTabela">Título do Pedido</th>
+							<th class="tituloDeDescricaoDaTabela">Descrição</th>
+							<th class="tituloDeDescricaoDaTabela">Projeto</th>
+							<th class="tituloDeDescricaoDaTabela">Produto</th>
+							<th class="tituloDeDescricaoDaTabela">Horas</th>
+							<th class="tituloDeDescricaoDaTabela">Candidatar</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="p : ${pedido}">
+							<td th:text="${p.idPedido}"></td>
+							<td class="alinhadoAEsquerda" th:text="${p.titulo}"></td>
+							<td class="alinhadoAEsquerda" th:text="${p.descricao}"></td>
+							<td th:text="${p.projeto.nome}"></td>
+							<td th:text="${p.projeto.produto}"></td>
+							<td th:text="${p.sugestaoDeHoras}"></td>
+							<td>
+								<form action="/homeConsultor/candidatar" method="POST">
+									<button id="candidatarSe" class="botao" type="submit"
+										name="idPedido" th:value="${p.idPedido}">Candidatar-se</button>
+									<input type="hidden" th:name="${_csrf.parameterName}"
+										th:value="${_csrf.token}" />
+								</form>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
 

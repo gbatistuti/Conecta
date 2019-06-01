@@ -31,7 +31,8 @@
 			</thead>
 			<tbody>
 				<tr th:each="d : ${disponiveis}">
-					<td th:text="${d.consultor.idUsuario}"></td>
+<!-- 					<td th:text="${d.consultor.idUsuario}"></td> -->
+					<td th:text="${d.idDisponivel}"></td>
 					<td th:text="${d.consultor.nome}"></td>
 					<td th:text="${d.horaInicio}"></td>
 					<td th:text="${d.horaFim}"></td>
@@ -68,11 +69,11 @@
 					<option value="">Escolha o projeto</option>
 					<option th:each="p : ${projeto}"
 							th:value="${p.idProjeto}"
-							th:text="${p.idProjeto + ' - ' + p.nome}">
+							th:text="${'Nome: ' + p.nome + ' | Créditos: ' + p.qtdCreditos}">
 					</option>
 				</select>
 				
-				<input type="text" th:field="${agendamento.consultor}">
+				<input type="text" th:field="${agendamento.disponivel}">
 				
 				<input type="submit" value="Salvar">
 				
@@ -95,7 +96,7 @@
 					<option value="">Escolha o projeto</option>
 					<option th:each="p : ${projeto}"
 							th:value="${p.idProjeto}"
-							th:text="${p.idProjeto + ' - ' + p.nome}">
+							th:text="${'Nome: ' + p.nome + ' | Créditos: ' + p.qtdCreditos}">
 					</option>
 				</select>
 				<input type="submit" value="Salvar">
@@ -105,47 +106,47 @@
 			</form>
 		</div>
 		
-		<div>
-			<table>
-				<thead>
-					<tr>
-						<th>Cod</th>
-						<th>Título do Pedido</th>
-						<th>Projeto</th>
-						<th>Status</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="p : ${pedidosRealizados}">
-						<td th:text="${p.idPedido}"></td>
-						<td th:text="${p.titulo}"></td>
-						<td th:text="${p.projeto.nome}"></td>
-						<td th:text="${p.status}"></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
+<!-- 		<div> -->
+<!-- 			<table> -->
+<!-- 				<thead> -->
+<!-- 					<tr> -->
+<!-- 						<th>Cod</th> -->
+<!-- 						<th>Título do Pedido</th> -->
+<!-- 						<th>Projeto</th> -->
+<!-- 						<th>Status</th> -->
+<!-- 					</tr> -->
+<!-- 				</thead> -->
+<!-- 				<tbody> -->
+<!-- 					<tr th:each="p : ${pedidosRealizados}"> -->
+<!-- 						<td th:text="${p.idPedido}"></td> -->
+<!-- 						<td th:text="${p.titulo}"></td> -->
+<!-- 						<td th:text="${p.projeto.nome}"></td> -->
+<!-- 						<td th:text="${p.status}"></td> -->
+<!-- 					</tr> -->
+<!-- 				</tbody> -->
+<!-- 			</table> -->
+<!-- 		</div> -->
 		
-		<div>
-		<table>
-			<thead>
-				<tr>
-					<th>Cod</th>				
-					<th>Título do Agendamento</th>
-					<th>Projeto</th>
-					<th>Status</th>
-				</tr>			
-			</thead>
-			<tbody>
-				<tr th:each = "a : ${agendamentosCriados}">
-					<td th:text="${a.idAgendamento}"></td>
-					<td th:text="${a.pedido.titulo}"></td>
-					<td th:text="${a.pedido.projeto.nome}"></td>
-					<td th:text="${a.pedido.status}"></td>
-				</tr>
-			</tbody>
-		</table>
-		</div>
+<!-- 		<div> -->
+<!-- 		<table> -->
+<!-- 			<thead> -->
+<!-- 				<tr> -->
+<!-- 					<th>Cod</th>				 -->
+<!-- 					<th>Título do Agendamento</th> -->
+<!-- 					<th>Projeto</th> -->
+<!-- 					<th>Status</th> -->
+<!-- 				</tr>			 -->
+<!-- 			</thead> -->
+<!-- 			<tbody> -->
+<!-- 				<tr th:each = "a : ${agendamentosCriados}"> -->
+<!-- 					<td th:text="${a.idAgendamento}"></td> -->
+<!-- 					<td th:text="${a.pedido.titulo}"></td> -->
+<!-- 					<td th:text="${a.pedido.projeto.nome}"></td> -->
+<!-- 					<td th:text="${a.pedido.status}"></td> -->
+<!-- 				</tr> -->
+<!-- 			</tbody> -->
+<!-- 		</table> -->
+<!-- 		</div> -->
 		
 		<div>
 			<form action="/logout" method="post">

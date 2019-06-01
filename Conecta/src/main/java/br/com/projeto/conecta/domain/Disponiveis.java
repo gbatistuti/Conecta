@@ -3,6 +3,7 @@ package br.com.projeto.conecta.domain;
 import java.sql.Date;
 import java.time.LocalTime;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -11,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
@@ -31,6 +33,9 @@ public class Disponiveis {
 	@ManyToOne
 	@JoinColumn(name = "idUsuario")
 	private Consultor consultor;
+	
+	@OneToMany(mappedBy = "disponivel")
+	private List<Agendamento> agendamento;
 	
 	public Disponiveis() {}
 	

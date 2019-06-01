@@ -51,9 +51,9 @@ public class ConectaUserDetailsService implements UserDetailsService {
 		return new User(usuario.getUsername(), usuario.getPassword(), usuario.getAuthorities());
 	}
 
-	public Collection<? extends GrantedAuthority> authorities(Usuarios usuario) {
-		return authorities(grupoRepository.findByUsuariosIn(usuario));
-	}
+//	public Collection<? extends GrantedAuthority> authorities(Usuarios usuario) {
+//		return authorities(grupoRepository.findByUsuariosIn(usuario));
+//	}
 
 	public Integer getCurrentUserId() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -63,21 +63,20 @@ public class ConectaUserDetailsService implements UserDetailsService {
 		return usuarioLogado;
 	}
 	
-	@Cacheable("userCache")
+//	@Cacheable("userCache")
 	public Usuarios getCurrentUser() {
 		return usuariosRepository.getById(getCurrentUserId()) ;
 	}
 	
-	@Cacheable("consultorCache")
+//	@Cacheable("consultorCache")
 	public Consultor getCurrentConsultor() {
 		return consultorRepository.getById(getCurrentUserId()) ;
 	}
 	
-	@Cacheable("liderCache")
+//	@Cacheable("liderCache")
 	public Lider getCurrentLider() {
 		return liderRepository.getById(getCurrentUserId());
 	}
-	
 
 }
 

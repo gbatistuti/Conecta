@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -21,6 +22,10 @@ public class Recusado {
 	@OneToOne
 	@JoinColumn(name = "ID_AGENDAMENTO")
 	private Agendamento agendamento;
+	
+	@ManyToOne
+	@JoinColumn(name = "ID_CRIADO_POR")
+	private Usuarios criadoPor;
 
 	public Integer getIdRecusado() {
 		return idRecusado;
@@ -46,4 +51,11 @@ public class Recusado {
 		this.agendamento = agendamento;
 	}
 
+	public Usuarios getCriadoPor() {
+		return criadoPor;
+	}
+
+	public void setCriadoPor(Usuarios criadoPor) {
+		this.criadoPor = criadoPor;
+	}
 }

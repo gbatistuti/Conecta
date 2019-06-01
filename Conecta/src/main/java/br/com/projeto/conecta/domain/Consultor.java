@@ -28,9 +28,6 @@ public class Consultor extends Usuarios {
 			@JoinColumn(name = "idUsuario") }, inverseJoinColumns = { @JoinColumn(name = "idHabilidadeEspecifica") })
 	private List<HabilidadesEspecificas> habilidadesEspecificas;
 
-	@OneToMany(mappedBy = "consultor")
-	private List<Agendamento> agendamento;
-
 	public Consultor() {
 	}
 	
@@ -39,6 +36,10 @@ public class Consultor extends Usuarios {
 		this.unidade = unidade;
 		this.cargo = cargo;
 		this.creditosPorHora = creditosPorHora;
+	}
+
+	public Consultor(Integer idUsuario) {
+		super(idUsuario);
 	}
 
 	public String getUnidade() {
@@ -63,14 +64,6 @@ public class Consultor extends Usuarios {
 
 	public void setCreditosPorHora(Float creditosPorHora) {
 		this.creditosPorHora = creditosPorHora;
-	}
-
-	public List<Agendamento> getAgendamento() {
-		return agendamento;
-	}
-
-	public void setAgendamento(List<Agendamento> agendamento) {
-		this.agendamento = agendamento;
 	}
 
 	public List<Disponiveis> getDisponiveis() {

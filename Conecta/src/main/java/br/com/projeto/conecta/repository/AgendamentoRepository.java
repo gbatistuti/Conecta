@@ -14,14 +14,13 @@ import br.com.projeto.conecta.domain.Usuarios;
 @Repository
 public interface AgendamentoRepository extends JpaRepository<Agendamento, Integer> {
 
-	@Query("select u from Agendamento u where u.criadoPor = :consultor")
+	@Query("select a from Agendamento a join a.disponivel where a.disponivel.consultor = :consultor")
 	List<Agendamento> findByConsultor(@Param("consultor")Consultor consultor);
 
 	@Query("select u from Agendamento u where u.criadoPor = :usuario")
 	List<Agendamento> findByCliente(@Param("usuario")Usuarios usuario);
 	
-//	@Query("update Agendamento u set u.pedido.status where u.idAgendamento = :idAgendamento")
-//	void alterarStatusParaAprovado(@Param("idAgendamento") int IdAgendamento);
-	
+	@Query("select u from Agendamento u where u.pedido.status = 'aguardando'")
+	List<Agendamento> findByStatus();
 	
 }

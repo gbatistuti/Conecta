@@ -1,5 +1,7 @@
 package br.com.projeto.conecta.domain;
 
+import java.time.LocalTime;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,6 +29,10 @@ public class Alocacoes {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "ID_LIDER")
 	private Lider CriadoPor;
+	
+	private LocalTime horaInicio;
+	
+	private LocalTime horaFim;
 	
 	public Alocacoes() {}
 
@@ -60,6 +66,22 @@ public class Alocacoes {
 
 	public void setAgendamento(Agendamento agendamento) {
 		this.agendamento = agendamento;
+	}
+
+	public LocalTime getHoraInicio() {
+		return horaInicio;
+	}
+
+	public void setHoraInicio(LocalTime horaInicio) {
+		this.horaInicio = horaInicio;
+	}
+
+	public LocalTime getHoraFim() {
+		return horaFim;
+	}
+
+	public void setHoraFim(LocalTime horaFim) {
+		this.horaFim = horaFim;
 	}
 
 }

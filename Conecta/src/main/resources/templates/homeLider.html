@@ -8,6 +8,25 @@
 	<!--Sera substituido pelo fragmento head que contem associaçoes para menu funcionar-->
 	<th:block th:replace="fragments/head :: head"></th:block>
 </head>
+<body>
+<div>
+		<h1>
+			Seja bem vindo, <label
+				th:text="${#httpServletRequest.getAttribute('nome')}"></label>
+		</h1>
+	</div>
+	<div>
+		<h2>Agendamentos</h2>
+		<table>
+			<thead>
+				<tr>
+					<th>Cod</th>
+					<th>Título do Agendamento</th>
+					<th>Descrição do Agendamento</th>
+					<th>Criado Por</th>
+					<th>Projeto</th>
+					<th>Produto</th>
+					<th>Consultor</th>
 					<th>Horas</th>
 				</tr>
 			</thead>
@@ -23,14 +42,33 @@
 									<td th:text="${g.nomeGrupo}"></td>
 								</tr>
 							</tbody>
+						</table>
 					</td>
+					<td th:text="${a.pedido.projeto.nome}"></td>
+					<td th:text="${a.pedido.projeto.produto}"></td>
+					<td th:text="${a.disponivel.consultor.nome}"></td>
+					<td th:text="${a.pedido.sugestaoDeHoras}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div>
+		<h2>Lista de disponibilidade</h2>
+		<table>
+			<thead>
+				<tr>
+					<th>Cód.</th>
+					<th>Consultor</th>
+					<th>Hora início</th>
+					<th>Hora fim</th>
+					<th>Créditos / h</th>
 					<th>Habilidade Principal</th>
 					<th>Habilidade Especifica</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="d : ${disponiveis}">
-					<td th:text="${d.consultor.idUsuario}"></td>
+					<td th:text="${d.idDisponivel}"></td>
 					<td th:text="${d.consultor.nome}"></td>
 					<td th:text="${d.horaInicio}"></td>
 					<td th:text="${d.horaFim}"></td>
@@ -52,17 +90,32 @@
 	</div>
 	<div>
 		<!-- parte para terminar e fazer a parte de aprovar e reprovar	-->
-		<h2>Avaliação</h2>
+		<h2>Aprovar</h2>
 		<form action="/homeLider/aprovar" method="post" th:object="${alocacoes}">
 			<label>Id do Agendamento:</label>
-			<input name="idAgendamento" th:value="${idAgendamento}"> 
+			<input name="agendamento"> 
 			<label>Motivo:</label>
 			<input name="motivo">
+			<label>Hora Inicio:</label>
+			<input name="horaInicio">
+			<label>Hora Fim:</label>
+			<input name ="horaFim">
 			<button type="submit">Aprovar</button>
 			<input type="hidden" th:name="${_csrf.parameterName}"
 				th:value="${_csrf.token}" />
 		</form>
 	</div>
+	<h2>Reprovar</h2>
+	<form action="/homeLider/reprovar" method="post" th:object="${recusado}">
+	<label>Id do Agendamento:</label>
+	<input name="agendamento">
+	<label>Motivo:</label>
+	<input name="motivo">
+	<button type="submit">Reprovar</button>
+	<input type="hidden" th:name="${_csrf.parameterName}"
+				th:value="${_csrf.token}" />
+	</form>
+	
 	<div>
 		<form action="/logout" method="post">
 			<button type="submit">Sair</button>

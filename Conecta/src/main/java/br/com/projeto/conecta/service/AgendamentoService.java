@@ -1,7 +1,11 @@
 package br.com.projeto.conecta.service;
 
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
 
+import org.hibernate.Criteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import br.com.projeto.conecta.domain.Agendamento;
@@ -18,8 +22,10 @@ public class AgendamentoService {
 	private AgendamentoRepository agendamentoRepository;
 	@Autowired
 	private ConectaUserDetailsService sessao;
+//	@Autowired
+//	private EntityManagerFactory emf;
 
-	public List<Agendamento> BuscarTodos() {
+	public List<Agendamento> BuscarTodos() {	
 		return agendamentoRepository.findAll();
 	}
 	
@@ -30,6 +36,15 @@ public class AgendamentoService {
 
 	public List<Agendamento> buscarCandidaturasByUsuario() {
 		Consultor consultor = sessao.getCurrentConsultor();
+		
+//		EntityManager em = emf.createEntityManager();
+//		em.getTransaction().begin();
+//		
+//		List<Agendamento> agendamentos = em.createQuery("select a from Agendamento a join fetch a.disponivel where a.disponivel.consultor.idUsuario = 2", Agendamento.class).getResultList();
+//		 
+//		em.getTransaction().commit();
+//		em.close();
+//		return agendamentos;
 		return agendamentoRepository.findByConsultor(consultor);
 	}
 
@@ -40,5 +55,7 @@ public class AgendamentoService {
 	public Agendamento getAgendamento(int id) {
 		return agendamentoRepository.getOne(id);
 	}
-	
+	public List<Agendamento> BuscarPorStatus(){
+		return agendamentoRepository.findByStatus();
+	}
 }

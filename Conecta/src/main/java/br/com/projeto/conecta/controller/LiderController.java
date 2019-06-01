@@ -1,5 +1,6 @@
 package br.com.projeto.conecta.controller;
 
+import java.time.LocalTime;
 import java.util.Stack;
 
 import javax.servlet.http.HttpServletRequest;
@@ -52,9 +53,8 @@ public class LiderController {
 	
 	@PostMapping("/aprovar")
 	public String aprovarAgendamento(Alocacoes alocacoes, Agendamento agendamento) {
-		alocacoes.setCriadoPor(sessao.getCurrentLider());
 		
-		alocacaoService.salvarAlocacao(alocacoes);
+		alocacoes.setCriadoPor(sessao.getCurrentLider());
 		
 		Agendamento agendamentoAlterado = agendamentoService.getAgendamento(agendamento.getIdAgendamento());
 		agendamentoAlterado.getPedido().setStatus("aprovado");
@@ -66,6 +66,17 @@ public class LiderController {
 		agendamentoAlterado.getPedido().getProjeto().setQtdCreditos(creditosDoProjeto-creditosParaDescontar);
 		agendamentoService.salvarAgendamento(agendamentoAlterado);
 		
+		LocalTime horaInicio = alocacaoService.buscaUltimaHora(agendamentoAlterado);
+		
+		if(horaInicio != null) {
+			alocacoes.setHoraInicio(LocalTime.now());
+		} else {
+			alocacoes.setHoraInicio(horaInicio);
+		}
+		
+		Int alocacoes.getAgendamento().getPedido().getSugestaoDeHoras();
+		
+		alocacaoService.salvarAlocacao(alocacoes);
 		//alocacoes.setHoraInicio(horaInicio);		
 		return "redirect:/homeLider";
 	}

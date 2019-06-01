@@ -68,7 +68,13 @@ public class LiderController {
 		
 		LocalTime horaInicio = alocacaoService.buscaUltimaHora(agendamentoAlterado);
 		
-		if(horaInicio )
+		if(horaInicio != null) {
+			alocacoes.setHoraInicio(LocalTime.now());
+		} else {
+			alocacoes.setHoraInicio(horaInicio);
+		}
+		
+		Int alocacoes.getAgendamento().getPedido().getSugestaoDeHoras();
 		
 		alocacaoService.salvarAlocacao(alocacoes);
 		//alocacoes.setHoraInicio(horaInicio);		

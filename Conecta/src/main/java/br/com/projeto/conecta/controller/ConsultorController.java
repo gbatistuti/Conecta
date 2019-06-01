@@ -36,7 +36,7 @@ public class ConsultorController {
 	@GetMapping
 	public String listarPedidos(ModelMap model, HttpServletRequest request) {
 		//Usuarios usuario = sessao.getCurrentUser();
-		//model.addAttribute("pedido", pedidoService.filtrarPorOrigemECandidatura());
+		model.addAttribute("pedido", pedidoService.filtrarPorOrigemECandidatura());
 		model.addAttribute("pedidoCandidatado", agendamentoService.buscarCandidaturasByUsuario());
 		//request.setAttribute("nome", usuario.getNome());
 		return "homeConsultor";

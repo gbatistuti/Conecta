@@ -22,8 +22,8 @@ public class AgendamentoService {
 	private AgendamentoRepository agendamentoRepository;
 	@Autowired
 	private ConectaUserDetailsService sessao;
-	@Autowired
-	private EntityManagerFactory emf;
+//	@Autowired
+//	private EntityManagerFactory emf;
 
 	public List<Agendamento> BuscarTodos() {	
 		return agendamentoRepository.findAll();

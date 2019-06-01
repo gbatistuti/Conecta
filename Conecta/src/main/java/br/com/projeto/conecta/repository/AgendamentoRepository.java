@@ -17,7 +17,7 @@ import br.com.projeto.conecta.domain.Usuarios;
 @Repository
 public interface AgendamentoRepository extends JpaRepository<Agendamento, Integer> {
 
-	@Query("select a from Agendamento a join fetch a.disponivel where a.disponivel.consultor = :consultor")
+	@Query("select a from Agendamento a join a.disponivel where a.disponivel.consultor = :consultor")
 	List<Agendamento> findByConsultor(@Param("consultor")Consultor consultor);
 
 	@Query("select u from Agendamento u where u.criadoPor = :usuario")

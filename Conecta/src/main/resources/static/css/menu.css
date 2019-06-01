@@ -26,8 +26,7 @@
 	padding: 17px;
 	position: static;
 	margin: 20px;
-
- 	/*filter: blur(10px);*/
+	z-index: -1;
 }
 
 h2{

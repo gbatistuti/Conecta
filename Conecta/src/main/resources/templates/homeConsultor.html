@@ -6,16 +6,36 @@
 <title>Home | Consultor</title>
 <link rel="stylesheet" type="text/css" media='screen' th:href="@{/css/homeConsultor.css}"/>
 
+<script th:src='@{/js/homeConsultor.js}' type="text/javascript"></script>
+
 <!--Sera substituido pelo fragmento head que contem associaçoes para menu funcionar-->
 <th:block th:replace="fragments/head :: head"></th:block>
 
 </head>
-<body id="menuBody" style="background-image:url('img/menu/fundo1.png')">
-	
+<body onloadstart="aberturaDoPopUp()" id="menuBody" style="background-image:url('img/menu/fundo1.png')">
+	<div class="modal fade" id="avisoModal">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1>Teste</h1>
+				</div>
+				<div class="modal-body">
+					teste do corpo
+					<div th:if="${param.falha}">
+				<div>Não é possível apontar duas vezes no mesmo dia!</div>
+				<br> <br>
+			</div>
+				</div>
+				<div class="modal-footer">
+					<input class="btn btn-default" value="Close">
+				</div>
+			</div>
+		</div>
+	</div>
 	<!--Sera substituido pelo fragmento do menu-->
 	<div th:replace="fragments/menuConsultor :: menu"></div>
 	<!-- Todos id e class de menu começam com menuAlgumacoisa então evite usar menu na frente de seus ids ou class-->
-	
+	<a href="#" data-toggle="modal" data-target="#avisoModal">Abrir modal</a>
 	<div class="aDireita col-lg-4">
 		<div id="ApontarOciosidade" class="fundo">
 			<h2 >Apontar Ociosidade</h2>
@@ -24,10 +44,7 @@
 				<div>Apontamento realizado com sucesso!</div>
 				<br> <br>
 			</div>
-			<div th:if="${param.falha}">
-				<div>Não é possível apontar duas vezes no mesmo dia!</div>
-				<br> <br>
-			</div>
+			
 			<div id="formularioDeOciosidade">
 				<form action="/homeConsultor/apontar" method="POST">
 					<label class="labelHorario">Inicio:</label> <input class="inputHorario" type="text" placeholder="Ex:08:30" name="horaInicio">

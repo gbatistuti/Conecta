@@ -3,40 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gerenciamento de Projetos | Líder</title>
-
-<link rel="icon" type="imagem/png" href="../static/img/logo.png" th:href="@{../static/img/logo.png}"/>
-    
-<link href="../static/css/DesignP.css" 
-th:href="@{../static/css/DesignP.css}" rel="stylesheet"/>
+	<title>Gerenciamento de Projetos | Líder</title>
+	<link rel="icon" type="imagem/png" href="../static/img/logo.png" th:href="@{../static/img/logo.png}"/>
+	<link href="../static/css/DesignP.css" 
+	th:href="@{../static/css/DesignP.css}" rel="stylesheet"/>
+	
+	<!--Sera substituido pelo fragmento head que contem associaçoes para menu funcionar-->
+	<th:block th:replace="fragments/head :: head"></th:block>
+	
 </head>
-<body>
-	<div>
-	<table>
-		<thead>
-			<tr>
-				<th>Código do Projeto</th>
-				<th>Projeto</th>
-				<th>Código do Cliente</th>
-				<th>Cliente</th>
-				<th>Horas   </th>
-                <th>        </th>
-			</tr>			
-		</thead>
-		<tbody>
-			<tr th:each ="p : ${projetos}">
-				<td th:text="${p.codigoProjeto}"></td>
-				<td th:text="${p.nome}"></td>
-				<td th:text="${p.cliente.codigo}"></td>
-				<td th:text="${p.cliente.nome}"></td>
-				<td th:text="${p.qtdCreditos}"> <div class="divP"><label>aaaa</label></div></td>
-				<td>
-                    <button type="button: hover" class="">Atualizar</button>				
-                </td>
-			</tr>
-                
-		</tbody>
-	</table>
+<body id="menuBody" style="background-image:url('/img/menu/fundo1.png')!important">
+	
+	<!--Sera substituido pelo fragmento do menu-->
+	<div th:replace="fragments/menu :: menu"></div>
+	<!-- Todos id e class de menu começam com menuAlgumacoisa então evite usar menu na frente de seus ids ou class-->
+	
+	<div id="fundoUmaTabelaNaPaginaToda"class="fundo">
+		<h2>Gerencia de projetos</h2>
+		<div id="rolagemUmaTabelaNaPaginaToda" class="rolagem">
+			<table>
+				<thead>
+					<tr>
+						<th>Código do Projeto</th>
+						<th>Projeto</th>
+						<th>Código do Cliente</th>
+						<th>Cliente</th>
+						<th>Creditos</th>
+						<th>atualiazar creditos</th>
+		                <th>        </th>
+					</tr>			
+				</thead>
+				<tbody>
+					<tr th:each ="p : ${projetos}">
+						<td th:text="${p.codigoProjeto}"></td>
+						<td th:text="${p.nome}"></td>
+						<td th:text="${p.cliente.codigo}"></td>
+						<td th:text="${p.cliente.nome}"></td>
+						<td th:text="${p.qtdCreditos}"> <div class="divP"><label>aaaa</label></div></td>
+						<!-- colocar imput de atualização de horas -->
+						<td>
+		                    <button type="button: hover" class="">Atualizar</button>				
+		                </td>
+					</tr>
+		                
+				</tbody>
+			</table>
+		</div>
 	</div>
 </body>
 </html>

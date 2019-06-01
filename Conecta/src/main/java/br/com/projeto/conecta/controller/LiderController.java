@@ -1,5 +1,7 @@
 package br.com.projeto.conecta.controller;
 
+import java.util.Stack;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.projeto.conecta.domain.Agendamento;
 import br.com.projeto.conecta.domain.Alocacoes;
+import br.com.projeto.conecta.domain.Recusado;
 import br.com.projeto.conecta.domain.Usuarios;
 import br.com.projeto.conecta.security.ConectaUserDetailsService;
 import br.com.projeto.conecta.service.AgendamentoService;
 import br.com.projeto.conecta.service.AlocacaoService;
 import br.com.projeto.conecta.service.DisponivelService;
+import br.com.projeto.conecta.service.PedidoService;
+import br.com.projeto.conecta.service.RecusadoService;
 
 @Controller
 @RequestMapping("/homeLider")
@@ -31,12 +36,15 @@ public class LiderController {
 	private AlocacaoService alocacaoService;
 	@Autowired
 	private ConectaUserDetailsService sessao;
-	
+	@Autowired
+	private RecusadoService recusadoService;
+	@Autowired
+	private PedidoService pedidoService;
 	
 	@GetMapping
 	public String listarAgendamentos(ModelMap model, HttpServletRequest request) {
 		Usuarios usuario = conecta.getCurrentUser();
-		model.addAttribute("agendamento", agendamentoService.BuscarTodos());
+		model.addAttribute("agendamento", agendamentoService.BuscarPorStatus());
 		model.addAttribute("disponiveis", disponivelService.buscarTodos());
 		request.setAttribute("nome", usuario.getNome());
 		return "homeLider";
@@ -45,44 +53,38 @@ public class LiderController {
 	@PostMapping("/aprovar")
 	public String aprovarAgendamento(Alocacoes alocacoes, Agendamento agendamento) {
 		alocacoes.setCriadoPor(sessao.getCurrentLider());
+		
+		alocacaoService.salvarAlocacao(alocacoes);
+		
 		Agendamento agendamentoAlterado = agendamentoService.getAgendamento(agendamento.getIdAgendamento());
 		agendamentoAlterado.getPedido().setStatus("aprovado");
+		
+		float creditosDoProjeto = agendamentoAlterado.getPedido().getProjeto().getQtdCreditos();	
+		float creditosParaDescontar = alocacaoService.CreditosParaDescontar(agendamentoAlterado.getPedido().getSugestaoDeHoras(),
+		agendamentoAlterado.getDisponivel().getConsultor().getCreditosPorHora());
+		
+		agendamentoAlterado.getPedido().getProjeto().setQtdCreditos(creditosDoProjeto-creditosParaDescontar);
 		agendamentoService.salvarAgendamento(agendamentoAlterado);
-		alocacaoService.salvarAlocacao(alocacoes);
+		
+		//alocacoes.setHoraInicio(horaInicio);		
 		return "redirect:/homeLider";
 	}
 	
-//	@GetMapping
-//	public String ListarDisponiveis(ModelMap model) {
-//		model.addAttribute("disponiveis", disponivelService.buscarTodos());
-//		return "homeLider";
-//	}
+	@PostMapping("/reprovar")
+	public String reprovarAgendamento(Recusado recusado, Agendamento agendamento) {
+	    recusado.setCriadoPor(sessao.getCurrentUser());   
+	    recusadoService.salvarRecusado(recusado);
+	    Agendamento agendamentoAlterado = agendamentoService.getAgendamento(agendamento.getIdAgendamento());
+		agendamentoAlterado.getPedido().setStatus("recusado");
+		agendamentoService.salvarAgendamento(agendamentoAlterado);
+	    return "redirect:/homeLider";
+	    
+	}
 	
-	
-//	@Autowired
-//	private AgendamentoService agendamentoService;
-//	@Autowired
-//	private ProjetoService projetoService;
-//	@Autowired
-//	private PedidoService pedidoService;
-//
-//	@GetMapping
-//	public String ListarAgendamentos(ModelMap model) {
-//		model.addAttribute("agendamento", agendamentoService.BuscarTodos());
-//		return "homeLider";
-//	}
-//	
-//	@GetMapping("/gerenciaProjetos")
-//	public String listar(ModelMap model) {
-//		model.addAttribute("projetos", projetoService.buscarTodos());
-//		return "gerenciaProjetos";
-//	}
-//	
-//	@GetMapping("/totinhas")
-//	public String ListarDisponiveis(ModelMap model) {
-//		model.addAttribute("pedidos", pedidoService.buscarTodos());
-//		return "alocacao";
-//	}
-	
+	@GetMapping("/alocacao")
+	public String ListarDisponiveis(ModelMap model) {
+		model.addAttribute("pedidos", pedidoService.buscarPorStatus());
+		return "alocacao";
+	}
 	
 }

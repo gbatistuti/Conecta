@@ -7,6 +7,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.zaxxer.hikari.util.SuspendResumeLock;
+
 import br.com.projeto.conecta.domain.Alocacoes;
 import br.com.projeto.conecta.repository.AlocacaoRepository;
 
@@ -24,4 +26,8 @@ public class AlocacaoService {
 	public void salvarAlocacao(Alocacoes alocacoes) {
 		alocaoRepository.save(alocacoes);
 	}
+
+	public float CreditosParaDescontar(int sugestaoDeHoras, Float creditosPorHora) {
+		return sugestaoDeHoras * creditosPorHora;
+	}	
 }

@@ -7,7 +7,6 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import br.com.projeto.conecta.domain.Consultor;
 import br.com.projeto.conecta.domain.Disponiveis;
 import br.com.projeto.conecta.repository.DisponivelRepository;
@@ -37,5 +36,9 @@ public class DisponivelService {
 		Date data = new Date();
 		Consultor consultor = sessao.getCurrentConsultor();
 		return disponivelRepository.findByUserAndDate(data, consultor);
+	}
+	
+	public Disponiveis getDisponivel(int id) {
+		return disponivelRepository.getOne(id);
 	}
 }

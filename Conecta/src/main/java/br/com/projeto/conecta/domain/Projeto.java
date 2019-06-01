@@ -24,8 +24,8 @@ public class Projeto {
 	private String produto;
 	private String modulo;
 	private String coordenador;
-	private Integer qtdCreditos;
-
+	private Float qtdCreditos;
+	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "ID_CLIENTE")
 	private Cliente cliente;
@@ -37,7 +37,7 @@ public class Projeto {
 	}
 
 	public Projeto(Integer idProjeto, String codigoProjeto, String nome, String produto, String modulo,
-			String coordenador, Integer qtdCreditos, Cliente cliente) {
+			String coordenador, Float qtdCreditos, Cliente cliente) {
 		this.idProjeto = idProjeto;
 		this.codigoProjeto = codigoProjeto;
 		this.nome = nome;
@@ -96,14 +96,6 @@ public class Projeto {
 		this.coordenador = coordenador;
 	}
 
-	public Integer getQtdCreditos() {
-		return qtdCreditos;
-	}
-
-	public void setQtdCreditos(Integer qtdCreditos) {
-		this.qtdCreditos = qtdCreditos;
-	}
-
 	public Cliente getCliente() {
 		return cliente;
 	}
@@ -120,4 +112,11 @@ public class Projeto {
 		this.pedido = pedido;
 	}
 
+	public Float getQtdCreditos() {
+		return qtdCreditos;
+	}
+
+	public void setQtdCreditos(Float qtdCreditos) {
+		this.qtdCreditos = qtdCreditos;
+	}
 }

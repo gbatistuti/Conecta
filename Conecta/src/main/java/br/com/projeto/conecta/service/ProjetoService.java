@@ -22,7 +22,4 @@ public class ProjetoService {
 	public List<Projeto> buscarPor(Integer id) {
 		return projetoRepository.getById(id);
 	}
-	
-
-
 }

@@ -8,16 +8,15 @@
 	<!--Sera substituido pelo fragmento head que contem associaçoes para menu funcionar-->
 	<th:block th:replace="fragments/head :: head"></th:block>
 </head>
-
 <body>
 	<div>
 		<h1>
-			Seja bem vindo, <label
+			Seja bem vindo, <label>
 				th:text="${#httpServletRequest.getAttribute('nome')}"></label>
 		</h1>
 	</div>
 	<div>
-		<h2>Agendamentos</h2>
+		<h2> Agendamentos</h2>
 		<table>
 			<thead>
 				<tr>
@@ -43,26 +42,7 @@
 									<td th:text="${g.nomeGrupo}"></td>
 								</tr>
 							</tbody>
-						</table>
 					</td>
-					<td th:text="${a.pedido.projeto.nome}"></td>
-					<td th:text="${a.pedido.projeto.produto}"></td>
-					<td th:text="${a.consultor.nome}"></td>
-					<td th:text="${a.pedido.sugestaoDeHoras}"></td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-	<div>
-		<h2>Lista de disponibilidade</h2>
-		<table>
-			<thead>
-				<tr>
-					<th>Cód.</th>
-					<th>Consultor</th>
-					<th>Hora início</th>
-					<th>Hora fim</th>
-					<th>Créditos / h</th>
 					<th>Habilidade Principal</th>
 					<th>Habilidade Especifica</th>
 				</tr>

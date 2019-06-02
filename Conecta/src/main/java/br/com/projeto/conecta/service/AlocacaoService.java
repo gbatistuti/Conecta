@@ -1,9 +1,11 @@
 package br.com.projeto.conecta.service;
 
 import java.time.LocalTime;
-import java.util.Date;
+import java.util.Calendar;
+import java.sql.Date;
 import java.util.List;
 
+import javax.persistence.NoResultException;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +36,18 @@ public class AlocacaoService {
 	public float CreditosParaDescontar(int sugestaoDeHoras, Float creditosPorHora) {
 		return sugestaoDeHoras * creditosPorHora;
 	}
-	
+
 	public LocalTime buscaUltimaHora(Agendamento agendamento) {
-		Date data = new Date();
-		return alocaoRepository.findbyUltimaHora(data, agendamento.getDisponivel());
+		Calendar calendar = Calendar.getInstance();
+		Date data = new Date(calendar.getTime().getTime());
+		data = data.valueOf("2019-05-31");
+		Integer d = 3;
+		try {
+			LocalTime hora = alocaoRepository.findbyUltimaHora(d);
+			return hora;
+		} catch (NoResultException eX) {
+			System.out.println("Nenhum valor encontrado");
+			return null;
+		}
 	}
 }

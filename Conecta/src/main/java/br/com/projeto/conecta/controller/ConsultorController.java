@@ -3,6 +3,7 @@ package br.com.projeto.conecta.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ import br.com.projeto.conecta.domain.Consultor;
 import br.com.projeto.conecta.domain.Disponiveis;
 import br.com.projeto.conecta.domain.Pedido;
 import br.com.projeto.conecta.domain.Usuarios;
+import br.com.projeto.conecta.security.AuthenticationFacade;
 import br.com.projeto.conecta.security.ConectaUserDetailsService;
 import br.com.projeto.conecta.service.AgendamentoService;
 import br.com.projeto.conecta.service.ConsultorService;
@@ -32,6 +34,8 @@ public class ConsultorController {
 	private DisponivelService disponivelService;
 	@Autowired
 	private AgendamentoService agendamentoService;
+	@Autowired
+    private AuthenticationFacade authenticationFacade;
 
 	@GetMapping
 	public String listarPedidos(ModelMap model, HttpServletRequest request) {
@@ -47,7 +51,11 @@ public class ConsultorController {
 		Integer idUsuarioLogado = sessao.getCurrentUserId();
 		Consultor consultor = new Consultor(idUsuarioLogado);
 		//Consultor consultor = sessao.getCurrentConsultor();
-		if (disponivelService.validaApontamento() == null) {
+		
+		Authentication auth = authenticationFacade.getAuthentication();
+		
+		
+		if (disponivelService.validaApontamento(auth.getName()) == null) {
 			disponiveis.setConsultor(consultor);
 			disponivelService.salvarApontamento(disponiveis);
 			return "redirect:/homeConsultor?sucesso";
@@ -58,7 +66,8 @@ public class ConsultorController {
 	@PostMapping("/candidatar")
 	public String candidatarAoPedido(Agendamento agendamento, Pedido pedido) {
 
-		Disponiveis disponivel = disponivelService.validaApontamento();
+		Authentication auth = authenticationFacade.getAuthentication();
+		Disponiveis disponivel = disponivelService.validaApontamento(auth.getName());
 		
 		if (disponivel == null) {
 			return "redirect:/homeConsultor?falha2";

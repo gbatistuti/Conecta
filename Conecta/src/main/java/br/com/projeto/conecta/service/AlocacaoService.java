@@ -35,8 +35,8 @@ public class AlocacaoService {
 		return sugestaoDeHoras * creditosPorHora;
 	}
 	
-	public LocalTime buscaUltimaHora(Agendamento agendamento) {
-		Date data = new Date();
-		return alocaoRepository.findbyUltimaHora(data, agendamento.getDisponivel());
-	}
+//	public LocalTime buscaUltimaHora(Agendamento agendamento) {
+//		Date data = new Date();
+//		return alocaoRepository.findbyUltimaHora(data, agendamento.getDisponivel());
+//	}
 }

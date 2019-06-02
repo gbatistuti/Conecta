@@ -66,17 +66,17 @@ public class LiderController {
 		agendamentoAlterado.getPedido().getProjeto().setQtdCreditos(creditosDoProjeto-creditosParaDescontar);
 		agendamentoService.salvarAgendamento(agendamentoAlterado);
 		
-		LocalTime horaInicio = alocacaoService.buscaUltimaHora(agendamentoAlterado);
-		
-		if(horaInicio != null) {
-			alocacoes.setHoraInicio(LocalTime.now());
-		} else {
-			alocacoes.setHoraInicio(horaInicio);
-		}
-		
-		Int alocacoes.getAgendamento().getPedido().getSugestaoDeHoras();
-		
-		alocacaoService.salvarAlocacao(alocacoes);
+//		LocalTime horaInicio = alocacaoService.buscaUltimaHora(agendamentoAlterado);
+//		
+//		if(horaInicio != null) {
+//			alocacoes.setHoraInicio(LocalTime.now());
+//		} else {
+//			alocacoes.setHoraInicio(horaInicio);
+//		}
+//		
+//		Int alocacoes.getAgendamento().getPedido().getSugestaoDeHoras();
+//		
+//		alocacaoService.salvarAlocacao(alocacoes);
 		//alocacoes.setHoraInicio(horaInicio);		
 		return "redirect:/homeLider";
 	}

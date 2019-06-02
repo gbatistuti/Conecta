@@ -3,16 +3,12 @@
 <head>
 </head>
 <body id="body">
-	<!-- MENU-->
+<!-- MENU-->
     <nav th:fragment="menu">
 		<div id="menu">
 			<a th:src="@{/../templates/homeLider.html}"><img id="menuLogo" th:src="@{/img/menu/logo.png}" alt="TotvsConecta"/></a>
 			<img class="menuLinhaDeSeparacaoMenu" th:src="@{/img/menu/linhaDeSeparacaoMenu.png}"/>
-			<a th:href="@{/homeLider}"><img class="menuIcon" th:src="@{/img/menu/aprovacoes.png}" alt="aprovacoes" style="margin-bottom: 13px"></a>
-			<img class="menuLinhaDeSeparacaoMenu" th:src="@{/img/menu/linhaDeSeparacaoMenu.png}"/>
-			<a th:href="@{/homeLider/totinhas}"><img class="menuIcon" th:src="@{/img/menu/pedidos.png}" alt="pedidos" style="margin-bottom: 11px"></a>
-			<img class="menuLinhaDeSeparacaoMenu" th:src="@{/img/menu/linhaDeSeparacaoMenu.png}"/>
-			<a th:href="@{/homeLider/gerenciaProjetos}"><img class="menuIcon" th:src="@{/img/menu/projetos.png}" alt="Projetos"></a>
+			<a th:href="@{/mapeamento}"><img class="menuIcon" th:src="@{/img/nomeDaImagemQueIraUtilizarAqui.png}" alt="insiraAquiAImgDeMenu"></a>
 			<img class="menuLinhaDeSeparacaoMenu" th:src="@{/img/menu/linhaDeSeparacaoMenu.png}"/>
 			<img id="menuUserIcon" onclick="VisibilidadePainelUser()" th:src='@{/img/menu/userIcon.png}'></a>
 			<div id="menuDivSair">

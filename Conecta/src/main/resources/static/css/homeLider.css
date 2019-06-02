@@ -3,7 +3,7 @@
 }
 
 #rolagemAgendamentos{
-	height: 35vh;
+	height: 40vh;
 }
 
 #fundoListaDeDisponibilidade{
@@ -16,22 +16,42 @@
 	height: 68.5vh;
 }
 
-#aprovar{
+.painelInferiorQueTroca{
 	height: 25.5vh;
+}
+
+.botaoDeFechar{
+	float: right;
+	background: none;
+	top: -100px;
+	padding: 0px;
+}
+
+#aprovar{
+	display: none;
 }
 
 #reprovar{
 	display: none;
 }
 
+.botoes{
+	margin-top:10px;
+	padding: 0px 10px 0px 10px;
+}
 .buttonAprovarERecusar{
-	padding: 0px;
+	font-size: 20px;
 }
 
 #buttonAprovar{
-	background-color: green;
+	background-color: #0c9abe;
 }
 
 #buttonRecusar{
-	background-color: red;
+	background-color: #ea9b3e;
+}
+
+#motivo{
+	left: 0px;
+	width: 50%
 }

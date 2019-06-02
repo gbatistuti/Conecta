@@ -7,7 +7,7 @@
 <link rel="stylesheet" type="text/css" media="screen"
 	th:href="@{/css/homeLider.css}" />
 	
-<script type="text/javascript"></script>
+<script type="text/javascript" th:src="@{js/homeLider.js}"></script>
 
 <!--Sera substituido pelo fragmento head que contem associaçoes para menu funcionar-->
 <th:block th:replace="fragments/head :: head"></th:block>
@@ -56,34 +56,36 @@
 					</table>
 				</div>
 			</div>
+			
+			<div id="selecao" class="fundo painelInferiorQueTroca">
+				<h2>Aprovar ou Recusar agendamento</h2>
+				<button class="buttonAprovarERecusar botoes" id="buttonAprovar" onclick="abreAprovar()">Aprovar</button>
+				<button class="buttonAprovarERecusar botoes" id="buttonRecusar" onclick="abreReprovar()">Recusar</button>
+			</div>
 
-			<div id="aprovar" class="fundo">
+			<div id="aprovar" class="fundo painelInferiorQueTroca">
 				<!-- parte para terminar e fazer a parte de aprovar e reprovar	-->
-				<div>
-						<button class="buttonAprovarERecusar" id="buttonAprovar" onclick="TrocaPainel()">Aprovar</button>
-						<button class="buttonAprovarERecusar" id="buttonRecusar" onclick="TrocaPainel()">Recusar</button>
-				</div>
+				<button class="botaoDeFechar" onclick="abreSeletor()">X</button>
 				<h2>Aprovar</h2>
 				<form action="/homeLider/aprovar" method="post"
-					th:object="${alocacoes}">
+					th:object="${alocacoes}">	 
 					<div>
-						<label>Id do Agendamento:</label> <input name="agendamento">
-						<label>Motivo:</label> <input name="motivo"> 
-					</div>
-					<div>
+						<label>Cod:</label> <input name="agendamento">
 						<label>Hora Inicio:</label> <input name="horaInicio">
 						<label>Hora Fim:</label> <input name="horaFim">
 					</div>
-					<button type="submit">Enviar</button> <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+					<label>Motivo:</label> <input name="motivo">
+					<button class="botoes" type="submit">Enviar</button> <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 				</form>
 			</div>
 
-			<div id="reprovar" class="fundo">
+			<div id="reprovar" class="fundo painelInferiorQueTroca">
+				<button class="botaoDeFechar" onclick="abreSeletor()">X</button>
 				<h2>Reprovar</h2>
 				<form action="/homeLider/reprovar" method="post"
 					th:object="${recusado}">
 					<label>Id do Agendamento:</label> <input name="agendamento">
-					<label>Motivo:</label> <input name="motivo">
+					<label>Motivo:</label> <input id="motivo" name="motivo">
 					<button type="submit">Reprovar</button>
 					<input type="hidden" th:name="${_csrf.parameterName}"
 						th:value="${_csrf.token}" />
@@ -132,6 +134,29 @@
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript">
+	function abreAprovar(){
+		var aprovar = document.getElementById("aprovar");
+		var selecao = document.getElementById("selecao");
+		aprovar.style.display = "block"
+		selecao.style.display = "none"
+	}
 	
+	function abreReprovar(){
+		var reprovar = document.getElementById("reprovar");
+		var selecao = document.getElementById("selecao");
+		reprovar.style.display = "block"
+		selecao.style.display = "none"
+	}
+	
+	function abreSeletor(){
+		var aprovar = document.getElementById("aprovar");
+		var reprovar = document.getElementById("reprovar");
+		var selecao = document.getElementById("selecao");
+		aprovar.style.display = "none"
+		reprovar.style.display = "none"
+		selecao.style.display = "block"
+	}
+	</script>
 </body>
 </html>

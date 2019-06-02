@@ -40,14 +40,10 @@ public class AlocacaoService {
 	public LocalTime buscaUltimaHora(Agendamento agendamento) {
 		Calendar calendar = Calendar.getInstance();
 		Date data = new Date(calendar.getTime().getTime());
-		data = data.valueOf("2019-05-31");
-		Integer d = 3;
-		try {
-			LocalTime hora = alocaoRepository.findbyUltimaHora(d);
-			return hora;
-		} catch (NoResultException eX) {
-			System.out.println("Nenhum valor encontrado");
-			return null;
+		LocalTime hora = alocaoRepository.findbyUltimaHora(data, agendamento.getDisponivel().getIdDisponivel());
+		if (hora == null) {
+			return LocalTime.of(LocalTime.now().getHour(), 00).plusHours(1);
 		}
+		return hora;
 	}
 }

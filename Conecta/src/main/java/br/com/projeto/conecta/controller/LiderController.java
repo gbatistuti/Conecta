@@ -43,7 +43,7 @@ public class LiderController {
 	@Autowired
 	private PedidoService pedidoService;
 	@Autowired
-    private AuthenticationFacade authenticationFacade;
+	private AuthenticationFacade authenticationFacade;
 
 	@GetMapping
 	public String listarAgendamentos(ModelMap model, HttpServletRequest request) {
@@ -56,10 +56,9 @@ public class LiderController {
 
 	@PostMapping("/aprovar")
 	public String aprovarAgendamento(Alocacoes alocacoes, Agendamento agendamento) {
-		
+
 		Authentication auth = authenticationFacade.getAuthentication();
 		auth.getName();
-		
 
 		alocacoes.setCriadoPor(sessao.getCurrentLider());
 
@@ -75,11 +74,7 @@ public class LiderController {
 
 		LocalTime horaInicio = alocacaoService.buscaUltimaHora(agendamentoAlterado);
 
-		if (horaInicio == null) {
-			alocacoes.setHoraInicio(LocalTime.now());
-		} else {
-			alocacoes.setHoraInicio(horaInicio);
-		}
+		alocacoes.setHoraInicio(horaInicio);
 
 		LocalTime horaFim = LocalTime.of(horaInicio.getHour(), 0)
 				.plusHours(alocacoes.getAgendamento().getPedido().getSugestaoDeHoras());

@@ -51,9 +51,9 @@ public class ConectaUserDetailsService implements UserDetailsService {
 		return new User(usuario.getUsername(), usuario.getPassword(), usuario.getAuthorities());
 	}
 
-	public Collection<? extends GrantedAuthority> authorities(Usuarios usuario) {
-		return authorities(grupoRepository.findByUsuariosIn(usuario));
-	}
+//	public Collection<? extends GrantedAuthority> authorities(Usuarios usuario) {
+//		return authorities(grupoRepository.findByUsuariosIn(usuario));
+//	}
 
 	public Integer getCurrentUserId() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -77,7 +77,6 @@ public class ConectaUserDetailsService implements UserDetailsService {
 	public Lider getCurrentLider() {
 		return liderRepository.getById(getCurrentUserId());
 	}
-	
 
 }
 

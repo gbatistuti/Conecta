@@ -39,7 +39,7 @@ public class Pedido {
 	@JoinColumn(name = "ID_CRIADO_POR")
 	private Usuarios criadoPor;
 	
-	@OneToOne(mappedBy = "pedido")
+	@OneToOne(mappedBy = "pedido", fetch=FetchType.LAZY)
 	private Agendamento agendamento;
 
 	public Pedido() {

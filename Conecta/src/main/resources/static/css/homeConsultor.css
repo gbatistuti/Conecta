@@ -1,22 +1,26 @@
 #ApontarOciosidade{
-	
 	height: 25vh;
 	margin-bottom: 34px;
 }
 
-label{
+.labelHorario{
 	margin-right: 5x;
+	font-size: 20px;
 }
 
-.horasInput{
+.inputHorario{
 	margin-right: 5px;
-	height: 20px;
-	width: 100px;
+	height: 30px;
+	width: 150px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	text-align: center;
 }
+
 
 #salvarOciosidade{
-	margin-top: 20px;
-	font-size: 15px;
+	margin-top: 10px;
+	font-size: 20px;
 	padding-left: 50px;
 	padding-right: 50px;
 	background-color: #ea9b3e;
@@ -26,30 +30,22 @@ label{
 }
 
 #salvarOciosidade:active{
-	margin-top: 20px;
-	font-size: 15px;
-	padding-left: 50px;
-	padding-right: 50px;
-	background-color: rgb(41,182,297);
-	border: solid;
-	border-width: 1.5px;
-	border-color: rgba(41,182,297,0.2);
+	background-color: #29b6c5;
+	border-color:#29b6c5;
 }
 
 #candidaturas{
-	height: 47.5vh;
+	height: 54.5vh;
 }
 
 #rolagemCandidaturas{
-	height: 39vh;
+	height: 46vh;
 }
 
 
 #pedidosFundo{
 	font-family: 20px;
 	padding: 17px;
-	height:83vh;
-	width: 45vw;
 	margin-top: 25px;
 	margin-left: 20px;
 }
@@ -67,7 +63,6 @@ h2{
 
 #rolagemPedidos{
 	height: 75vh;
-	width: 45vw;
 }
 
 .alinhadoAEsquerda{

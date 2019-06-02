@@ -3,7 +3,7 @@
 }
 
 #rolagemAgendamentos{
-	height: 40vh;
+	height: 35vh;
 }
 
 #fundoListaDeDisponibilidade{
@@ -22,4 +22,16 @@
 
 #reprovar{
 	display: none;
+}
+
+.buttonAprovarERecusar{
+	padding: 0px;
+}
+
+#buttonAprovar{
+	background-color: green;
+}
+
+#buttonRecusar{
+	background-color: red;
 }

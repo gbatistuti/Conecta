@@ -3,6 +3,7 @@ package br.com.projeto.conecta.controller;
 import java.time.LocalTime;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -54,19 +55,22 @@ public class LiderController {
 		return "homeLider";
 	}
 
+	
 	@PostMapping("/aprovar")
-	public String aprovarAgendamento(Alocacoes alocacoes, Agendamento agendamento) {
+	@Transactional
+	public String aprovarAgendamento(Alocacoes alocacao, Agendamento agendamento) {
 
 		Authentication auth = authenticationFacade.getAuthentication();
 		auth.getName();
 
-		alocacoes.setCriadoPor(sessao.getCurrentLider());
+		alocacao.setCriadoPor(sessao.getCurrentLider());
 
 		Agendamento agendamentoAlterado = agendamentoService.getAgendamento(agendamento.getIdAgendamento());
+
 		agendamentoAlterado.getPedido().setStatus("aprovado");
 
 		float creditosDoProjeto = agendamentoAlterado.getPedido().getProjeto().getQtdCreditos();
-		float creditosParaDescontar = alocacaoService.CreditosParaDescontar(
+		float creditosParaDescontar = alocacaoService.creditosParaDescontar(
 				agendamentoAlterado.getPedido().getSugestaoDeHoras(),
 				agendamentoAlterado.getDisponivel().getConsultor().getCreditosPorHora());
 
@@ -74,15 +78,12 @@ public class LiderController {
 
 		LocalTime horaInicio = alocacaoService.buscaUltimaHora(agendamentoAlterado);
 
-		alocacoes.setHoraInicio(horaInicio);
-
-		LocalTime horaFim = LocalTime.of(horaInicio.getHour(), 0)
-				.plusHours(alocacoes.getAgendamento().getPedido().getSugestaoDeHoras());
-
-		alocacoes.setHoraFim(horaFim);
+		alocacao.setHoraInicio(horaInicio);
+		
+		alocacao.setHoraFim(alocacaoService.definirHoraFim(horaInicio, alocacao));
 
 		agendamentoService.salvarAgendamento(agendamentoAlterado);
-		alocacaoService.salvarAlocacao(alocacoes);
+		alocacaoService.salvarAlocacao(alocacao);
 		return "redirect:/homeLider";
 	}
 

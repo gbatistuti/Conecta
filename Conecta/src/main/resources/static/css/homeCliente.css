@@ -1,7 +1,11 @@
+#content{
+	margin: 0px!important;
+}
+
 #fundoListaDisponibilidade{
 	margin-left: 20px;
 	height: 80vh;
-	width: 45vw;
+	width: 90vw;
 	margin-top: 20px;
 }
 

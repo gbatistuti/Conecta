@@ -34,8 +34,7 @@ public class AgendamentoService {
 		return true;
 	}
 
-	public List<Agendamento> buscarCandidaturasByUsuario() {
-		Consultor consultor = sessao.getCurrentConsultor();
+	public List<Agendamento> buscarCandidaturasByUsuario(Consultor consultor) {
 		
 //		EntityManager em = emf.createEntityManager();
 //		em.getTransaction().begin();
@@ -55,7 +54,7 @@ public class AgendamentoService {
 	public Agendamento getAgendamento(int id) {
 		return agendamentoRepository.getOne(id);
 	}
-	public List<Agendamento> BuscarPorStatus(){
+	public List<Agendamento> buscarPorStatus(){
 		return agendamentoRepository.findByStatus();
 	}
 }

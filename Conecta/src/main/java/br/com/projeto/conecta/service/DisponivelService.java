@@ -32,10 +32,10 @@ public class DisponivelService {
 	}
 	
 	@Transactional
-	public Disponiveis validaApontamento() {
+	public Disponiveis validaApontamento(String email) {
 		Date data = new Date();
 		Consultor consultor = sessao.getCurrentConsultor();
-		return disponivelRepository.findByUserAndDate(data, consultor);
+		return disponivelRepository.findByUserAndDate(data, email);
 	}
 	
 	public Disponiveis getDisponivel(int id) {

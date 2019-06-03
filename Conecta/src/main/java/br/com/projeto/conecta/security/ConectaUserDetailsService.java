@@ -1,13 +1,9 @@
 package br.com.projeto.conecta.security;
 
-import java.util.Collection;
-
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,7 +15,6 @@ import br.com.projeto.conecta.domain.Consultor;
 import br.com.projeto.conecta.domain.Lider;
 import br.com.projeto.conecta.domain.Usuarios;
 import br.com.projeto.conecta.repository.ConsultorRepository;
-import br.com.projeto.conecta.repository.GrupoRepository;
 import br.com.projeto.conecta.repository.LiderRepository;
 import br.com.projeto.conecta.repository.UsuariosRepository;
 
@@ -30,9 +25,6 @@ public class ConectaUserDetailsService implements UserDetailsService {
 	@Autowired
 	private UsuariosRepository usuariosRepository;
 
-	@Autowired
-	private GrupoRepository grupoRepository;
-	
 	@Autowired
 	private ConsultorRepository consultorRepository;
 	
@@ -50,32 +42,33 @@ public class ConectaUserDetailsService implements UserDetailsService {
 
 		return new User(usuario.getUsername(), usuario.getPassword(), usuario.getAuthorities());
 	}
+	
+	public Authentication getAuthentication() {
+		return SecurityContextHolder.getContext().getAuthentication();
+	}
 
-//	public Collection<? extends GrantedAuthority> authorities(Usuarios usuario) {
-//		return authorities(grupoRepository.findByUsuariosIn(usuario));
-//	}
+	public String getCurrentUserEmail() {
+		return SecurityContextHolder.getContext().getAuthentication().getName();
+	}
 
 	public Integer getCurrentUserId() {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		User user = (User) auth.getPrincipal();
-		String userName =  user.getUsername();
-		Integer usuarioLogado = usuariosRepository.findByEmail(userName).getIdUsuario();
+		Integer usuarioLogado = usuariosRepository.findByEmail(getCurrentUserEmail()).getIdUsuario();
 		return usuarioLogado;
 	}
 	
-//	@Cacheable("userCache")
 	public Usuarios getCurrentUser() {
-		return usuariosRepository.getById(getCurrentUserId()) ;
+		String email = getCurrentUserEmail();
+		return usuariosRepository.findByEmail(email);
 	}
 	
-//	@Cacheable("consultorCache")
 	public Consultor getCurrentConsultor() {
-		return consultorRepository.getById(getCurrentUserId()) ;
+		String email = getCurrentUserEmail();
+		return consultorRepository.findByEmail(email);
 	}
 	
-//	@Cacheable("liderCache")
 	public Lider getCurrentLider() {
-		return liderRepository.getById(getCurrentUserId());
+		String email = getCurrentUserEmail();
+		return liderRepository.findByEmail(email);
 	}
 
 }

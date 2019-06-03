@@ -57,11 +57,8 @@ public class LiderController {
 
 		LocalTime horaInicio = alocacaoService.buscaUltimaHora(agendamento);
 
-		alocacao.setCriadoPor(sessao.getCurrentLider());
-		alocacao.setHoraInicio(horaInicio);
-		alocacao.setHoraFim(alocacaoService.definirHoraFim(horaInicio, alocacao));
-
 		agendamentoService.salvarAgendamento(agendamento);
+		alocacao = new Alocacoes(agendamento, sessao.getCurrentLider(), horaInicio, alocacaoService.definirHoraFim(horaInicio, alocacao));
 		alocacaoService.salvarAlocacao(alocacao);
 		return "redirect:/homeLider";
 	}

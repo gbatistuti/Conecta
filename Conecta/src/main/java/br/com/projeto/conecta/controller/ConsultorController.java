@@ -62,12 +62,11 @@ public class ConsultorController {
 			// colocar mensagem de 'necessário apontamento'
 		}
 
-		Pedido pedidoCandidatado = pedidoService.getPedido(pedido.getIdPedido());
-		pedidoCandidatado.setCandidatura(true);
+		pedido.setCandidatura(true);
 
-		agendamento = new Agendamento(disponivel, usuario, pedidoCandidatado);
+		agendamento = new Agendamento(disponivel, usuario, pedido);
 		
-		pedidoService.salvarPedido(pedidoCandidatado);
+		pedidoService.salvarPedido(pedido);
 		agendamentoService.salvarAgendamento(agendamento);
 		return "redirect:/homeConsultor?candidatado";
 	}

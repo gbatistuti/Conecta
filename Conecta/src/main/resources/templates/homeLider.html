@@ -69,13 +69,17 @@
 				<h2>Aprovar</h2>
 				<form action="/homeLider/aprovar" method="post"
 					th:object="${alocacoes}">	 
-					<div>
+					<div class="formulario">
 						<label>Cod:</label> <input name="agendamento">
 						<label>Hora Inicio:</label> <input name="horaInicio">
 						<label>Hora Fim:</label> <input name="horaFim">
+						<br>
+						<label>Motivo:</label> <br> <input id="motivo" name="motivo">
+						<button class="botoes" type="submit">Enviar</button> <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 					</div>
-					<label>Motivo:</label> <input name="motivo">
-					<button class="botoes" type="submit">Enviar</button> <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+					<div id="formulario">
+						
+					</div>
 				</form>
 			</div>
 
@@ -85,8 +89,8 @@
 				<form action="/homeLider/reprovar" method="post"
 					th:object="${recusado}">
 					<label>Id do Agendamento:</label> <input name="agendamento">
-					<label>Motivo:</label> <input id="motivo" name="motivo">
-					<button type="submit">Reprovar</button>
+					<label>Motivo:</label> <input name="motivo">
+					<button class="botoes" type="submit">Enviar</button>
 					<input type="hidden" th:name="${_csrf.parameterName}"
 						th:value="${_csrf.token}" />
 				</form>

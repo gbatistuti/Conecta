@@ -10,9 +10,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.apache.catalina.Session;
-import org.hibernate.Criteria;
-
 @Entity
 @Table(name = "AGENDAMENTOS")
 public class Agendamento {

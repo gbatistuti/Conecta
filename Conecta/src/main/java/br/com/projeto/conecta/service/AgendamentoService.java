@@ -1,13 +1,10 @@
 package br.com.projeto.conecta.service;
 
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Query;
 
-import org.hibernate.Criteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import br.com.projeto.conecta.domain.Agendamento;
 import br.com.projeto.conecta.domain.Consultor;
 import br.com.projeto.conecta.domain.Usuarios;

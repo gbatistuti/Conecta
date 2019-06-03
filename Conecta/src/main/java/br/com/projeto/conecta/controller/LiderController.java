@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.projeto.conecta.domain.Agendamento;
 import br.com.projeto.conecta.domain.Alocacoes;
+import br.com.projeto.conecta.domain.Pedido;
 import br.com.projeto.conecta.domain.Recusado;
 import br.com.projeto.conecta.domain.Usuarios;
 import br.com.projeto.conecta.security.ConectaUserDetailsService;
@@ -41,7 +42,7 @@ public class LiderController {
 	private RecusadoService recusadoService;
 	@Autowired
 	private PedidoService pedidoService;
-	
+
 	@GetMapping
 	public String listarAgendamentos(ModelMap model, HttpServletRequest request) {
 		Usuarios usuario = conecta.getCurrentUser();
@@ -50,22 +51,23 @@ public class LiderController {
 		request.setAttribute("nome", usuario.getNome());
 		return "homeLider";
 	}
-	
+
 	@PostMapping("/aprovar")
 	public String aprovarAgendamento(Alocacoes alocacoes, Agendamento agendamento) {
-		
+
 		alocacoes.setCriadoPor(sessao.getCurrentLider());
-		
+
 		Agendamento agendamentoAlterado = agendamentoService.getAgendamento(agendamento.getIdAgendamento());
 		agendamentoAlterado.getPedido().setStatus("aprovado");
-		
-		float creditosDoProjeto = agendamentoAlterado.getPedido().getProjeto().getQtdCreditos();	
-		float creditosParaDescontar = alocacaoService.CreditosParaDescontar(agendamentoAlterado.getPedido().getSugestaoDeHoras(),
-		agendamentoAlterado.getDisponivel().getConsultor().getCreditosPorHora());
-		
-		agendamentoAlterado.getPedido().getProjeto().setQtdCreditos(creditosDoProjeto-creditosParaDescontar);
+
+		float creditosDoProjeto = agendamentoAlterado.getPedido().getProjeto().getQtdCreditos();
+		float creditosParaDescontar = alocacaoService.CreditosParaDescontar(
+				agendamentoAlterado.getPedido().getSugestaoDeHoras(),
+				agendamentoAlterado.getDisponivel().getConsultor().getCreditosPorHora());
+
+		agendamentoAlterado.getPedido().getProjeto().setQtdCreditos(creditosDoProjeto - creditosParaDescontar);
 		agendamentoService.salvarAgendamento(agendamentoAlterado);
-		
+
 //		LocalTime horaInicio = alocacaoService.buscaUltimaHora(agendamentoAlterado);
 //		
 //		if(horaInicio != null) {
@@ -77,25 +79,46 @@ public class LiderController {
 //		Int alocacoes.getAgendamento().getPedido().getSugestaoDeHoras();
 //		
 //		alocacaoService.salvarAlocacao(alocacoes);
-		//alocacoes.setHoraInicio(horaInicio);		
+		// alocacoes.setHoraInicio(horaInicio);
 		return "redirect:/homeLider";
 	}
-	
+
 	@PostMapping("/reprovar")
 	public String reprovarAgendamento(Recusado recusado, Agendamento agendamento) {
-	    recusado.setCriadoPor(sessao.getCurrentUser());   
-	    recusadoService.salvarRecusado(recusado);
-	    Agendamento agendamentoAlterado = agendamentoService.getAgendamento(agendamento.getIdAgendamento());
+		recusado.setCriadoPor(sessao.getCurrentUser());
+		recusadoService.salvarRecusado(recusado);
+		Agendamento agendamentoAlterado = agendamentoService.getAgendamento(agendamento.getIdAgendamento());
 		agendamentoAlterado.getPedido().setStatus("recusado");
 		agendamentoService.salvarAgendamento(agendamentoAlterado);
-	    return "redirect:/homeLider";
-	    
+		return "redirect:/homeLider";
+
 	}
-	
+
 	@GetMapping("/alocacao")
-	public String ListarDisponiveis(ModelMap model) {
+	public String ListarDisponiveis(ModelMap model, HttpServletRequest request) {
 		model.addAttribute("pedidos", pedidoService.buscarPorStatus());
+		model.addAttribute("disponiveis", disponivelService.buscarTodos());
+		Usuarios usuario = conecta.getCurrentUser();
+		request.setAttribute("nome", usuario.getNome());
 		return "alocacao";
 	}
-	
+
+	@PostMapping("/alocacao/alocar")
+	public String alocarDisponivelAoPedido(Agendamento agendamento, Pedido pedido, Alocacoes alocacoes) {
+		Usuarios usuario = sessao.getCurrentUser();
+		
+		Pedido pedidoSelecionado = pedidoService.getPedido(pedido.getIdPedido());
+		pedidoService.salvarPedido(pedidoSelecionado);
+		
+		agendamento = new Agendamento(agendamento.getDisponivel(), usuario, pedidoSelecionado);
+		agendamentoService.salvarAgendamento(agendamento);
+		
+		return "redirect:/homeLider/alocacao";
+	}
 }
+
+
+
+
+
+

@@ -89,9 +89,16 @@ public class LiderController {
 	}
 
 	@GetMapping("/alocacao")
-	public String ListarDisponiveis(ModelMap model) {
+	public String listarDisponiveis(ModelMap model) {
 		model.addAttribute("pedidos", pedidoService.buscarPorStatus());
 		return "alocacao";
+	}
+	
+	@GetMapping("/acompanhamento")
+	public String listarAgendamentosAprovadosEReprovados(ModelMap model) {
+		model.addAttribute("aprovados", alocacaoService.buscarTodos());
+		model.addAttribute("reprovados", recusadoService.buscarTodos());
+		return "acompanhamentoLider";
 	}
 
 }

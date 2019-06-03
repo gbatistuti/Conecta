@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<title>Acompanhamento | Líder</title>
+</head>
+<body>
+		<div>
+			<table>
+				<thead>
+					<tr>
+						<th>Cod</th>
+						<th>Título do Pedido</th>
+						<th>Projeto</th>
+						<th>Status</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="a : ${aprovados}">
+						<td th:text="${a.idPedido}"></td>
+						<td th:text="${a.titulo}"></td>
+						<td th:text="${a.projeto.nome}"></td>
+						<td th:text="${a.status}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+		<div>
+		<table>
+			<thead>
+				<tr>
+					<th>Cod</th>				
+					<th>Título do Agendamento</th>
+					<th>Projeto</th>
+					<th>Status</th>
+				</tr>			
+			</thead>
+			<tbody>
+				<tr th:each = "r : ${reprovados}">
+					<td th:text="${r.idAgendamento}"></td>
+					<td th:text="${r.pedido.titulo}"></td>
+					<td th:text="${r.pedido.projeto.nome}"></td>
+					<td th:text="${r.pedido.status}"></td>
+				</tr>
+			</tbody>
+		</table>
+		</div>
+		
+		<div>
+			<form action="/logout" method="post">
+				<button type="submit">Sair</button>
+				<input type="hidden" th:name="${_csrf.parameterName}"
+					th:value="${_csrf.token}" />
+			</form>
+		</div>
+</body>
+</html>

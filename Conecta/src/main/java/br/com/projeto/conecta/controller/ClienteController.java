@@ -79,6 +79,6 @@ public class ClienteController {
 		Usuarios usuario = sessao.getCurrentUser();
 		model.addAttribute("pedidosRealizados", pedidoService.buscarPedidosPorUsuario(usuario));
 		model.addAttribute("agendamentosCriados", agendamentoService.buscarAgendamentosPorUsuario(usuario));
-		return "clienteAcompanhamento";
+		return "AcompanhamentoCliente";
 	}
 }

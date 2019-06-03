@@ -7,18 +7,15 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import br.com.projeto.conecta.domain.Consultor;
+
 import br.com.projeto.conecta.domain.Disponiveis;
 import br.com.projeto.conecta.repository.DisponivelRepository;
-import br.com.projeto.conecta.security.ConectaUserDetailsService;
 
 @Service
 public class DisponivelService {
 
 	@Autowired
 	private DisponivelRepository disponivelRepository;
-	@Autowired
-	private ConectaUserDetailsService sessao;
 	
 	@Transactional
 	public List<Disponiveis> buscarTodos(){
@@ -34,7 +31,6 @@ public class DisponivelService {
 	@Transactional
 	public Disponiveis validaApontamento(String email) {
 		Date data = new Date();
-		Consultor consultor = sessao.getCurrentConsultor();
 		return disponivelRepository.findByUserAndDate(data, email);
 	}
 	

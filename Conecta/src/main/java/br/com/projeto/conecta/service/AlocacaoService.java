@@ -29,8 +29,14 @@ public class AlocacaoService {
 		alocaoRepository.save(alocacao);
 	}
 
-	public float creditosParaDescontar(int sugestaoDeHoras, float creditosPorHora) {
-		return sugestaoDeHoras * creditosPorHora;
+	public float creditosParaDescontar(Agendamento agendamento) {
+		float creditosPorHora = agendamento.getDisponivel().getConsultor().getCreditosPorHora();
+		int horasConstratadas = agendamento.getPedido().getSugestaoDeHoras();
+		float creditosDoProjeto = agendamento.getPedido().getProjeto().getQtdCreditos();
+
+		float creditosParaDescontar = (creditosPorHora * horasConstratadas);
+
+		return creditosDoProjeto - creditosParaDescontar;
 	}
 
 	public LocalTime buscaUltimaHora(Agendamento agendamento) {
@@ -39,22 +45,18 @@ public class AlocacaoService {
 		LocalTime hora = alocaoRepository.findbyUltimaHora(data, agendamento.getDisponivel().getIdDisponivel());
 
 		if (hora == null) {
-
 			int min = LocalTime.now().getMinute();
-
 			if (min >= 0 && min < 30) {
 				return LocalTime.of(LocalTime.now().getHour(), 30);
 			}
-
 			return LocalTime.of(LocalTime.now().getHour(), 00).plusHours(1);
 		}
-
 		return hora;
 	}
 
 	public LocalTime definirHoraFim(LocalTime horaInicio, Alocacoes alocacao) {
 		LocalTime horaFim;
-		
+
 		if (horaInicio.getMinute() == 30) {
 			horaFim = LocalTime.of(horaInicio.getHour(), 30)
 					.plusHours(alocacao.getAgendamento().getPedido().getSugestaoDeHoras());

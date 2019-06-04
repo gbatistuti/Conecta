@@ -96,19 +96,33 @@ public class LiderController {
 	public String alocarDisponivelAoPedido(Agendamento agendamento, Pedido pedido, Alocacoes alocacao) {
 		Usuarios usuario = sessao.getCurrentUser();
 
-		agendamento = new Agendamento(agendamento.getDisponivel(), usuario, pedido);
+		Pedido pedidoCandidatado = pedidoService.getPedido(pedido.getIdPedido());
+		pedidoCandidatado.setStatus("aprovado");
+		
+		agendamento = new Agendamento(agendamento.getDisponivel(), usuario, pedidoCandidatado);
 		agendamentoService.salvarAgendamento(agendamento);
 		
+		float creditosPorHora = agendamento.getDisponivel().getConsultor().getCreditosPorHora();
+		System.out.println("------------------------------------creditos por hora: "+creditosPorHora);
+		int horasConstratadas = pedidoCandidatado.getSugestaoDeHoras();
+		System.out.println("------------------------------------horas contratadas: "+horasConstratadas);
+		float creditosDoProjeto = agendamento.getPedido().getProjeto().getQtdCreditos();
+		System.out.println("------------------------------------creditos DO projeto: "+creditosDoProjeto);
+		float creditosParaDescontar = (creditosPorHora * horasConstratadas);
+		System.out.println("------------------------------------creditos para descontar: "+creditosParaDescontar);
 		
-		pedido.getProjeto().setQtdCreditos(alocacaoService.creditosParaDescontar(agendamento));
+
+		agendamento.getPedido().getProjeto().setQtdCreditos(creditosDoProjeto - creditosParaDescontar);
 		
+		//agendamento.getPedido().getProjeto().setQtdCreditos(alocacaoService.creditosParaDescontar(agendamento));
 		LocalTime horaInicio = alocacaoService.buscaUltimaHora(agendamento);
 		alocacao.setCriadoPor(sessao.getCurrentLider());
 		alocacao.setHoraInicio(horaInicio);
+		System.out.println("------------------------------------- hora inicio"+alocacao.getHoraInicio());
+		alocacao.setAgendamento(agendamento);		
 		alocacao.setHoraFim(alocacaoService.definirHoraFim(horaInicio, alocacao));
 		alocacao.setMotivo("Alocação criada a partir da lista de pedidos.");
 
-		agendamento.getPedido().setStatus("aprovado");
 		alocacaoService.salvarAlocacao(alocacao);
 		return "redirect:/homeLider/alocacao";
 	}

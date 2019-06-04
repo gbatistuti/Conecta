@@ -37,7 +37,7 @@
 						<td>
 						<form action="/homeLider/alocacao/alocar" method="POST">
 							<input name="disponivel">
-							<button type="submit" name="IdPedido" th:value="${p.IdPedido}">Alocar</button>
+							<button type="submit" name="idPedido" th:value="${p.idPedido}">Alocar</button>
 							<input type="hidden" th:name="${_csrf.parameterName}"
 									th:value="${_csrf.token}" />
 							</form>

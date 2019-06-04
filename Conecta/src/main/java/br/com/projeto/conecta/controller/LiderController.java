@@ -57,9 +57,9 @@ public class LiderController {
 		agendamento.getPedido().setStatus("aprovado");
 		agendamento.getPedido().getProjeto().setQtdCreditos(alocacaoService.creditosParaDescontar(agendamento));
 
+		alocacao.setCriadoPor(sessao.getCurrentLider());
 		LocalTime horaInicio = alocacaoService.buscaUltimaHora(agendamento);
 
-		alocacao.setCriadoPor(sessao.getCurrentLider());
 		alocacao.setHoraInicio(horaInicio);
 		alocacao.setHoraFim(alocacaoService.definirHoraFim(horaInicio, alocacao));
 
@@ -93,15 +93,23 @@ public class LiderController {
 	}
 
 	@PostMapping("/alocacao/alocar")
-	public String alocarDisponivelAoPedido(Agendamento agendamento, Pedido pedido, Alocacoes alocacoes) {
+	public String alocarDisponivelAoPedido(Agendamento agendamento, Pedido pedido, Alocacoes alocacao) {
 		Usuarios usuario = sessao.getCurrentUser();
 
-		Pedido pedidoSelecionado = pedidoService.getPedido(pedido.getIdPedido());
-		pedidoService.salvarPedido(pedidoSelecionado);
-
-		agendamento = new Agendamento(agendamento.getDisponivel(), usuario, pedidoSelecionado);
+		agendamento = new Agendamento(agendamento.getDisponivel(), usuario, pedido);
 		agendamentoService.salvarAgendamento(agendamento);
+		
+		
+		pedido.getProjeto().setQtdCreditos(alocacaoService.creditosParaDescontar(agendamento));
+		
+		LocalTime horaInicio = alocacaoService.buscaUltimaHora(agendamento);
+		alocacao.setCriadoPor(sessao.getCurrentLider());
+		alocacao.setHoraInicio(horaInicio);
+		alocacao.setHoraFim(alocacaoService.definirHoraFim(horaInicio, alocacao));
+		alocacao.setMotivo("Alocação criada a partir da lista de pedidos.");
 
+		agendamento.getPedido().setStatus("aprovado");
+		alocacaoService.salvarAlocacao(alocacao);
 		return "redirect:/homeLider/alocacao";
 	}
 

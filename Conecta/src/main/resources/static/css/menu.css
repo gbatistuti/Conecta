@@ -113,6 +113,13 @@ input:focus{
 	border-color: #29b6c5;
 }
 
+.botaoDeFechar{
+	float: right;
+	background: none;
+	top: -100px;
+	padding: 0px;
+}
+
 /* biblioteca */
 
 * {

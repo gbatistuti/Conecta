@@ -3,13 +3,44 @@
 }
 
 #fundoListaDisponibilidade{
-	margin-left: 20px;
-	height: 80vh;
-	width: 90vw;
-	margin-top: 20px;
+	margin-bottom: 0px;
+	width: 70vw;
 }
 
-#rolagemlistaDisponibilidade{
-	height: 70vh;
-	width: 44,5vw;
+#rolagemListaDisponibilidade{
+	height: 80vh;
+}
+
+.seletor{
+	height: 88.2vh;
+	width: 25vw;
+	float: right;
+	margin-top: 15px !important;
+}
+
+#botoesCentralizadosSeletor{
+	margin-top: 30vh;
+}
+
+#botoesCentralizadosSeletor > button{
+	margin-bottom: 10px;
+	font-size: 20px;
+}
+
+#buttonPedido{
+	padding-left: 40px;
+	padding-right: 40px;
+}
+
+#pedido{
+	display: none;
+}
+
+#agendamento{
+	display: none;
+}
+
+#seletor{
+	display: unset;
+	margin-left: 40px;
 }

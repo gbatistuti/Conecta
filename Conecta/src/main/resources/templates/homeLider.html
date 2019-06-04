@@ -42,7 +42,7 @@
 								<td th:text="${a.pedido.projeto.produto}"></td>
 								<td th:text="${a.disponivel.consultor.nome}"></td>
 								<td th:text="${a.pedido.sugestaoDeHoras}"></td>
-								<td th:text="${a.pedido.candidatura}"></td>
+								<td th:text="(${a.pedido.candidatura} == true)? 'Sim' : 'Não'"></td>
 							</tr>
 						</tbody>
 					</table>

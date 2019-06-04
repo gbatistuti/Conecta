@@ -26,11 +26,11 @@
 								<th>Cod</th>
 								<th>Título do Agendamento</th>
 								<th>Descrição do Agendamento</th>
-								<th>Criado Por</th>
 								<th>Projeto</th>
 								<th>Produto</th>
 								<th>Consultor</th>
 								<th>Horas</th>
+								<th>Candidatura</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -38,19 +38,11 @@
 								<td th:text="${a.idAgendamento}"></td>
 								<td th:text="${a.pedido.titulo}"></td>
 								<td th:text="${a.pedido.descricao}"></td>
-								<td>
-									<table>
-										<tbody>
-											<tr th:each="g : ${a.criadoPor.grupo}">
-												<td th:text="${g.nomeGrupo}"></td>
-											</tr>
-										</tbody>
-									</table>
-								</td>
 								<td th:text="${a.pedido.projeto.nome}"></td>
 								<td th:text="${a.pedido.projeto.produto}"></td>
 								<td th:text="${a.disponivel.consultor.nome}"></td>
 								<td th:text="${a.pedido.sugestaoDeHoras}"></td>
+								<td th:text="${a.pedido.candidatura}"></td>
 							</tr>
 						</tbody>
 					</table>

@@ -12,4 +12,6 @@ public interface LiderRepository extends JpaRepository<Lider, Integer>{
 	@Query("select u from Lider u where u.idUsuario = :currentUserId")
 	Lider getById(Integer currentUserId);
 
+	Lider findByEmail(String email);
+
 }

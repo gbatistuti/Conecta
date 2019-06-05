@@ -1,6 +1,8 @@
 package br.com.projeto.conecta.domain;
 
+import java.sql.Date;
 import java.time.LocalTime;
+import java.util.Calendar;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 @Entity
@@ -34,7 +37,17 @@ public class Alocacoes {
 	
 	private LocalTime horaFim;
 	
+	private Date data;
+	
+	
 	public Alocacoes() {}
+	
+	public Alocacoes(Agendamento agendamento, Lider criadoPor, LocalTime horaInicio, LocalTime horaFim) {
+		this.agendamento = agendamento;
+		CriadoPor = criadoPor;
+		this.horaInicio = horaInicio;
+		this.horaFim = horaFim;
+	}
 
 	public Integer getIdAlocacao() {
 		return idAlocacao;
@@ -84,4 +97,18 @@ public class Alocacoes {
 		this.horaFim = horaFim;
 	}
 
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
+	}
+	
+	@PrePersist
+	public void data() {
+		Calendar calendar = Calendar.getInstance();
+		this.data = new Date(calendar.getTime().getTime());
+		
+	}
 }

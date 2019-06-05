@@ -1,5 +1,8 @@
 package br.com.projeto.conecta.service;
 
+import java.sql.Date;
+import java.time.LocalTime;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -7,8 +10,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.zaxxer.hikari.util.SuspendResumeLock;
-
+import br.com.projeto.conecta.domain.Agendamento;
 import br.com.projeto.conecta.domain.Alocacoes;
 import br.com.projeto.conecta.repository.AlocacaoRepository;
 
@@ -23,11 +25,46 @@ public class AlocacaoService {
 		return alocaoRepository.findAll();
 	}
 
-	public void salvarAlocacao(Alocacoes alocacoes) {
-		alocaoRepository.save(alocacoes);
+	public void salvarAlocacao(Alocacoes alocacao) {
+		alocaoRepository.save(alocacao);
 	}
 
-	public float CreditosParaDescontar(int sugestaoDeHoras, Float creditosPorHora) {
-		return sugestaoDeHoras * creditosPorHora;
-	}	
+	public float creditosParaDescontar(Agendamento agendamento) {
+		float creditosPorHora = agendamento.getDisponivel().getConsultor().getCreditosPorHora();
+		int horasConstratadas = agendamento.getPedido().getSugestaoDeHoras();
+		float creditosDoProjeto = agendamento.getPedido().getProjeto().getQtdCreditos();
+
+		float creditosParaDescontar = (creditosPorHora * horasConstratadas);
+
+		return creditosDoProjeto - creditosParaDescontar;
+	}
+
+	public LocalTime buscaUltimaHora(Agendamento agendamento) {
+		Calendar calendar = Calendar.getInstance();
+		Date data = new Date(calendar.getTime().getTime());
+		LocalTime ultimaHora = alocaoRepository.findbyUltimaHora(data, agendamento.getDisponivel().getIdDisponivel());
+
+		if (ultimaHora == null || ultimaHora.isBefore(LocalTime.now())) {
+			int min = LocalTime.now().getMinute();
+			if (min >= 0 && min < 30) {
+				return LocalTime.of(LocalTime.now().getHour(), 30);
+			}
+			return LocalTime.of(LocalTime.now().getHour(), 00).plusHours(1);
+		}
+		return ultimaHora;
+	}
+
+	public LocalTime definirHoraFim(LocalTime horaInicio, Alocacoes alocacao) {
+		LocalTime horaFim;
+
+		if (horaInicio.getMinute() == 30) {
+			horaFim = LocalTime.of(horaInicio.getHour(), 30)
+					.plusHours(alocacao.getAgendamento().getPedido().getSugestaoDeHoras());
+			return horaFim;
+		}
+
+		horaFim = LocalTime.of(horaInicio.getHour(), 00)
+				.plusHours(alocacao.getAgendamento().getPedido().getSugestaoDeHoras());
+		return horaFim;
+	}
 }

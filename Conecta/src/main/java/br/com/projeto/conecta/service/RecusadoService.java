@@ -1,5 +1,7 @@
 package br.com.projeto.conecta.service;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,5 +19,9 @@ public class RecusadoService{
 	@Transactional
 	public void salvarRecusado(Recusado recusado) {
 		recusadoRepository.save(recusado);
+	}
+
+	public List<Recusado> buscarTodos() {
+		return recusadoRepository.findAll();
 	}
 }

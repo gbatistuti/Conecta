@@ -63,8 +63,6 @@
 					th:object="${alocacoes}">	 
 					<div class="formulario">
 						<label>Cod:</label> <input name="agendamento">
-<!-- 						<label>Hora Inicio:</label> <input name="horaInicio"> -->
-<!-- 						<label>Hora Fim:</label> <input name="horaFim"> -->
 						<br>
 						<label>Motivo:</label> <br> <input id="motivo" name="motivo">
 						<button class="botoes" type="submit">Enviar</button> <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />

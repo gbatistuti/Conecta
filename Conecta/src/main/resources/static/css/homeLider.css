@@ -20,13 +20,6 @@
 	height: 26.4vh;
 }
 
-.botaoDeFechar{
-	float: right;
-	background: none;
-	top: -100px;
-	padding: 0px;
-}
-
 #aprovar{
 	display: none;
 }

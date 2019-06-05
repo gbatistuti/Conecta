@@ -1,78 +1,84 @@
+#content{
+	margin: 0px!important;
+}
+
 #fundoListaDisponibilidade{
-	margin-left: 20px;
+	margin-bottom: 0px;
+	width: 70vw;
+}
+
+#rolagemListaDisponibilidade{
 	height: 80vh;
-	width: 45vw;
+}
+
+.escondidoNaLista{
+	display: none;
+}
+
+.seletor{
+	height: 88.2vh;
+	width: 25vw;
+	float: right;
+	margin-top: 15px !important;
+}
+
+#botoesCentralizadosSeletor{
+	margin-top: 30vh;
+}
+
+#botoesCentralizadosSeletor > button{
+	margin-bottom: 10px;
+	font-size: 20px;
+}
+
+#pedido{
+	display: none;
+}
+
+.formPedidoEAgendamento{
+	margin-top: 10%;
+	margin-left: 15%;
+	margin-right: 15%;
+	font-size: 20px;
+	text-align: left;
+}
+
+.formPedidoEAgendamento > label{
+	font-size: 20px;
 	margin-top: 20px;
 }
 
-#rolagemlistaDisponibilidade{
-	height: 70vh;
-	width: 44,5vw;
+.formPedidoEAgendamento > input{
+	width: 100%;
 }
 
-  .modal-container{
-        width:100vw;
-        height: 100vw;
-        background:rgba(0,0,0,.5);
-        position: fixed;
-        top: 0px;
-        left: 0px;
-        margin: 0;
-        z-index:2000; 
-        display: none;
-        justify-content: center;
-        align-items: center;
-         background-size:100%;
-    bottom: 0;
-    color: black;
-    left: 0;
-    overflow: auto;
-    padding: 3em;
-    position: absolute;
-    right: 0;
-    text-align: center;
-    top: 0;
-    background-size: cover;
-    }    
-    .modal-container.mostrar
-    {
-        display: flex
-        
-    }
-    .modal{
-    background: white;
-        width: 60%;
-        min-width:300px;
-        padding: 40px;
-        border: 10px solid #288b7a;
-        box-shadow: 0 0 0 10px white;
-        position: relative;
-    }
-    .fechar{
-        position: absolute;
-        top:0px;
-        right: 0px;
-        width: 50px;
-        height: 50px;
-        border:4px solid black;
-        border-radius: 50px;
-        background: White;
-        color: black;
-        font-family:
-        curso:pointer;
-    }
-        @keyframes modal{
-            from{
-                opacity: 0;
-                transform: translate3d(0, -60px, 0);
-            }
-            to
-            {
-              opacity: 1;
-                transform: translate3d(0, 0, 0);        
-            }
-        }
-        
-    .mostrar .modal{
-        animation: modal.7s;
-    }
+.formPedidoEAgendamento > select{
+	width: 100%;
+}
+
+.formPedidoEAgendamento > button{
+	margin-top: 10%;
+	margin-left: 33%;
+	font-size: 20px;
+	padding: 5px 30px 5px 30px;
+	border-radius: 100%;
+}
+
+.inputDeHoras {
+	text-align: center;
+	padding-left: 40px;
+}
+
+#buttonPedido{
+	padding-left: 40px;
+	padding-right: 40px;
+}
+
+#agendamento{
+	display: none;
+}
+
+#seletor{
+	display: unset;
+	margin-left: 40px;
+}

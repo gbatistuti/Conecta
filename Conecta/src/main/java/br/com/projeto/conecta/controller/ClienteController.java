@@ -36,20 +36,22 @@ public class ClienteController {
 	
 	@GetMapping
 	public String listarDisponiveis(ModelMap model, HttpServletRequest request) {
-		Usuarios usuario = sessao.getCurrentUser();
-		request.setAttribute("nome", usuario.getNome());
+		
+		//Usuarios usuario = sessao.getCurrentUser();
+		//request.setAttribute("nome", usuario.getNome());
 		model.addAttribute("disponiveis",disponivelService.buscarTodos());
 		model.addAttribute("projeto",projetoService.buscarPor(sessao.getCurrentUserId()));
 		model.addAttribute("pedido", new Pedido());
 		model.addAttribute("agendamento", new Agendamento());
-		model.addAttribute("pedidosRealizados", pedidoService.buscarPedidosPorUsuario(usuario));
-		model.addAttribute("agendamentosCriados", agendamentoService.buscarAgendamentosPorUsuario(usuario));
+//		model.addAttribute("pedidosRealizados", pedidoService.buscarPedidosPorUsuario(usuario));
+//		model.addAttribute("agendamentosCriados", agendamentoService.buscarAgendamentosPorUsuario(usuario));
 		return "homeCliente";
 	}
 	
 	@PostMapping("/criarpedido")
 	public String criarPedido(Pedido pedido, Model model) {
 		Usuarios usuario = sessao.getCurrentUser();
+		
 		pedido.setCriadoPor(usuario);
 		pedido.setOrigem("pedido");
 		pedidoService.salvarPedido(pedido);
@@ -59,13 +61,24 @@ public class ClienteController {
 	@PostMapping("/criaragendamento")
 	public String criarAgendamento(Pedido pedido, Agendamento agendamento, Model model) {
 		Usuarios usuario = sessao.getCurrentUser();
+		
 		pedido.setCriadoPor(usuario);
 		pedido.setOrigem("agendamento");
-		pedidoService.salvarPedido(pedido);
+		
 		agendamento.setPedido(pedido);
 		agendamento.setCriadoPor(usuario);
+		
+		pedidoService.salvarPedido(pedido);
 		agendamentoService.salvarAgendamento(agendamento);
 		
 		return "redirect:/homeCliente";
+	}
+	
+	@GetMapping("/acompanhamentoCliente")
+	public String listarPedidosEAgendamentos(Pedido pedido, Agendamento agendamento, Model model) {
+		Usuarios usuario = sessao.getCurrentUser();
+		model.addAttribute("pedidosRealizados", pedidoService.buscarPedidosPorUsuario(usuario));
+		model.addAttribute("agendamentosCriados", agendamentoService.buscarAgendamentosPorUsuario(usuario));
+		return "AcompanhamentoCliente";
 	}
 }

@@ -19,8 +19,6 @@ public class Cliente extends Usuarios{
 	
 	public Cliente() {
 	}
-
-	
 	public String getTelefone() {
 		return telefone;
 	}

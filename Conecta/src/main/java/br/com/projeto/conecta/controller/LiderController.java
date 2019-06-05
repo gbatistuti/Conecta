@@ -1,6 +1,9 @@
 package br.com.projeto.conecta.controller;
 
+import java.time.LocalTime;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,78 +14,81 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.projeto.conecta.domain.Agendamento;
 import br.com.projeto.conecta.domain.Alocacoes;
-import br.com.projeto.conecta.domain.Usuarios;
+import br.com.projeto.conecta.domain.Recusado;
 import br.com.projeto.conecta.security.ConectaUserDetailsService;
 import br.com.projeto.conecta.service.AgendamentoService;
 import br.com.projeto.conecta.service.AlocacaoService;
 import br.com.projeto.conecta.service.DisponivelService;
+import br.com.projeto.conecta.service.PedidoService;
+import br.com.projeto.conecta.service.RecusadoService;
 
 @Controller
 @RequestMapping("/homeLider")
 public class LiderController {
 
 	@Autowired
-	private ConectaUserDetailsService conecta;
-	@Autowired
 	private AgendamentoService agendamentoService;
-	@Autowired
-	private DisponivelService disponivelService;
 	@Autowired
 	private AlocacaoService alocacaoService;
 	@Autowired
 	private ConectaUserDetailsService sessao;
-	
-	
+	@Autowired
+	private DisponivelService disponivelService;
+	@Autowired
+	private PedidoService pedidoService;
+	@Autowired
+	private RecusadoService recusadoService;
+
 	@GetMapping
 	public String listarAgendamentos(ModelMap model, HttpServletRequest request) {
-		Usuarios usuario = conecta.getCurrentUser();
-		model.addAttribute("agendamento", agendamentoService.BuscarTodos());
+		//Usuarios usuario = sessao.getCurrentUser();
+		//request.setAttribute("nome", usuario.getNome());
+		model.addAttribute("agendamento", agendamentoService.buscarPorStatus());
 		model.addAttribute("disponiveis", disponivelService.buscarTodos());
-		request.setAttribute("nome", usuario.getNome());
 		return "homeLider";
 	}
-	
+
 	@PostMapping("/aprovar")
-	public String aprovarAgendamento(Alocacoes alocacoes, Agendamento agendamento) {
-		alocacoes.setCriadoPor(sessao.getCurrentLider());
-		Agendamento agendamentoAlterado = agendamentoService.getAgendamento(agendamento.getIdAgendamento());
-		agendamentoAlterado.getPedido().setStatus("aprovado");
-		agendamentoService.salvarAgendamento(agendamentoAlterado);
-		alocacaoService.salvarAlocacao(alocacoes);
+	@Transactional
+	public String aprovarAgendamento(Alocacoes alocacao, Agendamento agendamento) {
+		
+		agendamento.getPedido().setStatus("aprovado");
+		agendamento.getPedido().getProjeto().setQtdCreditos(alocacaoService.creditosParaDescontar(agendamento));
+
+		LocalTime horaInicio = alocacaoService.buscaUltimaHora(agendamento);
+
+		agendamentoService.salvarAgendamento(agendamento);
+		alocacao = new Alocacoes(agendamento, sessao.getCurrentLider(), horaInicio, alocacaoService.definirHoraFim(horaInicio, alocacao));
+		alocacaoService.salvarAlocacao(alocacao);
 		return "redirect:/homeLider";
 	}
+
+	@PostMapping("/reprovar")
+	public String reprovarAgendamento(Recusado recusado, Agendamento agendamento) {
+		recusado.setCriadoPor(sessao.getCurrentUser());
+		
+		Agendamento agendamentoAlterado = agendamentoService.getAgendamento(agendamento.getIdAgendamento());
+		
+		agendamentoAlterado.getPedido().setStatus("recusado");
+		
+		recusadoService.salvarRecusado(recusado);
+		agendamentoService.salvarAgendamento(agendamentoAlterado);
+		
+		return "redirect:/homeLider";
+
+	}
+
+	@GetMapping("/alocacao")
+	public String listarDisponiveis(ModelMap model) {
+		model.addAttribute("pedidos", pedidoService.buscarPorStatus());
+		return "alocacao";
+	}
 	
-//	@GetMapping
-//	public String ListarDisponiveis(ModelMap model) {
-//		model.addAttribute("disponiveis", disponivelService.buscarTodos());
-//		return "homeLider";
-//	}
-	
-	
-//	@Autowired
-//	private AgendamentoService agendamentoService;
-//	@Autowired
-//	private ProjetoService projetoService;
-//	@Autowired
-//	private PedidoService pedidoService;
-//
-//	@GetMapping
-//	public String ListarAgendamentos(ModelMap model) {
-//		model.addAttribute("agendamento", agendamentoService.BuscarTodos());
-//		return "homeLider";
-//	}
-//	
-//	@GetMapping("/gerenciaProjetos")
-//	public String listar(ModelMap model) {
-//		model.addAttribute("projetos", projetoService.buscarTodos());
-//		return "gerenciaProjetos";
-//	}
-//	
-//	@GetMapping("/totinhas")
-//	public String ListarDisponiveis(ModelMap model) {
-//		model.addAttribute("pedidos", pedidoService.buscarTodos());
-//		return "alocacao";
-//	}
-	
-	
+	@GetMapping("/acompanhamento")
+	public String listarAgendamentosAprovadosEReprovados(ModelMap model) {
+		model.addAttribute("aprovados", alocacaoService.buscarTodos());
+		model.addAttribute("reprovados", recusadoService.buscarTodos());
+		return "acompanhamentoLider";
+	}
+
 }

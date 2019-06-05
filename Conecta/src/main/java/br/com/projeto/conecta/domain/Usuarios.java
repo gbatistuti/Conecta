@@ -50,7 +50,14 @@ public class Usuarios implements Serializable, UserDetails {
 	@OneToMany(mappedBy = "criadoPor")
 	private List<Pedido> pedidos;
 	
+	@OneToMany(mappedBy = "criadoPor")
+	private List<Recusado> recusado;
+	
 	public Usuarios() {
+	}
+	
+	public Usuarios(Integer idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 	
 	public Usuarios(String email, String senha, String codigo, String nome, List<Grupo> grupo) {
@@ -107,6 +114,22 @@ public class Usuarios implements Serializable, UserDetails {
 
 	public void setGrupo(List<Grupo> grupo) {
 		this.grupo = grupo;
+	}
+
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
+
+	public List<Recusado> getRecusado() {
+		return recusado;
+	}
+
+	public void setRecusado(List<Recusado> recusado) {
+		this.recusado = recusado;
 	}
 
 	@Override

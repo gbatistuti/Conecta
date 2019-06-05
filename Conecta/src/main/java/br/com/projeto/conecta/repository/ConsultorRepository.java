@@ -11,5 +11,9 @@ public interface ConsultorRepository extends JpaRepository<Consultor, Integer>{
 	
 	@Query("select u from Consultor u where u.idUsuario = :currentUserId")
 	Consultor getById(Integer currentUserId);
+
+	Consultor findByEmail(String email);
+	
+	
 	
 }

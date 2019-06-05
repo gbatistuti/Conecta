@@ -1,169 +1,144 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="UTF-8">
 <title>Home | Cliente</title>
-</head>
-<body>
+<link rel="stylesheet" type="text/css" media="screen"
+	th:href="@{/css/homeCliente.css}">
 
-	<div>
-		<h1>
-			Seja bem vindo, <label
-				th:text="${#httpServletRequest.getAttribute('nome')}"></label>
-		</h1>
+<!--Sera substituido pelo fragmento head que contem associaçoes para menu funcionar-->
+<th:block th:replace="fragments/head :: head"></th:block>
+
+</head>
+<body id="menuBody">
+
+	<!--Sera substituido pelo fragmento do menu-->
+	<div th:replace="fragments/menuCliente :: menu"></div>
+	<!-- Todos id e class de menu começam com menuAlgumacoisa então evite usar menu na frente de seus ids ou class-->
+	
+	<div id="selecao" class="seletor fundo">
+		<h2>Criar</h2>
+		<div id="botoesCentralizadosSeletor">
+		<button onclick="abreAgendamento()">Agendamento</button>
+		<br>
+		<button onclick="abrePedido()" id="buttonPedido">Pedido</button>
+		</div>
 	</div>
 
-	<div>
+	<div id="agendamento" class="fundo seletor">
+		<button onclick="abreSeletor()" class="botaoDeFechar">X</button>
+		<h2>Agendamento</h2>
+		<form class="formPedidoEAgendamento" action="/homeCliente/criaragendamento" method="post">
+			<Label>Título</Label> <br> <input type="text" th:field="${pedido.titulo}"><br>
+			<Label>Descrição</Label> <br> <input type="text"th:field="${pedido.descricao}"><br>
+			<label> Codigo do Consultor</label><br><input type="text" th:field="${agendamento.disponivel}"><br>
+			<Label>Sugestão de Horas</Label> <br> <input class="inputDeHoras" type="time" th:field="${pedido.sugestaoDeHoras}"><br>
+			<label>Projeto</label><br>
+			<select th:field="${pedido.projeto}" name="idProjeto">
+				<option value="">Escolha o projeto</option>
+				<option th:each="p : ${projeto}" th:value="${p.idProjeto}"
+					th:text="${'Nome: ' + p.nome + ' | Créditos: ' + p.qtdCreditos}">
+				</option>
+			</select><br>
+			<button>Salvar</button>
+			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+		</form>
+	</div>
+
+	<div id="pedido" class="fundo seletor">
+		<button onclick="abreSeletor()" class="botaoDeFechar">X</button>
+		<h2>Pedido</h2>
+		<form class="formPedidoEAgendamento" action="/homeCliente/criarpedido" method="post"
+			th:object="${pedido}">
+			<Label>Título</Label> <br> <input name="titulo"><br> 
+			<Label>Descrição</Label> <br> <input name="descricao"><br>
+			<Label>Sugestão de Horas</Label> <br> <input class="inputDeHoras" type="time" name="sugestaoDeHoras"><br> 
+			<label>Projeto</label> <br> <select th:field="*{projeto}" name="idProjeto"><br>
+				<option value="">Escolha o projeto</option>
+				<option th:each="p : ${projeto}" th:value="${p.idProjeto}"
+					th:text="${'Nome: ' + p.nome + ' | Créditos: ' + p.qtdCreditos}">
+				</option>
+			</select>
+			<br> 
+			<button>Salvar</button> 
+			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+		</form>
+	</div>
+
+	<div id="fundoListaDisponibilidade" class="fundo">
 		<h2>Lista de disponibilidade</h2>
-		<table>
-			<thead>
-				<tr>
-					<th>Cód.</th>
-					<th>Consultor</th>
-					<th>Hora início</th>
-					<th>Hora fim</th>
-					<th>Créditos / h</th>
-					<th>Habilidade Principal</th>
-					<th>Habilidade Especifica</th>
-<!-- th>Selecionar</th> -->
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="d : ${disponiveis}">
-					<td th:text="${d.consultor.idUsuario}"></td>
-					<td th:text="${d.consultor.nome}"></td>
-					<td th:text="${d.horaInicio}"></td>
-					<td th:text="${d.horaFim}"></td>
-					<td th:text="${d.consultor.creditosPorHora}"></td>
-					<td>
-						<table>
-							<tbody>
-								<tr th:each="h : ${d.consultor.habilidadesEspecificas}">
-									<td
-										th:text="${h.habilidadesPrincipais.nomeHabilidadePrincipal}"></td>
-									<td th:text="${h.nomeHabilidadeEspecifica}"></td>
-								</tr>
-							</tbody>
-						</table>
-					</td>
-
-					<td><button type="button">Botão</button></td>
-				</tr>
-			</tbody>
-		</table>
-		
-		<div>
-			<h2>Agendamento</h2>
-
-			<form action="/homeCliente/criaragendamento" method="post">
-				<Label>Título</Label>
-				<input type="text" th:field="${pedido.titulo}">
-				<Label>Descrição</Label>
-				<input type="text" th:field="${pedido.descricao}">
-				<Label>Sugestão de Horas</Label>
-				<input type="text" th:field="${pedido.sugestaoDeHoras}">
-				
-				<select th:field="${pedido.projeto}" name="idProjeto">
-					<option value="">Escolha o projeto</option>
-					<option th:each="p : ${projeto}"
-							th:value="${p.idProjeto}"
-							th:text="${p.idProjeto + ' - ' + p.nome}">
-					</option>
-				</select>
-				
-				<input type="text" th:field="${agendamento.consultor}">
-				
-				<input type="submit" value="Salvar">
-				
-				<input type="hidden" th:name="${_csrf.parameterName}"
-				th:value="${_csrf.token}" />
-			</form>
-		</div>
-		
-		<div>
-			<h2>Pedido</h2>
-			<form action="/homeCliente/criarpedido" method="post" th:object="${pedido}">
-				<Label>Título</Label>
-				<input name="titulo">
-				<Label>Descrição</Label>
-				<input name="descricao">
-				<Label>Sugestão de Horas</Label>
-				<input name="sugestaoDeHoras">
-				
-				<select th:field="*{projeto}" name="idProjeto">
-					<option value="">Escolha o projeto</option>
-					<option th:each="p : ${projeto}"
-							th:value="${p.idProjeto}"
-							th:text="${p.idProjeto + ' - ' + p.nome}">
-					</option>
-				</select>
-				<input type="submit" value="Salvar">
-				
-				<input type="hidden" th:name="${_csrf.parameterName}"
-				th:value="${_csrf.token}" />
-			</form>
-		</div>
-		
-		<div>
+		<div id="rolagemListaDisponibilidade" class="rolagem">
 			<table>
 				<thead>
 					<tr>
-						<th>Cod</th>
-						<th>Título do Pedido</th>
-						<th>Projeto</th>
-						<th>Status</th>
+						<th>Cód.</th>
+						<th>Consultor</th>
+						<th>Hora início</th>
+						<th>Hora fim</th>
+						<th>Créditos / h</th>
+						<th>Habilidades</th>
+						<th class="escondidoNaLista">Habilidade Principal</th>
+						<th class="escondidoNaLista">Habilidade Especifica</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="p : ${pedidosRealizados}">
-						<td th:text="${p.idPedido}"></td>
-						<td th:text="${p.titulo}"></td>
-						<td th:text="${p.projeto.nome}"></td>
-						<td th:text="${p.status}"></td>
+					<tr th:each="d : ${disponiveis}">
+						<!-- 					<td th:text="${d.consultor.idUsuario}"></td> -->
+						<td th:text="${d.idDisponivel}"></td>
+						<td th:text="${d.consultor.nome}"></td>
+						<td th:text="${d.horaInicio}"></td>
+						<td th:text="${d.horaFim}"></td>
+						<td th:text="${d.consultor.creditosPorHora}"></td>
+						<td> <img alt="" th:src="@{/img/homeCliente/info.svg}"></td>
+						<td class="escondidoNaLista">
+							<table>
+								<tbody>
+									<tr th:each="h : ${d.consultor.habilidadesEspecificas}">
+										<td
+											th:text="${h.habilidadesPrincipais.nomeHabilidadePrincipal}"></td>
+									</tr>
+								</tbody>
+							</table>
+						</td>
+						<td>
+							<table class="escondidoNaLista">
+								<tbody>
+									<tr th:each="h : ${d.consultor.habilidadesEspecificas}">
+										<td th:text="${h.nomeHabilidadeEspecifica}"></td>
+									</tr>
+								</tbody>
+							</table>
+						</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
-		
-		<div>
-		<table>
-			<thead>
-				<tr>
-					<th>Cod</th>				
-					<th>Título do Agendamento</th>
-					<th>Projeto</th>
-					<th>Status</th>
-				</tr>			
-			</thead>
-			<tbody>
-				<tr th:each = "a : ${agendamentosCriados}">
-					<td th:text="${a.idAgendamento}"></td>
-					<td th:text="${a.pedido.titulo}"></td>
-					<td th:text="${a.pedido.projeto.nome}"></td>
-					<td th:text="${a.pedido.status}"></td>
-				</tr>
-			</tbody>
-		</table>
-		</div>
-		
-		<div>
-			<form action="/logout" method="post">
-				<button type="submit">Sair</button>
-				<input type="hidden" th:name="${_csrf.parameterName}"
-					th:value="${_csrf.token}" />
-			</form>
-		</div>
-		</div>
-        <div id="modal-tabela" class="modal-container">
-	<div class="modal">
-        <button class="fechar">X</button>
-        <h1> Informações</h1>
-	       <div>
-            
-        </div>
 	</div>
-</div>
+	
+	<script type="text/javascript">
+	function abrePedido(){
+		var pedido = document.getElementById("pedido");
+		var selecao = document.getElementById("selecao");
+		pedido.style.display = "block"
+		selecao.style.display = "none"
+	}
+	
+	function abreAgendamento(){
+		var agendamento = document.getElementById("agendamento");
+		var selecao = document.getElementById("selecao");
+		agendamento.style.display = "block"
+		selecao.style.display = "none"
+	}
+	
+	function abreSeletor(){
+		var pedido = document.getElementById("pedido");
+		var agendamento = document.getElementById("agendamento");
+		var selecao = document.getElementById("selecao");
+		agendamento.style.display = "none"
+		pedido.style.display = "none"
+		selecao.style.display = "block"
+	}
+	</script>
 </body>
-
 </html>

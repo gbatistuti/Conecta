@@ -84,11 +84,16 @@ public class LiderController {
 		return "alocacao";
 	}
 	
-	@GetMapping("/acompanhamento")
-	public String listarAgendamentosAprovadosEReprovados(ModelMap model) {
+	@GetMapping("/agendamentosAprovados")
+	public String listarAgendamentosAprovados(ModelMap model) {
 		model.addAttribute("aprovados", alocacaoService.buscarTodos());
+		return "agendamentosAprovados";
+	}
+	
+	@GetMapping("/agendamentosReprovados")
+	public String listarAgendamentosReprovados(ModelMap model) {
 		model.addAttribute("reprovados", recusadoService.buscarTodos());
-		return "acompanhamentoLider";
+		return "agendamentosReprovados";
 	}
 
 }

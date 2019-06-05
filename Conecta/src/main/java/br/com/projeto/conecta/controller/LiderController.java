@@ -22,6 +22,7 @@ import br.com.projeto.conecta.service.AgendamentoService;
 import br.com.projeto.conecta.service.AlocacaoService;
 import br.com.projeto.conecta.service.DisponivelService;
 import br.com.projeto.conecta.service.PedidoService;
+import br.com.projeto.conecta.service.ProjetoService;
 import br.com.projeto.conecta.service.RecusadoService;
 
 @Controller
@@ -40,6 +41,8 @@ public class LiderController {
 	private PedidoService pedidoService;
 	@Autowired
 	private RecusadoService recusadoService;
+	@Autowired
+	private ProjetoService projetoservice;
 
 	@GetMapping
 	public String listarAgendamentos(ModelMap model, HttpServletRequest request) {
@@ -132,6 +135,12 @@ public class LiderController {
 		model.addAttribute("aprovados", alocacaoService.buscarTodos());
 		model.addAttribute("reprovados", recusadoService.buscarTodos());
 		return "acompanhamentoLider";
+	}
+	
+	@GetMapping("/gerenciaProjetos")
+	public String listar(ModelMap model) {
+		model.addAttribute("projetos", projetoservice.buscarTodos());
+		return "gerenciaProjetos";
 	}
 
 }

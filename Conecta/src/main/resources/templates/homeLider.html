@@ -10,7 +10,7 @@
 <script type="text/javascript" th:src="@{js/homeLider.js}"></script>
 
 <!--Sera substituido pelo fragmento head que contem associaçoes para menu funcionar-->
-  <th:block th:replace="fragments/head :: head"></th:block>
+<th:block th:replace="fragments/head :: head"></th:block>
 </head>
 <body id="menuBody">
 	<!--Sera substituido pelo fragmento do menu-->
@@ -63,8 +63,6 @@
 					th:object="${alocacoes}">	 
 					<div class="formulario">
 						<label>Cod:</label> <input name="agendamento">
-<!-- 						<label>Hora Inicio:</label> <input name="horaInicio"> -->
-<!-- 						<label>Hora Fim:</label> <input name="horaFim"> -->
 						<br>
 						<label>Motivo:</label> <br> <input id="motivo" name="motivo">
 						<button class="botoes" type="submit">Enviar</button> <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />

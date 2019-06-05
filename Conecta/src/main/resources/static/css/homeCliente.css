@@ -11,6 +11,10 @@
 	height: 80vh;
 }
 
+.escondidoNaLista{
+	display: none;
+}
+
 .seletor{
 	height: 88.2vh;
 	width: 25vw;
@@ -27,13 +31,47 @@
 	font-size: 20px;
 }
 
+#pedido{
+	display: none;
+}
+
+.formPedidoEAgendamento{
+	margin-top: 10%;
+	margin-left: 15%;
+	margin-right: 15%;
+	font-size: 20px;
+	text-align: left;
+}
+
+.formPedidoEAgendamento > label{
+	font-size: 20px;
+	margin-top: 20px;
+}
+
+.formPedidoEAgendamento > input{
+	width: 100%;
+}
+
+.formPedidoEAgendamento > select{
+	width: 100%;
+}
+
+.formPedidoEAgendamento > button{
+	margin-top: 10%;
+	margin-left: 33%;
+	font-size: 20px;
+	padding: 5px 30px 5px 30px;
+	border-radius: 100%;
+}
+
+.inputDeHoras {
+	text-align: center;
+	padding-left: 40px;
+}
+
 #buttonPedido{
 	padding-left: 40px;
 	padding-right: 40px;
-}
-
-#pedido{
-	display: none;
 }
 
 #agendamento{

@@ -1,21 +1,61 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="UTF-8">
-	<title>Pedidos | Líder</title>
-	
-	<!--Sera substituido pelo fragmento head que contem associaçoes para menu funcionar-->
-	<th:block th:replace="fragments/head :: head"></th:block>
+<meta charset="UTF-8">
+<title>Pedidos | Líder</title>
+<link rel="stylesheet" type="text/css" media="screen"
+	th:href="@{/css/pedido.css}" />
+
+<!--Sera substituido pelo fragmento head que contem associaçoes para menu funcionar-->
+<th:block th:replace="fragments/head :: head"></th:block>
 </head>
-<body id="menuBody" style="background-image:url('/img/menu/fundo1.png')!important">
+<body id="menuBody">
 
 	<!--Sera substituido pelo fragmento do menu-->
 	<div th:replace="fragments/menuLider :: menu"></div>
 	<!-- Todos id e class de menu começam com menuAlgumacoisa então evite usar menu na frente de seus ids ou class-->
-	
-	<div id="fundoUmaTabelaNaPaginaToda"class="fundo">
+
+	<div id="listaDeDisponibilidade" class="fundo">
+		<h2>Lista de disponibilidade</h2>
+		<div id="rolagemListaDisponibilidade" class="rolagem">
+			<table>
+				<thead>
+					<tr>
+						<th>Cód.</th>
+						<th>Consultor</th>
+						<th>Hora início</th>
+						<th>Hora fim</th>
+						<th>Créditos / h</th>
+						<th>Habilidade Principal</th>
+						<th>Habilidade Especifica</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="d : ${disponiveis}">
+						<td th:text="${d.idDisponivel}"></td>
+						<td th:text="${d.consultor.nome}"></td>
+						<td th:text="${d.horaInicio}"></td>
+						<td th:text="${d.horaFim}"></td>
+						<td th:text="${d.consultor.creditosPorHora}"></td>
+						<td>
+							<table>
+								<tbody>
+									<tr th:each="h : ${d.consultor.habilidadesEspecificas}">
+										<td
+											th:text="${h.habilidadesPrincipais.nomeHabilidadePrincipal}"></td>
+										<td th:text="${h.nomeHabilidadeEspecifica}"></td>
+									</tr>
+								</tbody>
+							</table>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div id="pedidos" class="fundo">
 		<h2>Pedidos</h2>
-		<div id="rolagemUmaTabelaNaPaginaToda" class="rolagem">
+		<div id="rolagemPedidos" class="rolagem">
 			<table>
 				<thead>
 					<tr>
@@ -35,10 +75,10 @@
 						<td th:text="${p.projeto.cliente.nome}"></td>
 						<td th:text="${p.projeto.produto}"></td>
 						<td>
-						<form action="/homeLider/alocacao/alocar" method="POST">
-							<input name="disponivel">
-							<button type="submit" name="idPedido" th:value="${p.idPedido}">Alocar</button>
-							<input type="hidden" th:name="${_csrf.parameterName}"
+							<form action="/homeLider/alocacao/alocar" method="POST">
+								<input class="inputPedidos" name="disponivel">
+								<button class="botaoPedidos" type="submit" name="idPedido" th:value="${p.idPedido}">Alocar</button>
+								<input type="hidden" th:name="${_csrf.parameterName}"
 									th:value="${_csrf.token}" />
 							</form>
 						</td>
@@ -46,42 +86,6 @@
 				</tbody>
 			</table>
 		</div>
-	</div>
-	<div>
-		<h2>Lista de disponibilidade</h2>
-		<table>
-			<thead>
-				<tr>
-					<th>Cód.</th>
-					<th>Consultor</th>
-					<th>Hora início</th>
-					<th>Hora fim</th>
-					<th>Créditos / h</th>
-					<th>Habilidade Principal</th>
-					<th>Habilidade Especifica</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="d : ${disponiveis}">
-					<td th:text="${d.idDisponivel}"></td>
-					<td th:text="${d.consultor.nome}"></td>
-					<td th:text="${d.horaInicio}"></td>
-					<td th:text="${d.horaFim}"></td>
-					<td th:text="${d.consultor.creditosPorHora}"></td>
-					<td>
-						<table>
-							<tbody>
-								<tr th:each="h : ${d.consultor.habilidadesEspecificas}">
-									<td
-										th:text="${h.habilidadesPrincipais.nomeHabilidadePrincipal}"></td>
-									<td th:text="${h.nomeHabilidadeEspecifica}"></td>
-								</tr>
-							</tbody>
-						</table>
-					</td>
-				</tr>
-			</tbody>
-		</table>
 	</div>
 </body>
 </html>

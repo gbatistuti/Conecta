@@ -13,7 +13,7 @@ import org.springframework.security.core.GrantedAuthority;
 @Entity
 @Table(name = "GRUPOS")
 public class Grupo implements Serializable, GrantedAuthority {
-	
+
 	@Id 
 	private String nomeGrupo;
 	

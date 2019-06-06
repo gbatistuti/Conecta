@@ -17,6 +17,6 @@ public interface DisponivelRepository extends JpaRepository<Disponiveis, Integer
 	List<Disponiveis> findByDate(@Param("hoje") Date data);
 	
 
-	@Query("select u from Disponiveis u where u.data = :data and u.consultor.email = :email")
+	@Query("select u from Disponiveis u join fetch u.consultor where u.data = :data and u.consultor.email = :email")
 	Disponiveis findByUserAndDate(@Param("data")Date data, @Param("email") String email);
 }

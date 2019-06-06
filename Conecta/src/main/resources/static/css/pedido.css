@@ -1,0 +1,25 @@
+#pedidos{
+	width: 70vw;
+}
+
+#rolagemPedidos{
+	height: 80vh;
+}
+
+.inputPedidos{
+	height: 28px;
+}
+
+.botaoPedidos{
+	padding-top: 1.5px;
+	padding-bottom: 1.5px;
+}
+
+#listaDeDisponibilidade{
+	width: 25vw;
+	float: right;
+	margin-top: 15px;
+}
+#rolagemListaDisponibilidade{
+	height: 80vh;
+}

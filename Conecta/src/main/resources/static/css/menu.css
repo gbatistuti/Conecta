@@ -101,6 +101,7 @@ button{
 	font-size: 9px;
 	margin-right: 3px;
 	cursor: pointer;
+	outline: 0;
 	
 }
 
@@ -120,6 +121,7 @@ input{
 	border-color: #ea9b3e;
 	border-radius: 20px;
 	background-color:rgba(255, 255, 255, 0);
+	outline: 0;
 }
 
 textarea{

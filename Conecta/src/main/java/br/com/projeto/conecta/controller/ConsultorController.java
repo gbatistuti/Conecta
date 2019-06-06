@@ -33,8 +33,6 @@ public class ConsultorController {
 
 	@GetMapping
 	public String listarPedidos(ModelMap model, HttpServletRequest request) {
-		// Usuarios usuario = sessao.getCurrentUser();
-		// request.setAttribute("nome", usuario.getNome());
 		model.addAttribute("pedido", pedidoService.filtrarPorOrigemECandidatura());
 		model.addAttribute("pedidoCandidatado", agendamentoService.buscarCandidaturasByUsuario(sessao.getCurrentUserEmail()));
 		return "homeConsultor";
@@ -58,14 +56,8 @@ public class ConsultorController {
 			return "redirect:/homeConsultor?falha2";
 			// colocar mensagem de 'necessário apontamento'
 		}
-		
-//		Consultor consultor = sessao.getCurrentConsultor();
-//		Usuarios usuario = sessao.getCurrentUser();
+
 		Usuarios usuario = disponivel.getConsultor();
-		
-//		Pedido pedidoCandidatado = pedidoService.getPedido(pedido.getIdPedido());
-//		pedidoCandidatado.setCandidatura(true);
-//		pedidoService.salvarPedido(pedidoCandidatado);
 		
 		pedidoService.atualizarPedido(pedido.getIdPedido());
 		

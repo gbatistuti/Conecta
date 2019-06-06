@@ -66,12 +66,12 @@
 
 .inputDeHoras {
 	text-align: center;
-	padding-left: 40px;
 }
 
 #buttonPedido{
 	padding-left: 40px;
 	padding-right: 40px;
+	outline: 0;
 }
 
 #agendamento{

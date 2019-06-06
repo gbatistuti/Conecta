@@ -21,4 +21,12 @@ public class ProjetoService {
 	public List<Projeto> buscarPor(Integer id) {
 		return projetoRepository.getById(id);
 	}
+	
+	public void salvar(Projeto projeto){
+		projetoRepository.save(projeto);
+	}
+	
+	public Projeto getProjeto(Integer id) {
+		return projetoRepository.getOne(id);
+	}
 }

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import br.com.projeto.conecta.domain.Agendamento;
 import br.com.projeto.conecta.domain.Alocacoes;
 import br.com.projeto.conecta.domain.Pedido;
+import br.com.projeto.conecta.domain.Projeto;
 import br.com.projeto.conecta.domain.Recusado;
 import br.com.projeto.conecta.domain.Usuarios;
 import br.com.projeto.conecta.security.ConectaUserDetailsService;
@@ -106,22 +107,15 @@ public class LiderController {
 		agendamentoService.salvarAgendamento(agendamento);
 		
 		float creditosPorHora = agendamento.getDisponivel().getConsultor().getCreditosPorHora();
-		System.out.println("------------------------------------creditos por hora: "+creditosPorHora);
 		int horasConstratadas = pedidoCandidatado.getSugestaoDeHoras();
-		System.out.println("------------------------------------horas contratadas: "+horasConstratadas);
 		float creditosDoProjeto = agendamento.getPedido().getProjeto().getQtdCreditos();
-		System.out.println("------------------------------------creditos DO projeto: "+creditosDoProjeto);
 		float creditosParaDescontar = (creditosPorHora * horasConstratadas);
-		System.out.println("------------------------------------creditos para descontar: "+creditosParaDescontar);
-		
 
 		agendamento.getPedido().getProjeto().setQtdCreditos(creditosDoProjeto - creditosParaDescontar);
 		
-		//agendamento.getPedido().getProjeto().setQtdCreditos(alocacaoService.creditosParaDescontar(agendamento));
 		LocalTime horaInicio = alocacaoService.buscaUltimaHora(agendamento);
 		alocacao.setCriadoPor(sessao.getCurrentLider());
 		alocacao.setHoraInicio(horaInicio);
-		System.out.println("------------------------------------- hora inicio"+alocacao.getHoraInicio());
 		alocacao.setAgendamento(agendamento);		
 		alocacao.setHoraFim(alocacaoService.definirHoraFim(horaInicio, alocacao));
 		alocacao.setMotivo("Alocação criada a partir da lista de pedidos.");
@@ -141,6 +135,14 @@ public class LiderController {
 	public String listar(ModelMap model) {
 		model.addAttribute("projetos", projetoservice.buscarTodos());
 		return "gerenciaProjetos";
+	}
+	
+	@PostMapping("gerenciaProjetos/atualizar")
+	public String atualizarQtdDeCreditos(Projeto projeto) {
+		Projeto projetoAlterado = projetoservice.getProjeto(projeto.getIdProjeto());
+		projetoAlterado.setQtdCreditos(projeto.getQtdCreditos());
+		projetoservice.salvar(projetoAlterado);
+		return "redirect:/homeLider/gerenciaProjetos";
 	}
 
 }

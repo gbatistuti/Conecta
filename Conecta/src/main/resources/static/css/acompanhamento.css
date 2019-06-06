@@ -19,14 +19,14 @@
 }
 
 #rolagemListaPedidos{
-	height: 25vw;
+	height: 32vw;
 }
 
 #rolagemListaAgendamentos{
-	height: 25vw;
+	height: 32vw;
 }
 th {
- align-items: center;
+ 	align-items: center;
     padding-bottom: 10px;
     padding-top: 10px;
     padding: 10px;
@@ -36,7 +36,7 @@ th {
     border-right: 0px;
     border-left: 0px;
     font-size: 16px;
-    
+    padding-left:18px;
 }
 
 thead
@@ -48,4 +48,8 @@ table{
 }
 tr:nth-child(odd) {
     background: white;
+}
+
+.tamanho{
+	height:40vw;
 }

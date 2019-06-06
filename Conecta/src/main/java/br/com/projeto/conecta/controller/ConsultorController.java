@@ -54,7 +54,6 @@ public class ConsultorController {
 		
 		if (disponivel == null) {
 			return "redirect:/homeConsultor?falha2";
-			// colocar mensagem de 'necessário apontamento'
 		}
 
 		Usuarios usuario = disponivel.getConsultor();

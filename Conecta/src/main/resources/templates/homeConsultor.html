@@ -23,13 +23,16 @@
 					<div th:if="${param.falha}">
 						<p>Não é possível apontar duas vezes no mesmo dia!</p>
 					</div>
+					<div th:if="${param.falha2}">
+						<p>É necessário apontar a ociosidade antes de se candidatar!</p>
+					</div>
 					<div th:if="${param.sucesso}">
 						<p>Apontamento realizado com sucesso!</p>
 					</div>
 					
 				</div>
 				<div class="modal-footer">
-					<button onclick="fecharPopUp" class="btn btn-default" value="Close">
+					<button onclick="fecharPopUp" class="btn btn-default" value="Close"></button>
 				</div>
 			</div>
 		</div>
@@ -127,6 +130,7 @@
  	
  	var sucessoNaUrl = url_atual.indexOf("sucesso")
  	var erroNaUrl = url_atual.indexOf("falha")
+ 	var erroNaUrl = url_atual.indexOf("falha2")
  	
  	var modal = document.getElementById('avisoModal')
  	

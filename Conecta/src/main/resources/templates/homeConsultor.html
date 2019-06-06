@@ -1,3 +1,148 @@
+<<<<<<< HEAD
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<title>Home | Consultor</title>
+<link rel="stylesheet" type="text/css" media='screen' th:href="@{/css/homeConsultor.css}"/>
+
+<script th:src='@{/js/homeConsultor.js}' type="text/javascript"></script>
+
+<!--Sera substituido pelo fragmento head que contem associaçoes para menu funcionar-->
+<th:block th:replace="fragments/head :: head"></th:block>
+
+</head>
+<body onload="aberturaDoPopUp()" id="menuBody" style="background-image:url('img/menu/fundo1.png')">
+	<div class="modal fade" id="avisoModal">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5>aviso</h5>
+				</div>
+				<div class="modal-body">
+					<div th:if="${param.falha}">
+						<p>Não é possível apontar duas vezes no mesmo dia!</p>
+					</div>
+					<div th:if="${param.sucesso}">
+						<p>Apontamento realizado com sucesso!</p>
+					</div>
+					
+				</div>
+				<div class="modal-footer">
+					<button onclick="fecharPopUp" class="btn btn-default" value="Close">
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--Sera substituido pelo fragmento do menu-->
+	<div th:replace="fragments/menuConsultor :: menu"></div>
+	<!-- Todos id e class de menu começam com menuAlgumacoisa então evite usar menu na frente de seus ids ou class-->
+	<div class="aDireita col-lg-4">
+		<div id="ApontarOciosidade" class="fundo">
+			<h2 >Apontar Ociosidade</h2>
+	
+			
+			
+			<div id="formularioDeOciosidade">
+				<form action="/homeConsultor/apontar" method="POST">
+					<label class="labelHorario">Inicio:</label> <input class="inputHorario" type="text" placeholder="Ex:08:30" name="horaInicio">
+					<br>
+					<label class="labelHorario">Termino:</label> <input class="inputHorario" type="text" placeholder="Ex:15:20" name="horaFim">
+					<br/>
+					<button id="salvarOciosidade"class="botao" type="submit">Enviar</button>
+					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+				</form>
+			</div>
+		</div>
+	
+		<div id="candidaturas" class="fundo">
+			<h2>Candidaturas</h2>
+			<div id="rolagemCandidaturas" class="rolagem">
+				<table id="table">
+					<thead class="descricaoTabela">
+						<tr>
+							<th class="tituloDeDescricaoDaTabela">Título do Pedido</th>
+							<th class="tituloDeDescricaoDaTabela">Status</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="pC : ${pedidoCandidatado}">
+							<td th:text="${pC.pedido.titulo}"></td>
+							<td th:text="${pC.pedido.status}"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+	
+		</div>
+	
+		<div>
+			
+		</div>
+	</div>
+	
+	<div class="aEsquerda col-lg-8">
+		<div id="pedidosFundo" class="fundo">
+			<h2>Pedidos em aberto</h2>
+			<div id="rolagemPedidos" class="rolagem">
+				<table id="table">
+					<thead class="descricaoTabela">
+						<tr>
+							<th class="tituloDeDescricaoDaTabela">Cod</th>
+							<th class="tituloDeDescricaoDaTabela">Título do Pedido</th>
+							<th class="tituloDeDescricaoDaTabela">Descrição</th>
+							<th class="tituloDeDescricaoDaTabela">Projeto</th>
+							<th class="tituloDeDescricaoDaTabela">Produto</th>
+							<th class="tituloDeDescricaoDaTabela">Horas</th>
+							<th class="tituloDeDescricaoDaTabela">Candidatar</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="p : ${pedido}">
+							<td th:text="${p.idPedido}"></td>
+							<td class="alinhadoAEsquerda" th:text="${p.titulo}"></td>
+							<td class="alinhadoAEsquerda" th:text="${p.descricao}"></td>
+							<td th:text="${p.projeto.nome}"></td>
+							<td th:text="${p.projeto.produto}"></td>
+							<td th:text="${p.sugestaoDeHoras}"></td>
+							<td>
+								<form action="/homeConsultor/candidatar" method="POST">
+									<button id="candidatarSe" class="botao" type="submit"
+										name="idPedido" th:value="${p.idPedido}">Candidatar-se</button>
+									<input type="hidden" th:name="${_csrf.parameterName}"
+										th:value="${_csrf.token}" />
+								</form>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+<script type="text/javascript">
+
+ function aberturaDoPopUp() {
+ 	var url_atual = window.location.href
+ 	
+ 	var sucessoNaUrl = url_atual.indexOf("sucesso")
+ 	var erroNaUrl = url_atual.indexOf("falha")
+ 	
+ 	var modal = document.getElementById('avisoModal')
+ 	
+ 	
+ 	if(sucessoNaUrl != -1 || erroNaUrl != -1 ){
+ 		$("#avisoModal").modal('show');
+ 	}
+ }
+ 
+ function fecharPopUp(){
+	 $("#avisoModal").modal('hide');
+ }
+ </script>
+	
+=======
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
@@ -141,5 +286,6 @@
  }
  </script>
 	
+>>>>>>> 9c493f4a13f984ca6b87942f7d0965206687b10d
 </body>
 </html>

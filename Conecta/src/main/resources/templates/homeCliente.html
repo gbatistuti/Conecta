@@ -69,7 +69,7 @@
 	<div id="fundoListaDisponibilidade" class="fundo">
 		<h2>Lista de disponibilidade</h2>
 		<div id="rolagemListaDisponibilidade" class="rolagem">
-			<table>
+			<table id="minhaTabela">
 				<thead>
 					<tr>
 						<th>Cód.</th>
@@ -83,14 +83,14 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="d : ${disponiveis}">
+					<tr th:each="d : ${disponiveis}" onclick="selLinha(this, false)">
 						<!-- 					<td th:text="${d.consultor.idUsuario}"></td> -->
 						<td th:text="${d.idDisponivel}"></td>
 						<td th:text="${d.consultor.nome}"></td>
 						<td th:text="${d.horaInicio}"></td>
 						<td th:text="${d.horaFim}"></td>
 						<td th:text="${d.consultor.creditosPorHora}"></td>
-						<td> <img alt="" th:src="@{/img/homeCliente/info.svg}"></td>
+						<td><img alt="" th:src="@{/img/homeCliente/info.svg}"></td>
 						<td class="escondidoNaLista">
 							<table>
 								<tbody>
@@ -114,6 +114,7 @@
 				</tbody>
 			</table>
 		</div>
+		<button id="visualizarDados" onclick="Visualizar()">visualizar</button>
 	</div>
 	
 	<script type="text/javascript">
@@ -138,6 +139,50 @@
 		agendamento.style.display = "none"
 		pedido.style.display = "none"
 		selecao.style.display = "block"
+	}
+	
+	// pop-up
+	
+	var tabela = document.getElementById("minhaTabela");
+	var linhas = tabela.getElementsByTagName("tr");
+	
+	for(var i = 0; i < linhas.lenght; i++){
+		var linha = linhas[i];
+		linha.addEventListener("click", function(){
+			selLinha(this, false);	
+		});
+	}
+	
+	function selLinha(linha, multiplos){
+		if(!multiplos){
+		  	var linhas = linha.parentElement.getElementsByTagName("tr");
+		        for(var i = 0; i < linhas.length; i++){
+		           var linha_ = linhas[i];
+		           linha_.classList.remove("selecionado");    
+		        }
+		  }
+		linha.classList.toggle("selecionado");
+		
+		Visualizar();
+	}
+	
+	function Visualizar(){
+		var selecionados = tabela.getElementsByClassName("selecionado");
+		if(selecionados.lenght < 1){
+			alert("Selecione pelo menos uma linha");
+			return false;
+		}
+		
+		var dados = "";
+		
+		for(var i =0; i < selecionados.length; i++){
+			var selecionado = selecionados[i];
+			selecionado = selecionado.getElementsByTagName("td");
+			dados += "teste" + selecionado[0].innerHTML + selecionado[1].innerHTML +
+			selecionado[2].innerHTML + selecionado[3].innerHTML + selecionado[4].innerHTML +
+			selecionado[5].innerHTML;
+		}
+		alert(dados);
 	}
 	</script>
 </body>

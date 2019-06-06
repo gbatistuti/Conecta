@@ -55,7 +55,7 @@ public class ClienteController {
 		pedido.setCriadoPor(usuario);
 		pedido.setOrigem("pedido");
 		pedidoService.salvarPedido(pedido);
-		return "redirect:/homeCliente";
+		return "redirect:/homeCliente?pedidoCriado";
 	}
 	
 	@PostMapping("/criaragendamento")
@@ -71,7 +71,7 @@ public class ClienteController {
 		pedidoService.salvarPedido(pedido);
 		agendamentoService.salvarAgendamento(agendamento);
 		
-		return "redirect:/homeCliente";
+		return "redirect:/homeCliente?agendamentoCriado";
 	}
 	
 	@GetMapping("/acompanhamentoCliente")

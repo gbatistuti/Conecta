@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<th:block th:replace="fragments/head :: head"></th:block>
+<meta charset="UTF-8">
+<title>Alocações | Líder</title>
+</head>
+<body id="menuBody">
+	<!--Sera substituido pelo fragmento do menu-->
+	<div th:replace="fragments/menuLider :: menu"></div>
+	<div class="fundo" id="fundoUmaTabelaNaPaginaToda">
+		<h2>Alocações</h2>
+		<div class="rolagem" id="rolagemUmaTabelaNaPaginaToda">
+			<table>
+				<thead>
+					<tr>
+						<th>Cod.</th>
+						<th>Data</th>
+						<th>Hora início:</th>
+						<th>Hora fim:</th>
+						<th>Título:</th>
+						<th>Motivo:</th>
+						<th>Consultor:</th>
+						<th>Projeto:</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="a : ${aprovados}">
+						<td th:text="${a.idAlocacao}"></td>
+						<td th:text="${a.data}"></td>
+						<td th:text="${a.horaInicio}"></td>
+						<td th:text="${a.horaFim}"></td>
+						<td th:text="${a.agendamento.pedido.titulo}"></td>
+						<td th:text="${a.motivo}"></td>
+						<td th:text="${a.agendamento.disponivel.consultor.nome}"></td>
+						<td th:text="${a.agendamento.pedido.projeto.nome}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

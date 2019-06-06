@@ -13,17 +13,27 @@
 	z-index: -1;
 }
 
-#fundoListaDisponibilidade{
-	margin-left: 20px;
-	height: 80vh;
-	width: 45vw;
-	margin-top: 20px;
-}
 #rolagem {
 	height: 70vh;
-	width: 44,5vw;
+	width: 44vw;
 }
-.tamanho{
-    width: 45vw;
 
+#rolagemListaPedidos{
+	height: 25vw;
+}
+
+#rolagemListaAgendamentos{
+	height: 25vw;
+}
+th {
+ align-items: center;
+    
+}
+
+thead
+{
+    border: 2px;
+}
+table{
+    width:90%;
 }

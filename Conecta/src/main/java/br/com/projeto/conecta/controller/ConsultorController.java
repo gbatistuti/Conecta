@@ -36,8 +36,7 @@ public class ConsultorController {
 		// Usuarios usuario = sessao.getCurrentUser();
 		// request.setAttribute("nome", usuario.getNome());
 		model.addAttribute("pedido", pedidoService.filtrarPorOrigemECandidatura());
-		model.addAttribute("pedidoCandidatado",
-				agendamentoService.buscarCandidaturasByUsuario(sessao.getCurrentConsultor()));
+		model.addAttribute("pedidoCandidatado", agendamentoService.buscarCandidaturasByUsuario(sessao.getCurrentConsultor()));
 		return "homeConsultor";
 	}
 

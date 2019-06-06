@@ -31,8 +31,7 @@ public class AgendamentoService {
 		return true;
 	}
 
-	public List<Agendamento> buscarCandidaturasByUsuario(Consultor consultor) {
-		
+	public List<Agendamento> buscarCandidaturasByUsuario(String email) {
 //		EntityManager em = emf.createEntityManager();
 //		em.getTransaction().begin();
 //		
@@ -41,7 +40,7 @@ public class AgendamentoService {
 //		em.getTransaction().commit();
 //		em.close();
 //		return agendamentos;
-		return agendamentoRepository.findByConsultor(consultor);
+		return agendamentoRepository.findByConsultor(email);
 	}
 
 	public List<Agendamento> buscarAgendamentosPorUsuario(Usuarios usuario) {

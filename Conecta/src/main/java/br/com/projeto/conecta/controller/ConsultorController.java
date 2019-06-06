@@ -36,14 +36,12 @@ public class ConsultorController {
 		// Usuarios usuario = sessao.getCurrentUser();
 		// request.setAttribute("nome", usuario.getNome());
 		model.addAttribute("pedido", pedidoService.filtrarPorOrigemECandidatura());
-		model.addAttribute("pedidoCandidatado",
-				agendamentoService.buscarCandidaturasByUsuario(sessao.getCurrentConsultor()));
+		model.addAttribute("pedidoCandidatado", agendamentoService.buscarCandidaturasByUsuario(sessao.getCurrentUserEmail()));
 		return "homeConsultor";
 	}
 
 	@PostMapping("/apontar")
 	public String salvarApontamento(Disponiveis disponiveis) {
-
 		if (disponivelService.validaApontamento(sessao.getCurrentUserEmail()) == null) {
 			disponiveis.setConsultor(sessao.getCurrentConsultor());
 			disponivelService.salvarApontamento(disponiveis);
@@ -54,19 +52,24 @@ public class ConsultorController {
 
 	@PostMapping("/candidatar")
 	public String candidatarAoPedido(Agendamento agendamento, Pedido pedido) {
-		Usuarios usuario = sessao.getCurrentUser();
 		Disponiveis disponivel = disponivelService.validaApontamento(sessao.getCurrentUserEmail());
-
+		
 		if (disponivel == null) {
 			return "redirect:/homeConsultor?falha2";
 			// colocar mensagem de 'necessário apontamento'
 		}
-
-		pedido.setCandidatura(true);
-
-		agendamento = new Agendamento(disponivel, usuario, pedido);
 		
-		pedidoService.salvarPedido(pedido);
+//		Consultor consultor = sessao.getCurrentConsultor();
+//		Usuarios usuario = sessao.getCurrentUser();
+		Usuarios usuario = disponivel.getConsultor();
+		
+//		Pedido pedidoCandidatado = pedidoService.getPedido(pedido.getIdPedido());
+//		pedidoCandidatado.setCandidatura(true);
+//		pedidoService.salvarPedido(pedidoCandidatado);
+		
+		pedidoService.atualizarPedido(pedido.getIdPedido());
+		
+		agendamento = new Agendamento(disponivel, usuario, pedido);
 		agendamentoService.salvarAgendamento(agendamento);
 		return "redirect:/homeConsultor?candidatado";
 	}

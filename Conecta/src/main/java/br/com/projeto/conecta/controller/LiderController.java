@@ -125,7 +125,7 @@ public class LiderController {
 		return "redirect:/homeLider/alocacao";
 	}
 
-	@GetMapping("/acompanhamento")
+	@GetMapping("/alocacoes")
 	public String listarAgendamentosAprovadosEReprovados(ModelMap model) {
 		model.addAttribute("aprovados", alocacaoService.buscarTodos());
 		return "agendamentosAprovados";

@@ -45,9 +45,9 @@
 			
 			<div id="formularioDeOciosidade">
 				<form action="/homeConsultor/apontar" method="POST">
-					<label class="labelHorario">Inicio:</label> <input class="inputHorario" placeholder="Ex:09:30" name="horaInicio">
+					<label class="labelHorario">Inicio:</label> <input class="inputHorario" type="text" placeholder="Ex:08:30" name="horaInicio">
 					<br>
-					<label class="labelHorario">Término:</label> <input class="inputHorario" placeholder="Ex:18:00" name="horaFim">
+					<label class="labelHorario">Termino:</label> <input class="inputHorario" type="text" placeholder="Ex:15:20" name="horaFim">
 					<br/>
 					<button id="salvarOciosidade"class="botao" type="submit">Enviar</button>
 					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
@@ -141,5 +141,3 @@
  }
  </script>
 	
-</body>
-</html>

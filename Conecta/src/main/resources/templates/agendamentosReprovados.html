@@ -26,6 +26,7 @@
 			<tbody>
 				<tr th:each="r : ${reprovados}">
 					<td th:text="${r.idRecusado}"></td>
+					<td th:text="${r.data}">
 					<td th:text="${r.agendamento.pedido.titulo}"></td>
 					<td th:text="${r.motivo}"></td>
 					<td th:text="${r.agendamento.disponivel.consultor.nome}"></td>

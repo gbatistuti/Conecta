@@ -7,12 +7,11 @@
 
 #fundoUmaTabelaNaPaginaToda{
 	margin: 20px;
-	height: 80vh;
 }
 
 #rolagemUmaTabelaNaPaginaToda{
 	position:relative;
-	height: 70vh;
+	height: 80vh;
 }
 .fundo{
 	background-color: rgba(249,249,249,0.9);
@@ -178,6 +177,20 @@ select{
 .menuIcon{
     position: relative;
     margin-bottom:9px;
+    margin-top:4px;
+    height: 32px;
+    width: 32px;
+}
+
+.menuLink{
+	text-decoration:none; 
+	padding: 0px;
+	background: none;
+	border:none;
+	cursor: pointer;
+	color:#EA9B3E;
+	font-family: 'Lato', sans-serif;
+    font-size: 20px;
 }
 
 #menuUserIcon{

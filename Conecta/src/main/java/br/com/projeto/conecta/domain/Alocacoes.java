@@ -39,7 +39,15 @@ public class Alocacoes {
 	
 	private Date data;
 	
+	
 	public Alocacoes() {}
+	
+	public Alocacoes(Agendamento agendamento, Lider criadoPor, LocalTime horaInicio, LocalTime horaFim) {
+		this.agendamento = agendamento;
+		CriadoPor = criadoPor;
+		this.horaInicio = horaInicio;
+		this.horaFim = horaFim;
+	}
 
 	public Integer getIdAlocacao() {
 		return idAlocacao;

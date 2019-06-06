@@ -28,7 +28,7 @@ public class ConectaUserDetailsService implements UserDetailsService {
 	@Autowired
 	private ConsultorRepository consultorRepository;
 	
-	@Autowired 
+	@Autowired
 	LiderRepository liderRepository;
 	
 

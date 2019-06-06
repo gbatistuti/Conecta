@@ -68,6 +68,7 @@ public class LiderController {
 		alocacao.setHoraFim(alocacaoService.definirHoraFim(horaInicio, alocacao));
 
 		agendamentoService.salvarAgendamento(agendamento);
+		alocacao = new Alocacoes(agendamento, sessao.getCurrentLider(), horaInicio, alocacaoService.definirHoraFim(horaInicio, alocacao));
 		alocacaoService.salvarAlocacao(alocacao);
 		return "redirect:/homeLider";
 	}
@@ -87,16 +88,16 @@ public class LiderController {
 
 	}
 
-	@GetMapping("/alocacao")
+	@GetMapping("/pedidos")
 	public String ListarDisponiveis(ModelMap model, HttpServletRequest request) {
 		model.addAttribute("pedidos", pedidoService.buscarPorStatus());
 		model.addAttribute("disponiveis", disponivelService.buscarTodos());
 		Usuarios usuario = sessao.getCurrentUser();
 		request.setAttribute("nome", usuario.getNome());
-		return "alocacao";
+		return "pedidos";
 	}
 
-	@PostMapping("/alocacao/alocar")
+	@PostMapping("/pedidos/alocar")
 	public String alocarDisponivelAoPedido(Agendamento agendamento, Pedido pedido, Alocacoes alocacao) {
 		Usuarios usuario = sessao.getCurrentUser();
 
@@ -123,12 +124,17 @@ public class LiderController {
 		alocacaoService.salvarAlocacao(alocacao);
 		return "redirect:/homeLider/alocacao";
 	}
-
-	@GetMapping("/acompanhamento")
-	public String listarAgendamentosAprovadosEReprovados(ModelMap model) {
+	
+	@GetMapping("/alocacoes")
+	public String listarAgendamentosAprovados(ModelMap model) {
 		model.addAttribute("aprovados", alocacaoService.buscarTodos());
+		return "agendamentosAprovados";
+	}
+	
+	@GetMapping("/agendamentosReprovados")
+	public String listarAgendamentosReprovados(ModelMap model) {
 		model.addAttribute("reprovados", recusadoService.buscarTodos());
-		return "acompanhamentoLider";
+		return "agendamentosReprovados";
 	}
 	
 	@GetMapping("/gerenciaProjetos")

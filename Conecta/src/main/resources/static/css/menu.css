@@ -7,15 +7,14 @@
 
 #fundoUmaTabelaNaPaginaToda{
 	margin: 20px;
-	height: 80vh;
 }
 
 #rolagemUmaTabelaNaPaginaToda{
 	position:relative;
-	height: 70vh;
+	height: 80vh;
 }
 .fundo{
-	background-color: rgba(249,249,249,0.6);
+	background-color: rgba(249,249,249,0.9);
 	box-shadow: inset 0 0 0 3000px rgba(255,255,255,0.3);
 	border-style: solid;
 	border-width: 1px;
@@ -92,25 +91,61 @@ tr{
 }
 
 button{
-	background-color: rgba(13, 114, 156, 0.5);
-	border: none;
-	border-radius: 25px!important;
+	background-color:rgba(255, 255, 255, 0);
+	color: black;
+	border: solid;
+	border-color:#ea9b3e;
+	border-width: 2px;
+	border-radius: 20px!important;
 	padding: 8px;
-	font-size: 13px;
+	font-size: 9px;
 	margin-right: 3px;
 	cursor: pointer;
+	outline: 0;
 	
 }
 
+.botaoDeFechar{
+	float: right;
+	background: none;
+	top: -100px;
+	padding: 0px;
+	border: none;
+}
+
 input{
+	height: 35px;
+	padding-left: 15px;
 	border: solid;
 	border-width: 1.5px;
 	border-color: #ea9b3e;
 	border-radius: 20px;
+	background-color:rgba(255, 255, 255, 0);
+	outline: 0;
+}
+
+textarea{
+	height: 35px;
+	padding-left: 15px;
+	border: solid;
+	border-width: 1.5px;
+	border-color: #ea9b3e;
+	border-radius: 20px;
+	background-color:rgba(255, 255, 255, 0);
 }
 
 input:focus{
 	border-color: #29b6c5;
+}
+
+select{
+	height: 35px;
+	padding-left: 15px;
+	border: solid;
+	border-width: 1.5px;
+	border-color: #ea9b3e;
+	border-radius: 20px;
+	background-color:rgba(255, 255, 255, 0);
 }
 
 /* biblioteca */
@@ -154,6 +189,20 @@ input:focus{
 .menuIcon{
     position: relative;
     margin-bottom:9px;
+    margin-top:4px;
+    height: 32px;
+    width: 32px;
+}
+
+.menuLink{
+	
+	padding: 0px;
+	background: none;
+	border:none;
+	cursor: pointer;
+	color:#EA9B3E;
+	font-family: 'Lato', sans-serif;
+    font-size: 20px;
 }
 
 #menuUserIcon{

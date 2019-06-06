@@ -42,16 +42,16 @@ public class AlocacaoService {
 	public LocalTime buscaUltimaHora(Agendamento agendamento) {
 		Calendar calendar = Calendar.getInstance();
 		Date data = new Date(calendar.getTime().getTime());
-		LocalTime hora = alocaoRepository.findbyUltimaHora(data, agendamento.getDisponivel().getIdDisponivel());
+		LocalTime ultimaHora = alocaoRepository.findbyUltimaHora(data, agendamento.getDisponivel().getIdDisponivel());
 
-		if (hora == null) {
+		if (ultimaHora == null || ultimaHora.isBefore(LocalTime.now())) {
 			int min = LocalTime.now().getMinute();
 			if (min >= 0 && min < 30) {
 				return LocalTime.of(LocalTime.now().getHour(), 30);
 			}
 			return LocalTime.of(LocalTime.now().getHour(), 00).plusHours(1);
 		}
-		return hora;
+		return ultimaHora;
 	}
 
 	public LocalTime definirHoraFim(LocalTime horaInicio, Alocacoes alocacao) {

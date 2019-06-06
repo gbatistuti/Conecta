@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<th:block th:replace="fragments/head :: head"></th:block>
+<meta charset="UTF-8">
+<title>Reprovados | Líder</title>
+</head>
+<body id="menuBody">
+	<!--Sera substituido pelo fragmento do menu-->
+	<div th:replace="fragments/menuLider :: menu"></div>
+	<div class="fundo" id="fundoUmaTabelaNaPaginaToda">
+		<h2>Agendamentos Reprovados</h2>
+	<div class="rolagem" id="rolagemUmaTabelaNaPaginaToda">
+		<table>
+			<thead>
+				<tr>
+					<th>Cod.</th>
+					<th>Data</th>
+					<th>Título:</th>
+					<th>Motivo:</th>
+					<th>Consultor:</th>
+					<th>Projeto:</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="r : ${reprovados}">
+					<td th:text="${r.idRecusado}"></td>
+					<td th:text="${r.agendamento.pedido.titulo}"></td>
+					<td th:text="${r.motivo}"></td>
+					<td th:text="${r.agendamento.disponivel.consultor.nome}"></td>
+					<td th:text="${r.agendamento.pedido.projeto.nome}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	</div>
+
+</body>
+</html>

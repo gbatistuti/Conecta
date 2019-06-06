@@ -12,7 +12,22 @@
 
 </head>
 <body id="menuBody">
-
+	
+	<div class="modal fade" id="avisoModal">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5>Habilidades</h5>
+				</div>
+				<div class="modal-body">
+					<p id="dadosPopUp"></p>
+				</div>
+				<div class="modal-footer">
+				</div>
+			</div>
+		</div>
+	</div>
+	
 	<!--Sera substituido pelo fragmento do menu-->
 	<div th:replace="fragments/menuCliente :: menu"></div>
 	<!-- Todos id e class de menu começam com menuAlgumacoisa então evite usar menu na frente de seus ids ou class-->
@@ -114,10 +129,13 @@
 				</tbody>
 			</table>
 		</div>
-		<button id="visualizarDados" onclick="Visualizar()">visualizar</button>
 	</div>
 	
 	<script type="text/javascript">
+	
+	var modal = document.getElementById();
+	$("#avisoModal").modal('show');
+	
 	function abrePedido(){
 		var pedido = document.getElementById("pedido");
 		var selecao = document.getElementById("selecao");
@@ -175,14 +193,22 @@
 		
 		var dados = "";
 		
-		for(var i =0; i < selecionados.length; i++){
+		for(var i = 0; i < selecionados.length; i++){
 			var selecionado = selecionados[i];
-			selecionado = selecionado.getElementsByTagName("td");
-			dados += "teste" + selecionado[0].innerHTML + selecionado[1].innerHTML +
-			selecionado[2].innerHTML + selecionado[3].innerHTML + selecionado[4].innerHTML +
-			selecionado[5].innerHTML;
+			selecionado = selecionado.getElementsByTagName("table");	
 		}
-		alert(dados);
+		
+		var tabela1 = selecionado[0];
+		var tabela2 = selecionado[1]
+		
+		var tdTabela1 = tabela1.getElementsByTagName("td");
+		var tdTabela2 = tabela2.getElementsByTagName("td");
+		
+		for(var i = 0; i < tdTabela1.lenght; i++){
+			dados = tdTabela1[i].innerHTML +" "+ tdTabela2[i].innerHTML + "\n";
+		}
+		
+		return dados;
 	}
 	</script>
 </body>

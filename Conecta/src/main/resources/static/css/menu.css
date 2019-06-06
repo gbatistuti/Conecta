@@ -122,6 +122,16 @@ input{
 	background-color:rgba(255, 255, 255, 0);
 }
 
+textarea{
+	height: 35px;
+	padding-left: 15px;
+	border: solid;
+	border-width: 1.5px;
+	border-color: #ea9b3e;
+	border-radius: 20px;
+	background-color:rgba(255, 255, 255, 0);
+}
+
 input:focus{
 	border-color: #29b6c5;
 }
@@ -183,7 +193,7 @@ select{
 }
 
 .menuLink{
-	text-decoration:none; 
+	
 	padding: 0px;
 	background: none;
 	border:none;

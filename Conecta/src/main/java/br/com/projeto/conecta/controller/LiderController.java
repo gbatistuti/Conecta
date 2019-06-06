@@ -88,7 +88,7 @@ public class LiderController {
 
 	@GetMapping("/pedidos")
 	public String ListarDisponiveis(ModelMap model, HttpServletRequest request) {
-		model.addAttribute("pedidos", pedidoService.buscarPorStatus());
+		model.addAttribute("pedidos", pedidoService.filtrarPorOrigemECandidatura());
 		model.addAttribute("disponiveis", disponivelService.buscarTodos());
 		Usuarios usuario = sessao.getCurrentUser();
 		request.setAttribute("nome", usuario.getNome());

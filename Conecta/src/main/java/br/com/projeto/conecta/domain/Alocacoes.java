@@ -42,11 +42,12 @@ public class Alocacoes {
 	
 	public Alocacoes() {}
 	
-	public Alocacoes(Agendamento agendamento, Lider criadoPor, LocalTime horaInicio, LocalTime horaFim) {
+	public Alocacoes(Agendamento agendamento, Lider criadoPor, LocalTime horaInicio, LocalTime horaFim, String motivo) {
 		this.agendamento = agendamento;
 		CriadoPor = criadoPor;
 		this.horaInicio = horaInicio;
 		this.horaFim = horaFim;
+		this.motivo = motivo;
 	}
 
 	public Integer getIdAlocacao() {

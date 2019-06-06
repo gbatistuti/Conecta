@@ -66,10 +66,10 @@ public class LiderController {
 
 		alocacao.setHoraInicio(horaInicio);
 		alocacao.setHoraFim(alocacaoService.definirHoraFim(horaInicio, alocacao));
-
+		
 		agendamentoService.salvarAgendamento(agendamento);
-		alocacao = new Alocacoes(agendamento, sessao.getCurrentLider(), horaInicio, alocacaoService.definirHoraFim(horaInicio, alocacao));
-		alocacaoService.salvarAlocacao(alocacao);
+		Alocacoes alocacaoNova = new Alocacoes(agendamento, sessao.getCurrentLider(), horaInicio, alocacaoService.definirHoraFim(horaInicio, alocacao), alocacao.getMotivo());
+		alocacaoService.salvarAlocacao(alocacaoNova);
 		return "redirect:/homeLider";
 	}
 

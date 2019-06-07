@@ -16,10 +16,10 @@
 <div class="modal fade" id="avisoModal">
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
-				<div class="modal-header">
+				<div id="cabecalhoModal" class="modal-header">
 					<h5>aviso</h5>
 				</div>
-				<div class="modal-body">
+				<div id="corpoModal" class="modal-body">
 					<div th:if="${param.agendamentoCriado}">
 						<p>Agendamento criado com sucesso!</p>
 					</div>
@@ -105,14 +105,14 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="d : ${disponiveis}" onclick="selLinha(this, false)">
+					<tr th:each="d : ${disponiveis}">
 						<!-- 					<td th:text="${d.consultor.idUsuario}"></td> -->
 						<td th:text="${d.idDisponivel}"></td>
 						<td th:text="${d.consultor.nome}"></td>
 						<td th:text="${d.horaInicio}"></td>
 						<td th:text="${d.horaFim}"></td>
 						<td th:text="${d.consultor.creditosPorHora}"></td>
-						<td><img alt="" th:src="@{/img/homeCliente/info.svg}"></td>
+						<td><img alt="" th:src="@{/img/homeCliente/info.svg}" onclick="selLinha(this, false)" ></td>
 						<td class="escondidoNaLista">
 							<table>
 								<tbody>
@@ -139,6 +139,8 @@
 	</div>
 	
 	<script type="text/javascript">
+	
+	var modal = document.getElementById('avisoModal')
 	
 	function abrePedido(){
 		var pedido = document.getElementById("pedido");
@@ -209,21 +211,26 @@
 		var tdTabela1 = tabela1.getElementsByTagName("td");
 		var tdTabela2 = tabela2.getElementsByTagName("td");
 		
-		for(var i = 0; i < tdTabela1.lenght; i++){
-			dados = tdTabela1[i].innerHTML +" "+ tdTabela2[i].innerHTML + "\n";
+		for(var i = 0; i < tdTabela1.length; i++){
+			dados += "<p> Produto: " + tdTabela1[i].innerHTML +" - Modulo: "+ tdTabela2[i].innerHTML + "</p> <br>";
 		}
 		
-		return tdTabela2[0].innerHTML;
+		
+		var cabecalhoModal = document.getElementById("cabecalhoModal")
+		var corpoModal = document.getElementById("corpoModal")
+		cabecalhoModal = "Habilidades"
+		corpoModal.innerHTML = dados;
+		
+		$("#avisoModal").modal('show')
+		
+		return dados;
 	}
-
+	
 	function aberturaDoPopUp() {
 	 	var url_atual = window.location.href
 	 	
 	 	var sucessoNaUrl = url_atual.indexOf("agendamentoCriado")
 	 	var erroNaUrl = url_atual.indexOf("pedidoCriado")
-	 	
-	 	var modal = document.getElementById('avisoModal')
-	 	
 	 	
 	 	if(sucessoNaUrl != -1 || erroNaUrl != -1 ){
 	 		$("#avisoModal").modal('show');

@@ -13,11 +13,30 @@
 	<th:block th:replace="fragments/head :: head"></th:block>
 	
 </head>
-<body id="menuBody">
+<body onload="aberturaDoPopUp()" id="menuBody">
 	
 	<!--Sera substituido pelo fragmento do menu-->
 	<div th:replace="fragments/menuLider :: menu"></div>
 	<!-- Todos id e class de menu começam com menuAlgumacoisa então evite usar menu na frente de seus ids ou class-->
+	
+	<div class="modal fade" id="avisoModal">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5>aviso</h5>
+				</div>
+				<div class="modal-body">
+					<div th:if="${param.atualizado}">
+						<p>Créditos atualizados com sucesso!</p>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button onclick="fecharPopUp" class="btn btn-default" value="Close"></button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 	<div id="fundoUmaTabelaNaPaginaToda"class="fundo">
 		<h2>Gerencia de projetos</h2>
 		<div id="rolagemUmaTabelaNaPaginaToda" class="rolagem">
@@ -29,7 +48,7 @@
 						<th>Código do Cliente</th>
 						<th>Cliente</th>
 						<th>Creditos</th>
-						<th>atualiazar creditos</th>
+						<th>Atualiazar Créditos</th>
 					</tr>			
 				</thead>
 				<tbody>
@@ -52,5 +71,23 @@
 			</table>
 		</div>
 	</div>
+	<script type="text/javascript">
+	 function aberturaDoPopUp() {
+		 	var url_atual = window.location.href
+		 	
+		 	var sucessoNaUrl = url_atual.indexOf("atualizado")
+		 	
+		 	var modal = document.getElementById('avisoModal')
+		 	
+		 	
+		 	if(sucessoNaUrl != -1 || erroNaUrl != -1 ){
+		 		$("#avisoModal").modal('show');
+		 	}
+		 }
+		 
+		 function fecharPopUp(){
+			 $("#avisoModal").modal('hide');
+		 }
+	</script>
 </body>
 </html>

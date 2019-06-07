@@ -26,7 +26,7 @@ public class Agendamento {
 	@JoinColumn(name = "ID_CRIADO_POR")
 	private Usuarios criadoPor;
 	
-	@OneToOne(fetch=FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ID_PEDIDO")
 	private Pedido pedido;
 

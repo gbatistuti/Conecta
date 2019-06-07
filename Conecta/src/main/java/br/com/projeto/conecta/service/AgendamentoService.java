@@ -19,8 +19,6 @@ public class AgendamentoService {
 	private AgendamentoRepository agendamentoRepository;
 	@Autowired
 	private ConectaUserDetailsService sessao;
-//	@Autowired
-//	private EntityManagerFactory emf;
 
 	public List<Agendamento> BuscarTodos() {	
 		return agendamentoRepository.findAll();
@@ -31,17 +29,8 @@ public class AgendamentoService {
 		return true;
 	}
 
-	public List<Agendamento> buscarCandidaturasByUsuario(Consultor consultor) {
-		
-//		EntityManager em = emf.createEntityManager();
-//		em.getTransaction().begin();
-//		
-//		List<Agendamento> agendamentos = em.createQuery("select a from Agendamento a join fetch a.disponivel where a.disponivel.consultor.idUsuario = 2", Agendamento.class).getResultList();
-//		 
-//		em.getTransaction().commit();
-//		em.close();
-//		return agendamentos;
-		return agendamentoRepository.findByConsultor(consultor);
+	public List<Agendamento> buscarCandidaturasByUsuario(String email) {
+		return agendamentoRepository.findByConsultor(email);
 	}
 
 	public List<Agendamento> buscarAgendamentosPorUsuario(Usuarios usuario) {

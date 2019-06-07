@@ -4,6 +4,9 @@
 <head>
 <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">   
+<!--Sera substituido pelo fragmento head que contem associaçoes para menu funcionar-->
+<th:block th:replace="fragments/head :: head"></th:block>
+
 <title>Acompanhamento | Cliente</title>
     
 <link rel="stylesheet" type="text/css" href="../static/css/acompanhamento.css" th:href="@{/css/acompanhamento.css}" />
@@ -13,67 +16,121 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
 <body id="menuBody">
+<!-- <<<<<<< HEAD -->
 
+<!-- 	<!--Sera substituido pelo fragmento do menu--> -->
+<!-- 	<div th:replace="fragments/menuCliente :: menu"></div> -->
+<!-- 	<!-- Todos id e class de menu começam com menuAlgumacoisa então evite usar menu na frente de seus ids ou class--> -->
+	
+<!-- 	<div class="container-fluid"> -->
+<!-- 		<div class="row"> -->
+<!-- 			<div class="col-lg-6"> -->
+<!--             <div class="fundo tamanho"> -->
+<!-- 			<h2>Lista de pedidos</h2> -->
+<!-- 			<div id="rolagemListaPedidos" class="rolagem"> -->
+<!-- 				<table> -->
+<!-- 					<thead> -->
+<!-- 						<tr> -->
+<!-- 							<th>Cod</th> -->
+<!-- 							<th>Título do Pedido</th> -->
+<!-- 							<th>Projeto</th> -->
+<!-- 							<th>Status</th> -->
+<!-- 						</tr> -->
+<!-- 					</thead> -->
+<!-- 					<tbody> -->
+<!-- 						<tr th:each="p : ${pedidosRealizados}"> -->
+<!-- 							<td th:text="${p.idPedido}"></td> -->
+<!-- 							<td th:text="${p.titulo}"></td> -->
+<!-- 							<td th:text="${p.projeto.nome}"></td> -->
+<!-- 							<td th:text="${p.status}"></td> -->
+<!-- 						</tr> -->
+<!-- 					</tbody> -->
+<!-- 				</table> -->
+<!-- 			</div> -->
+<!--             </div> -->
+<!-- 			</div> -->
+			
+<!-- 			<div class="col-lg-6"> -->
+                
+<!-- 		      <div class="fundo tamanho"> -->
+<!-- 				<h2>Lista de Agendamentos</h2> -->
+<!-- 			<div id="rolagemListaAgendamentos" class="rolagem"> -->
+<!-- 				<table> -->
+<!-- 					<thead> -->
+<!-- 						<tr> -->
+<!-- 							<th>Cod</th> -->
+<!-- 							<th>Título do Agendamento</th> -->
+<!-- 							<th>Projeto</th> -->
+<!-- 							<th>Status</th> -->
+<!-- 						</tr> -->
+<!-- 					</thead> -->
+<!-- 					<tbody> -->
+<!-- 						<tr th:each="a : ${agendamentosCriados}"> -->
+<!-- 							<td th:text="${a.idAgendamento}"></td> -->
+<!-- 							<td th:text="${a.pedido.titulo}"></td> -->
+<!-- 							<td th:text="${a.pedido.projeto.nome}"></td> -->
+<!-- 							<td th:text="${a.pedido.status}"></td> -->
+<!-- 						</tr> -->
+<!-- 					</tbody> -->
+<!-- 				</table> -->
+<!-- 			</div> -->
+<!--             </div> -->
+<!-- 			</div> -->
+            
+<!--         </div>     -->
+<!-- 		</div>	 -->
+<!-- ======= -->
 	<!--Sera substituido pelo fragmento do menu-->
 	<div th:replace="fragments/menuCliente :: menu"></div>
 	<!-- Todos id e class de menu começam com menuAlgumacoisa então evite usar menu na frente de seus ids ou class-->
-	
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-lg-6">
-            <div class="fundo tamanho">
-			<h2>Lista de pedidos</h2>
-			<div id="rolagemListaPedidos" class="rolagem">
-				<table>
-					<thead>
-						<tr>
-							<th>Cod</th>
-							<th>Título do Pedido</th>
-							<th>Projeto</th>
-							<th>Status</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:each="p : ${pedidosRealizados}">
-							<td th:text="${p.idPedido}"></td>
-							<td th:text="${p.titulo}"></td>
-							<td th:text="${p.projeto.nome}"></td>
-							<td th:text="${p.status}"></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-            </div>
-			</div>
-			
-			<div class="col-lg-6">
-                
-		      <div class="fundo tamanho">
-				<h2>Lista de Agendamentos</h2>
-			<div id="rolagemListaAgendamentos" class="rolagem">
-				<table>
-					<thead>
-						<tr>
-							<th>Cod</th>
-							<th>Título do Agendamento</th>
-							<th>Projeto</th>
-							<th>Status</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:each="a : ${agendamentosCriados}">
-							<td th:text="${a.idAgendamento}"></td>
-							<td th:text="${a.pedido.titulo}"></td>
-							<td th:text="${a.pedido.projeto.nome}"></td>
-							<td th:text="${a.pedido.status}"></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-            </div>
-			</div>
-            
-        </div>    
-		</div>	
+
+	<div class="fundo" id="acompanhamentoDireita">
+		<h2>Pedidos Realizados</h2>
+		<div id="rolagemAcompanhamento">
+			<table>
+				<thead>
+					<tr>
+						<th>Cod</th>
+						<th>Título do Pedido</th>
+						<th>Projeto</th>
+						<th>Status</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="p : ${pedidosRealizados}">
+						<td th:text="${p.idPedido}"></td>
+						<td th:text="${p.titulo}"></td>
+						<td th:text="${p.projeto.nome}"></td>
+						<td th:text="${p.status}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<div class="fundo" id="acompanhamentoEsquerda">
+		<h2>Agendamentos Realizados</h2>
+		<div id="rolagemAcompanhamento">
+			<table>
+				<thead>
+					<tr>
+						<th>Cod</th>
+						<th>Título do Agendamento</th>
+						<th>Projeto</th>
+						<th>Status</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="a : ${agendamentosCriados}">
+						<td th:text="${a.idAgendamento}"></td>
+						<td th:text="${a.pedido.titulo}"></td>
+						<td th:text="${a.pedido.projeto.nome}"></td>
+						<td th:text="${a.pedido.status}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
 </body>
 </html>

@@ -296,3 +296,24 @@ select{
 	margin-right: -50px;
 	position:relative;
 }
+
+#acompanhamentoDireita{
+	height: 80vh;
+	width: 47vw;
+	float: right;
+}
+
+#acompanhamentoEsquerda{
+	height: 80vh;
+	width: 47vw;
+	float: left;
+}
+
+#rolagemAcompanhamento{
+	overflow: auto;
+	overflow-x: auto;
+	border: solid;
+	border-width: 1px;
+	position:relative;
+	height: 80vh;
+}

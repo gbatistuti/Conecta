@@ -38,5 +38,9 @@ public class PedidoService {
 	public List<Pedido>buscarPorStatus(){
 		return pedidoRepository.findByStatus();
 	}
+	
+	public void atualizarPedido(Integer idPedido) {
+		pedidoRepository.atualizaCandidatura(idPedido);
+	}
 
 }

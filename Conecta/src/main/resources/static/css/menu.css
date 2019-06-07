@@ -7,12 +7,11 @@
 
 #fundoUmaTabelaNaPaginaToda{
 	margin: 20px;
-	height: 80vh;
 }
 
 #rolagemUmaTabelaNaPaginaToda{
 	position:relative;
-	height: 70vh;
+	height: 80vh;
 }
 .fundo{
 	background-color: rgba(249,249,249,0.9);
@@ -92,7 +91,7 @@ tr{
 }
 
 button{
-	background-color:rgba(255, 255, 255, 0);
+	background-color:#ea9b3e;
 	color: black;
 	border: solid;
 	border-color:#ea9b3e;
@@ -102,6 +101,7 @@ button{
 	font-size: 9px;
 	margin-right: 3px;
 	cursor: pointer;
+	outline: 0 !important;
 	
 }
 
@@ -114,6 +114,17 @@ button{
 }
 
 input{
+	height: 35px;
+	padding-left: 15px;
+	border: solid;
+	border-width: 1.5px;
+	border-color: #ea9b3e;
+	border-radius: 20px;
+	background-color:rgba(255, 255, 255, 0);
+	outline: 0;
+}
+
+textarea{
 	height: 35px;
 	padding-left: 15px;
 	border: solid;
@@ -135,6 +146,7 @@ select{
 	border-color: #ea9b3e;
 	border-radius: 20px;
 	background-color:rgba(255, 255, 255, 0);
+	outline: 0 !important;
 }
 
 /* biblioteca */
@@ -178,6 +190,20 @@ select{
 .menuIcon{
     position: relative;
     margin-bottom:9px;
+    margin-top:4px;
+    height: 32px;
+    width: 32px;
+}
+
+.menuLink{
+	
+	padding: 0px;
+	background: none;
+	border:none;
+	cursor: pointer;
+	color:#EA9B3E;
+	font-family: 'Lato', sans-serif;
+    font-size: 20px;
 }
 
 #menuUserIcon{

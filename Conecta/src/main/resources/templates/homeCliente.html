@@ -11,23 +11,30 @@
 <th:block th:replace="fragments/head :: head"></th:block>
 
 </head>
-<body id="menuBody">
-	
-	<div class="modal fade" id="avisoModal">
+<body onload="aberturaDoPopUp()" id="menuBody">
+
+<div class="modal fade" id="avisoModal">
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5>Habilidades</h5>
+					<h5>aviso</h5>
 				</div>
 				<div class="modal-body">
-					<p id="dadosPopUp"></p>
+					<div th:if="${param.agendamentoCriado}">
+						<p>Agendamento criado com sucesso!</p>
+					</div>
+					<div th:if="${param.pedidoCriado}">
+						<p>Pedido criado com sucesso!</p>
+					</div>
+					
 				</div>
 				<div class="modal-footer">
+					<button onclick="fecharPopUp" class="btn btn-default" value="Close"></button>
 				</div>
 			</div>
 		</div>
 	</div>
-	
+
 	<!--Sera substituido pelo fragmento do menu-->
 	<div th:replace="fragments/menuCliente :: menu"></div>
 	<!-- Todos id e class de menu começam com menuAlgumacoisa então evite usar menu na frente de seus ids ou class-->
@@ -48,7 +55,7 @@
 			<Label>Título</Label> <br> <input type="text" th:field="${pedido.titulo}"><br>
 			<Label>Descrição</Label> <br> <input type="text"th:field="${pedido.descricao}"><br>
 			<label> Codigo do Consultor</label><br><input type="text" th:field="${agendamento.disponivel}"><br>
-			<Label>Sugestão de Horas</Label> <br> <input class="inputDeHoras" type="time" th:field="${pedido.sugestaoDeHoras}"><br>
+			<Label>Quantidade de Horas</Label> <br> <input class="inputDeHoras" type="text" th:field="${pedido.sugestaoDeHoras}"><br>
 			<label>Projeto</label><br>
 			<select th:field="${pedido.projeto}" name="idProjeto">
 				<option value="">Escolha o projeto</option>
@@ -68,7 +75,7 @@
 			th:object="${pedido}">
 			<Label>Título</Label> <br> <input name="titulo"><br> 
 			<Label>Descrição</Label> <br> <input name="descricao"><br>
-			<Label>Sugestão de Horas</Label> <br> <input class="inputDeHoras" type="time" name="sugestaoDeHoras"><br> 
+			<Label>Quantidade de Horas</Label> <br> <input class="inputDeHoras" type="text" name="sugestaoDeHoras"><br> 
 			<label>Projeto</label> <br> <select th:field="*{projeto}" name="idProjeto"><br>
 				<option value="">Escolha o projeto</option>
 				<option th:each="p : ${projeto}" th:value="${p.idProjeto}"
@@ -156,6 +163,7 @@
 		selecao.style.display = "block"
 	}
 	
+
 	// pop-up
 	
 	var tabela = document.getElementById("minhaTabela");
@@ -207,6 +215,25 @@
 		
 		return tdTabela2[0].innerHTML;
 	}
+
+	function aberturaDoPopUp() {
+	 	var url_atual = window.location.href
+	 	
+	 	var sucessoNaUrl = url_atual.indexOf("agendamentoCriado")
+	 	var erroNaUrl = url_atual.indexOf("pedidoCriado")
+	 	
+	 	var modal = document.getElementById('avisoModal')
+	 	
+	 	
+	 	if(sucessoNaUrl != -1 || erroNaUrl != -1 ){
+	 		$("#avisoModal").modal('show');
+	 	}
+	 }
+	 
+	 function fecharPopUp(){
+		 $("#avisoModal").modal('hide');
+	 }
+
 	</script>
 </body>
 </html>

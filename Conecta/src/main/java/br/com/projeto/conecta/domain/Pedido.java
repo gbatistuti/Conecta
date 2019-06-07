@@ -38,9 +38,6 @@ public class Pedido {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ID_CRIADO_POR")
 	private Usuarios criadoPor;
-	
-	@OneToOne(mappedBy = "pedido", fetch=FetchType.LAZY)
-	private Agendamento agendamento;
 
 	public Pedido() {
 	}
@@ -120,14 +117,6 @@ public class Pedido {
 	
 	public void setCriadoPor(Usuarios criadoPor) {
 		this.criadoPor = criadoPor;
-	}
-	
-	public Agendamento getAgendamento() {
-		return agendamento;
-	}
-
-	public void setAgendamento(Agendamento agendamento) {
-		this.agendamento = agendamento;
 	}
 
 	public boolean isCandidatura() {

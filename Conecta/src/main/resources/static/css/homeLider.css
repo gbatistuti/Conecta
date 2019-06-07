@@ -8,7 +8,7 @@
 
 #fundoListaDeDisponibilidade{
 	float: right;
-	width: 100%;
+	width: 96%;
 }
 
 #rolagemListaDisponibilidade{
@@ -16,10 +16,27 @@
 	height: 40vh;
 }
 
+#minhaTabela tr td{
+	cursor: pointer;
+}
+
+#minhaTabela tr:hover td{
+	background-color: #ea9b3e;
+}
+
+#minhaTabela tr.ConteudoDesejado td{
+	background-color: #29b6c5;
+}
+
+.escondidoNaLista{
+	display: none;
+}
+
 .painelInferiorQueTroca{
 	height: 35.9vh;
+	margin-top: 54.5vh !important;
 	margin-left: 5px !important;
-	margin-right: 5px !important;
+	margin-right: 16px !important;
 
 }
 

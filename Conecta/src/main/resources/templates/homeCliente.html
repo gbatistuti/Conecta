@@ -54,7 +54,7 @@
 		<form class="formPedidoEAgendamento" action="/homeCliente/criaragendamento" method="post">
 			<Label>Título</Label> <br> <input type="text" th:field="${pedido.titulo}"><br>
 			<Label>Descrição</Label> <br> <input type="text"th:field="${pedido.descricao}"><br>
-			<label> Codigo do Consultor</label><br><input type="text" th:field="${agendamento.disponivel}"><br>
+			<label> Codigo do Consultor</label><br><input type="text" readonly th:field="${agendamento.disponivel}"><br>
 			<Label>Quantidade de Horas</Label> <br> <input class="inputDeHoras" type="text" th:field="${pedido.sugestaoDeHoras}"><br>
 			<label>Projeto</label><br>
 			<select th:field="${pedido.projeto}" name="idProjeto">
@@ -105,8 +105,8 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="d : ${disponiveis}" th:id="${d.idDisponivel}">
-						<td th:text="${d.idDisponivel}"></td>
+					<tr th:each="d : ${disponiveis}" th:id="${d.idDisponivel}" onclick="SelecionaLinhaComConteudo(this)">
+						<td class="idConsultor" th:text="${d.idDisponivel}"></td>
 						<td th:text="${d.consultor.nome}"></td>
 						<td th:text="${d.horaInicio}"></td>
 						<td th:text="${d.horaFim}"></td>
@@ -139,6 +139,19 @@
 	
 	<script type="text/javascript">
 	
+	function aberturaDoPopUp() {
+	 	var url_atual = window.location.href
+	 	
+	 	var sucessoNaUrl = url_atual.indexOf("agendamentoCriado")
+	 	var erroNaUrl = url_atual.indexOf("pedidoCriado")
+	 	
+	 	if(sucessoNaUrl != -1 || erroNaUrl != -1 ){
+	 		$("#avisoModal").modal('show');
+	 	}
+	 }
+	
+	//Pop-up de sucesso ou falha
+	
 	var modal = document.getElementById('avisoModal')
 	
 	function abrePedido(){
@@ -165,7 +178,7 @@
 	}
 	
 
-	// pop-up
+	// Pop-Up de Abilidade
 	
 	var tabela = document.getElementById("minhaTabela");
 	var linhas = tabela.getElementsByTagName("tr");
@@ -228,21 +241,38 @@
 		return dados;
 	}
 	
-	function aberturaDoPopUp() {
-	 	var url_atual = window.location.href
-	 	
-	 	var sucessoNaUrl = url_atual.indexOf("agendamentoCriado")
-	 	var erroNaUrl = url_atual.indexOf("pedidoCriado")
-	 	
-	 	if(sucessoNaUrl != -1 || erroNaUrl != -1 ){
-	 		$("#avisoModal").modal('show');
-	 	}
-	 }
-	 
-	 function fecharPopUp(){
-		 $("#avisoModal").modal('hide');
-	 }
-
+	// Passar conteudo para os inputs
+	
+	
+	function SelecionaLinhaComConteudo(linhaQueTeraClasse){
+		//Retira a classe conteudo desejado de todas as linhas
+		
+		var linhasSemClasse = linhaQueTeraClasse.parentElement.getElementsByTagName("tr");
+			for(var i = 0; i < linhasSemClasse.length; i++){
+				var linha = linhasSemClasse[i];
+				linha.classList.remove("ConteudoDesejado");
+			}
+			
+		//Adiciona classe na linha que foi passada por parametro
+		linhaQueTeraClasse.classList.toggle("ConteudoDesejado");
+		
+		PassaConteudoDaLinhaParaInputs();
+	}
+	
+	function PassaConteudoDaLinhaParaInputs(){
+		var arrayDeElementos = document.getElementsByClassName("ConteudoDesejado");
+		var linhaComConteudo = arrayDeElementos[0];
+		
+		var idConsultor = linhaComConteudo.getElementsByClassName("idConsultor")
+		
+		var inputDisponivel = document.getElementById("disponivel")
+		inputDisponivel.value = idConsultor[0].innerHTML
+		
+		abreAgendamento();
+		
+		return linhaComConteudo
+	}
+	
 	</script>
 </body>
 </html>

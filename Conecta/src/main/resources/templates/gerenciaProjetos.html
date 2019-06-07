@@ -23,7 +23,7 @@
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5>aviso</h5>
+					<h5>Aviso:</h5>
 				</div>
 				<div class="modal-body">
 					<div th:if="${param.atualizado}">
@@ -43,11 +43,11 @@
 			<table>
 				<thead>
 					<tr>
-						<th>Código do Projeto</th>
+						<th>Cód. do Projeto</th>
 						<th>Projeto</th>
-						<th>Código do Cliente</th>
+						<th>Cód. do Cliente</th>
 						<th>Cliente</th>
-						<th>Creditos</th>
+						<th>Créditos</th>
 						<th>Atualiazar Créditos</th>
 					</tr>			
 				</thead>
@@ -57,10 +57,10 @@
 						<td th:text="${p.nome}"></td>
 						<td th:text="${p.cliente.codigo}"></td>
 						<td th:text="${p.cliente.nome}"></td>
-						<td th:text="${p.qtdCreditos}"> <div class="divP"><label>aaaa</label></div></td>						
+						<td th:text="${p.qtdCreditos}"> <div class="divP"><label></label></div></td>						
 						<td>
 							<form action="/homeLider/gerenciaProjetos/atualizar" method="POST">
-								<input type="number" name="qtdCreditos" required oninvalid="this.setCustomValidity('Campo não pode ser vazio')">
+								<input type="number" name="qtdCreditos" required oninvalid="this.setCustomValidity('Campo não pode ser vazio')" onchange="try{setCustomValidity('')}catch(e){}">
 		                    	<button type="submit" name="idProjeto" th:value="${p.idProjeto}">Atualizar</button>
 		                    	<input type="hidden" th:name="${_csrf.parameterName}"
 									th:value="${_csrf.token}" />

@@ -105,14 +105,13 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="d : ${disponiveis}">
-						<!-- 					<td th:text="${d.consultor.idUsuario}"></td> -->
+					<tr th:each="d : ${disponiveis}" th:id="${d.idDisponivel}">
 						<td th:text="${d.idDisponivel}"></td>
 						<td th:text="${d.consultor.nome}"></td>
 						<td th:text="${d.horaInicio}"></td>
 						<td th:text="${d.horaFim}"></td>
 						<td th:text="${d.consultor.creditosPorHora}"></td>
-						<td><img alt="" th:src="@{/img/homeCliente/info.svg}" onclick="selLinha(this, false)" ></td>
+						<td><img alt="" th:src="@{/img/homeCliente/info.svg}" onclick="selLinha( this, false)"></td>
 						<td class="escondidoNaLista">
 							<table>
 								<tbody>
@@ -178,7 +177,10 @@
 		});
 	}
 	
-	function selLinha(linha, multiplos){
+	function selLinha(neto, multiplos){
+		var filho = neto.parentNode;
+		var linha = filho.parentNode;
+		
 		if(!multiplos){
 		  	var linhas = linha.parentElement.getElementsByTagName("tr");
 		        for(var i = 0; i < linhas.length; i++){
@@ -218,7 +220,7 @@
 		
 		var cabecalhoModal = document.getElementById("cabecalhoModal")
 		var corpoModal = document.getElementById("corpoModal")
-		cabecalhoModal = "Habilidades"
+		cabecalhoModal.innerHTML = "Habilidades"
 		corpoModal.innerHTML = dados;
 		
 		$("#avisoModal").modal('show')

@@ -45,7 +45,7 @@
 					<table>
 						<thead>
 							<tr>
-								<th>Cod</th>
+								<th>Cód.</th>
 								<th>Título do Agendamento</th>
 								<th>Descrição do Agendamento</th>
 								<th>Projeto</th>
@@ -126,7 +126,7 @@
 			<div>
 
 				<div id="selecao" class="fundo painelInferiorQueTroca">
-					<h2>Ações agendamento</h2>
+					<h2>Ações Agendamento</h2>
 					<button class="buttonAprovarERecusar botoes" id="buttonAprovar"
 						onclick="abreAprovar()">Aprovar</button>
 					<button class="buttonAprovarERecusar botoes" id="buttonRecusar"
@@ -157,9 +157,11 @@
 					<form action="/homeLider/reprovar" method="post"
 						th:object="${recusado}">
 						<div class="formulario">
+
 							<label>Id do Agendamento</label><br> <input
 								name="agendamento" required> <label>Motivo:</label><br>
 							<input name="motivo" required>
+
 							<button type="submit">Enviar</button>
 						</div>
 						<input type="hidden" th:name="${_csrf.parameterName}"

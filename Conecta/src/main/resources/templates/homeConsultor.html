@@ -48,9 +48,9 @@
 			
 			<div id="formularioDeOciosidade">
 				<form action="/homeConsultor/apontar" method="POST">
-					<label class="labelHorario">Início:</label> <input class="inputHorario" type="text" placeholder="Ex:08:30" name="horaInicio" required>
+					<label class="labelHorario">Início</label> <input class="inputHorario" type="time" placeholder="Ex:08:30" name="horaInicio" required oninvalid="this.setCustomValidity('Campo não pode ser vazio')" onchange="try{setCustomValidity('')}catch(e){}">
 					<br>
-					<label class="labelHorario">Termino:</label> <input class="inputHorario" type="text" placeholder="Ex:15:20" name="horaFim" required>
+					<label class="labelHorario">Término</label> <input class="inputHorario" type="time" placeholder="Ex:15:20" name="horaFim" required oninvalid="this.setCustomValidity('Campo não pode ser vazio')" onchange="try{setCustomValidity('')}catch(e){}">
 					<br/>
 					<button id="salvarOciosidade"class="botao" type="submit">Enviar</button>
 					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
@@ -86,12 +86,12 @@
 	
 	<div class="aEsquerda col-lg-8">
 		<div id="pedidosFundo" class="fundo">
-			<h2>Pedidos em aberto</h2>
+			<h2>Pedidos em Aberto</h2>
 			<div id="rolagemPedidos" class="rolagem">
 				<table id="table">
 					<thead class="descricaoTabela">
 						<tr>
-							<th class="tituloDeDescricaoDaTabela">Cod</th>
+							<th class="tituloDeDescricaoDaTabela">Cód.</th>
 							<th class="tituloDeDescricaoDaTabela">Título do Pedido</th>
 							<th class="tituloDeDescricaoDaTabela">Descrição</th>
 							<th class="tituloDeDescricaoDaTabela">Projeto</th>

@@ -18,15 +18,15 @@ import br.com.projeto.conecta.repository.AlocacaoRepository;
 public class AlocacaoService {
 
 	@Autowired
-	private AlocacaoRepository alocaoRepository;
+	private AlocacaoRepository alocacaoRepository;
 
 	@Transactional
 	public List<Alocacoes> buscarTodos() {
-		return alocaoRepository.findAll();
+		return alocacaoRepository.findAll();
 	}
 
 	public void salvarAlocacao(Alocacoes alocacao) {
-		alocaoRepository.save(alocacao);
+		alocacaoRepository.save(alocacao);
 	}
 
 	public float creditosParaDescontar(Agendamento agendamento) {
@@ -42,7 +42,7 @@ public class AlocacaoService {
 	public LocalTime buscaUltimaHora(Agendamento agendamento) {
 		Calendar calendar = Calendar.getInstance();
 		Date data = new Date(calendar.getTime().getTime());
-		LocalTime ultimaHora = alocaoRepository.findbyUltimaHora(data, agendamento.getDisponivel().getIdDisponivel());
+		LocalTime ultimaHora = alocacaoRepository.findbyUltimaHora(data, agendamento.getDisponivel().getIdDisponivel());
 
 		if (ultimaHora == null || ultimaHora.isBefore(LocalTime.now())) {
 			int min = LocalTime.now().getMinute();

@@ -1,15 +1,18 @@
 package br.com.projeto.conecta.service;
 
+import java.sql.Date;
+import java.time.LocalTime;
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.projeto.conecta.domain.Agendamento;
-import br.com.projeto.conecta.domain.Consultor;
 import br.com.projeto.conecta.domain.Usuarios;
 import br.com.projeto.conecta.repository.AgendamentoRepository;
-import br.com.projeto.conecta.security.ConectaUserDetailsService;
+import br.com.projeto.conecta.repository.AlocacaoRepository;
+import br.com.projeto.conecta.repository.DisponivelRepository;
 
 
 @Service
@@ -18,7 +21,9 @@ public class AgendamentoService {
 	@Autowired
 	private AgendamentoRepository agendamentoRepository;
 	@Autowired
-	private ConectaUserDetailsService sessao;
+	private AlocacaoRepository alocacaoRepository;
+	@Autowired
+	private DisponivelRepository disponivelRepository;
 
 	public List<Agendamento> BuscarTodos() {	
 		return agendamentoRepository.findAll();
@@ -42,5 +47,18 @@ public class AgendamentoService {
 	}
 	public List<Agendamento> buscarPorStatus(){
 		return agendamentoRepository.findByStatus();
+	}
+	
+	public Boolean buscaUltimaHora(Agendamento agendamento) {
+		
+		Calendar calendar = Calendar.getInstance();
+		Date data = new Date(calendar.getTime().getTime());
+		LocalTime ultimaHoraAlocacao = alocacaoRepository.findbyUltimaHora(data, agendamento.getDisponivel().getIdDisponivel());
+		
+		if (ultimaHoraAlocacao == null || ultimaHoraAlocacao.isBefore(LocalTime.now())) {
+			ultimaHoraAlocacao = LocalTime.of(0, 0);
+		}
+		LocalTime ultimaHoraDisponivel = dispo
+		
 	}
 }

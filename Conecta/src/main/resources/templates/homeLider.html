@@ -3,7 +3,7 @@
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="UTF-8">
-<title>Home | Lider</title>
+<title>Home | Líder</title>
 <link rel="stylesheet" type="text/css" media="screen"
 	th:href="@{/css/homeLider.css}" />
 
@@ -74,19 +74,19 @@
 
 		<div class="aDireita col-lg-4">
 			<div id="fundoListaDeDisponibilidade" class="fundo">
-				<h2>Lista de disponibilidade</h2>
+				<h2>Lista de Disponibilidade</h2>
 				<div id="rolagemListaDisponibilidade" class="rolagem">
 					<table id="minhaTabela">
 						<thead>
 							<tr>
 								<th>Cód.</th>
 								<th>Consultor</th>
-								<th>Hora início</th>
-								<th>Hora fim</th>
+								<th>Hora Início</th>
+								<th>Hora Fim</th>
 								<th>Créditos / h</th>
 								<th>Habilidades</th>
 								<th class="escondidoNaLista">Habilidade Principal</th>
-								<th class="escondidoNaLista">Habilidade Especifica</th>
+								<th class="escondidoNaLista">Habilidade Específica</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -140,8 +140,8 @@
 					<form action="/homeLider/aprovar" method="post"
 						th:object="${alocacoes}">
 						<div class="formulario">
-							<label>Codigo do Agendamento</label> <br> <input
-								name="agendamento" required> <br> <label>Motivo</label>
+							<label>Cód. do Agendamento</label> <br> <input
+								name="agendamento" required oninvalid="this.setCustomValidity('Campo não pode ser vazio')" onchange="try{setCustomValidity('')}catch(e){}"> <br> <label>Motivo</label>
 							<br> <input name="motivo">
 							<button type="submit">Enviar</button>
 							<input type="hidden" th:name="${_csrf.parameterName}"
@@ -158,9 +158,9 @@
 						th:object="${recusado}">
 						<div class="formulario">
 
-							<label>Id do Agendamento</label><br> <input
-								name="agendamento" required> <label>Motivo:</label><br>
-							<input name="motivo" required>
+							<label>Cód. do Agendamento</label><br> <input
+								name="agendamento" required oninvalid="this.setCustomValidity('Campo não pode ser vazio')" onchange="try{setCustomValidity('')}catch(e){}"> <label>Motivo</label><br>
+							<input name="motivo" required oninvalid="this.setCustomValidity('Campo não pode ser vazio')" onchange="try{setCustomValidity('')}catch(e){}">
 
 							<button type="submit">Enviar</button>
 						</div>

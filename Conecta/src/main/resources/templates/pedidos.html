@@ -19,7 +19,7 @@
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
 				<div id="cabecalhoModal" class="modal-header">
-					<h5>aviso</h5>
+					<h5>Aviso:</h5>
 				</div>
 				<div id="corpoModal" class="modal-body">
 					<div th:if="${param.sucesso}">
@@ -34,19 +34,19 @@
 	</div>
 	
 	<div id="listaDeDisponibilidade" class="fundo">
-		<h2>Lista de disponibilidade</h2>
+		<h2>Lista de Disponibilidade</h2>
 		<div id="rolagemListaDisponibilidade" class="rolagem">
 			<table id="minhaTabela">
 				<thead>
 					<tr>
 						<th>Cód.</th>
 						<th>Consultor</th>
-						<th>Hora início</th>
-						<th>Hora fim</th>
+						<th>Hora Início</th>
+						<th>Hora Fim</th>
 						<th>Créditos / h</th>
 						<th>Habilidades</th>
 						<th class="escondidoNaLista">Habilidade Principal</th>
-						<th class="escondidoNaLista">Habilidade Especifica</th>
+						<th class="escondidoNaLista">Habilidade Específica</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -87,12 +87,12 @@
 			<table>
 				<thead>
 					<tr>
-						<th>Cod</th>
+						<th>Cód.</th>
 						<th>Título do Pedido</th>
 						<th>Descrição do Pedido</th>
 						<th>Cliente</th>
 						<th>Produto</th>
-						<th>ID do disponivel</th>
+						<th>Cód. do Disponivel</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -104,7 +104,7 @@
 						<td th:text="${p.projeto.produto}"></td>
 						<td>
 							<form action="/homeLider/pedidos/alocar" method="POST">
-								<input class="inputPedidos" name="disponivel">
+								<input class="inputPedidos" name="disponivel" required oninvalid="this.setCustomValidity('Campo não pode ser vazio')" onchange="try{setCustomValidity('')}catch(e){}">
 								<button class="botaoPedidos" type="submit" name="idPedido" th:value="${p.idPedido}">Alocar</button>
 								<input type="hidden" th:name="${_csrf.parameterName}"
 									th:value="${_csrf.token}" />

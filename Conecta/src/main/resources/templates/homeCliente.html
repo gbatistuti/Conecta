@@ -105,7 +105,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="d : ${disponiveis}" th:id="${d.idDisponivel}" onclick="SelecionaLinhaComConteudo(this)">
+					<tr th:each="d : ${disponiveis}" th:id="${d.idDisponivel}">
 						<td class="idConsultor" th:text="${d.idDisponivel}"></td>
 						<td th:text="${d.consultor.nome}"></td>
 						<td th:text="${d.horaInicio}"></td>

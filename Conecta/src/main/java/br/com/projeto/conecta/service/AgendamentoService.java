@@ -3,10 +3,11 @@ package br.com.projeto.conecta.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import br.com.projeto.conecta.domain.Agendamento;
-import br.com.projeto.conecta.domain.Consultor;
 import br.com.projeto.conecta.domain.Usuarios;
 import br.com.projeto.conecta.repository.AgendamentoRepository;
 import br.com.projeto.conecta.security.ConectaUserDetailsService;
@@ -24,6 +25,7 @@ public class AgendamentoService {
 		return agendamentoRepository.findAll();
 	}
 	
+	@CacheEvict(value = "agendamentosPorUsuarioCache", allEntries = true)
 	public boolean salvarAgendamento(Agendamento agendamento) {
 		agendamentoRepository.save(agendamento);
 		return true;
@@ -33,6 +35,7 @@ public class AgendamentoService {
 		return agendamentoRepository.findByConsultor(email);
 	}
 
+	@Cacheable(value = "agendamentosPorUsuarioCache")
 	public List<Agendamento> buscarAgendamentosPorUsuario(Usuarios usuario) {
 		return agendamentoRepository.findByCliente(usuario);
 	}

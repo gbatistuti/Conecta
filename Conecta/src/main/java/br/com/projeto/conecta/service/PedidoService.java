@@ -3,6 +3,8 @@ package br.com.projeto.conecta.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import br.com.projeto.conecta.domain.Pedido;
@@ -19,6 +21,7 @@ public class PedidoService {
 		return pedidoRepository.findAll();
 	}
 	
+	@CacheEvict(value = "pedidosPorUsuarioCache", allEntries = true)
 	public void salvarPedido(Pedido pedido) {
 		pedidoRepository.save(pedido);
 	}
@@ -31,6 +34,7 @@ public class PedidoService {
 		return pedidoRepository.getOne(id);
 	}
 	
+	@Cacheable(value = "pedidosPorUsuarioCache")
 	public List<Pedido> buscarPedidosPorUsuario(Usuarios usuario) {
 		return pedidoRepository.findByCliente(usuario);
 	}

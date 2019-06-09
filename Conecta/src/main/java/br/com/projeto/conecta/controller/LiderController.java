@@ -47,6 +47,9 @@ public class LiderController {
 
 	@GetMapping
 	public String listarAgendamentos(ModelMap model, HttpServletRequest request) {
+		Usuarios usuario = sessao.getCurrentUser();
+		request.setAttribute("nome", usuario.getNome());
+		
 		model.addAttribute("agendamento", agendamentoService.buscarPorStatus());
 		model.addAttribute("disponiveis", disponivelService.buscarTodos());
 		return "homeLider";
@@ -88,6 +91,9 @@ public class LiderController {
 
 	@GetMapping("/pedidos")
 	public String ListarDisponiveis(ModelMap model, HttpServletRequest request) {
+		Usuarios usuario = sessao.getCurrentUser();
+		request.setAttribute("nome", usuario.getNome());
+		
 		model.addAttribute("pedidos", pedidoService.filtrarPorOrigemECandidatura());
 		model.addAttribute("disponiveis", disponivelService.buscarTodos());
 		return "pedidos";
@@ -122,19 +128,28 @@ public class LiderController {
 	}
 
 	@GetMapping("/alocacoes")
-	public String listarAgendamentosAprovadosEReprovados(ModelMap model) {
+	public String listarAgendamentosAprovadosEReprovados(ModelMap model, HttpServletRequest request) {
+		Usuarios usuario = sessao.getCurrentUser();
+		request.setAttribute("nome", usuario.getNome());
+		
 		model.addAttribute("aprovados", alocacaoService.buscarTodos());
 		return "agendamentosAprovados";
 	}
 	
 	@GetMapping("/agendamentosReprovados")
-	public String listarAgendamentosReprovados(ModelMap model) {
+	public String listarAgendamentosReprovados(ModelMap model, HttpServletRequest request) {
+		Usuarios usuario = sessao.getCurrentUser();
+		request.setAttribute("nome", usuario.getNome());
+		
 		model.addAttribute("reprovados", recusadoService.buscarTodos());
 		return "agendamentosReprovados";
 	}
 	
 	@GetMapping("/gerenciaProjetos")
-	public String listar(ModelMap model) {
+	public String listar(ModelMap model, HttpServletRequest request) {
+		Usuarios usuario = sessao.getCurrentUser();
+		request.setAttribute("nome", usuario.getNome());
+		
 		model.addAttribute("projetos", projetoservice.buscarTodos());
 		return "gerenciaProjetos";
 	}

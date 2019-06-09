@@ -21,7 +21,7 @@ public class AgendamentoService {
 		return agendamentoRepository.findAll();
 	}
 
-	@CacheEvict(value = {"agendamentosPorUsuarioCache", "candidaturasPorUsuarioCache"}, allEntries = true)
+	@CacheEvict(value = {"agendamentosPorUsuarioCache", "candidaturasPorUsuarioCache", "pedidosFiltradosPorOrigemECandidaturaCache"}, allEntries = true)
 	public boolean salvarAgendamento(Agendamento agendamento) {
 		agendamentoRepository.save(agendamento);
 		return true;

@@ -21,11 +21,12 @@ public class PedidoService {
 		return pedidoRepository.findAll();
 	}
 	
-	@CacheEvict(value = "pedidosPorUsuarioCache", allEntries = true)
+	@CacheEvict(value = {"pedidosPorUsuarioCache", "pedidosFiltradosPorOrigemECandidaturaCache"}, allEntries = true)
 	public void salvarPedido(Pedido pedido) {
 		pedidoRepository.save(pedido);
 	}
 	
+	@Cacheable(value = "pedidosFiltradosPorOrigemECandidaturaCache")
 	public List<Pedido> filtrarPorOrigemECandidatura () {
 		return pedidoRepository.getPedidoFiltrado();
 	}

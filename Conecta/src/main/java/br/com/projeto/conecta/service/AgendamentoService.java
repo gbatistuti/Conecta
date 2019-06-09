@@ -10,27 +10,24 @@ import org.springframework.stereotype.Service;
 import br.com.projeto.conecta.domain.Agendamento;
 import br.com.projeto.conecta.domain.Usuarios;
 import br.com.projeto.conecta.repository.AgendamentoRepository;
-import br.com.projeto.conecta.security.ConectaUserDetailsService;
-
 
 @Service
 public class AgendamentoService {
 
 	@Autowired
 	private AgendamentoRepository agendamentoRepository;
-	@Autowired
-	private ConectaUserDetailsService sessao;
 
-	public List<Agendamento> BuscarTodos() {	
+	public List<Agendamento> BuscarTodos() {
 		return agendamentoRepository.findAll();
 	}
-	
-	@CacheEvict(value = "agendamentosPorUsuarioCache", allEntries = true)
+
+	@CacheEvict(value = {"agendamentosPorUsuarioCache", "candidaturasPorUsuarioCache"}, allEntries = true)
 	public boolean salvarAgendamento(Agendamento agendamento) {
 		agendamentoRepository.save(agendamento);
 		return true;
 	}
 
+	@Cacheable(value = "candidaturasPorUsuarioCache")
 	public List<Agendamento> buscarCandidaturasByUsuario(String email) {
 		return agendamentoRepository.findByConsultor(email);
 	}
@@ -39,11 +36,12 @@ public class AgendamentoService {
 	public List<Agendamento> buscarAgendamentosPorUsuario(Usuarios usuario) {
 		return agendamentoRepository.findByCliente(usuario);
 	}
-	
+
 	public Agendamento getAgendamento(int id) {
 		return agendamentoRepository.getOne(id);
 	}
-	public List<Agendamento> buscarPorStatus(){
+
+	public List<Agendamento> buscarPorStatus() {
 		return agendamentoRepository.findByStatus();
 	}
 }

@@ -27,12 +27,13 @@ public class DisponivelService {
 	}
 
 	@Transactional
-	@CacheEvict(value = "disponiveisCache", allEntries = true)
+	@CacheEvict(value = {"disponiveisCache", "validaApontamentoCache"}, allEntries = true)
 	public void salvarApontamento(Disponiveis disponiveis) {
 		disponivelRepository.save(disponiveis);
 	}
 	
 	@Transactional
+	@Cacheable(value = "validaApontamentoCache")
 	public Disponiveis validaApontamento(String email) {
 		Date data = new Date();
 		return disponivelRepository.findByUserAndDate(data, email);

@@ -41,6 +41,7 @@ public class AgendamentoService {
 		return agendamentoRepository.getOne(id);
 	}
 
+	@Cacheable(value = "agendamentosPorStatusCache")
 	public List<Agendamento> buscarPorStatus() {
 		return agendamentoRepository.findByStatus();
 	}

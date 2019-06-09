@@ -60,7 +60,7 @@ public class LiderController {
 		agendamento.getPedido().getProjeto().setQtdCreditos(alocacaoService.creditosParaDescontar(agendamento));
 
 		alocacao.setCriadoPor(sessao.getCurrentLider());
-		LocalTime horaInicio = alocacaoService.buscaUltimaHora(agendamento);
+		LocalTime horaInicio = alocacaoService.buscaUltimaHoraFimDeAlocacaoDoConsultor(agendamento);
 
 		alocacao.setHoraInicio(horaInicio);
 		alocacao.setHoraFim(alocacaoService.definirHoraFim(horaInicio, alocacao));
@@ -90,8 +90,6 @@ public class LiderController {
 	public String ListarDisponiveis(ModelMap model, HttpServletRequest request) {
 		model.addAttribute("pedidos", pedidoService.filtrarPorOrigemECandidatura());
 		model.addAttribute("disponiveis", disponivelService.buscarTodos());
-		Usuarios usuario = sessao.getCurrentUser();
-		request.setAttribute("nome", usuario.getNome());
 		return "pedidos";
 	}
 
@@ -112,7 +110,7 @@ public class LiderController {
 
 		agendamento.getPedido().getProjeto().setQtdCreditos(creditosDoProjeto - creditosParaDescontar);
 		
-		LocalTime horaInicio = alocacaoService.buscaUltimaHora(agendamento);
+		LocalTime horaInicio = alocacaoService.buscaUltimaHoraFimDeAlocacaoDoConsultor(agendamento);
 		alocacao.setCriadoPor(sessao.getCurrentLider());
 		alocacao.setHoraInicio(horaInicio);
 		alocacao.setAgendamento(agendamento);		

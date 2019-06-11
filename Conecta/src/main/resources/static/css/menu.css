@@ -90,6 +90,14 @@ tr{
 	height: 50px;
 }
 
+table tr:hover td{
+	background-color: #ea9b3e;
+}
+
+.btnHabilidades{
+	cursor: pointer;
+}
+
 button{
 	background-color:#ea9b3e;
 	color: black;

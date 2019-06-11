@@ -16,10 +16,6 @@
 	height: 40vh;
 }
 
-#minhaTabela tr td{
-	cursor: pointer;
-}
-
 #minhaTabela tr:hover td{
 	background-color: #ea9b3e;
 }

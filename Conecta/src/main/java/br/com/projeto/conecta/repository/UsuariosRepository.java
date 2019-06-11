@@ -9,7 +9,7 @@ import br.com.projeto.conecta.domain.Usuarios;
 @Repository
 public interface UsuariosRepository extends JpaRepository<Usuarios, Integer>{
 
-
+	@Query("select u from Usuarios u where u.email = :userName")
 	Usuarios findByEmail(String userName);
 
 	@Query("select u from Usuarios u where u.idUsuario = :currentUserId")

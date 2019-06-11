@@ -36,11 +36,8 @@ public class ClienteController {
 	
 	@GetMapping
 	public String listarDisponiveis(ModelMap model, HttpServletRequest request) {
-		Usuarios usuario = sessao.getCurrentUser();
-		request.setAttribute("nome", usuario.getNome());
-		
+		model.addAttribute("projeto",projetoService.buscarPor(sessao.getCurrentUserEmail()));
 		model.addAttribute("disponiveis",disponivelService.buscarTodos());
-		model.addAttribute("projeto",projetoService.buscarPor(sessao.getCurrentUserId()));
 		model.addAttribute("pedido", new Pedido());
 		model.addAttribute("agendamento", new Agendamento());
 		return "homeCliente";

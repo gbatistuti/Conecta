@@ -12,6 +12,7 @@ import br.com.projeto.conecta.domain.Projeto;
 @Repository
 public interface ProjetoRepository extends JpaRepository<Projeto, Integer> {
 
-	@Query("select u from Projeto u where u.cliente.idUsuario = :id")
-	List<Projeto> getById(@Param("id") Integer id);
+	@Query("select u from Projeto u where u.cliente.email = :email")
+	List<Projeto> getByEmail(@Param("email") String email);
+
 }

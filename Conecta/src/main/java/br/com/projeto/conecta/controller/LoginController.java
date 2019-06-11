@@ -2,6 +2,7 @@ package br.com.projeto.conecta.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -23,8 +24,15 @@ public class LoginController {
 	}
 
 	@GetMapping("/login")
+	@CacheEvict(value = {"user", "lider", "consultor"}, allEntries = true)
 	public String login() {
 		return "login";
+	}
+	
+	@GetMapping("/logout")
+	@CacheEvict(value = {"user", "lider", "consultor"}, allEntries = true)
+	public String logout() {
+		return "login?logout";
 	}
 	
 }

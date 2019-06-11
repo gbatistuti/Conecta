@@ -3,7 +3,7 @@
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="UTF-8">
-<title>Home | Lider</title>
+<title>Home | Líder</title>
 <link rel="stylesheet" type="text/css" media="screen"
 	th:href="@{/css/homeLider.css}" />
 
@@ -20,10 +20,10 @@
 	<div class="modal fade" id="avisoModal">
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
-				<div class="modal-header">
-					<h5>aviso</h5>
+				<div id="cabecalhoModal" class="modal-header">
+					<h5>Aviso:</h5>
 				</div>
-				<div class="modal-body">
+				<div id="corpoModal" class="modal-body">
 					<div th:if="${param.aprovado}">
 						<p>Agendamento aprovado com sucesso!</p>
 					</div>
@@ -45,7 +45,7 @@
 					<table>
 						<thead>
 							<tr>
-								<th>Cod</th>
+								<th>Cód.</th>
 								<th>Título do Agendamento</th>
 								<th>Descrição do Agendamento</th>
 								<th>Projeto</th>
@@ -73,50 +73,60 @@
 		</div>
 
 		<div class="aDireita col-lg-4">
-			<div class="row">
-				<div id="fundoListaDeDisponibilidade" class="fundo">
-					<h2>Lista de disponibilidade</h2>
-					<div id="rolagemListaDisponibilidade" class="rolagem">
-						<table>
-							<thead>
-								<tr>
-									<th>Cód.</th>
-									<th>Consultor</th>
-									<th>Hora início</th>
-									<th>Hora fim</th>
-									<th>Créditos / h</th>
-									<th>Habilidade Principal</th>
-									<th>Habilidade Especifica</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr th:each="d : ${disponiveis}">
-									<td th:text="${d.idDisponivel}"></td>
-									<td th:text="${d.consultor.nome}"></td>
-									<td th:text="${d.horaInicio}"></td>
-									<td th:text="${d.horaFim}"></td>
-									<td th:text="${d.consultor.creditosPorHora}"></td>
-									<td>
-										<table>
-											<tbody>
-												<tr th:each="h : ${d.consultor.habilidadesEspecificas}">
-													<td
-														th:text="${h.habilidadesPrincipais.nomeHabilidadePrincipal}"></td>
-													<td th:text="${h.nomeHabilidadeEspecifica}"></td>
-												</tr>
-											</tbody>
-										</table>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
+			<div id="fundoListaDeDisponibilidade" class="fundo">
+				<h2>Lista de Disponibilidade</h2>
+				<div id="rolagemListaDisponibilidade" class="rolagem">
+					<table id="minhaTabela">
+						<thead>
+							<tr>
+								<th>Cód.</th>
+								<th>Consultor</th>
+								<th>Hora Início</th>
+								<th>Hora Fim</th>
+								<th>Créditos / h</th>
+								<th>Habilidades</th>
+								<th class="escondidoNaLista">Habilidade Principal</th>
+								<th class="escondidoNaLista">Habilidade Específica</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="d : ${disponiveis}" th:id="${d.idDisponivel}"
+								onclick="SelecionaLinhaComConteudo(this)">
+								<td class="idConsultor" th:text="${d.idDisponivel}"></td>
+								<td th:text="${d.consultor.nome}"></td>
+								<td th:text="${d.horaInicio}"></td>
+								<td th:text="${d.horaFim}"></td>
+								<td th:text="${d.consultor.creditosPorHora}"></td>
+								<td><img alt="" th:src="@{/img/homeCliente/info.svg}"
+									onclick="selLinha( this, false)"></td>
+								<td class="escondidoNaLista">
+									<table>
+										<tbody>
+											<tr th:each="h : ${d.consultor.habilidadesEspecificas}">
+												<td
+													th:text="${h.habilidadesPrincipais.nomeHabilidadePrincipal}"></td>
+											</tr>
+										</tbody>
+									</table>
+								</td>
+								<td>
+									<table class="escondidoNaLista">
+										<tbody>
+											<tr th:each="h : ${d.consultor.habilidadesEspecificas}">
+												<td th:text="${h.nomeHabilidadeEspecifica}"></td>
+											</tr>
+										</tbody>
+									</table>
+								</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 			</div>
 			<div>
 
 				<div id="selecao" class="fundo painelInferiorQueTroca">
-					<h2>Ações agendamento</h2>
+					<h2>Ações Agendamento</h2>
 					<button class="buttonAprovarERecusar botoes" id="buttonAprovar"
 						onclick="abreAprovar()">Aprovar</button>
 					<button class="buttonAprovarERecusar botoes" id="buttonRecusar"
@@ -130,11 +140,9 @@
 					<form action="/homeLider/aprovar" method="post"
 						th:object="${alocacoes}">
 						<div class="formulario">
-							<label>Codigo do Agendamento</label> <br> <input
-								name="agendamento">
-							<!-- 						<label>Hora Inicio:</label> <input name="horaInicio"> -->
-							<!-- 						<label>Hora Fim:</label> <input name="horaFim"> -->
-							<br> <label>Motivo</label> <br> <input name="motivo">
+							<label>Cód. do Agendamento</label> <br> <input
+								name="agendamento" required oninvalid="this.setCustomValidity('Campo não pode ser vazio')" onchange="try{setCustomValidity('')}catch(e){}"> <br> <label>Motivo</label>
+							<br> <input name="motivo">
 							<button type="submit">Enviar</button>
 							<input type="hidden" th:name="${_csrf.parameterName}"
 								th:value="${_csrf.token}" />
@@ -149,9 +157,11 @@
 					<form action="/homeLider/reprovar" method="post"
 						th:object="${recusado}">
 						<div class="formulario">
-							<label>Id do Agendamento</label><br>
-							<input name="agendamento"> <label>Motivo:</label><br>
-							<input name="motivo">
+
+							<label>Cód. do Agendamento</label><br> <input
+								name="agendamento" required oninvalid="this.setCustomValidity('Campo não pode ser vazio')" onchange="try{setCustomValidity('')}catch(e){}"> <label>Motivo</label><br>
+							<input name="motivo" required oninvalid="this.setCustomValidity('Campo não pode ser vazio')" onchange="try{setCustomValidity('')}catch(e){}">
+
 							<button type="submit">Enviar</button>
 						</div>
 						<input type="hidden" th:name="${_csrf.parameterName}"
@@ -163,6 +173,7 @@
 
 	</div>
 	<script type="text/javascript">
+		// Troca de itens da pagina
 		function abreAprovar() {
 			var aprovar = document.getElementById("aprovar");
 			var selecao = document.getElementById("selecao");
@@ -186,6 +197,8 @@
 			selecao.style.display = "block"
 		}
 
+		//Pop-up
+
 		function aberturaDoPopUp() {
 			var url_atual = window.location.href
 
@@ -201,6 +214,62 @@
 
 		function fecharPopUp() {
 			$("#avisoModal").modal('hide');
+		}
+
+		// Tabela de habilidades
+
+		var tabela = document.getElementById("minhaTabela");
+		var linhas = tabela.getElementsByTagName("tr");
+
+		function selLinha(neto, multiplos) {
+			var filho = neto.parentNode;
+			var linha = filho.parentNode;
+
+			if (!multiplos) {
+				var linhas = linha.parentElement.getElementsByTagName("tr");
+				for (var i = 0; i < linhas.length; i++) {
+					var linha_ = linhas[i];
+					linha_.classList.remove("selecionado");
+				}
+			}
+			linha.classList.toggle("selecionado");
+
+			Visualizar();
+		}
+
+		function Visualizar() {
+			var selecionados = tabela.getElementsByClassName("selecionado");
+			if (selecionados.lenght < 1) {
+				alert("Selecione pelo menos uma linha");
+				return false;
+			}
+
+			var dados = "";
+
+			for (var i = 0; i < selecionados.length; i++) {
+				var selecionado = selecionados[i];
+				selecionado = selecionado.getElementsByTagName("table");
+			}
+
+			var tabela1 = selecionado[0];
+			var tabela2 = selecionado[1]
+
+			var tdTabela1 = tabela1.getElementsByTagName("td");
+			var tdTabela2 = tabela2.getElementsByTagName("td");
+
+			for (var i = 0; i < tdTabela1.length; i++) {
+				dados += "<p> Produto: " + tdTabela1[i].innerHTML
+						+ " - Modulo: " + tdTabela2[i].innerHTML + "</p> <br>";
+			}
+
+			var cabecalhoModal = document.getElementById("cabecalhoModal")
+			var corpoModal = document.getElementById("corpoModal")
+			cabecalhoModal.innerHTML = "Habilidades"
+			corpoModal.innerHTML = dados;
+
+			$("#avisoModal").modal('show')
+
+			return dados;
 		}
 	</script>
 </body>

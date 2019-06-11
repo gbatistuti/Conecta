@@ -16,10 +16,10 @@
 <div class="modal fade" id="avisoModal">
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
-				<div class="modal-header">
-					<h5>aviso</h5>
+				<div id="cabecalhoModal" class="modal-header">
+					<h5>Aviso:</h5>
 				</div>
-				<div class="modal-body">
+				<div id="corpoModal" class="modal-body">
 					<div th:if="${param.agendamentoCriado}">
 						<p>Agendamento criado com sucesso!</p>
 					</div>
@@ -52,12 +52,12 @@
 		<button onclick="abreSeletor()" class="botaoDeFechar">X</button>
 		<h2>Agendamento</h2>
 		<form class="formPedidoEAgendamento" action="/homeCliente/criaragendamento" method="post">
-			<Label>Título</Label> <br> <input type="text" th:field="${pedido.titulo}"><br>
-			<Label>Descrição</Label> <br> <input type="text"th:field="${pedido.descricao}"><br>
-			<label> Codigo do Consultor</label><br><input type="text" th:field="${agendamento.disponivel}"><br>
-			<Label>Quantidade de Horas</Label> <br> <input class="inputDeHoras" type="text" th:field="${pedido.sugestaoDeHoras}"><br>
+			<Label>Título</Label> <br> <input type="text" th:field="${pedido.titulo}" required oninvalid="this.setCustomValidity('Campo não pode ser vazio')" onchange="try{setCustomValidity('')}catch(e){}"><br>
+			<Label>Descrição</Label> <br> <input type="text"th:field="${pedido.descricao}" required oninvalid="this.setCustomValidity('Campo não pode ser vazio')" onchange="try{setCustomValidity('')}catch(e){}"><br>
+			<label>Cód. do Consultor</label><br><input class="inputNumero" type="number" placeholder="Selecione um item da lista" readonly th:field="${agendamento.disponivel}"><br>
+			<Label>Quantidade de Horas</Label> <br> <input class="inputNumero" type="number" min="1" max="8" name="sugestaoDeHoras" required oninvalid="this.setCustomValidity('Digite um valor de 1 a 8 horas')" onchange="try{setCustomValidity('')}catch(e){}"><br>
 			<label>Projeto</label><br>
-			<select th:field="${pedido.projeto}" name="idProjeto">
+			<select th:field="${pedido.projeto}" name="idProjeto" required oninvalid="this.setCustomValidity('Escolha um projeto da lista')" onchange="try{setCustomValidity('')}catch(e){}">
 				<option value="">Escolha o projeto</option>
 				<option th:each="p : ${projeto}" th:value="${p.idProjeto}"
 					th:text="${'Nome: ' + p.nome + ' | Créditos: ' + p.qtdCreditos}">
@@ -73,10 +73,10 @@
 		<h2>Pedido</h2>
 		<form class="formPedidoEAgendamento" action="/homeCliente/criarpedido" method="post"
 			th:object="${pedido}">
-			<Label>Título</Label> <br> <input name="titulo"><br> 
-			<Label>Descrição</Label> <br> <input name="descricao"><br>
-			<Label>Quantidade de Horas</Label> <br> <input class="inputDeHoras" type="text" name="sugestaoDeHoras"><br> 
-			<label>Projeto</label> <br> <select th:field="*{projeto}" name="idProjeto"><br>
+			<Label>Título</Label> <br> <input name="titulo" required oninvalid="this.setCustomValidity('Campo não pode ser vazio')" onchange="try{setCustomValidity('')}catch(e){}"><br> 
+			<Label>Descrição</Label> <br> <input name="descricao" required oninvalid="this.setCustomValidity('Campo não pode ser vazio')" onchange="try{setCustomValidity('')}catch(e){}"><br>
+			<Label>Quantidade de Horas</Label> <br> <input class="inputDeHoras" type="number" min="1" max="8" name="sugestaoDeHoras" required oninvalid="this.setCustomValidity('Digite um valor de 1 a 8 horas')" onchange="try{setCustomValidity('')}catch(e){}"><br> 
+			<label>Projeto</label> <br> <select th:field="*{projeto}" name="idProjeto" required oninvalid="this.setCustomValidity('Escolha um projeto da lista')" onchange="try{setCustomValidity('')}catch(e){}"><br>
 				<option value="">Escolha o projeto</option>
 				<option th:each="p : ${projeto}" th:value="${p.idProjeto}"
 					th:text="${'Nome: ' + p.nome + ' | Créditos: ' + p.qtdCreditos}">
@@ -89,15 +89,15 @@
 	</div>
 
 	<div id="fundoListaDisponibilidade" class="fundo">
-		<h2>Lista de disponibilidade</h2>
+		<h2>Lista de Disponibilidade</h2>
 		<div id="rolagemListaDisponibilidade" class="rolagem">
-			<table>
+			<table id="minhaTabela">
 				<thead>
 					<tr>
 						<th>Cód.</th>
 						<th>Consultor</th>
-						<th>Hora início</th>
-						<th>Hora fim</th>
+						<th>Hora Início</th>
+						<th>Hora Fim</th>
 						<th>Créditos / h</th>
 						<th>Habilidades</th>
 						<th class="escondidoNaLista">Habilidade Principal</th>
@@ -105,14 +105,13 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="d : ${disponiveis}">
-						<!-- 					<td th:text="${d.consultor.idUsuario}"></td> -->
-						<td th:text="${d.idDisponivel}"></td>
+					<tr th:each="d : ${disponiveis}" th:id="${d.idDisponivel}">
+						<td class="idConsultor" th:text="${d.idDisponivel}"></td>
 						<td th:text="${d.consultor.nome}"></td>
 						<td th:text="${d.horaInicio}"></td>
 						<td th:text="${d.horaFim}"></td>
 						<td th:text="${d.consultor.creditosPorHora}"></td>
-						<td> <img alt="" th:src="@{/img/homeCliente/info.svg}"></td>
+						<td><img alt="" th:src="@{/img/homeCliente/info.svg}" onclick="selLinha( this, false)"></td>
 						<td class="escondidoNaLista">
 							<table>
 								<tbody>
@@ -139,6 +138,22 @@
 	</div>
 	
 	<script type="text/javascript">
+	
+	function aberturaDoPopUp() {
+	 	var url_atual = window.location.href
+	 	
+	 	var sucessoNaUrl = url_atual.indexOf("agendamentoCriado")
+	 	var erroNaUrl = url_atual.indexOf("pedidoCriado")
+	 	
+	 	if(sucessoNaUrl != -1 || erroNaUrl != -1 ){
+	 		$("#avisoModal").modal('show');
+	 	}
+	 }
+	
+	//Pop-up de sucesso ou falha
+	
+	var modal = document.getElementById('avisoModal')
+	
 	function abrePedido(){
 		var pedido = document.getElementById("pedido");
 		var selecao = document.getElementById("selecao");
@@ -162,23 +177,102 @@
 		selecao.style.display = "block"
 	}
 	
-	function aberturaDoPopUp() {
-	 	var url_atual = window.location.href
-	 	
-	 	var sucessoNaUrl = url_atual.indexOf("agendamentoCriado")
-	 	var erroNaUrl = url_atual.indexOf("pedidoCriado")
-	 	
-	 	var modal = document.getElementById('avisoModal')
-	 	
-	 	
-	 	if(sucessoNaUrl != -1 || erroNaUrl != -1 ){
-	 		$("#avisoModal").modal('show');
-	 	}
-	 }
-	 
-	 function fecharPopUp(){
-		 $("#avisoModal").modal('hide');
-	 }
+
+	// Pop-Up de Habilidade
+	
+	var tabela = document.getElementById("minhaTabela");
+	var linhas = tabela.getElementsByTagName("tr");
+	
+	for(var i = 0; i < linhas.lenght; i++){
+		var linha = linhas[i];
+		linha.addEventListener("click", function(){
+			selLinha(this, false);	
+		});
+	}
+	
+	function selLinha(neto, multiplos){
+		var filho = neto.parentNode;
+		var linha = filho.parentNode;
+		
+		if(!multiplos){
+		  	var linhas = linha.parentElement.getElementsByTagName("tr");
+		        for(var i = 0; i < linhas.length; i++){
+		           var linha_ = linhas[i];
+		           linha_.classList.remove("selecionado");    
+		        }
+		  }
+		linha.classList.toggle("selecionado");
+		
+		Visualizar();
+	}
+	
+	function Visualizar(){
+		var selecionados = tabela.getElementsByClassName("selecionado");
+		if(selecionados.lenght < 1){
+			alert("Selecione pelo menos uma linha");
+			return false;
+		}
+		
+		var dados = "";
+		
+		for(var i = 0; i < selecionados.length; i++){
+			var selecionado = selecionados[i];
+			selecionado = selecionado.getElementsByTagName("table");	
+		}
+		
+		var tabela1 = selecionado[0];
+		var tabela2 = selecionado[1]
+		
+		var tdTabela1 = tabela1.getElementsByTagName("td");
+		var tdTabela2 = tabela2.getElementsByTagName("td");
+		
+		for(var i = 0; i < tdTabela1.length; i++){
+			dados += "<p> Produto: " + tdTabela1[i].innerHTML +" - Modulo: "+ tdTabela2[i].innerHTML + "</p> <br>";
+		}
+		
+		
+		var cabecalhoModal = document.getElementById("cabecalhoModal")
+		var corpoModal = document.getElementById("corpoModal")
+		cabecalhoModal.innerHTML = "Habilidades"
+		corpoModal.innerHTML = dados;
+		
+		$("#avisoModal").modal('show')
+		
+		return dados;
+	}
+	
+	// Passar conteudo para os inputs
+	
+	
+	function SelecionaLinhaComConteudo(linhaQueTeraClasse){
+		//Retira a classe conteudo desejado de todas as linhas
+		
+		var linhasSemClasse = linhaQueTeraClasse.parentElement.getElementsByTagName("tr");
+			for(var i = 0; i < linhasSemClasse.length; i++){
+				var linha = linhasSemClasse[i];
+				linha.classList.remove("ConteudoDesejado");
+			}
+			
+		//Adiciona classe na linha que foi passada por parametro
+		linhaQueTeraClasse.classList.toggle("ConteudoDesejado");
+		
+		PassaConteudoDaLinhaParaInputs();
+	}
+	
+	function PassaConteudoDaLinhaParaInputs(){
+		var arrayDeElementos = document.getElementsByClassName("ConteudoDesejado");
+		var linhaComConteudo = arrayDeElementos[0];
+		
+		var idConsultor = linhaComConteudo.getElementsByClassName("idConsultor")
+		
+		var inputDisponivel = document.getElementById("disponivel")
+		inputDisponivel.value = idConsultor[0].innerHTML
+		
+		abreAgendamento();
+		
+		return linhaComConteudo
+	}
+	
 	</script>
 </body>
 </html>

@@ -3,6 +3,7 @@ package br.com.projeto.conecta.security;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
@@ -24,10 +25,8 @@ public class ConectaUserDetailsService implements UserDetailsService {
 
 	@Autowired
 	private UsuariosRepository usuariosRepository;
-
 	@Autowired
 	private ConsultorRepository consultorRepository;
-	
 	@Autowired
 	LiderRepository liderRepository;
 	
@@ -51,21 +50,25 @@ public class ConectaUserDetailsService implements UserDetailsService {
 		return SecurityContextHolder.getContext().getAuthentication().getName();
 	}
 
+	@Cacheable(value = "idUser")
 	public Integer getCurrentUserId() {
 		Integer usuarioLogado = usuariosRepository.findByEmail(getCurrentUserEmail()).getIdUsuario();
 		return usuarioLogado;
 	}
 	
+	@Cacheable(value = "user")
 	public Usuarios getCurrentUser() {
 		String email = getCurrentUserEmail();
 		return usuariosRepository.findByEmail(email);
 	}
 	
+	@Cacheable(value = "consultor")
 	public Consultor getCurrentConsultor() {
 		String email = getCurrentUserEmail();
 		return consultorRepository.findByEmail(email);
 	}
 	
+	@Cacheable(value = "lider")
 	public Lider getCurrentLider() {
 		String email = getCurrentUserEmail();
 		return liderRepository.findByEmail(email);

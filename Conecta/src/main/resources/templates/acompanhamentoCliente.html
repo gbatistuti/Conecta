@@ -1,16 +1,25 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="UTF-8">
+<!--Sera substituido pelo fragmento head que contem associaçoes para menu funcionar-->
+<th:block th:replace="fragments/head :: head"></th:block>
+
 <title>Acompanhamento | Cliente</title>
 </head>
-<body>
-		<div>
+<body id="menuBody">
+	<!--Sera substituido pelo fragmento do menu-->
+	<div th:replace="fragments/menuCliente :: menu"></div>
+	<!-- Todos id e class de menu começam com menuAlgumacoisa então evite usar menu na frente de seus ids ou class-->
+
+	<div class="fundo" id="acompanhamentoDireita">
+		<h2>Pedidos Realizados</h2>
+		<div id="rolagemAcompanhamento">
 			<table>
 				<thead>
 					<tr>
-						<th>Cod</th>
+						<th>Cód.</th>
 						<th>Título do Pedido</th>
 						<th>Projeto</th>
 						<th>Status</th>
@@ -26,34 +35,31 @@
 				</tbody>
 			</table>
 		</div>
-		
-		<div>
-		<table>
-			<thead>
-				<tr>
-					<th>Cod</th>				
-					<th>Título do Agendamento</th>
-					<th>Projeto</th>
-					<th>Status</th>
-				</tr>			
-			</thead>
-			<tbody>
-				<tr th:each = "a : ${agendamentosCriados}">
-					<td th:text="${a.idAgendamento}"></td>
-					<td th:text="${a.pedido.titulo}"></td>
-					<td th:text="${a.pedido.projeto.nome}"></td>
-					<td th:text="${a.pedido.status}"></td>
-				</tr>
-			</tbody>
-		</table>
+	</div>
+
+	<div class="fundo" id="acompanhamentoEsquerda">
+		<h2>Agendamentos Realizados</h2>
+		<div id="rolagemAcompanhamento">
+			<table>
+				<thead>
+					<tr>
+						<th>Cód.</th>
+						<th>Título do Agendamento</th>
+						<th>Projeto</th>
+						<th>Status</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="a : ${agendamentosCriados}">
+						<td th:text="${a.idAgendamento}"></td>
+						<td th:text="${a.pedido.titulo}"></td>
+						<td th:text="${a.pedido.projeto.nome}"></td>
+						<td th:text="${a.pedido.status}"></td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
-		
-		<div>
-			<form action="/logout" method="post">
-				<button type="submit">Sair</button>
-				<input type="hidden" th:name="${_csrf.parameterName}"
-					th:value="${_csrf.token}" />
-			</form>
-		</div>
+	</div>
+
 </body>
 </html>

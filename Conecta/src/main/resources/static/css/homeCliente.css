@@ -11,6 +11,18 @@
 	height: 80vh;
 }
 
+#minhaTabela tr td{
+	cursor: pointer;
+}
+
+#minhaTabela tr:hover td{
+	background-color: #ea9b3e;
+}
+
+#minhaTabela tr.ConteudoDesejado td{
+	background-color: #29b6c5;
+}
+
 .escondidoNaLista{
 	display: none;
 }
@@ -64,7 +76,7 @@
 	border-radius: 100%;
 }
 
-.inputDeHoras {
+.inputNumero {
 	text-align: center;
 }
 
@@ -82,3 +94,4 @@
 	display: unset;
 	margin-left: 40px;
 }
+

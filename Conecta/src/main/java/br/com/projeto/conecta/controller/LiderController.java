@@ -47,6 +47,9 @@ public class LiderController {
 
 	@GetMapping
 	public String listarAgendamentos(ModelMap model, HttpServletRequest request) {
+		Usuarios usuario = sessao.getCurrentUser();
+		request.setAttribute("nome", usuario.getNome());
+		
 		model.addAttribute("agendamento", agendamentoService.buscarPorStatus());
 		model.addAttribute("disponiveis", disponivelService.buscarTodos());
 		return "homeLider";
@@ -60,7 +63,7 @@ public class LiderController {
 		agendamento.getPedido().getProjeto().setQtdCreditos(alocacaoService.creditosParaDescontar(agendamento));
 
 		alocacao.setCriadoPor(sessao.getCurrentLider());
-		LocalTime horaInicio = alocacaoService.buscaUltimaHora(agendamento);
+		LocalTime horaInicio = alocacaoService.buscaUltimaHoraFimDeAlocacaoDoConsultor(agendamento);
 
 		alocacao.setHoraInicio(horaInicio);
 		alocacao.setHoraFim(alocacaoService.definirHoraFim(horaInicio, alocacao));
@@ -88,10 +91,11 @@ public class LiderController {
 
 	@GetMapping("/pedidos")
 	public String ListarDisponiveis(ModelMap model, HttpServletRequest request) {
-		model.addAttribute("pedidos", pedidoService.filtrarPorOrigemECandidatura());
-		model.addAttribute("disponiveis", disponivelService.buscarTodos());
 		Usuarios usuario = sessao.getCurrentUser();
 		request.setAttribute("nome", usuario.getNome());
+		
+		model.addAttribute("pedidos", pedidoService.filtrarPorOrigemECandidatura());
+		model.addAttribute("disponiveis", disponivelService.buscarTodos());
 		return "pedidos";
 	}
 
@@ -112,7 +116,7 @@ public class LiderController {
 
 		agendamento.getPedido().getProjeto().setQtdCreditos(creditosDoProjeto - creditosParaDescontar);
 		
-		LocalTime horaInicio = alocacaoService.buscaUltimaHora(agendamento);
+		LocalTime horaInicio = alocacaoService.buscaUltimaHoraFimDeAlocacaoDoConsultor(agendamento);
 		alocacao.setCriadoPor(sessao.getCurrentLider());
 		alocacao.setHoraInicio(horaInicio);
 		alocacao.setAgendamento(agendamento);		
@@ -124,19 +128,28 @@ public class LiderController {
 	}
 
 	@GetMapping("/alocacoes")
-	public String listarAgendamentosAprovadosEReprovados(ModelMap model) {
+	public String listarAgendamentosAprovadosEReprovados(ModelMap model, HttpServletRequest request) {
+		Usuarios usuario = sessao.getCurrentUser();
+		request.setAttribute("nome", usuario.getNome());
+		
 		model.addAttribute("aprovados", alocacaoService.buscarTodos());
 		return "agendamentosAprovados";
 	}
 	
 	@GetMapping("/agendamentosReprovados")
-	public String listarAgendamentosReprovados(ModelMap model) {
+	public String listarAgendamentosReprovados(ModelMap model, HttpServletRequest request) {
+		Usuarios usuario = sessao.getCurrentUser();
+		request.setAttribute("nome", usuario.getNome());
+		
 		model.addAttribute("reprovados", recusadoService.buscarTodos());
 		return "agendamentosReprovados";
 	}
 	
 	@GetMapping("/gerenciaProjetos")
-	public String listar(ModelMap model) {
+	public String listar(ModelMap model, HttpServletRequest request) {
+		Usuarios usuario = sessao.getCurrentUser();
+		request.setAttribute("nome", usuario.getNome());
+		
 		model.addAttribute("projetos", projetoservice.buscarTodos());
 		return "gerenciaProjetos";
 	}

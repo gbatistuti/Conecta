@@ -8,6 +8,8 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import br.com.projeto.conecta.domain.Agendamento;
@@ -21,10 +23,12 @@ public class AlocacaoService {
 	private AlocacaoRepository alocaoRepository;
 
 	@Transactional
+	@Cacheable(value = "alocacoesCache")
 	public List<Alocacoes> buscarTodos() {
 		return alocaoRepository.findAll();
 	}
 
+	@CacheEvict(value = {"agendamentosPorStatusCache", "ultimaHoraFimDeAlocacaoDoConsultorCache", "alocacoesCache"}, allEntries = true)
 	public void salvarAlocacao(Alocacoes alocacao) {
 		alocaoRepository.save(alocacao);
 	}
@@ -39,7 +43,8 @@ public class AlocacaoService {
 		return creditosDoProjeto - creditosParaDescontar;
 	}
 
-	public LocalTime buscaUltimaHora(Agendamento agendamento) {
+	@Cacheable(value = "ultimaHoraFimDeAlocacaoDoConsultorCache")
+	public LocalTime buscaUltimaHoraFimDeAlocacaoDoConsultor(Agendamento agendamento) {
 		Calendar calendar = Calendar.getInstance();
 		Date data = new Date(calendar.getTime().getTime());
 		LocalTime ultimaHora = alocaoRepository.findbyUltimaHora(data, agendamento.getDisponivel().getIdDisponivel());

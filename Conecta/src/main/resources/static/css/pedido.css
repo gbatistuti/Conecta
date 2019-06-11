@@ -1,0 +1,41 @@
+#pedidos{
+	width: 70vw;
+}
+
+#rolagemPedidos{
+	height: 80vh;
+}
+
+.inputPedidos{
+	height: 28px;
+}
+
+.botaoPedidos{
+	padding-top: 1.5px;
+	padding-bottom: 1.5px;
+}
+
+#listaDeDisponibilidade{
+	width: 25vw;
+	float: right;
+	margin-top: 15px;
+}
+#rolagemListaDisponibilidade{
+	height: 80vh;
+}
+
+#minhaTabela tr td{
+	cursor: pointer;
+}
+
+#minhaTabela tr:hover td{
+	background-color: #ea9b3e;
+}
+
+#minhaTabela tr.ConteudoDesejado td{
+	background-color: #29b6c5;
+}
+
+.escondidoNaLista{
+	display: none;
+}

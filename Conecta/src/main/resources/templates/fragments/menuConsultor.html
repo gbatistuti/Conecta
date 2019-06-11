@@ -1,9 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+</head>
+<body id="body">
 <!-- MENU-->
     <nav th:fragment="menu">
 		<div id="menu">
 			<a><img id="menuLogo" th:src="@{/img/menu/logo.png}" alt="TotvsConecta"/></a>
 			<img class="menuLinhaDeSeparacaoMenu" th:src="@{img/menu/linhaDeSeparacaoMenu.png}"/>
-			<img id="menuUserIcon" onclick="VisibilidadePainelUser()" th:src='@{/img/menu/userIcon.png}'></a>
+			<img id="menuUserIcon" onclick="VisibilidadePainelUser()" th:src='@{/img/menu/userIcon.png}'>
 			<div id="menuDivSair">
 				<form action="/logout" method="post">
 					<button id="menuSair" type="submit">Sair</button>
@@ -12,7 +18,7 @@
 			</div>
 			<img id = "menuSeparacaoADireita"class="menuLinhaDeSeparacaoMenu" th:src="@{img/menu/linhaDeSeparacaoMenu.png}" />
 			<div id="menuSaldacao">
-				<label>Seja bem vindo(a),  </label><label th:text="${#httpServletRequest.getAttribute('nome')}"></label>
+				<label>Bem vindo(a),  </label> <label th:text="${#httpServletRequest.getAttribute('nome')}"></label>
 			</div>
 		</div>
 		<div id="menuLinhaInferior"></div>

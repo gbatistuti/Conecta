@@ -6,6 +6,7 @@ import java.util.Calendar;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,11 +26,11 @@ public class Alocacoes {
 	
 	private String motivo;
 
-	@OneToOne
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "ID_AGENDAMENTO")
 	private Agendamento agendamento;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "ID_LIDER")
 	private Lider CriadoPor;
 	
@@ -42,11 +43,12 @@ public class Alocacoes {
 	
 	public Alocacoes() {}
 	
-	public Alocacoes(Agendamento agendamento, Lider criadoPor, LocalTime horaInicio, LocalTime horaFim) {
+	public Alocacoes(Agendamento agendamento, Lider criadoPor, LocalTime horaInicio, LocalTime horaFim, String motivo) {
 		this.agendamento = agendamento;
 		CriadoPor = criadoPor;
 		this.horaInicio = horaInicio;
 		this.horaFim = horaFim;
+		this.motivo = motivo;
 	}
 
 	public Integer getIdAlocacao() {

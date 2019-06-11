@@ -17,11 +17,14 @@
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5>aviso</h5>
+					<h5>Aviso:</h5>
 				</div>
 				<div class="modal-body">
 					<div th:if="${param.falha}">
 						<p>Não é possível apontar duas vezes no mesmo dia!</p>
+					</div>
+					<div th:if="${param.falha2}">
+						<p>É necessário apontar a ociosidade antes de se candidatar!</p>
 					</div>
 					<div th:if="${param.sucesso}">
 						<p>Apontamento realizado com sucesso!</p>
@@ -29,7 +32,7 @@
 					
 				</div>
 				<div class="modal-footer">
-					<button onclick="fecharPopUp" class="btn btn-default" value="Close">
+					<button onclick="fecharPopUp" class="btn btn-default" value="Close"></button>
 				</div>
 			</div>
 		</div>
@@ -45,9 +48,9 @@
 			
 			<div id="formularioDeOciosidade">
 				<form action="/homeConsultor/apontar" method="POST">
-					<label class="labelHorario">Inicio:</label> <input class="inputHorario" placeholder="Ex:09:30" name="horaInicio">
+					<label class="labelHorario">Início</label> <input class="inputHorario" type="time" placeholder="Ex:08:30" name="horaInicio" required oninvalid="this.setCustomValidity('Campo não pode ser vazio')" onchange="try{setCustomValidity('')}catch(e){}">
 					<br>
-					<label class="labelHorario">Término:</label> <input class="inputHorario" placeholder="Ex:18:00" name="horaFim">
+					<label class="labelHorario">Término</label> <input class="inputHorario" type="time" placeholder="Ex:15:20" name="horaFim" required oninvalid="this.setCustomValidity('Campo não pode ser vazio')" onchange="try{setCustomValidity('')}catch(e){}">
 					<br/>
 					<button id="salvarOciosidade"class="botao" type="submit">Enviar</button>
 					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
@@ -83,12 +86,12 @@
 	
 	<div class="aEsquerda col-lg-8">
 		<div id="pedidosFundo" class="fundo">
-			<h2>Pedidos em aberto</h2>
+			<h2>Pedidos em Aberto</h2>
 			<div id="rolagemPedidos" class="rolagem">
 				<table id="table">
 					<thead class="descricaoTabela">
 						<tr>
-							<th class="tituloDeDescricaoDaTabela">Cod</th>
+							<th class="tituloDeDescricaoDaTabela">Cód.</th>
 							<th class="tituloDeDescricaoDaTabela">Título do Pedido</th>
 							<th class="tituloDeDescricaoDaTabela">Descrição</th>
 							<th class="tituloDeDescricaoDaTabela">Projeto</th>
@@ -127,6 +130,7 @@
  	
  	var sucessoNaUrl = url_atual.indexOf("sucesso")
  	var erroNaUrl = url_atual.indexOf("falha")
+ 	var erroNaUrl = url_atual.indexOf("falha2")
  	
  	var modal = document.getElementById('avisoModal')
  	
@@ -141,5 +145,3 @@
  }
  </script>
 	
-</body>
-</html>

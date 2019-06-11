@@ -3,21 +3,50 @@
 }
 
 #rolagemAgendamentos{
-	height: 40vh;
+	height: 80vh;
 }
 
 #fundoListaDeDisponibilidade{
 	float: right;
-	width: 100%;
+	width: 96%;
 }
 
 #rolagemListaDisponibilidade{
 	width: 100%;
-	height: 68.5vh;
+	height: 40vh;
+}
+
+#minhaTabela tr td{
+	cursor: pointer;
+}
+
+#minhaTabela tr:hover td{
+	background-color: #ea9b3e;
+}
+
+#minhaTabela tr.ConteudoDesejado td{
+	background-color: #29b6c5;
+}
+
+.escondidoNaLista{
+	display: none;
 }
 
 .painelInferiorQueTroca{
-	height: 26.4vh;
+	height: 35.9vh;
+	margin-top: 54.5vh !important;
+	margin-left: 5px !important;
+	margin-right: 16px !important;
+
+}
+
+.painelInferiorQueTroca > form{
+	font-size: 20px;
+	margin-left: 5px !important;
+	margin-right: 5px !important;
+	padding-left: 15% !important;
+	padding-right: 15% !important;
+	font-size: 20px !important;
 }
 
 #aprovar{
@@ -33,15 +62,16 @@
 	padding: 0px 10px 0px 10px;
 }
 .buttonAprovarERecusar{
-	font-size: 20px;
+	margin-top: 15%;
+	font-size: 25px;
 }
 
 #buttonAprovar{
-	background-color: #0c9abe;
+	margin-right: 5px;
 }
 
 #buttonRecusar{
-	background-color: #ea9b3e;
+	
 }
 
 .formulario{
@@ -52,7 +82,24 @@
 	padding-left: 1%;
 }
 
-#motivo{
-	left: 0px;
-	width: 88%;
+.formulario > label{
+	font-size: 20px;
+	margin-top: 10px;
 }
+
+.formulario > input{
+	width: 100%;
+}
+
+.formulario > button{
+	margin-top: 10%;
+	margin-left: 33%;
+	font-size: 20px;
+	padding: 5px 30px 5px 30px;
+	border-radius: 100%;
+}
+
+.formulario > textarea{
+	max-height : 50px;
+}
+

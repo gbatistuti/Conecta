@@ -4,28 +4,29 @@
 <head>
 <th:block th:replace="fragments/head :: head"></th:block>
 <meta charset="UTF-8">
-<title>Acompanhamento | Líder</title>
+<title>Reprovados | Líder</title>
 </head>
 <body id="menuBody">
 	<!--Sera substituido pelo fragmento do menu-->
 	<div th:replace="fragments/menuLider :: menu"></div>
 	<div class="fundo" id="fundoUmaTabelaNaPaginaToda">
-		<h2>Alocações Reprovadas</h2>
+		<h2>Agendamentos Reprovados</h2>
 	<div class="rolagem" id="rolagemUmaTabelaNaPaginaToda">
 		<table>
 			<thead>
 				<tr>
-					<th>Cod.</th>
+					<th>Cód.</th>
 					<th>Data</th>
-					<th>Título:</th>
-					<th>Motivo:</th>
-					<th>Consultor:</th>
-					<th>Projeto:</th>
+					<th>Título</th>
+					<th>Motivo</th>
+					<th>Consultor</th>
+					<th>Projeto</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="r : ${reprovados}">
 					<td th:text="${r.idRecusado}"></td>
+					<td th:text="${r.data}">
 					<td th:text="${r.agendamento.pedido.titulo}"></td>
 					<td th:text="${r.motivo}"></td>
 					<td th:text="${r.agendamento.disponivel.consultor.nome}"></td>

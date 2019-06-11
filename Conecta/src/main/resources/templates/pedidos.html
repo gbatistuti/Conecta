@@ -90,8 +90,9 @@
 						<th>Cód.</th>
 						<th>Título do Pedido</th>
 						<th>Descrição do Pedido</th>
-						<th>Cliente</th>
+						<th>Projeto</th>
 						<th>Produto</th>
+						<th>Horas</th>
 						<th>Cód. do Disponivel</th>
 					</tr>
 				</thead>
@@ -100,8 +101,9 @@
 						<td th:text="${p.idPedido}"></td>
 						<td th:text="${p.titulo}"></td>
 						<td th:text="${p.descricao}"></td>
-						<td th:text="${p.projeto.cliente.nome}"></td>
+						<td th:text="${p.projeto.nome}"></td>
 						<td th:text="${p.projeto.produto}"></td>
+						<td th:text="${p.sugestaoDeHoras}"></td>
 						<td>
 							<form action="/homeLider/pedidos/alocar" method="POST">
 								<input class="inputPedidos" name="disponivel" required oninvalid="this.setCustomValidity('Campo não pode ser vazio')" onchange="try{setCustomValidity('')}catch(e){}">

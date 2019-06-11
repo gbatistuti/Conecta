@@ -36,6 +36,8 @@ public class ClienteController {
 	
 	@GetMapping
 	public String listarDisponiveis(ModelMap model, HttpServletRequest request) {
+		Usuarios usuario = sessao.getCurrentUser();
+		request.setAttribute("nome", usuario.getNome());
 		
 		model.addAttribute("disponiveis",disponivelService.buscarTodos());
 		model.addAttribute("projeto",projetoService.buscarPor(sessao.getCurrentUserId()));
@@ -71,8 +73,9 @@ public class ClienteController {
 	}
 	
 	@GetMapping("/acompanhamentoCliente")
-	public String listarPedidosEAgendamentos(Pedido pedido, Agendamento agendamento, Model model) {
+	public String listarPedidosEAgendamentos(Pedido pedido, Agendamento agendamento, Model model, HttpServletRequest request) {
 		Usuarios usuario = sessao.getCurrentUser();
+		request.setAttribute("nome", usuario.getNome());
 		model.addAttribute("pedidosRealizados", pedidoService.buscarPedidosPorUsuario(usuario));
 		model.addAttribute("agendamentosCriados", agendamentoService.buscarAgendamentosPorUsuario(usuario));
 		return "AcompanhamentoCliente";

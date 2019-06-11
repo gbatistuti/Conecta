@@ -23,6 +23,9 @@
 				</form>
 			</div>
 			<img id = "menuSeparacaoADireita"class="menuLinhaDeSeparacaoMenu" th:src="@{/img/menu/linhaDeSeparacaoMenu.png}" />
+			<div id="menuSaldacao">
+				<label>Bem vindo(a),  </label> <label th:text="${#httpServletRequest.getAttribute('nome')}"></label>
+			</div>
 		</div>
 		<div id="menuLinhaInferior"></div>
 		<div id="menuSelecaoDeCor">

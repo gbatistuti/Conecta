@@ -47,11 +47,6 @@ public class LiderController {
 
 	@GetMapping
 	public String listarAgendamentos(ModelMap model, HttpServletRequest request) {
-<<<<<<< HEAD
-		// Usuarios usuario = sessao.getCurrentUser();
-		// request.setAttribute("nome", usuario.getNome());
-=======
->>>>>>> 21ae5ea518fe1268da5d48bcd23fe16881262b5d
 		model.addAttribute("agendamento", agendamentoService.buscarPorStatus());
 		model.addAttribute("disponiveis", disponivelService.buscarTodos());
 		return "homeLider";
@@ -69,11 +64,7 @@ public class LiderController {
 
 		alocacao.setHoraInicio(horaInicio);
 		alocacao.setHoraFim(alocacaoService.definirHoraFim(horaInicio, alocacao));
-<<<<<<< HEAD
 
-=======
-		
->>>>>>> 21ae5ea518fe1268da5d48bcd23fe16881262b5d
 		agendamentoService.salvarAgendamento(agendamento);
 		Alocacoes alocacaoNova = new Alocacoes(agendamento, sessao.getCurrentLider(), horaInicio, alocacaoService.definirHoraFim(horaInicio, alocacao), alocacao.getMotivo());
 		alocacaoService.salvarAlocacao(alocacaoNova);
@@ -91,21 +82,16 @@ public class LiderController {
 		recusadoService.salvarRecusado(recusado);
 		agendamentoService.salvarAgendamento(agendamentoAlterado);
 
-<<<<<<< HEAD
-		return "redirect:/homeLider";
-=======
 		return "redirect:/homeLider?reprovado";
->>>>>>> 21ae5ea518fe1268da5d48bcd23fe16881262b5d
+
 
 	}
 
 	@GetMapping("/pedidos")
 	public String ListarDisponiveis(ModelMap model, HttpServletRequest request) {
-<<<<<<< HEAD
-		model.addAttribute("pedidos", pedidoService.buscarPorStatus());
-=======
+
 		model.addAttribute("pedidos", pedidoService.filtrarPorOrigemECandidatura());
->>>>>>> 21ae5ea518fe1268da5d48bcd23fe16881262b5d
+
 		model.addAttribute("disponiveis", disponivelService.buscarTodos());
 		Usuarios usuario = sessao.getCurrentUser();
 		request.setAttribute("nome", usuario.getNome());
@@ -137,11 +123,7 @@ public class LiderController {
 		alocacao.setMotivo("Alocação criada a partir da lista de pedidos.");
 
 		alocacaoService.salvarAlocacao(alocacao);
-<<<<<<< HEAD
-		return "redirect:/homeLider/alocacao";
-=======
 		return "redirect:/homeLider/pedidos?sucesso";
->>>>>>> 21ae5ea518fe1268da5d48bcd23fe16881262b5d
 	}
 
 	@GetMapping("/alocacoes")
@@ -167,11 +149,8 @@ public class LiderController {
 		Projeto projetoAlterado = projetoservice.getProjeto(projeto.getIdProjeto());
 		projetoAlterado.setQtdCreditos(projeto.getQtdCreditos());
 		projetoservice.salvar(projetoAlterado);
-<<<<<<< HEAD
 		return "redirect:/homeLider/gerenciaProjetos";
-=======
-		return "redirect:/homeLider/gerenciaProjetos?atualizado";
->>>>>>> 21ae5ea518fe1268da5d48bcd23fe16881262b5d
+
 	}
 
 }

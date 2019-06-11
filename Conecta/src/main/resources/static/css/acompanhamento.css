@@ -53,3 +53,6 @@ tr:nth-child(odd) {
 .tamanho{
 	height:40vw;
 }
+#tabela thead th:nth-child(1){
+	width:100px;
+}

@@ -42,7 +42,7 @@
 			<div class="fundo">
 				<h2>Agendamentos</h2>
 				<div id="rolagemAgendamentos" class="rolagem">
-					<table>
+					<table id="Agendamentos">
 						<thead>
 							<tr>
 								<th>Cód.</th>
@@ -56,8 +56,8 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="a : ${agendamento}">
-								<td th:text="${a.idAgendamento}"></td>
+							<tr th:each="a : ${agendamento}" onclick="selecionaAgendamento(this)">
+								<td id="tdAgendamento" th:text="${a.idAgendamento}"></td>
 								<td th:text="${a.pedido.titulo}"></td>
 								<td th:text="${a.pedido.descricao}"></td>
 								<td th:text="${a.pedido.projeto.nome}"></td>
@@ -141,7 +141,7 @@
 						th:object="${alocacoes}">
 						<div class="formulario">
 							<label>Cód. do Agendamento</label> <br> <input
-								name="agendamento" required oninvalid="this.setCustomValidity('Campo não pode ser vazio')" onchange="try{setCustomValidity('')}catch(e){}"> <br> <label>Motivo</label>
+								class="inputDadosAgendamento" name="agendamento" required oninvalid="this.setCustomValidity('Campo não pode ser vazio')" onchange="try{setCustomValidity('')}catch(e){}"> <br> <label>Motivo</label>
 							<br> <input name="motivo">
 							<button type="submit">Enviar</button>
 							<input type="hidden" th:name="${_csrf.parameterName}"
@@ -159,7 +159,7 @@
 						<div class="formulario">
 
 							<label>Cód. do Agendamento</label><br> <input
-								name="agendamento" required oninvalid="this.setCustomValidity('Campo não pode ser vazio')" onchange="try{setCustomValidity('')}catch(e){}"> <label>Motivo</label><br>
+								class="inputDadosAgendamento" name="agendamento" required oninvalid="this.setCustomValidity('Campo não pode ser vazio')" onchange="try{setCustomValidity('')}catch(e){}"> <label>Motivo</label><br>
 							<input name="motivo" required oninvalid="this.setCustomValidity('Campo não pode ser vazio')" onchange="try{setCustomValidity('')}catch(e){}">
 
 							<button type="submit">Enviar</button>
@@ -270,6 +270,35 @@
 			$("#avisoModal").modal('show')
 
 			return dados;
+		}
+		
+		// Inserção de dados no input de cod. Aprovação pela lista
+		
+		function selecionaAgendamento(tr){
+			var tabela = document.getElementById("Agendamentos")
+			var trs = tabela.getElementsByTagName("tr")
+			
+			for(i = 1; i < trs.length; i++){
+				trs[i].classList.remove("AgendamentoSelecionado")
+			}
+			
+			tr.classList.toggle("AgendamentoSelecionado")
+			
+			var tds = tr.getElementsByTagName("td")
+			
+			var td = tds[0]
+			
+			var dados = td.innerHTML
+			
+			colocaInformacaoInput(dados, "inputDadosAgendamento")
+		}
+		
+		function colocaInformacaoInput(dados, idInput){
+			var input = document.getElementsByClassName(idInput)
+			
+			for(i = 0; i < input.length ; i++){
+				input[i].value = dados
+			}
 		}
 	</script>
 </body>

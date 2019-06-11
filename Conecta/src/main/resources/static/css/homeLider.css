@@ -24,6 +24,10 @@
 	background-color: #29b6c5;
 }
 
+.AgendamentoSelecionado{
+	background-color: #29b6c5 !important;
+}
+
 .escondidoNaLista{
 	display: none;
 }

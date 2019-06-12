@@ -15,8 +15,8 @@
 		<table>
 			<thead>
 				<tr>
-					<th class="centralizado">Cód.</th>
-					<th class="aEsquerda">Data</th>
+					<th class="aDireita">Cód.</th>
+					<th class="aDireita">Data</th>
 					<th class="aEsquerda">Consultor</th>
 					<th class="aEsquerda">Projeto</th>
 					<th class="justificado">Título</th>
@@ -25,8 +25,8 @@
 			</thead>
 			<tbody>
 				<tr th:each="r : ${reprovados}">
-					<td class="centralizado" th:text="${r.idRecusado}"></td>
-					<td class="aEsquerda" th:text="${r.data}">
+					<td class="aDireita" th:text="${r.idRecusado}"></td>
+					<td class="aDireita" th:text="${r.data}">
 					<td class="aEsquerda" th:text="${r.agendamento.disponivel.consultor.nome}"></td>
 					<td class="aEsquerda" th:text="${r.agendamento.pedido.projeto.nome}"></td>
 					<td class="justificado" th:text="${r.agendamento.pedido.titulo}"></td>

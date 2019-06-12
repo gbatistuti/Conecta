@@ -15,10 +15,10 @@
 			<table>
 				<thead>
 					<tr>
-						<th class="centralizado">Cód.</th>
-						<th class="aEsquerda">Data</th>
-						<th class="centralizado">Hora Início</th>
-						<th class="centralizado">Hora Fim</th>
+						<th class="aDireita">Cód.</th>
+						<th class="aDireita">Data</th>
+						<th class="aDireita">Hora Início</th>
+						<th class="aDireita">Hora Fim</th>
 						<th class="aEsquerda">Consultor</th>
 						<th class="aEsquerda">Projeto</th>
 						<th class="justificado">Título</th>
@@ -27,10 +27,10 @@
 				</thead>
 				<tbody>
 					<tr th:each="a : ${aprovados}">
-						<td class="centralizado" th:text="${a.idAlocacao}"></td>
-						<td class="aEsquerda" th:text="${a.data}"></td>
-						<td class="centralizado" th:text="${a.horaInicio}"></td>
-						<td class="centralizado" th:text="${a.horaFim}"></td>
+						<td class="aDireita" th:text="${a.idAlocacao}"></td>
+						<td class="aDireita" th:text="${a.data}"></td>
+						<td class="aDireita" th:text="${a.horaInicio}"></td>
+						<td class="aDireita" th:text="${a.horaFim}"></td>
 						<td class="aEsquerda" th:text="${a.agendamento.disponivel.consultor.nome}"></td>
 						<td class="aEsquerda" th:text="${a.agendamento.pedido.projeto.nome}"></td>
 						<td class="justificado" th:text="${a.agendamento.pedido.titulo}"></td>

@@ -43,21 +43,21 @@
 			<table>
 				<thead>
 					<tr>
-						<th class="centralizado">Cód. do Projeto</th>
+						<th class="aDireita">Cód. do Projeto</th>
 						<th class="aEsquerda">Projeto</th>
-						<th class="centralizado">Cód. do Cliente</th>
+						<th class="aDireita">Cód. do Cliente</th>
 						<th class="aEsquerda">Cliente</th>
-						<th class="centralizado">Créditos</th>
+						<th class="aDireita">Créditos</th>
 						<th class="centralizado">Atualiazar Créditos</th>
 					</tr>			
 				</thead>
 				<tbody>
 					<tr th:each ="p : ${projetos}">
-						<td class="centralizado" th:text="${p.codigoProjeto}"></td>
+						<td class="aDireita" th:text="${p.codigoProjeto}"></td>
 						<td class="aEsquerda" th:text="${p.nome}"></td>
-						<td class="centralizado" th:text="${p.cliente.codigo}"></td>
+						<td class="aDireita" th:text="${p.cliente.codigo}"></td>
 						<td class="aEsquerda" th:text="${p.cliente.nome}"></td>
-						<td class="centralizado" th:text="${p.qtdCreditos}"> <div class="divP"><label></label></div></td>						
+						<td class="aDireita" th:text="${p.qtdCreditos}"> <div class="divP"><label></label></div></td>						
 						<td class="centralizado">
 							<form action="/homeLider/gerenciaProjetos/atualizar" method="POST">
 								<input type="number" name="qtdCreditos" required oninvalid="this.setCustomValidity('Campo não pode ser vazio')" onchange="try{setCustomValidity('')}catch(e){}">

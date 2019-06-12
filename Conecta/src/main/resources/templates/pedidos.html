@@ -40,11 +40,11 @@
 			<table id="minhaTabela">
 				<thead>
 					<tr>
-						<th class="centralizado">Cód.</th>
+						<th class="aDireita">Cód.</th>
 						<th class="aEsquerda">Consultor</th>
 						<th class="centralizado">Hora Início</th>
 						<th class="centralizado">Hora Fim</th>
-						<th class="centralizado">Créditos / h</th>
+						<th class="aDireita">Créditos/h</th>
 						<th class="centralizado">Habilidades</th>
 						<th class="escondidoNaLista">Habilidade Principal</th>
 						<th class="escondidoNaLista">Habilidade Específica</th>
@@ -52,11 +52,11 @@
 				</thead>
 				<tbody>
 					<tr th:each="d : ${disponiveis}" th:id="${d.idDisponivel}">
-						<td class="centralizado" th:text="${d.idDisponivel}"></td>
+						<td class="aDireita" th:text="${d.idDisponivel}"></td>
 						<td class="aEsquerda" th:text="${d.consultor.nome}"></td>
 						<td class="centralizado" th:text="${d.horaInicio}"></td>
 						<td class="centralizado" th:text="${d.horaFim}"></td>
-						<td class="centralizado" th:text="${d.consultor.creditosPorHora}"></td>
+						<td class="aDireita" th:text="${d.consultor.creditosPorHora}"></td>
 						<td class="centralizado"><img alt="" th:src="@{/img/homeCliente/info.svg}" onclick="selLinha( this, false)"></td>
 						<td class="escondidoNaLista">
 							<table>
@@ -88,23 +88,23 @@
 			<table>
 				<thead>
 					<tr>
-						<th class="centralizado">Cód.</th>
+						<th class="aDireita">Cód.</th>
 						<th class="aEsquerda">Título do Pedido</th>
 						<th class="aEsquerda">Descrição do Pedido</th>
 						<th class="aEsquerda">Projeto</th>
 						<th class="aEsquerda">Produto</th>
-						<th class="centralizado">Horas</th>
+						<th class="aDireita">Horas</th>
 						<th class="centralizado">Cód. do Disponivel</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="p : ${pedidos}">
-						<td class="centralizado" th:text="${p.idPedido}"></td>
+						<td class="aDireita" th:text="${p.idPedido}"></td>
 						<td class="justificado" th:text="${p.titulo}"></td>
 						<td class="justificado" th:text="${p.descricao}"></td>
 						<td class="aEsquerda" th:text="${p.projeto.nome}"></td>
 						<td class="aEsquerda" th:text="${p.projeto.produto}"></td>
-						<td class="centralizado" th:text="${p.sugestaoDeHoras}"></td>
+						<td class="aDireita" th:text="${p.sugestaoDeHoras}"></td>
 						<td class="centralizado">
 							<form action="/homeLider/pedidos/alocar" method="POST">
 								<input class="inputPedidos" name="disponivel" required oninvalid="this.setCustomValidity('Campo não pode ser vazio')" onchange="try{setCustomValidity('')}catch(e){}">

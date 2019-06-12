@@ -45,29 +45,27 @@
 					<table id="Agendamentos">
 						<thead>
 							<tr>
-								<th class="centralizado">Cód.</th>
+								<th class="aDireita">Cód.</th>
 								<th class="aEsquerda">Título do Agendamento</th>
 								<th class="aEsquerda">Descrição do Agendamento</th>
 								<th class="aEsquerda">Projeto</th>
 								<th class="aEsquerda">Produto</th>
 								<th class="aEsquerda">Consultor</th>
-								<th class="centralizado">Horas</th>
+								<th class="aDireita">Horas</th>
 								<th class="aDireita">Candidatura</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr th:each="a : ${agendamento}"
 								onclick="selecionaAgendamento(this)">
-								<td class="centralizado" id="tdAgendamento"
-									th:text="${a.idAgendamento}"></td>
+								<td class="aDireita" id="tdAgendamento" th:text="${a.idAgendamento}"></td>
 								<td class="justificado" th:text="${a.pedido.titulo}"></td>
 								<td class="justificado" th:text="${a.pedido.descricao}"></td>
 								<td class="aEsquerda" th:text="${a.pedido.projeto.nome}"></td>
 								<td class="aEsquerda" th:text="${a.pedido.projeto.produto}"></td>
 								<td class="aEsquerda" th:text="${a.disponivel.consultor.nome}"></td>
-								<td class="centralizado" th:text="${a.pedido.sugestaoDeHoras}"></td>
-								<td class="centralizado"
-									th:text="(${a.pedido.candidatura} == true)? 'Sim' : 'Não'"></td>
+								<td class="aDireita" th:text="${a.pedido.sugestaoDeHoras}"></td>
+								<td class="centralizado" th:text="(${a.pedido.candidatura} == true)? 'Sim' : 'Não'"></td>
 							</tr>
 						</tbody>
 					</table>
@@ -82,11 +80,11 @@
 					<table id="minhaTabela">
 						<thead>
 							<tr>
-								<th class="centralizado">Cód.</th>
+								<th class="aDireita">Cód.</th>
 								<th class="aEsquerda">Consultor</th>
 								<th class="centralizado">Hora Início</th>
 								<th class="centralizado">Hora Fim</th>
-								<th class="centralizado">Créditos / h</th>
+								<th class="aDireita">Créditos/h</th>
 								<th class="centralizado">Habilidades</th>
 								<th class="escondidoNaLista">Habilidade Principal</th>
 								<th class="escondidoNaLista">Habilidade Específica</th>
@@ -95,11 +93,11 @@
 						<tbody>
 							<tr th:each="d : ${disponiveis}" th:id="${d.idDisponivel}"
 								onclick="SelecionaLinhaComConteudo(this)">
-								<td class="centralizado" th:text="${d.idDisponivel}"></td>
+								<td class="aDireita" th:text="${d.idDisponivel}"></td>
 								<td class="aEsquerda" th:text="${d.consultor.nome}"></td>
 								<td class="centralizado" th:text="${d.horaInicio}"></td>
 								<td class="centralizado" th:text="${d.horaFim}"></td>
-								<td class="centralizado"
+								<td class="aDireita"
 									th:text="${d.consultor.creditosPorHora}"></td>
 								<td class="centralizado"><img class="btnHabilidades"
 									th:src="@{/img/homeCliente/info.svg}"

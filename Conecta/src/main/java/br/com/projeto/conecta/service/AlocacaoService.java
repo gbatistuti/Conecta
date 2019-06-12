@@ -28,7 +28,7 @@ public class AlocacaoService {
 		return alocacaoRepository.findAll();
 	}
 
-	@CacheEvict(value = {"agendamentosPorStatusCache", "ultimaHoraFimDeAlocacaoDoConsultorCache", "alocacoesCache", "projetosTodosCache"}, allEntries = true)
+	@CacheEvict(value = {"agendamentosPorStatusCache", "ultimaHoraFimDeAlocacaoDoConsultorCache", "alocacoesCache", "projetosTodosCache", "projetosCache"}, allEntries = true)
 	public void salvarAlocacao(Alocacoes alocacao) {
 		alocacaoRepository.save(alocacao);
 	}

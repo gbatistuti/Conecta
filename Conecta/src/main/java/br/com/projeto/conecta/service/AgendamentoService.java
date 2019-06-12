@@ -12,9 +12,6 @@ import org.springframework.stereotype.Service;
 import br.com.projeto.conecta.domain.Agendamento;
 import br.com.projeto.conecta.domain.Usuarios;
 import br.com.projeto.conecta.repository.AgendamentoRepository;
-import br.com.projeto.conecta.repository.AlocacaoRepository;
-import br.com.projeto.conecta.repository.DisponivelRepository;
-
 
 @Service
 public class AgendamentoService {
@@ -22,17 +19,14 @@ public class AgendamentoService {
 	@Autowired
 	private AgendamentoRepository agendamentoRepository;
 	@Autowired
-	private AlocacaoRepository alocacaoRepository;
-	@Autowired
-	private DisponivelRepository disponivelRepository;
-	@Autowired
 	private AlocacaoService alocacaoService;
 
 	public List<Agendamento> BuscarTodos() {
 		return agendamentoRepository.findAll();
 	}
 
-	@CacheEvict(value = {"agendamentosPorUsuarioCache", "candidaturasPorUsuarioCache", "pedidosFiltradosPorOrigemECandidaturaCache"}, allEntries = true)
+	@CacheEvict(value = { "agendamentosPorUsuarioCache", "candidaturasPorUsuarioCache",
+			"pedidosFiltradosPorOrigemECandidaturaCache" }, allEntries = true)
 	public boolean salvarAgendamento(Agendamento agendamento) {
 		agendamentoRepository.save(agendamento);
 		return true;
@@ -56,16 +50,26 @@ public class AgendamentoService {
 	public List<Agendamento> buscarPorStatus() {
 		return agendamentoRepository.findByStatus();
 	}
-	
+
 	public boolean validaHoras(Agendamento agendamento) {
 		LocalTime horaFimAlocacao = alocacaoService.buscaUltimaHoraFimDeAlocacaoDoConsultor(agendamento);
 		LocalTime horaFImDisponivel = agendamento.getDisponivel().getHoraFim();
-		
+
 		float horas = Duration.between(horaFimAlocacao, horaFImDisponivel).toMinutes();
 		horas /= 60;
 		if (horas >= agendamento.getPedido().getSugestaoDeHoras()) {
 			return true;
-		}else {
+		} else {
+			return false;
+		}
+	}
+
+	public boolean validaCreditos(Agendamento agendamento) {
+		float creditosASeremDescontados = agendamento.getPedido().getSugestaoDeHoras()
+				* agendamento.getDisponivel().getConsultor().getCreditosPorHora();
+		if (creditosASeremDescontados <= agendamento.getPedido().getProjeto().getQtdCreditos()) {
+			return true;
+		} else {
 			return false;
 		}
 	}

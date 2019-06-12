@@ -68,8 +68,10 @@ public class ClienteController {
 		agendamento.setPedido(pedido);
 		agendamento.setCriadoPor(usuario);
 		
-		if (agendamentoService.validaHoras(agendamento)== false) {
-			return "redirect:/homeCliente?erroAoCriarAgendamento";
+		if (agendamentoService.validaHoras(agendamento) == false) {
+			return "redirect:/homeCliente?erroAoCriarAgendamentoPorhoras";
+		} else if (agendamentoService.validaCreditos(agendamento) == false) {
+			return "redirect:/homeCliente?erroAoCriarAgendamentoPorCreditos";
 		}
 		pedidoService.salvarPedido(pedido);
 		agendamentoService.salvarAgendamento(agendamento);

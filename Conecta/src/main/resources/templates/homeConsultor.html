@@ -64,14 +64,16 @@
 				<table id="table">
 					<thead class="descricaoTabela">
 						<tr>
-							<th class="tituloDeDescricaoDaTabela">Título do Pedido</th>
-							<th class="tituloDeDescricaoDaTabela">Status</th>
+							<th class="alinhadoADireita">Cód.</th>
+							<th class="alinhadoAEsquerda">Título do Pedido</th>
+							<th class="alinhadoAEsquerda">Status</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr th:each="pC : ${pedidoCandidatado}">
-							<td th:text="${pC.pedido.titulo}"></td>
-							<td th:text="${pC.pedido.status}"></td>
+							<td class="alinhadoADireita" th:text="${pC.pedido.idPedido}"></td>
+							<td class="alinhadoAEsquerda" th:text="${pC.pedido.titulo}"></td>
+							<td class="alinhadoAEsquerda" th:text="${pC.pedido.status}"></td>
 						</tr>
 					</tbody>
 				</table>
@@ -91,24 +93,24 @@
 				<table id="table">
 					<thead class="descricaoTabela">
 						<tr>
-							<th class="tituloDeDescricaoDaTabela">Cód.</th>
-							<th class="tituloDeDescricaoDaTabela">Título do Pedido</th>
-							<th class="tituloDeDescricaoDaTabela">Descrição</th>
-							<th class="tituloDeDescricaoDaTabela">Projeto</th>
-							<th class="tituloDeDescricaoDaTabela">Produto</th>
-							<th class="tituloDeDescricaoDaTabela">Horas</th>
-							<th class="tituloDeDescricaoDaTabela">Candidatar</th>
+							<th class="alinhadoADireita">Cód.</th>
+							<th class="justificado">Título do Pedido</th>
+							<th class="justificado">Descrição</th>
+							<th class="alinhadoAEsquerda">Projeto</th>
+							<th class="alinhadoAEsquerda">Produto</th>
+							<th class="alinhadoADireita">Horas</th>
+							<th class="centralizado">Candidatar</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr th:each="p : ${pedido}">
-							<td th:text="${p.idPedido}"></td>
-							<td class="alinhadoAEsquerda" th:text="${p.titulo}"></td>
-							<td class="alinhadoAEsquerda" th:text="${p.descricao}"></td>
-							<td th:text="${p.projeto.nome}"></td>
-							<td th:text="${p.projeto.produto}"></td>
-							<td th:text="${p.sugestaoDeHoras}"></td>
-							<td>
+							<td class="alinhadoADireita" th:text="${p.idPedido}"></td>
+							<td class="justificado" th:text="${p.titulo}"></td>
+							<td class="justificado" th:text="${p.descricao}"></td>
+							<td class="alinhadoAEsquerda" th:text="${p.projeto.nome}"></td>
+							<td class="alinhadoAEsquerda" th:text="${p.projeto.produto}"></td>
+							<td class="alinhadoADireita" th:text="${p.sugestaoDeHoras}"></td>
+							<td class="centralizado" >
 								<form action="/homeConsultor/candidatar" method="POST">
 									<button id="candidatarSe" class="botao" type="submit"
 										name="idPedido" th:value="${p.idPedido}">Candidatar-se</button>

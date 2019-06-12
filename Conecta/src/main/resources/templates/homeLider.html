@@ -144,7 +144,7 @@
 						th:object="${alocacoes}">
 						<div class="formulario">
 							<label>Cód. do Agendamento</label> <br> <input
-								class="inputDadosAgendamento" name="agendamento" required
+								class="inputDadosAgendamento centralizado" name="agendamento" placeholder="Selecione um agendamento da lista" required readonly
 								oninvalid="this.setCustomValidity('Campo não pode ser vazio')"
 								onchange="try{setCustomValidity('')}catch(e){}"> <br>
 							<label>Motivo</label> <br> <input name="motivo">
@@ -163,12 +163,11 @@
 						th:object="${recusado}">
 						<div class="formulario">
 
-							<label>Cód. do Agendamento</label><br> <input
-								class="inputDadosAgendamento" name="agendamento" required
-								oninvalid="this.setCustomValidity('Campo não pode ser vazio')"
-								onchange="try{setCustomValidity('')}catch(e){}"> <label>Motivo</label><br>
-							<input name="motivo" required
-								oninvalid="this.setCustomValidity('Campo não pode ser vazio')"
+							<label>Cód. do Agendamento</label><br> 
+							<input class="inputDadosAgendamento centralizado" name="agendamento" placeholder="Selecione um agendamento da lista" required readonly oninvalid="this.setCustomValidity('Campo não pode ser vazio')"
+								onchange="try{setCustomValidity('')}catch(e){}"> 
+							<label>Motivo</label><br>
+							<input name="motivo" required oninvalid="this.setCustomValidity('Campo não pode ser vazio')"
 								onchange="try{setCustomValidity('')}catch(e){}">
 
 							<button type="submit">Enviar</button>

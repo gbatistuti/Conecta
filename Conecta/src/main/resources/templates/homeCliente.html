@@ -54,7 +54,7 @@
 		<form class="formPedidoEAgendamento" action="/homeCliente/criaragendamento" method="post">
 			<Label>Título</Label> <br> <input type="text" th:field="${pedido.titulo}" required oninvalid="this.setCustomValidity('Campo não pode ser vazio')" onchange="try{setCustomValidity('')}catch(e){}"><br>
 			<Label>Descrição</Label> <br> <input type="text"th:field="${pedido.descricao}" required oninvalid="this.setCustomValidity('Campo não pode ser vazio')" onchange="try{setCustomValidity('')}catch(e){}"><br>
-			<label>Cód. do Consultor</label><br><input class="inputNumero" type="number" placeholder="Selecione um item da lista" readonly th:field="${agendamento.disponivel}"><br>
+			<label>Cód. do Consultor</label><br><input class="inputNumero" type="number" placeholder="Selecione um consultor da lista" readonly th:field="${agendamento.disponivel}"><br>
 			<Label>Quantidade de Horas</Label> <br> <input class="inputNumero" type="number" min="1" max="8" name="sugestaoDeHoras" required oninvalid="this.setCustomValidity('Digite um valor de 1 a 8 horas')" onchange="try{setCustomValidity('')}catch(e){}"><br>
 			<label>Projeto</label><br>
 			<select th:field="${pedido.projeto}" name="idProjeto" required oninvalid="this.setCustomValidity('Escolha um projeto da lista')" onchange="try{setCustomValidity('')}catch(e){}">

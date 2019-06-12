@@ -3,7 +3,7 @@
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="UTF-8">
-<title>Acompanhamento | Líder</title>
+<title>Alocações | Líder</title>
 </head>
 <body>
 	<div>
@@ -11,19 +11,19 @@
 		<table>
 			<thead>
 				<tr>
-					<th>Cod.</th>
-					<th>Data</th>
-					<th>Hora início:</th>
-					<th>Hora fim:</th>
-					<th>Título:</th>
-					<th>Motivo:</th>
-					<th>Consultor:</th>
-					<th>Projeto:</th>
+					<th class="centralizado">Cod.</th>
+					<th class="aEsquerda">Data</th>
+					<th class="centralizado">Hora início:</th>
+					<th class="centralizado">Hora fim:</th>
+					<th class="justificado">Título:</th>
+					<th class="justificado">Motivo:</th>
+					<th class="aEsquerda">Consultor:</th>
+					<th class="aEsquerda">Projeto:</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="a : ${aprovados}">
-					<td th:text="${a.idAlocacao}"></td>
+					<td class="" th:text="${a.idAlocacao}"></td>
 					<td th:text="${a.data}"></td>
 					<td th:text="${a.horaInicio}"></td>
 					<td th:text="${a.horaFim}"></td>

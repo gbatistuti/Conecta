@@ -15,26 +15,26 @@
 			<table>
 				<thead>
 					<tr>
-						<th>Cód.</th>
-						<th>Data</th>
-						<th>Hora Início</th>
-						<th>Hora Fim</th>
-						<th>Título</th>
-						<th>Motivo</th>
-						<th>Consultor</th>
-						<th>Projeto</th>
+						<th class="centralizado">Cód.</th>
+						<th class="aEsquerda">Data</th>
+						<th class="centralizado">Hora Início</th>
+						<th class="centralizado">Hora Fim</th>
+						<th class="aEsquerda">Consultor</th>
+						<th class="aEsquerda">Projeto</th>
+						<th class="justificado">Título</th>
+						<th class="justificado">Motivo</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="a : ${aprovados}">
-						<td th:text="${a.idAlocacao}"></td>
-						<td th:text="${a.data}"></td>
-						<td th:text="${a.horaInicio}"></td>
-						<td th:text="${a.horaFim}"></td>
-						<td th:text="${a.agendamento.pedido.titulo}"></td>
-						<td th:text="${a.motivo}"></td>
-						<td th:text="${a.agendamento.disponivel.consultor.nome}"></td>
-						<td th:text="${a.agendamento.pedido.projeto.nome}"></td>
+						<td class="centralizado" th:text="${a.idAlocacao}"></td>
+						<td class="aEsquerda" th:text="${a.data}"></td>
+						<td class="centralizado" th:text="${a.horaInicio}"></td>
+						<td class="centralizado" th:text="${a.horaFim}"></td>
+						<td class="aEsquerda" th:text="${a.agendamento.disponivel.consultor.nome}"></td>
+						<td class="aEsquerda" th:text="${a.agendamento.pedido.projeto.nome}"></td>
+						<td class="justificado" th:text="${a.agendamento.pedido.titulo}"></td>
+						<td class="justificado" th:text="${a.motivo}"></td>
 					</tr>
 				</tbody>
 			</table>

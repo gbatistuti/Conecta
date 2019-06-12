@@ -90,6 +90,14 @@ tr{
 	height: 50px;
 }
 
+table tr:hover td{
+	background-color: #ea9b3e;
+}
+
+.btnHabilidades{
+	cursor: pointer;
+}
+
 button{
 	background-color:#ea9b3e;
 	color: black;
@@ -203,7 +211,7 @@ select{
 	cursor: pointer;
 	color:#EA9B3E;
 	font-family: 'Lato', sans-serif;
-    font-size: 20px;
+    font-size: 15px;
 }
 
 #menuUserIcon{

@@ -109,11 +109,11 @@
 				</thead>
 				<tbody>
 					<tr th:each="d : ${disponiveis}" th:id="${d.idDisponivel}">
-						<td class="idConsultor" th:text="${d.idDisponivel}"></td>
-						<td th:text="${d.consultor.nome}"></td>
-						<td th:text="${d.horaInicio}"></td>
-						<td th:text="${d.horaFim}"></td>
-						<td th:text="${d.consultor.creditosPorHora}"></td>
+						<td onclick="SelecionaLinhaComConteudo(this)" class="idConsultor" th:text="${d.idDisponivel}"></td>
+						<td onclick="SelecionaLinhaComConteudo(this)" th:text="${d.consultor.nome}"></td>
+						<td onclick="SelecionaLinhaComConteudo(this)" th:text="${d.horaInicio}"></td>
+						<td onclick="SelecionaLinhaComConteudo(this)" th:text="${d.horaFim}"></td>
+						<td onclick="SelecionaLinhaComConteudo(this)" th:text="${d.consultor.creditosPorHora}"></td>
 						<td><img alt="" th:src="@{/img/homeCliente/info.svg}" onclick="selLinha( this, false)"></td>
 						<td class="escondidoNaLista">
 							<table>
@@ -248,9 +248,10 @@
 	// Passar conteudo para os inputs
 	
 	
-	function SelecionaLinhaComConteudo(linhaQueTeraClasse){
-		//Retira a classe conteudo desejado de todas as linhas
+	function SelecionaLinhaComConteudo(filhoLinhaQueTeraClasse){
+		var linhaQueTeraClasse = filhoLinhaQueTeraClasse.parentNode
 		
+		//Retira a classe conteudo desejado de todas as linhas
 		var linhasSemClasse = linhaQueTeraClasse.parentElement.getElementsByTagName("tr");
 			for(var i = 0; i < linhasSemClasse.length; i++){
 				var linha = linhasSemClasse[i];

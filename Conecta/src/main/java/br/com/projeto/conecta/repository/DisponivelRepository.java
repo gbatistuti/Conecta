@@ -1,6 +1,5 @@
 package br.com.projeto.conecta.repository;
 
-import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
@@ -21,6 +20,6 @@ public interface DisponivelRepository extends JpaRepository<Disponiveis, Integer
 	@Query("select u from Disponiveis u join fetch u.consultor where u.data = :data and u.consultor.email = :email")
 	Disponiveis findByUserAndDate(@Param("data")Date data, @Param("email") String email);
 	
-	@Query("select u.horaFim from Disponiveis u where u.idDisponivel = :disponiveis and u.data")
-	LocalTime findByUltimaHoraDaDisponibilidade(Date data, Integer disponiveis);
+//	@Query("select u.horaFim from Disponiveis u where u.idDisponivel = :disponiveis and u.data")
+//	LocalTime findByUltimaHoraDaDisponibilidade(Date data, Integer disponiveis);
 }

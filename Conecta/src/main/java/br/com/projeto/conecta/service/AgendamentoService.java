@@ -1,8 +1,7 @@
 package br.com.projeto.conecta.service;
 
-import java.sql.Date;
+import java.time.Duration;
 import java.time.LocalTime;
-import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +25,8 @@ public class AgendamentoService {
 	private AlocacaoRepository alocacaoRepository;
 	@Autowired
 	private DisponivelRepository disponivelRepository;
+	@Autowired
+	private AlocacaoService alocacaoService;
 
 	public List<Agendamento> BuscarTodos() {
 		return agendamentoRepository.findAll();
@@ -56,16 +57,16 @@ public class AgendamentoService {
 		return agendamentoRepository.findByStatus();
 	}
 	
-	public Boolean buscaUltimaHora(Agendamento agendamento) {
+	public boolean validaHoras(Agendamento agendamento) {
+		LocalTime horaFimAlocacao = alocacaoService.buscaUltimaHoraFimDeAlocacaoDoConsultor(agendamento);
+		LocalTime horaFImDisponivel = agendamento.getDisponivel().getHoraFim();
 		
-		Calendar calendar = Calendar.getInstance();
-		Date data = new Date(calendar.getTime().getTime());
-		LocalTime ultimaHoraAlocacao = alocacaoRepository.findbyUltimaHora(data, agendamento.getDisponivel().getIdDisponivel());
-		
-		if (ultimaHoraAlocacao == null || ultimaHoraAlocacao.isBefore(LocalTime.now())) {
-			ultimaHoraAlocacao = LocalTime.of(0, 0);
+		float horas = Duration.between(horaFimAlocacao, horaFImDisponivel).toMinutes();
+		horas /= 60;
+		if (horas >= agendamento.getPedido().getSugestaoDeHoras()) {
+			return true;
+		}else {
+			return false;
 		}
-		LocalTime ultimaHoraDisponivel = dispo
-		
 	}
 }

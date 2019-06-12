@@ -100,24 +100,24 @@
 			<table id="minhaTabela">
 				<thead>
 					<tr>
-						<th>Cód.</th>
-						<th>Consultor</th>
-						<th>Hora Início</th>
-						<th>Hora Fim</th>
-						<th>Créditos / h</th>
-						<th>Habilidades</th>
+						<th class="alinhadoADireita">Cód.</th>
+						<th class="alinhadoAEsquerda" >Consultor</th>
+						<th class="alinhadoADireita" >Hora Início</th>
+						<th class="alinhadoADireita" >Hora Fim</th>
+						<th class="alinhadoADireita" >Créditos/h</th>
+						<th class="centralizado" >Habilidades</th>
 						<th class="escondidoNaLista">Habilidade Principal</th>
 						<th class="escondidoNaLista">Habilidade Especifica</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="d : ${disponiveis}" th:id="${d.idDisponivel}">
-						<td onclick="SelecionaLinhaComConteudo(this)" class="idConsultor" th:text="${d.idDisponivel}"></td>
-						<td onclick="SelecionaLinhaComConteudo(this)" th:text="${d.consultor.nome}"></td>
-						<td onclick="SelecionaLinhaComConteudo(this)" th:text="${d.horaInicio}"></td>
-						<td onclick="SelecionaLinhaComConteudo(this)" th:text="${d.horaFim}"></td>
-						<td onclick="SelecionaLinhaComConteudo(this)" th:text="${d.consultor.creditosPorHora}"></td>
-						<td><img alt="" th:src="@{/img/homeCliente/info.svg}" onclick="selLinha( this, false)"></td>
+						<td class="idConsultor alinhadoADireita" onclick="SelecionaLinhaComConteudo(this)" th:text="${d.idDisponivel}"></td>
+						<td class="alinhadoAEsquerda" onclick="SelecionaLinhaComConteudo(this)" th:text="${d.consultor.nome}"></td>
+						<td class="alinhadoADireita" onclick="SelecionaLinhaComConteudo(this)" th:text="${d.horaInicio}"></td>
+						<td class="alinhadoADireita" onclick="SelecionaLinhaComConteudo(this)" th:text="${d.horaFim}"></td>
+						<td class="alinhadoADireita" onclick="SelecionaLinhaComConteudo(this)" th:text="${d.consultor.creditosPorHora}"></td>
+						<td class="centralizado"><img alt="" th:src="@{/img/homeCliente/info.svg}" onclick="selLinha( this, false)"></td>
 						<td class="escondidoNaLista">
 							<table>
 								<tbody>

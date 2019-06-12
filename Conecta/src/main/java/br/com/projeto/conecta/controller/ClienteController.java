@@ -58,6 +58,8 @@ public class ClienteController {
 	
 	@PostMapping("/criaragendamento")
 	public String criarAgendamento(Pedido pedido, Agendamento agendamento, Model model) {
+		
+		
 		Usuarios usuario = sessao.getCurrentUser();
 		
 		pedido.setCriadoPor(usuario);
@@ -66,6 +68,11 @@ public class ClienteController {
 		agendamento.setPedido(pedido);
 		agendamento.setCriadoPor(usuario);
 		
+		if (agendamentoService.validaHoras(agendamento) == false) {
+			return "redirect:/homeCliente?erroAoCriarAgendamentoPorhoras";
+		} else if (agendamentoService.validaCreditos(agendamento) == false) {
+			return "redirect:/homeCliente?erroAoCriarAgendamentoPorCreditos";
+		}
 		pedidoService.salvarPedido(pedido);
 		agendamentoService.salvarAgendamento(agendamento);
 		

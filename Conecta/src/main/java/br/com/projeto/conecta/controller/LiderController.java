@@ -47,9 +47,8 @@ public class LiderController {
 
 	@GetMapping
 	public String listarAgendamentos(ModelMap model, HttpServletRequest request) {
-		Usuarios usuario = sessao.getCurrentUser();
-		request.setAttribute("nome", usuario.getNome());
-		
+//		Usuarios usuario = sessao.getCurrentUser();
+//		request.setAttribute("nome", usuario.getNome());
 		model.addAttribute("agendamento", agendamentoService.buscarPorStatus());
 		model.addAttribute("disponiveis", disponivelService.buscarTodos());
 		return "homeLider";

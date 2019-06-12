@@ -20,7 +20,7 @@ public interface AgendamentoRepository extends JpaRepository<Agendamento, Intege
 	@Query("select u from Agendamento u where u.criadoPor = :usuario")
 	List<Agendamento> findByCliente(@Param("usuario")Usuarios usuario);
 	
-	@Query("select u from Agendamento u where u.pedido.status = 'aguardando'")
+	@Query("select u from Agendamento u join fetch u.pedido p join fetch p.projeto join fetch u.disponivel d join fetch d.consultor where u.pedido.status = 'aguardando'")
 	List<Agendamento> findByStatus();
 	
 }

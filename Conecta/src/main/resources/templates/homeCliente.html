@@ -26,6 +26,12 @@
 					<div th:if="${param.pedidoCriado}">
 						<p>Pedido criado com sucesso!</p>
 					</div>
+					<div th:if="${param.erroAoCriarAgendamentoPorhoras}">
+						<p>O agendamento não foi criado pois o consultor não possui horas disponiveis suficientes!</p>
+					</div>
+					<div th:if="${param.erroAoCriarAgendamentoPorCreditos}">
+						<p>O agendamento não foi criado pois o projeto não possui créditos suficientes!</p>
+					</div>
 					
 				</div>
 				<div class="modal-footer">
@@ -144,8 +150,10 @@
 	 	
 	 	var sucessoNaUrl = url_atual.indexOf("agendamentoCriado")
 	 	var erroNaUrl = url_atual.indexOf("pedidoCriado")
+	 	var falhaNaUrl = url_atual.indexOf("erroAoCriarAgendamentoPorhoras")
+	 	var falha2NaUrl = url_atual.indexOf("erroAoCriarAgendamentoPorCreditos")
 	 	
-	 	if(sucessoNaUrl != -1 || erroNaUrl != -1 ){
+	 	if(sucessoNaUrl != -1 || erroNaUrl != -1 || falhaNaUrl != -1 || falha2NaUrl != -1 ){
 	 		$("#avisoModal").modal('show');
 	 	}
 	 }

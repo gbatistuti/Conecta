@@ -19,18 +19,18 @@
 			<table>
 				<thead>
 					<tr>
-						<th>Cód.</th>
-						<th>Título do Pedido</th>
-						<th>Projeto</th>
-						<th>Status</th>
+						<th class="alinhadoADireita">Cód.</th>
+						<th class="justificado">Título do Pedido</th>
+						<th class="alinhadoAEsquerda">Projeto</th>
+						<th class="alinhadoAEsquerda">Status</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="p : ${pedidosRealizados}">
-						<td th:text="${p.idPedido}"></td>
-						<td th:text="${p.titulo}"></td>
-						<td th:text="${p.projeto.nome}"></td>
-						<td th:text="${p.status}"></td>
+						<td class="alinhadoADireita" th:text="${p.idPedido}"></td>
+						<td class="justificado" th:text="${p.titulo}"></td>
+						<td class="alinhadoAEsquerda" th:text="${p.projeto.nome}"></td>
+						<td class="alinhadoAEsquerda" th:text="${p.status}"></td>
 					</tr>
 				</tbody>
 			</table>
@@ -43,18 +43,18 @@
 			<table>
 				<thead>
 					<tr>
-						<th>Cód.</th>
-						<th>Título do Agendamento</th>
-						<th>Projeto</th>
-						<th>Status</th>
+						<th class="alinhadoADireita">Cód.</th>
+						<th class="justificado">Título do Agendamento</th>
+						<th class="alinhadoAEsquerda">Projeto</th>
+						<th class="alinhadoAEsquerda">Status</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="a : ${agendamentosCriados}">
-						<td th:text="${a.idAgendamento}"></td>
-						<td th:text="${a.pedido.titulo}"></td>
-						<td th:text="${a.pedido.projeto.nome}"></td>
-						<td th:text="${a.pedido.status}"></td>
+						<td class="alinhadoADireita" th:text="${a.idAgendamento}"></td>
+						<td class="justificado" th:text="${a.pedido.titulo}"></td>
+						<td class="alinhadoAEsquerda" th:text="${a.pedido.projeto.nome}"></td>
+						<td class="alinhadoAEsquerda" th:text="${a.pedido.status}"></td>
 					</tr>
 				</tbody>
 			</table>

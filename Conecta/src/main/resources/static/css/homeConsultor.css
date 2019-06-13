@@ -4,8 +4,10 @@
 }
 
 .labelHorario{
-	margin-right: 5x;
+	margin-top: 10px;
+	margin-bottom: 10px;
 	font-size: 20px;
+	float: left;
 }
 
 .inputHorario{
@@ -15,6 +17,7 @@
 	margin-top: 10px;
 	margin-bottom: 10px;
 	text-align: center;
+	float: right;
 }
 
 
@@ -65,14 +68,15 @@ h2{
 	height: 75vh;
 }
 
-.alinhadoAEsquerda{
-	text-align:left;
-	margin-left: 5px;
+#formularioDeOciosidade{
+	align-items: center;
+    align-content: center;
+    padding-left: 7vw;
+    padding-right: 7vw;
 }
 
-.alinhadoADireita{
-	text-align:right;
-	margin-right: 5px;
-	padding: 10px;
+.centro{
+	align-content: center;
 }
+
 

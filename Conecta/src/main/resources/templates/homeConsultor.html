@@ -47,11 +47,9 @@
 			
 			
 			<div id="formularioDeOciosidade">
-				<form action="/homeConsultor/apontar" method="POST">
+				<form class="centro" action="/homeConsultor/apontar" method="POST">
 					<label class="labelHorario">Início</label> <input class="inputHorario" type="time" placeholder="Ex:08:30" name="horaInicio" required oninvalid="this.setCustomValidity('Campo não pode ser vazio')" onchange="try{setCustomValidity('')}catch(e){}">
-					<br>
 					<label class="labelHorario">Término</label> <input class="inputHorario" type="time" placeholder="Ex:15:20" name="horaFim" required oninvalid="this.setCustomValidity('Campo não pode ser vazio')" onchange="try{setCustomValidity('')}catch(e){}">
-					<br/>
 					<button id="salvarOciosidade"class="botao" type="submit">Enviar</button>
 					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 				</form>

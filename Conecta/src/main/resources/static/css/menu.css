@@ -332,13 +332,13 @@ select{
 }
 
 #acompanhamentoDireita{
-	height: 80vh;
+	height: 88vh;
 	width: 47vw;
 	float: right;
 }
 
 #acompanhamentoEsquerda{
-	height: 80vh;
+	height: 88vh;
 	width: 47vw;
 	float: left;
 }
@@ -349,5 +349,7 @@ select{
 	border: solid;
 	border-width: 1px;
 	position:relative;
-	height: 70vh;
+	height: 80vh;
 }
+
+

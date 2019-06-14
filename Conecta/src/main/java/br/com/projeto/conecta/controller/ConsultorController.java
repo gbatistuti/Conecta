@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import br.com.projeto.conecta.component.MensagemComponent;
 import br.com.projeto.conecta.domain.Agendamento;
 import br.com.projeto.conecta.domain.Disponiveis;
 import br.com.projeto.conecta.domain.Pedido;
@@ -30,6 +31,8 @@ public class ConsultorController {
 	private DisponivelService disponivelService;
 	@Autowired
 	private PedidoService pedidoService;
+	@Autowired
+	private MensagemComponent mensagemComponent;
 
 	@GetMapping
 	public String listarPedidos(ModelMap model, HttpServletRequest request) {
@@ -45,6 +48,9 @@ public class ConsultorController {
 		if (disponivelService.validaApontamento(sessao.getCurrentUserEmail()) == null) {
 			disponiveis.setConsultor(sessao.getCurrentConsultor());
 			disponivelService.salvarApontamento(disponiveis);
+			
+			mensagemComponent.enviarMensagemApontamento(disponiveis);
+			
 			return "redirect:/homeConsultor?sucesso";
 		}
 		return "redirect:/homeConsultor?falha";

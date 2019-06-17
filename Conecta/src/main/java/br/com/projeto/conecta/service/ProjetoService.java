@@ -22,6 +22,7 @@ public class ProjetoService {
 	}
 	
 	@Cacheable(value = "projetosCache")
+	@CacheEvict(value = "idUser")
 	public List<Projeto> buscarPor(Integer id) {
 		return projetoRepository.getById(id);
 	}

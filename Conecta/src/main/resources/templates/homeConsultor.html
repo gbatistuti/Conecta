@@ -29,6 +29,9 @@
 					<div th:if="${param.sucesso}">
 						<p>Apontamento realizado com sucesso!</p>
 					</div>
+					<div th:if="${param.candidatado}">
+						<p>Candidatura realizada com sucesso!</p>
+					</div>
 					
 				</div>
 				<div class="modal-footer">
@@ -129,13 +132,14 @@
  	var url_atual = window.location.href
  	
  	var sucessoNaUrl = url_atual.indexOf("sucesso")
+ 	var sucessoNaUrl2 = url_atual.indexOf("candidatado")
  	var erroNaUrl = url_atual.indexOf("falha")
- 	var erroNaUrl = url_atual.indexOf("falha2")
+ 	var erroNaUrl2 = url_atual.indexOf("falha2")
  	
  	var modal = document.getElementById('avisoModal')
  	
  	
- 	if(sucessoNaUrl != -1 || erroNaUrl != -1 ){
+ 	if(sucessoNaUrl != -1 || erroNaUrl != -1 || erroNaUrl2 != -1 || sucessoNaUrl2 != -1 ){
  		$("#avisoModal").modal('show');
  	}
  }

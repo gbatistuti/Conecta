@@ -7,6 +7,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import br.com.projeto.conecta.domain.Agendamento;
 import br.com.projeto.conecta.domain.Pedido;
 import br.com.projeto.conecta.domain.Usuarios;
 import br.com.projeto.conecta.repository.PedidoRepository;
@@ -44,8 +45,12 @@ public class PedidoService {
 		return pedidoRepository.findByStatus();
 	}
 	
-	public void atualizarPedido(Integer idPedido) {
+	public void atualizarCandidaturaPedido(Integer idPedido) {
 		pedidoRepository.atualizaCandidatura(idPedido);
+	}
+	
+	public void atualizarStatus(Agendamento agendamento) {
+		pedidoRepository.atualizaStatusEQtdCreditos(agendamento.getPedido().getIdPedido());
 	}
 
 }

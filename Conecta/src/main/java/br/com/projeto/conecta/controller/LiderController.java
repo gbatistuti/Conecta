@@ -47,8 +47,8 @@ public class LiderController {
 
 	@GetMapping
 	public String listarAgendamentos(ModelMap model, HttpServletRequest request) {
-//		Usuarios usuario = sessao.getCurrentUser();
-//		request.setAttribute("nome", usuario.getNome());
+		Usuarios usuario = sessao.getCurrentLider();
+		request.setAttribute("nome", usuario.getNome());
 		model.addAttribute("agendamento", agendamentoService.buscarPorStatus());
 		model.addAttribute("disponiveis", disponivelService.buscarTodos());
 		return "homeLider";
@@ -56,18 +56,12 @@ public class LiderController {
 
 	@PostMapping("/aprovar")
 	@Transactional
-	public String aprovarAgendamento(Alocacoes alocacao, Agendamento agendamento) {
+	public String aprovarAgendamento(Alocacoes alocacao, Agendamento agendamento) {		
+		pedidoService.atualizarStatus(agendamento);
+		alocacaoService.creditosParaDescontar(agendamento);
 		
-		agendamento.getPedido().setStatus("aprovado");
-		agendamento.getPedido().getProjeto().setQtdCreditos(alocacaoService.creditosParaDescontar(agendamento));
-
-		alocacao.setCriadoPor(sessao.getCurrentLider());
 		LocalTime horaInicio = alocacaoService.buscaUltimaHoraFimDeAlocacaoDoConsultor(agendamento);
-
-		alocacao.setHoraInicio(horaInicio);
-		alocacao.setHoraFim(alocacaoService.definirHoraFim(horaInicio, alocacao));
 		
-		agendamentoService.salvarAgendamento(agendamento);
 		Alocacoes alocacaoNova = new Alocacoes(agendamento, sessao.getCurrentLider(), horaInicio, alocacaoService.definirHoraFim(horaInicio, alocacao), alocacao.getMotivo());
 		alocacaoService.salvarAlocacao(alocacaoNova);
 		return "redirect:/homeLider?aprovado";

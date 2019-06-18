@@ -34,4 +34,8 @@ public class ProjetoService {
 	public Projeto getProjeto(Integer id) {
 		return projetoRepository.getOne(id);
 	}
+
+	public void atualizaCreditos(float creditosParaDescontar, Integer idProjeto) {
+		projetoRepository.updateCreditos(creditosParaDescontar, idProjeto);
+	}
 }

@@ -60,7 +60,7 @@ public class ConsultorController {
 
 		Usuarios usuario = disponivel.getConsultor();
 		
-		pedidoService.atualizarPedido(pedido.getIdPedido());
+		pedidoService.atualizarCandidaturaPedido(pedido.getIdPedido());
 		
 		agendamento = new Agendamento(disponivel, usuario, pedido);
 		agendamentoService.salvarAgendamento(agendamento);

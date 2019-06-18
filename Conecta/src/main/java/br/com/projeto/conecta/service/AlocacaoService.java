@@ -21,6 +21,10 @@ public class AlocacaoService {
 
 	@Autowired
 	private AlocacaoRepository alocaoRepository;
+	@Autowired
+	private AgendamentoService agendamentoService;
+	@Autowired
+	private ProjetoService projetoService;
 
 	@Transactional
 	@Cacheable(value = "alocacoesCache")
@@ -33,14 +37,9 @@ public class AlocacaoService {
 		alocaoRepository.save(alocacao);
 	}
 
-	public float creditosParaDescontar(Agendamento agendamento) {
-		float creditosPorHora = agendamento.getDisponivel().getConsultor().getCreditosPorHora();
-		int horasConstratadas = agendamento.getPedido().getSugestaoDeHoras();
-		float creditosDoProjeto = agendamento.getPedido().getProjeto().getQtdCreditos();
-
-		float creditosParaDescontar = (creditosPorHora * horasConstratadas);
-
-		return creditosDoProjeto - creditosParaDescontar;
+	public void creditosParaDescontar(Agendamento agendamento) {
+		float creditosParaDescontar = agendamentoService.calculaCreditosParaDescontar(agendamento);
+		projetoService.atualizaCreditos(creditosParaDescontar, agendamentoService.buscarProjeto(agendamento));
 	}
 
 	@Cacheable(value = "ultimaHoraFimDeAlocacaoDoConsultorCache")
@@ -61,15 +60,16 @@ public class AlocacaoService {
 
 	public LocalTime definirHoraFim(LocalTime horaInicio, Alocacoes alocacao) {
 		LocalTime horaFim;
+		Agendamento agendamento = alocacao.getAgendamento();
 
 		if (horaInicio.getMinute() == 30) {
 			horaFim = LocalTime.of(horaInicio.getHour(), 30)
-					.plusHours(alocacao.getAgendamento().getPedido().getSugestaoDeHoras());
+					.plusHours(agendamentoService.buscarHoras(agendamento.getIdAgendamento()));
 			return horaFim;
 		}
 
 		horaFim = LocalTime.of(horaInicio.getHour(), 00)
-				.plusHours(alocacao.getAgendamento().getPedido().getSugestaoDeHoras());
+				.plusHours(agendamentoService.buscarHoras(agendamento.getIdAgendamento()));
 		return horaFim;
 	}
 }

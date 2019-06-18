@@ -45,4 +45,25 @@ public class AgendamentoService {
 	public List<Agendamento> buscarPorStatus() {
 		return agendamentoRepository.findByStatus();
 	}
+
+	public float buscarCreditosPorHora(Integer integer) {
+		return agendamentoRepository.findCreditosPorHora(integer);
+	}
+
+	public int buscarHoras(Integer idAgendamento) {
+		return agendamentoRepository.findHoras(idAgendamento);
+	}
+
+	public float calculaCreditosParaDescontar(Agendamento agendamento) {
+		return agendamentoRepository.calcularCreditosPorHoraVezesSugestaoDeHoras(agendamento.getIdAgendamento());
+	}
+
+	public Integer buscarProjeto(Agendamento agendamento) {
+		return agendamentoRepository.findIdProjeto(agendamento.getIdAgendamento());
+	}
+
+//	public void atualizaStatusECreditos(Integer idAgendamento) {
+//		agendamentoRepository.updateStatusECreditos(idAgendamento);
+//		
+//	}
 }

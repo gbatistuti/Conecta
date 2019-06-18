@@ -20,21 +20,21 @@ import br.com.projeto.conecta.repository.AlocacaoRepository;
 public class AlocacaoService {
 
 	@Autowired
-	private AlocacaoRepository alocaoRepository;
-	@Autowired
 	private AgendamentoService agendamentoService;
 	@Autowired
 	private ProjetoService projetoService;
+	@Autowired
+	private AlocacaoRepository alocacaoRepository;
 
 	@Transactional
 	@Cacheable(value = "alocacoesCache")
 	public List<Alocacoes> buscarTodos() {
-		return alocaoRepository.findAll();
+		return alocacaoRepository.findAll();
 	}
 
 	@CacheEvict(value = {"agendamentosPorStatusCache", "ultimaHoraFimDeAlocacaoDoConsultorCache", "alocacoesCache", "projetosTodosCache", "projetosCache"}, allEntries = true)
 	public void salvarAlocacao(Alocacoes alocacao) {
-		alocaoRepository.save(alocacao);
+		alocacaoRepository.save(alocacao);
 	}
 
 	public void creditosParaDescontar(Agendamento agendamento) {
@@ -46,7 +46,7 @@ public class AlocacaoService {
 	public LocalTime buscaUltimaHoraFimDeAlocacaoDoConsultor(Agendamento agendamento) {
 		Calendar calendar = Calendar.getInstance();
 		Date data = new Date(calendar.getTime().getTime());
-		LocalTime ultimaHora = alocaoRepository.findbyUltimaHora(data, agendamento.getDisponivel().getIdDisponivel());
+		LocalTime ultimaHora = alocacaoRepository.findbyUltimaHora(data, agendamento.getDisponivel().getIdDisponivel());
 
 		if (ultimaHora == null || ultimaHora.isBefore(LocalTime.now())) {
 			int min = LocalTime.now().getMinute();

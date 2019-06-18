@@ -5,6 +5,7 @@
 <title>Pedidos | Líder</title>
 <link rel="stylesheet" type="text/css" media="screen"
 	th:href="@{/css/pedido.css}" />
+	
 
 <!--Sera substituido pelo fragmento head que contem associaçoes para menu funcionar-->
 <th:block th:replace="fragments/head :: head"></th:block>
@@ -39,24 +40,24 @@
 			<table id="minhaTabela">
 				<thead>
 					<tr>
-						<th>Cód.</th>
-						<th>Consultor</th>
-						<th>Hora Início</th>
-						<th>Hora Fim</th>
-						<th>Créditos / h</th>
-						<th>Habilidades</th>
+						<th class="alinhadoADireita">Cód.</th>
+						<th class="alinhadoAEsquerda">Consultor</th>
+						<th class="centralizado">Hora Início</th>
+						<th class="centralizado">Hora Fim</th>
+						<th class="alinhadoADireita">Créditos/h</th>
+						<th class="centralizado">Habilidades</th>
 						<th class="escondidoNaLista">Habilidade Principal</th>
 						<th class="escondidoNaLista">Habilidade Específica</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="d : ${disponiveis}" th:id="${d.idDisponivel}">
-						<td class="idConsultor" th:text="${d.idDisponivel}"></td>
-						<td th:text="${d.consultor.nome}"></td>
-						<td th:text="${d.horaInicio}"></td>
-						<td th:text="${d.horaFim}"></td>
-						<td th:text="${d.consultor.creditosPorHora}"></td>
-						<td><img alt="" th:src="@{/img/homeCliente/info.svg}" onclick="selLinha( this, false)"></td>
+						<td class="alinhadoADireita" th:text="${d.idDisponivel}"></td>
+						<td class="alinhadoAEsquerda" th:text="${d.consultor.nome}"></td>
+						<td class="centralizado" th:text="${d.horaInicio}"></td>
+						<td class="centralizado" th:text="${d.horaFim}"></td>
+						<td class="alinhadoADireita" th:text="${d.consultor.creditosPorHora}"></td>
+						<td class="centralizado"><img alt="" th:src="@{/img/homeCliente/info.svg}" onclick="selLinha( this, false)"></td>
 						<td class="escondidoNaLista">
 							<table>
 								<tbody>
@@ -67,7 +68,7 @@
 								</tbody>
 							</table>
 						</td>
-						<td>
+						<td class="escondidoNaLista">
 							<table class="escondidoNaLista">
 								<tbody>
 									<tr th:each="h : ${d.consultor.habilidadesEspecificas}">
@@ -87,24 +88,24 @@
 			<table>
 				<thead>
 					<tr>
-						<th>Cód.</th>
-						<th>Título do Pedido</th>
-						<th>Descrição do Pedido</th>
-						<th>Projeto</th>
-						<th>Produto</th>
-						<th>Horas</th>
-						<th>Cód. do Disponivel</th>
+						<th class="alinhadoADireita">Cód.</th>
+						<th class="alinhadoAEsquerda">Título do Pedido</th>
+						<th class="alinhadoAEsquerda">Descrição do Pedido</th>
+						<th class="alinhadoAEsquerda">Projeto</th>
+						<th class="alinhadoAEsquerda">Produto</th>
+						<th class="alinhadoADireita">Horas</th>
+						<th class="centralizado">Cód. do Disponivel</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="p : ${pedidos}">
-						<td th:text="${p.idPedido}"></td>
-						<td th:text="${p.titulo}"></td>
-						<td th:text="${p.descricao}"></td>
-						<td th:text="${p.projeto.nome}"></td>
-						<td th:text="${p.projeto.produto}"></td>
-						<td th:text="${p.sugestaoDeHoras}"></td>
-						<td>
+						<td class="alinhadoADireita" th:text="${p.idPedido}"></td>
+						<td class="justificado" th:text="${p.titulo}"></td>
+						<td class="justificado" th:text="${p.descricao}"></td>
+						<td class="alinhadoAEsquerda" th:text="${p.projeto.nome}"></td>
+						<td class="alinhadoAEsquerda" th:text="${p.projeto.produto}"></td>
+						<td class="alinhadoADireita" th:text="${p.sugestaoDeHoras}"></td>
+						<td class="centralizado">
 							<form action="/homeLider/pedidos/alocar" method="POST">
 								<input class="inputPedidos" name="disponivel" required oninvalid="this.setCustomValidity('Campo não pode ser vazio')" onchange="try{setCustomValidity('')}catch(e){}">
 								<button class="botaoPedidos" type="submit" name="idPedido" th:value="${p.idPedido}">Alocar</button>

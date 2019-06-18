@@ -22,8 +22,9 @@ public class ProjetoService {
 	}
 	
 	@Cacheable(value = "projetosCache")
-	public List<Projeto> buscarPor(String string) {
-		return projetoRepository.getByEmail(string);
+	@CacheEvict(value = "email")
+	public List<Projeto> buscarPor(String email) {
+		return projetoRepository.getByEmail(email);
 	}
 	
 	@CacheEvict(value = {"projetosTodosCache", "projetosCache"}, allEntries = true)

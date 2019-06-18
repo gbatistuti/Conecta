@@ -14,13 +14,6 @@ public class HabilidadesEspecificasService {
 	@Autowired
 	private HabilidadesEspecificasRepository habilidadesEspecificasRepository;
 	
-//	@Autowired
-//	private DisponivelService disponivelService;
-//	
-//	private List<Disponiveis> listaDisponiveis = new ArrayList();
-//	
-//	private List<String> listaNomeHabilidadesEspecificas = new ArrayList();
-	
 	public List<HabilidadesEspecificas> buscarTodos(){
 		return habilidadesEspecificasRepository.findAll();
 	}

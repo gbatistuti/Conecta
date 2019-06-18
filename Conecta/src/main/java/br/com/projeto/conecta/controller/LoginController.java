@@ -24,13 +24,13 @@ public class LoginController {
 	}
 
 	@GetMapping("/login")
-	@CacheEvict(value = {"user", "lider", "consultor"}, allEntries = true)
+	@CacheEvict(value = {"user", "lider", "consultor", "idUser"}, allEntries = true)
 	public String login() {
 		return "login";
 	}
 	
 	@GetMapping("/logout")
-	@CacheEvict(value = {"user", "lider", "consultor"}, allEntries = true)
+	@CacheEvict(value = {"user", "lider", "consultor", "idUser"}, allEntries = true)
 	public String logout() {
 		return "login?logout";
 	}

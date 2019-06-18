@@ -38,33 +38,34 @@
 		</div>
 	</div>
 	<div id="content" class="row">
-		<div class="aEsquerda col-lg-8">
+		<div class="alinhadoAEsquerda col-lg-8">
 			<div class="fundo">
 				<h2>Agendamentos</h2>
 				<div id="rolagemAgendamentos" class="rolagem">
 					<table id="Agendamentos">
 						<thead>
 							<tr>
-								<th>Cód.</th>
-								<th>Título do Agendamento</th>
-								<th>Descrição do Agendamento</th>
-								<th>Projeto</th>
-								<th>Produto</th>
-								<th>Consultor</th>
-								<th>Horas</th>
-								<th>Candidatura</th>
+								<th class="alinhadoADireita">Cód.</th>
+								<th class="alinhadoAEsquerda">Título do Agendamento</th>
+								<th class="alinhadoAEsquerda">Descrição do Agendamento</th>
+								<th class="alinhadoAEsquerda">Projeto</th>
+								<th class="alinhadoAEsquerda">Produto</th>
+								<th class="alinhadoAEsquerda">Consultor</th>
+								<th class="alinhadoADireita">Horas</th>
+								<th class="alinhadoADireita">Candidatura</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="a : ${agendamento}" onclick="selecionaAgendamento(this)">
-								<td id="tdAgendamento" th:text="${a.idAgendamento}"></td>
-								<td th:text="${a.pedido.titulo}"></td>
-								<td th:text="${a.pedido.descricao}"></td>
-								<td th:text="${a.pedido.projeto.nome}"></td>
-								<td th:text="${a.pedido.projeto.produto}"></td>
-								<td th:text="${a.disponivel.consultor.nome}"></td>
-								<td th:text="${a.pedido.sugestaoDeHoras}"></td>
-								<td th:text="(${a.pedido.candidatura} == true)? 'Sim' : 'Não'"></td>
+							<tr th:each="a : ${agendamento}"
+								onclick="selecionaAgendamento(this)">
+								<td class="alinhadoADireita" id="tdAgendamento" th:text="${a.idAgendamento}"></td>
+								<td class="justificado" th:text="${a.pedido.titulo}"></td>
+								<td class="justificado" th:text="${a.pedido.descricao}"></td>
+								<td class="alinhadoAEsquerda" th:text="${a.pedido.projeto.nome}"></td>
+								<td class="alinhadoAEsquerda" th:text="${a.pedido.projeto.produto}"></td>
+								<td class="alinhadoAEsquerda" th:text="${a.disponivel.consultor.nome}"></td>
+								<td class="alinhadoADireita" th:text="${a.pedido.sugestaoDeHoras}"></td>
+								<td class="centralizado" th:text="(${a.pedido.candidatura} == true)? 'Sim' : 'Não'"></td>
 							</tr>
 						</tbody>
 					</table>
@@ -79,12 +80,12 @@
 					<table id="minhaTabela">
 						<thead>
 							<tr>
-								<th>Cód.</th>
-								<th>Consultor</th>
-								<th>Hora Início</th>
-								<th>Hora Fim</th>
-								<th>Créditos / h</th>
-								<th>Habilidades</th>
+								<th class="alinhadoADireita">Cód.</th>
+								<th class="alinhadoAEsquerda">Consultor</th>
+								<th class="centralizado">Hora Início</th>
+								<th class="centralizado">Hora Fim</th>
+								<th class="alinhadoADireita">Créditos/h</th>
+								<th class="centralizado">Habilidades</th>
 								<th class="escondidoNaLista">Habilidade Principal</th>
 								<th class="escondidoNaLista">Habilidade Específica</th>
 							</tr>
@@ -92,12 +93,14 @@
 						<tbody>
 							<tr th:each="d : ${disponiveis}" th:id="${d.idDisponivel}"
 								onclick="SelecionaLinhaComConteudo(this)">
-								<td class="idConsultor" th:text="${d.idDisponivel}"></td>
-								<td th:text="${d.consultor.nome}"></td>
-								<td th:text="${d.horaInicio}"></td>
-								<td th:text="${d.horaFim}"></td>
-								<td th:text="${d.consultor.creditosPorHora}"></td>
-								<td><img class="btnHabilidades" th:src="@{/img/homeCliente/info.svg}"
+								<td class="alinhadoADireita" th:text="${d.idDisponivel}"></td>
+								<td class="alinhadoAEsquerda" th:text="${d.consultor.nome}"></td>
+								<td class="centralizado" th:text="${d.horaInicio}"></td>
+								<td class="centralizado" th:text="${d.horaFim}"></td>
+								<td class="alinhadoADireita"
+									th:text="${d.consultor.creditosPorHora}"></td>
+								<td class="centralizado"><img class="btnHabilidades"
+									th:src="@{/img/homeCliente/info.svg}"
 									onclick="selLinha( this, false)"></td>
 								<td class="escondidoNaLista">
 									<table>
@@ -109,7 +112,7 @@
 										</tbody>
 									</table>
 								</td>
-								<td>
+								<td class="escondidoNaLista">
 									<table class="escondidoNaLista">
 										<tbody>
 											<tr th:each="h : ${d.consultor.habilidadesEspecificas}">
@@ -141,8 +144,10 @@
 						th:object="${alocacoes}">
 						<div class="formulario">
 							<label>Cód. do Agendamento</label> <br> <input
-								class="inputDadosAgendamento" name="agendamento" required oninvalid="this.setCustomValidity('Campo não pode ser vazio')" onchange="try{setCustomValidity('')}catch(e){}"> <br> <label>Motivo</label>
-							<br> <input name="motivo">
+								class="inputDadosAgendamento centralizado" name="agendamento" placeholder="Selecione um agendamento da lista" required readonly
+								oninvalid="this.setCustomValidity('Campo não pode ser vazio')"
+								onchange="try{setCustomValidity('')}catch(e){}"> <br>
+							<label>Motivo</label> <br> <input name="motivo">
 							<button type="submit">Enviar</button>
 							<input type="hidden" th:name="${_csrf.parameterName}"
 								th:value="${_csrf.token}" />
@@ -158,9 +163,12 @@
 						th:object="${recusado}">
 						<div class="formulario">
 
-							<label>Cód. do Agendamento</label><br> <input
-								class="inputDadosAgendamento" name="agendamento" required oninvalid="this.setCustomValidity('Campo não pode ser vazio')" onchange="try{setCustomValidity('')}catch(e){}"> <label>Motivo</label><br>
-							<input name="motivo" required oninvalid="this.setCustomValidity('Campo não pode ser vazio')" onchange="try{setCustomValidity('')}catch(e){}">
+							<label>Cód. do Agendamento</label><br> 
+							<input class="inputDadosAgendamento centralizado" name="agendamento" placeholder="Selecione um agendamento da lista" required readonly oninvalid="this.setCustomValidity('Campo não pode ser vazio')"
+								onchange="try{setCustomValidity('')}catch(e){}"> 
+							<label>Motivo</label><br>
+							<input name="motivo" required oninvalid="this.setCustomValidity('Campo não pode ser vazio')"
+								onchange="try{setCustomValidity('')}catch(e){}">
 
 							<button type="submit">Enviar</button>
 						</div>
@@ -271,32 +279,32 @@
 
 			return dados;
 		}
-		
+
 		// Inserção de dados no input de cod. Aprovação pela lista
-		
-		function selecionaAgendamento(tr){
+
+		function selecionaAgendamento(tr) {
 			var tabela = document.getElementById("Agendamentos")
 			var trs = tabela.getElementsByTagName("tr")
-			
-			for(i = 1; i < trs.length; i++){
+
+			for (i = 1; i < trs.length; i++) {
 				trs[i].classList.remove("AgendamentoSelecionado")
 			}
-			
+
 			tr.classList.toggle("AgendamentoSelecionado")
-			
+
 			var tds = tr.getElementsByTagName("td")
-			
+
 			var td = tds[0]
-			
+
 			var dados = td.innerHTML
-			
+
 			colocaInformacaoInput(dados, "inputDadosAgendamento")
 		}
-		
-		function colocaInformacaoInput(dados, idInput){
+
+		function colocaInformacaoInput(dados, idInput) {
 			var input = document.getElementsByClassName(idInput)
-			
-			for(i = 0; i < input.length ; i++){
+
+			for (i = 0; i < input.length; i++) {
 				input[i].value = dados
 			}
 		}

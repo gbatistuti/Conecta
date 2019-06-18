@@ -15,22 +15,22 @@
 		<table>
 			<thead>
 				<tr>
-					<th>Cód.</th>
-					<th>Data</th>
-					<th>Título</th>
-					<th>Motivo</th>
-					<th>Consultor</th>
-					<th>Projeto</th>
+					<th class="alinhadoADireita">Cód.</th>
+					<th class="alinhadoADireita">Data</th>
+					<th class="alinhadoAEsquerda">Consultor</th>
+					<th class="alinhadoAEsquerda">Projeto</th>
+					<th class="justificado">Título</th>
+					<th class="justificado">Motivo</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="r : ${reprovados}">
-					<td th:text="${r.idRecusado}"></td>
-					<td th:text="${r.data}">
-					<td th:text="${r.agendamento.pedido.titulo}"></td>
-					<td th:text="${r.motivo}"></td>
-					<td th:text="${r.agendamento.disponivel.consultor.nome}"></td>
-					<td th:text="${r.agendamento.pedido.projeto.nome}"></td>
+					<td class="alinhadoADireita" th:text="${r.idRecusado}"></td>
+					<td class="alinhadoADireita" th:text="${r.data}">
+					<td class="alinhadoAEsquerda" th:text="${r.agendamento.disponivel.consultor.nome}"></td>
+					<td class="alinhadoAEsquerda" th:text="${r.agendamento.pedido.projeto.nome}"></td>
+					<td class="justificado" th:text="${r.agendamento.pedido.titulo}"></td>
+					<td class="justificado" th:text="${r.motivo}"></td>
 				</tr>
 			</tbody>
 		</table>

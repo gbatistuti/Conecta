@@ -26,6 +26,12 @@
 					<div th:if="${param.pedidoCriado}">
 						<p>Pedido criado com sucesso!</p>
 					</div>
+					<div th:if="${param.erroAoCriarAgendamentoPorhoras}">
+						<p>O agendamento não foi criado pois o consultor não possui horas disponiveis suficientes!</p>
+					</div>
+					<div th:if="${param.erroAoCriarAgendamentoPorCreditos}">
+						<p>O agendamento não foi criado pois o projeto não possui créditos suficientes!</p>
+					</div>
 					
 				</div>
 				<div class="modal-footer">
@@ -54,7 +60,7 @@
 		<form class="formPedidoEAgendamento" action="/homeCliente/criaragendamento" method="post">
 			<Label>Título</Label> <br> <input type="text" th:field="${pedido.titulo}" required oninvalid="this.setCustomValidity('Campo não pode ser vazio')" onchange="try{setCustomValidity('')}catch(e){}"><br>
 			<Label>Descrição</Label> <br> <input type="text"th:field="${pedido.descricao}" required oninvalid="this.setCustomValidity('Campo não pode ser vazio')" onchange="try{setCustomValidity('')}catch(e){}"><br>
-			<label>Cód. do Consultor</label><br><input class="inputNumero" type="number" placeholder="Selecione um item da lista" readonly th:field="${agendamento.disponivel}"><br>
+			<label>Cód. do Consultor</label><br><input class="inputNumero" type="number" placeholder="Selecione um consultor da lista" readonly th:field="${agendamento.disponivel}"><br>
 			<Label>Quantidade de Horas</Label> <br> <input class="inputNumero" type="number" min="1" max="8" name="sugestaoDeHoras" required oninvalid="this.setCustomValidity('Digite um valor de 1 a 8 horas')" onchange="try{setCustomValidity('')}catch(e){}"><br>
 			<label>Projeto</label><br>
 			<select th:field="${pedido.projeto}" name="idProjeto" required oninvalid="this.setCustomValidity('Escolha um projeto da lista')" onchange="try{setCustomValidity('')}catch(e){}">
@@ -94,24 +100,24 @@
 			<table id="minhaTabela">
 				<thead>
 					<tr>
-						<th>Cód.</th>
-						<th>Consultor</th>
-						<th>Hora Início</th>
-						<th>Hora Fim</th>
-						<th>Créditos / h</th>
-						<th>Habilidades</th>
+						<th class="alinhadoADireita">Cód.</th>
+						<th class="alinhadoAEsquerda" >Consultor</th>
+						<th class="alinhadoADireita" >Hora Início</th>
+						<th class="alinhadoADireita" >Hora Fim</th>
+						<th class="alinhadoADireita" >Créditos/h</th>
+						<th class="centralizado" >Habilidades</th>
 						<th class="escondidoNaLista">Habilidade Principal</th>
 						<th class="escondidoNaLista">Habilidade Especifica</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="d : ${disponiveis}" th:id="${d.idDisponivel}">
-						<td onclick="SelecionaLinhaComConteudo(this)" class="idConsultor" th:text="${d.idDisponivel}"></td>
-						<td onclick="SelecionaLinhaComConteudo(this)" th:text="${d.consultor.nome}"></td>
-						<td onclick="SelecionaLinhaComConteudo(this)" th:text="${d.horaInicio}"></td>
-						<td onclick="SelecionaLinhaComConteudo(this)" th:text="${d.horaFim}"></td>
-						<td onclick="SelecionaLinhaComConteudo(this)" th:text="${d.consultor.creditosPorHora}"></td>
-						<td><img alt="" th:src="@{/img/homeCliente/info.svg}" onclick="selLinha( this, false)"></td>
+						<td class="idConsultor alinhadoADireita" onclick="SelecionaLinhaComConteudo(this)" th:text="${d.idDisponivel}"></td>
+						<td class="alinhadoAEsquerda" onclick="SelecionaLinhaComConteudo(this)" th:text="${d.consultor.nome}"></td>
+						<td class="alinhadoADireita" onclick="SelecionaLinhaComConteudo(this)" th:text="${d.horaInicio}"></td>
+						<td class="alinhadoADireita" onclick="SelecionaLinhaComConteudo(this)" th:text="${d.horaFim}"></td>
+						<td class="alinhadoADireita" onclick="SelecionaLinhaComConteudo(this)" th:text="${d.consultor.creditosPorHora}"></td>
+						<td class="centralizado"><img alt="" th:src="@{/img/homeCliente/info.svg}" onclick="selLinha( this, false)"></td>
 						<td class="escondidoNaLista">
 							<table>
 								<tbody>
@@ -122,7 +128,7 @@
 								</tbody>
 							</table>
 						</td>
-						<td>
+						<td class="escondidoNaLista">
 							<table class="escondidoNaLista">
 								<tbody>
 									<tr th:each="h : ${d.consultor.habilidadesEspecificas}">
@@ -144,8 +150,10 @@
 	 	
 	 	var sucessoNaUrl = url_atual.indexOf("agendamentoCriado")
 	 	var erroNaUrl = url_atual.indexOf("pedidoCriado")
+	 	var falhaNaUrl = url_atual.indexOf("erroAoCriarAgendamentoPorhoras")
+	 	var falha2NaUrl = url_atual.indexOf("erroAoCriarAgendamentoPorCreditos")
 	 	
-	 	if(sucessoNaUrl != -1 || erroNaUrl != -1 ){
+	 	if(sucessoNaUrl != -1 || erroNaUrl != -1 || falhaNaUrl != -1 || falha2NaUrl != -1 ){
 	 		$("#avisoModal").modal('show');
 	 	}
 	 }

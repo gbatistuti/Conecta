@@ -9,8 +9,8 @@ public class Mensagem {
 	@JsonProperty private String assunto;
 	@JsonProperty private String corpo;
 
-	public Mensagem(String remetente, String destinatarios, String assunto, String corpo) {
-		this.remetente = remetente;
+	public Mensagem(String destinatarios, String assunto, String corpo) {
+		this.remetente = "conecta-mensagem@gmail.com";
 		this.destinatarios = destinatarios;
 		this.assunto = assunto;
 		this.corpo = corpo;
@@ -18,10 +18,6 @@ public class Mensagem {
 
 	public String getRemetente() {
 		return remetente;
-	}
-
-	public void setRemetente(String remetente) {
-		this.remetente = remetente;
 	}
 
 	public String getDestinatarios() {

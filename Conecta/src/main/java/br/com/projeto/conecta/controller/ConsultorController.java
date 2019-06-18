@@ -70,6 +70,9 @@ public class ConsultorController {
 		
 		agendamento = new Agendamento(disponivel, usuario, pedido);
 		agendamentoService.salvarAgendamento(agendamento);
+		
+		mensagemService.enviarMensagemCandidatura(disponivel, agendamento);
+		
 		return "redirect:/homeConsultor?candidatado";
 	}
 

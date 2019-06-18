@@ -50,7 +50,7 @@ public class AgendamentoService {
 	public List<Agendamento> buscarPorStatus() {
 		return agendamentoRepository.findByStatus();
 	}
-
+	
 	public float buscarCreditosPorHora(Integer integer) {
 		return agendamentoRepository.findCreditosPorHora(integer);
 	}
@@ -71,7 +71,7 @@ public class AgendamentoService {
 //		agendamentoRepository.updateStatusECreditos(idAgendamento);
 //		
 //	}
-	
+
 	public boolean validaHoras(Agendamento agendamento) {
 		LocalTime horaFimAlocacao = alocacaoService.buscaUltimaHoraFimDeAlocacaoDoConsultor(agendamento);
 		LocalTime horaFImDisponivel = agendamento.getDisponivel().getHoraFim();

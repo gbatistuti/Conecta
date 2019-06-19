@@ -31,6 +31,6 @@ public interface PedidoRepository extends JpaRepository<Pedido, Integer>{
 	
 	@Transactional
 	@Modifying
-	@Query("update Pedido set status = 'aprovado' where idPedido = :idPedido")
-	void atualizaStatusEQtdCreditos(@Param("idPedido")Integer idPedido);
+	@Query("update Pedido set status = :status where idPedido = :idPedido")
+	void atualizaStatus(@Param("status")String status, @Param("idPedido")Integer idPedido);
 }

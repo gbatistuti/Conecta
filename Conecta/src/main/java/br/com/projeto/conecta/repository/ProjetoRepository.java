@@ -14,12 +14,20 @@ import br.com.projeto.conecta.domain.Projeto;
 @Repository
 public interface ProjetoRepository extends JpaRepository<Projeto, Integer> {
 
+	@Query("select u from Projeto u join fetch u.cliente")
+	List<Projeto> findAll();
+	
 	@Query("select u from Projeto u where u.cliente.email = :email")
 	List<Projeto> getByEmail(@Param("email") String email);
 
 	@Transactional
 	@Modifying
 	@Query("update Projeto set qtdCreditos = qtdCreditos - :creditosParaDescontar where idProjeto = :idProjeto")
-	void updateCreditos(@Param("creditosParaDescontar") float creditosParaDescontar, @Param("idProjeto") Integer idProjeto);
+	void debitarCreditos(@Param("creditosParaDescontar") float creditosParaDescontar, @Param("idProjeto") Integer idProjeto);
+	
+	@Transactional
+	@Modifying
+	@Query("update Projeto set qtdCreditos = :qtdCreditos where idProjeto = :idProjeto")	
+	void atualizarCreditos(Float qtdCreditos, Integer idProjeto);
 
 }

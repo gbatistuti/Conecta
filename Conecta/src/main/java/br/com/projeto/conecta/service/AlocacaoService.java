@@ -39,7 +39,7 @@ public class AlocacaoService {
 
 	public void creditosParaDescontar(Agendamento agendamento) {
 		float creditosParaDescontar = agendamentoService.calculaCreditosParaDescontar(agendamento);
-		projetoService.atualizaCreditos(creditosParaDescontar, agendamentoService.buscarProjeto(agendamento));
+		projetoService.descontarCreditos(creditosParaDescontar, agendamentoService.buscarProjeto(agendamento));
 	}
 
 	@Cacheable(value = "ultimaHoraFimDeAlocacaoDoConsultorCache")
@@ -58,9 +58,8 @@ public class AlocacaoService {
 		return ultimaHora;
 	}
 
-	public LocalTime definirHoraFim(LocalTime horaInicio, Alocacoes alocacao) {
+	public LocalTime definirHoraFim(LocalTime horaInicio, Agendamento agendamento) {
 		LocalTime horaFim;
-		Agendamento agendamento = alocacao.getAgendamento();
 
 		if (horaInicio.getMinute() == 30) {
 			horaFim = LocalTime.of(horaInicio.getHour(), 30)

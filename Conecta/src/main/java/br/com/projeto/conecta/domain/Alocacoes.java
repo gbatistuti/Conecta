@@ -32,7 +32,7 @@ public class Alocacoes {
 
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "ID_LIDER")
-	private Lider CriadoPor;
+	private Lider criadoPor;
 	
 	private LocalTime horaInicio;
 	
@@ -45,7 +45,7 @@ public class Alocacoes {
 	
 	public Alocacoes(Agendamento agendamento, Lider criadoPor, LocalTime horaInicio, LocalTime horaFim, String motivo) {
 		this.agendamento = agendamento;
-		CriadoPor = criadoPor;
+		this.criadoPor = criadoPor;
 		this.horaInicio = horaInicio;
 		this.horaFim = horaFim;
 		this.motivo = motivo;
@@ -60,11 +60,11 @@ public class Alocacoes {
 	}
 
 	public Lider getCriadoPor() {
-		return CriadoPor;
+		return criadoPor;
 	}
 
 	public void setCriadoPor(Lider criadoPor) {
-		CriadoPor = criadoPor;
+		this.criadoPor = criadoPor;
 	}
 
 	public String getMotivo() {

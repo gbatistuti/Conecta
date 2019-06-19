@@ -49,8 +49,8 @@ public class PedidoService {
 		pedidoRepository.atualizaCandidatura(idPedido);
 	}
 	
-	public void atualizarStatus(Agendamento agendamento) {
-		pedidoRepository.atualizaStatusEQtdCreditos(agendamento.getPedido().getIdPedido());
+	public void atualizarStatus(String status, Agendamento agendamento) {
+		pedidoRepository.atualizaStatus(status, agendamento.getPedido().getIdPedido());
 	}
 
 }

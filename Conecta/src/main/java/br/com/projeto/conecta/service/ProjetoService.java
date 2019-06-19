@@ -36,7 +36,11 @@ public class ProjetoService {
 		return projetoRepository.getOne(id);
 	}
 
-	public void atualizaCreditos(float creditosParaDescontar, Integer idProjeto) {
-		projetoRepository.updateCreditos(creditosParaDescontar, idProjeto);
+	public void descontarCreditos(float creditosParaDescontar, Integer idProjeto) {
+		projetoRepository.debitarCreditos(creditosParaDescontar, idProjeto);
+	}
+
+	public void atualizarCreditos(Float qtdCreditos, Integer idProjeto) {
+		projetoRepository.atualizarCreditos(qtdCreditos, idProjeto);
 	}
 }

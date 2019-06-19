@@ -10,6 +10,10 @@
 	height: 28px;
 }
 
+.inputPedidos:focus{
+	border-color: black;
+}
+
 .botaoPedidos{
 	padding-top: 1.5px;
 	padding-bottom: 1.5px;
@@ -17,6 +21,17 @@
 
 .pedidoSelecionado{
 	background-color: #29b6c5 !important;
+}
+
+.pedidoSelecionado button{
+	background-color: black;
+	border-color: black;
+	color: white;
+}
+
+.pedidoSelecionado input{
+	border-color: black;
+	color: white;
 }
 
 #listaDeDisponibilidade{

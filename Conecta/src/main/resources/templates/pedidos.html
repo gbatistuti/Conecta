@@ -57,7 +57,7 @@
 						<td onclick="selecionaATrDeDisponibilidade(this)" class="centralizado" th:text="${d.horaInicio}"></td>
 						<td onclick="selecionaATrDeDisponibilidade(this)" class="centralizado" th:text="${d.horaFim}"></td>
 						<td onclick="selecionaATrDeDisponibilidade(this)" class="alinhadoADireita" th:text="${d.consultor.creditosPorHora}"></td>
-						<td class="centralizado"><img alt="" th:src="@{/img/homeCliente/info.svg}" onclick="selLinha( this, false)"></td>
+						<td class="centralizado"><img class="btnHabilidades" alt="Info" th:src="@{/img/homeCliente/info.svg}" onclick="selLinha( this, false)"></td>
 						<td class="escondidoNaLista">
 							<table>
 								<tbody>
@@ -107,8 +107,8 @@
 						<td class="alinhadoADireita" th:text="${p.sugestaoDeHoras}"></td>
 						<td class="centralizado">
 							<form action="/homeLider/pedidos/alocar" method="POST">
-								<input class="inputPedidos" name="disponivel" required oninvalid="this.setCustomValidity('Campo não pode ser vazio')" onchange="try{setCustomValidity('')}catch(e){}">
-								<button class="botaoPedidos" type="submit" name="idPedido" th:value="${p.idPedido}">Alocar</button>
+								<input class="inputPedidos centralizado" name="disponivel" readonly required placeholder="Selecione ao lado" oninvalid="this.setCustomValidity('Campo não pode ser vazio')" onchange="try{setCustomValidity('')}catch(e){}">
+								<button class="botaoPedidos botaoEmLista" type="submit" name="idPedido" th:value="${p.idPedido}">Alocar</button>
 								<input type="hidden" th:name="${_csrf.parameterName}"
 									th:value="${_csrf.token}" />
 							</form>

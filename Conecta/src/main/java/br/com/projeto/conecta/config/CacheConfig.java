@@ -10,18 +10,18 @@ import org.springframework.context.annotation.Configuration;
 
 import com.google.common.cache.CacheBuilder;
 
-//@Configuration
-//@EnableCaching
-//public class CacheConfig {
-//	
-//	@Bean
-//	public CacheManager cacheManager() {
-//		 CacheBuilder<Object, Object> builder = CacheBuilder.newBuilder()
-//		            .maximumSize(100)
-//		            .expireAfterAccess(10, TimeUnit.MINUTES);
-//		        GuavaCacheManager manager = new GuavaCacheManager();
-//		        manager.setCacheBuilder(builder);
-//
-//		        return manager;
-//	}
-//}
+@Configuration
+@EnableCaching
+public class CacheConfig {
+	
+	@Bean
+	public CacheManager cacheManager() {
+		 CacheBuilder<Object, Object> builder = CacheBuilder.newBuilder()
+		            .maximumSize(100)
+		            .expireAfterAccess(10, TimeUnit.MINUTES);
+		        GuavaCacheManager manager = new GuavaCacheManager();
+		        manager.setCacheBuilder(builder);
+
+		        return manager;
+	}
+}

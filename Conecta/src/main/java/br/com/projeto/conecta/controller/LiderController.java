@@ -89,7 +89,7 @@ public class LiderController {
 
 	@PostMapping("/pedidos/alocar")
 	@Transactional
-	public String alocarDisponivelAoPedido(Agendamento agendamento, Pedido pedido, Alocacoes alocacao) {
+	public String alocarDisponivelAoPedido(Agendamento agendamento, Pedido pedido) {
 		agendamento = new Agendamento(agendamento.getDisponivel(), sessao.getCurrentLider(), pedido);
 		agendamentoService.salvarAgendamento(agendamento);
 		pedidoService.atualizarStatus("aprovado",agendamento);
@@ -97,7 +97,7 @@ public class LiderController {
 		
 		LocalTime horaInicio = alocacaoService.buscaUltimaHoraFimDeAlocacaoDoConsultor(agendamento);
 		
-		alocacao = new Alocacoes(agendamento, sessao.getCurrentLider(), horaInicio, alocacaoService.definirHoraFim(horaInicio, agendamento), "Alocação criada a partir da lista de pedidos");
+		Alocacoes alocacao = new Alocacoes(agendamento, sessao.getCurrentLider(), horaInicio, alocacaoService.definirHoraFim(horaInicio, agendamento), "Alocação criada a partir da lista de pedidos");
 		alocacaoService.salvarAlocacao(alocacao);
 		return "redirect:/homeLider/pedidos?sucesso";
 	}

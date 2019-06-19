@@ -67,11 +67,6 @@ public class AgendamentoService {
 		return agendamentoRepository.findIdProjeto(agendamento.getIdAgendamento());
 	}
 
-//	public void atualizaStatusECreditos(Integer idAgendamento) {
-//		agendamentoRepository.updateStatusECreditos(idAgendamento);
-//		
-//	}
-
 	public boolean validaHoras(Agendamento agendamento) {
 		LocalTime horaFimAlocacao = alocacaoService.buscaUltimaHoraFimDeAlocacaoDoConsultor(agendamento);
 		LocalTime horaFImDisponivel = agendamento.getDisponivel().getHoraFim();

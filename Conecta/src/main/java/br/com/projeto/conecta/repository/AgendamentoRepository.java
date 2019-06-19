@@ -19,7 +19,7 @@ public interface AgendamentoRepository extends JpaRepository<Agendamento, Intege
 	@Query("select a from Agendamento a join fetch a.pedido where a.disponivel.consultor.email = :email")
 	List<Agendamento> findByConsultor(@Param("email")String email);
 
-	@Query("select u from Agendamento u where u.criadoPor = :usuario")
+	@Query("select u from Agendamento u join fetch u.pedido where u.criadoPor = :usuario")
 	List<Agendamento> findByCliente(@Param("usuario")Usuarios usuario);
 	
 	@Query("select u from Agendamento u join fetch u.pedido p join fetch p.projeto join fetch u.disponivel d join fetch d.consultor where u.pedido.status = 'aguardando'")
@@ -36,9 +36,5 @@ public interface AgendamentoRepository extends JpaRepository<Agendamento, Intege
 
 	@Query("select a.pedido.projeto.idProjeto from Agendamento a where a.idAgendamento = :idAgendamento")
 	Integer findIdProjeto(@Param("idAgendamento")Integer idAgendamento);
-
-//	@Transactional
-//	@Modifying
-//	@Query("update Agendamento set pedido.sugestaoDeHoras = 2, pedido.projeto.qtdCreditos = 5000 where idAgendamento = :idAgendamento in (select pedido.sugestaoDeHorasa.pedido.sugestaoDeHoras, pedido.projeto.qtdCreditos from Agendamento)")
-//	void updateStatusECreditos(@Param("idAgendamento")Integer idAgendamento);	
+	
 }

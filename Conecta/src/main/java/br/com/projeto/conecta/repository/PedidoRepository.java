@@ -15,7 +15,7 @@ import br.com.projeto.conecta.domain.Usuarios;
 @Repository
 public interface PedidoRepository extends JpaRepository<Pedido, Integer>{
 
-	@Query("select u from Pedido u where u.criadoPor = :usuario and u.origem = 'pedido'")
+	@Query("select u from Pedido u join fetch u.projeto where u.criadoPor = :usuario and u.origem = 'pedido'")
 	List<Pedido> findByCliente(Usuarios usuario);
 	
 	@Query("select u from Pedido u join fetch u.projeto where u.candidatura=false and u.origem='pedido' and status='aguardando'")

@@ -15,6 +15,10 @@
 	padding-bottom: 1.5px;
 }
 
+.pedidoSelecionado{
+	background-color: #29b6c5 !important;
+}
+
 #listaDeDisponibilidade{
 	width: 25vw;
 	float: right;
@@ -22,6 +26,10 @@
 }
 #rolagemListaDisponibilidade{
 	height: 80vh;
+}
+
+.disponivelSelecionado{
+	background-color: #29b6c5 !important;
 }
 
 #minhaTabela tr td{

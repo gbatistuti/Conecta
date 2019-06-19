@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import br.com.projeto.conecta.component.MensagemComponent;
 import br.com.projeto.conecta.domain.Agendamento;
 import br.com.projeto.conecta.domain.Disponiveis;
 import br.com.projeto.conecta.domain.Pedido;
@@ -17,6 +16,7 @@ import br.com.projeto.conecta.domain.Usuarios;
 import br.com.projeto.conecta.security.ConectaUserDetailsService;
 import br.com.projeto.conecta.service.AgendamentoService;
 import br.com.projeto.conecta.service.DisponivelService;
+import br.com.projeto.conecta.service.MensagemService;
 import br.com.projeto.conecta.service.PedidoService;
 
 @Controller
@@ -32,7 +32,7 @@ public class ConsultorController {
 	@Autowired
 	private PedidoService pedidoService;
 	@Autowired
-	private MensagemComponent mensagemComponent;
+	private MensagemService mensagemService;
 
 	@GetMapping
 	public String listarPedidos(ModelMap model, HttpServletRequest request) {
@@ -49,7 +49,7 @@ public class ConsultorController {
 			disponiveis.setConsultor(sessao.getCurrentConsultor());
 			disponivelService.salvarApontamento(disponiveis);
 			
-			mensagemComponent.enviarMensagemApontamento(disponiveis);
+			mensagemService.enviarMensagemApontamento(disponiveis);
 			
 			return "redirect:/homeConsultor?sucesso";
 		}

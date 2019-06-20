@@ -37,12 +37,8 @@
 	border-color:#29b6c5;
 }
 
-#candidaturas{
-	height: 54.5vh;
-}
-
 #rolagemCandidaturas{
-	height: 46vh;
+	height: 51.5vh;
 }
 
 
@@ -65,7 +61,7 @@ h2{
 }
 
 #rolagemPedidos{
-	height: 75vh;
+	height: 80vh;
 }
 
 #formularioDeOciosidade{

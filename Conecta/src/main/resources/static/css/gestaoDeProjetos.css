@@ -47,7 +47,7 @@ th, td {
   text-align: left;
   padding: 8px;
 }
-}
+
 thead
 {
     border: 2px;
@@ -67,10 +67,10 @@ button
 
 
 }
-.border:hover
-{
+
+.border:hover{
     border-color: #37B6C4;
-    box-shadow: inset 0 0 0 25px ##37B6C4;
+    box-shadow: inset 0 0 0 25px;
 }
 .divP{
   width: 40%;

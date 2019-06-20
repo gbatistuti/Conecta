@@ -37,7 +37,7 @@
 	<div id="listaDeDisponibilidade" class="fundo">
 		<h2>Lista de Disponibilidade</h2>
 		<div id="rolagemListaDisponibilidade" class="rolagem">
-			<table id="minhaTabela">
+			<table id="listaDisponibilidade">
 				<thead>
 					<tr>
 						<th class="alinhadoADireita">Cód.</th>
@@ -52,12 +52,12 @@
 				</thead>
 				<tbody>
 					<tr th:each="d : ${disponiveis}" th:id="${d.idDisponivel}">
-						<td class="alinhadoADireita" th:text="${d.idDisponivel}"></td>
-						<td class="alinhadoAEsquerda" th:text="${d.consultor.nome}"></td>
-						<td class="centralizado" th:text="${d.horaInicio}"></td>
-						<td class="centralizado" th:text="${d.horaFim}"></td>
-						<td class="alinhadoADireita" th:text="${d.consultor.creditosPorHora}"></td>
-						<td class="centralizado"><img alt="" th:src="@{/img/homeCliente/info.svg}" onclick="selLinha( this, false)"></td>
+						<td onclick="selecionaATrDeDisponibilidade(this)" id="idDisponivel" class="alinhadoADireita" th:text="${d.idDisponivel}"></td>
+						<td onclick="selecionaATrDeDisponibilidade(this)" class="alinhadoAEsquerda" th:text="${d.consultor.nome}"></td>
+						<td onclick="selecionaATrDeDisponibilidade(this)" class="centralizado" th:text="${d.horaInicio}"></td>
+						<td onclick="selecionaATrDeDisponibilidade(this)" class="centralizado" th:text="${d.horaFim}"></td>
+						<td onclick="selecionaATrDeDisponibilidade(this)" class="alinhadoADireita" th:text="${d.consultor.creditosPorHora}"></td>
+						<td class="centralizado"><img class="btnHabilidades" alt="Info" th:src="@{/img/homeCliente/info.svg}" onclick="selLinha( this, false)"></td>
 						<td class="escondidoNaLista">
 							<table>
 								<tbody>
@@ -85,7 +85,7 @@
 	<div id="pedidos" class="fundo">
 		<h2>Pedidos</h2>
 		<div id="rolagemPedidos" class="rolagem">
-			<table>
+			<table id="TabelaDePedidos">
 				<thead>
 					<tr>
 						<th class="alinhadoADireita">Cód.</th>
@@ -98,7 +98,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="p : ${pedidos}">
+					<tr onclick="selecionaATrDePedidos(this)" th:each="p : ${pedidos}">
 						<td class="alinhadoADireita" th:text="${p.idPedido}"></td>
 						<td class="justificado" th:text="${p.titulo}"></td>
 						<td class="justificado" th:text="${p.descricao}"></td>
@@ -107,8 +107,8 @@
 						<td class="alinhadoADireita" th:text="${p.sugestaoDeHoras}"></td>
 						<td class="centralizado">
 							<form action="/homeLider/pedidos/alocar" method="POST">
-								<input class="inputPedidos" name="disponivel" required oninvalid="this.setCustomValidity('Campo não pode ser vazio')" onchange="try{setCustomValidity('')}catch(e){}">
-								<button class="botaoPedidos" type="submit" name="idPedido" th:value="${p.idPedido}">Alocar</button>
+								<input class="inputPedidos centralizado" name="disponivel" readonly required placeholder="Selecione ao lado" oninvalid="this.setCustomValidity('Campo não pode ser vazio')" onchange="try{setCustomValidity('')}catch(e){}">
+								<button class="botaoPedidos botaoEmLista" type="submit" name="idPedido" th:value="${p.idPedido}">Alocar</button>
 								<input type="hidden" th:name="${_csrf.parameterName}"
 									th:value="${_csrf.token}" />
 							</form>
@@ -119,6 +119,64 @@
 		</div>
 	</div>
 		<script type="text/javascript">
+		// Script para troca de informação entre as tabela
+		
+		function selecionaATrDePedidos(tr){
+			var tabelaDePedidos = document.getElementById("TabelaDePedidos")
+			var tbodyEthead = tabelaDePedidos.children
+			var tbody = tbodyEthead[1]
+			var tds = tbody.getElementsByTagName("tr")
+			
+			for(indiceTd = 0; indiceTd < tds.length; indiceTd++){
+				tds[indiceTd].classList.remove("pedidoSelecionado")
+			}
+			tr.classList.add("pedidoSelecionado")
+			
+			PassaDadosEntreAsTabelas()
+		}
+		
+		function selecionaATrDeDisponibilidade(td){
+			var tr = td.parentNode
+			var tabelaDeDisponibilidade = document.getElementById("listaDisponibilidade")
+			var tbodyEthead = tabelaDeDisponibilidade.children
+			var tbody = tbodyEthead[1]
+			var tds = tbody.children
+			
+			for(indiceTd = 0; indiceTd < tds.length; indiceTd++){
+				tds[indiceTd].classList.remove("disponivelSelecionado")
+			}
+			tr.classList.add("disponivelSelecionado")
+			
+			PassaDadosEntreAsTabelas()
+		}
+		
+		function PassaDadosEntreAsTabelas(){
+			var disponivelSelecionado = document.getElementsByClassName("disponivelSelecionado")
+			var pedidoSelecionado = document.getElementsByClassName("pedidoSelecionado")
+			
+			LimpaInputsDePedidos()
+			
+			if(disponivelSelecionado.length && pedidoSelecionado.length){
+				var input = pedidoSelecionado[0].getElementsByClassName("inputPedidos")
+				var trs = disponivelSelecionado[0].getElementsByTagName("td")
+				var idDisponivel = trs[0]
+				
+				input[0].value = idDisponivel.innerHTML;
+			}
+		}
+		
+		function LimpaInputsDePedidos(){
+			var tabelaDePedidos = document.getElementById("TabelaDePedidos")
+			var tbodyEthead = tabelaDePedidos.children
+			var tbody = tbodyEthead[1]
+			var trs = tbody.getElementsByTagName("tr")
+			
+			for(indice = 0; indice < trs.length; indice++){
+				let tr = trs[indice]
+				var inputDaTr = tr.getElementsByTagName("input")
+				inputDaTr[0].value = ""
+			}
+		}
 		
 		// Pop Up
 	 	function aberturaDoPopUp() {
@@ -129,7 +187,7 @@
 		 	var modal = document.getElementById('avisoModal')
 		 	
 		 	
-		 	if(sucessoNaUrl != -1 || erroNaUrl != -1 ){
+		 	if(sucessoNaUrl != -1){
 		 		$("#avisoModal").modal('show');
 		 	}
 		 }
@@ -140,7 +198,7 @@
 		 
 		 // Lista Disponibilidade
 		 
-		 var tabela = document.getElementById("minhaTabela");
+		 var tabela = document.getElementById("listaDisponibilidade");
 	var linhas = tabela.getElementsByTagName("tr");
 	
 	for(var i = 0; i < linhas.lenght; i++){

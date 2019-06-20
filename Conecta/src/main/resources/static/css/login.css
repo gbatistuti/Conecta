@@ -20,6 +20,12 @@ body{
     */
 }
 
+#logoTotvs{
+	position: relative;
+    top: 40vh;
+    left: 5vw;
+}
+
 input{
     border-radius: 30px;
     height: 2.5vw;
@@ -31,9 +37,10 @@ input{
     font-size: 15px;
     font-family: Tahoma;
     outline: 0;
+    padding-left: 60px;
 }
 
-button{    
+#btnLogin{    
     background: #37B6C4;
     font-size: 1.5vw;
     font-family: Tahoma;
@@ -42,14 +49,17 @@ button{
     height: 3.4vw;
     width: 13vw;
     cursor: pointer;
-    border-width: 3px;
-    border-style: solid;
-    border-color:#397E88;
-    margin-left: 13%;
+    border-width: 3px !important;
+    border-style: solid !important;
+    border-color:#397E88 !important;
     text-align: center;
-    padding-left: 2%;
-    margin-left: 15%;
     outline: 0;
+}
+
+#btnLogin:hover{
+	border-color: #EA9B3E !important;
+	opacity: 1;
+	background-color:#EA9B3E;   
 }
 
 #divForm
@@ -76,7 +86,6 @@ button{
     background-repeat: no-repeat;
     background-size: 8% 69%;
     background-position: 5%;
-    padding-left:10%; 
     
 }
 #password
@@ -85,19 +94,17 @@ button{
     background-repeat: no-repeat;
     background-size: 9% 53%;
     background-position: 5%;
-    padding-left:10%; 
     
 }
-Button:hover
-{
-border-color: #EA9B3E;
-opacity: 1;
-background-color:#EA9B3E;   
-    
-}
+
 #formLogin{
-        margin-left: 30%;
-    margin-top: 44%;
+    align-items: center;
+    text-align: center;
+    width: 500px;
+    float:right;
+    position: relative;
+    top: 40vh;
+    right: 9.6vw;
 }
 .borda:hover
 {

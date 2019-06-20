@@ -88,6 +88,14 @@
 			<artifactId>spring-context-support</artifactId>
 			<version>4.1.0.RELEASE</version>
 		</dependency>
+
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>6.8.0</version>
+		</dependency>
+
+
 	</dependencies>
 
 

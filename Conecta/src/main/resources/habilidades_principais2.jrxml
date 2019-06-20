@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="habilidades_principais2" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="bf2e71a3-973b-48df-8a18-2736ae6da231">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
+	<parameter name="id" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[select * from dbo.habilidades_principais 
+where  habilidades_principais.id_habilidade_principal  =  $P{id}]]>
+	</queryString>
+	<field name="id_habilidade_principal" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="id_habilidade_principal"/>
+	</field>
+	<field name="nome_habilidade_principal" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nome_habilidade_principal"/>
+	</field>
+	<variable name="conta" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{id_habilidade_principal}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="278" height="30" uuid="7ca2faaa-7485-459d-803e-ba4650244a48">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b5dc49a5-b5c6-48fb-a91e-c58cc7035696"/>
+				</reportElement>
+				<text><![CDATA[id_habilidade_principal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="0" width="277" height="30" uuid="36366ce9-21c1-41a4-a5db-6d283bd67820">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b8e06f55-bc2e-416f-ae88-416c6e21153e"/>
+				</reportElement>
+				<text><![CDATA[nome_habilidade_principal]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="40" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="278" height="30" uuid="964d0e7b-4ed9-4cf2-a33e-1a64884df339">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b5dc49a5-b5c6-48fb-a91e-c58cc7035696"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{id_habilidade_principal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="278" y="5" width="277" height="30" uuid="9f37f5a4-be31-465b-bb78-55aad6660043">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b8e06f55-bc2e-416f-ae88-416c6e21153e"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{nome_habilidade_principal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

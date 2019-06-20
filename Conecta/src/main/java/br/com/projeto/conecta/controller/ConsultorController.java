@@ -1,6 +1,11 @@
 package br.com.projeto.conecta.controller;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.sql.SQLException;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,15 +13,20 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import br.com.projeto.conecta.domain.Agendamento;
 import br.com.projeto.conecta.domain.Disponiveis;
 import br.com.projeto.conecta.domain.Pedido;
 import br.com.projeto.conecta.domain.Usuarios;
+import br.com.projeto.conecta.repository.HabilidadesPrincipaisRelatorio;
 import br.com.projeto.conecta.security.ConectaUserDetailsService;
 import br.com.projeto.conecta.service.AgendamentoService;
 import br.com.projeto.conecta.service.DisponivelService;
 import br.com.projeto.conecta.service.PedidoService;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperPrint;
 
 @Controller
 @RequestMapping("/homeConsultor")
@@ -30,7 +40,9 @@ public class ConsultorController {
 	private DisponivelService disponivelService;
 	@Autowired
 	private PedidoService pedidoService;
-
+	@Autowired
+	private HabilidadesPrincipaisRelatorio habilidadesPrincipaisRelatorio;
+	
 	@GetMapping
 	public String listarPedidos(ModelMap model, HttpServletRequest request) {
 		Usuarios usuario = sessao.getCurrentUser();
@@ -66,5 +78,18 @@ public class ConsultorController {
 		agendamentoService.salvarAgendamento(agendamento);
 		return "redirect:/homeConsultor?candidatado";
 	}
-
+	
+	
+	@PostMapping("/exportar")
+	public void exportarPdf(ModelAndView model, HttpServletResponse response, String id) throws IOException, JRException, SQLException {
+	
+		JasperPrint jasperPrint = null;
+		
+		response.setContentType("application/x-download");
+		response.setHeader("content-Disposition", String.format("attachment; filename=\"habilidadesPrincipais.pdf\""));
+		
+		OutputStream out = response.getOutputStream();
+		jasperPrint = habilidadesPrincipaisRelatorio.exportPdfFile(id);
+		JasperExportManager.exportReportToPdfStream(jasperPrint, out);
+	}
 }

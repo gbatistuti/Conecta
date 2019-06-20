@@ -15,7 +15,7 @@ import br.com.projeto.conecta.domain.Usuarios;
 @Repository
 public interface PedidoRepository extends JpaRepository<Pedido, Integer>{
 
-	@Query("select u from Pedido u where u.criadoPor = :usuario and u.origem = 'pedido'")
+	@Query("select u from Pedido u join fetch u.projeto where u.criadoPor = :usuario and u.origem = 'pedido'")
 	List<Pedido> findByCliente(Usuarios usuario);
 	
 	@Query("select u from Pedido u join fetch u.projeto where u.candidatura=false and u.origem='pedido' and status='aguardando'")
@@ -29,4 +29,8 @@ public interface PedidoRepository extends JpaRepository<Pedido, Integer>{
 	@Query("update Pedido set candidatura = true where idPedido = :idPedido")
 	void atualizaCandidatura(@Param("idPedido") Integer idPedido);
 	
+	@Transactional
+	@Modifying
+	@Query("update Pedido set status = :status where idPedido = :idPedido")
+	void atualizaStatus(@Param("status")String status, @Param("idPedido")Integer idPedido);
 }

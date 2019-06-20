@@ -33,6 +33,16 @@ public class Recusado {
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "ID_CRIADO_POR")
 	private Usuarios criadoPor;
+	
+	public Recusado() {
+	}
+	
+	public Recusado(String motivo, Date data, Agendamento agendamento, Usuarios criadoPor) {
+		this.motivo = motivo;
+		this.data = data;
+		this.agendamento = agendamento;
+		this.criadoPor = criadoPor;
+	}
 
 	public Integer getIdRecusado() {
 		return idRecusado;

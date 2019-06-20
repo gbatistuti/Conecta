@@ -13,7 +13,7 @@ import br.com.projeto.conecta.domain.Disponiveis;
 @Repository
 public interface DisponivelRepository extends JpaRepository<Disponiveis, Integer>{
 
-	@Query("select u from Disponiveis u where u.data = :hoje")
+	@Query("select u from Disponiveis u join fetch u.consultor c join fetch c.habilidadesEspecificas h join fetch h.habilidadesPrincipais where u.data = :hoje")
 	List<Disponiveis> findByDate(@Param("hoje") Date data);
 	
 

@@ -210,12 +210,12 @@ select{
 
 @-webkit-keyframes marquee {
     0% {text-indent:100%;}
-    100% {text-indent:-50%}
+    100% {text-indent:-20%}
 }
 
 .marquee {
-  -webkit-animation: marquee 15s infinite;
-/*   -webkit-animation-timing-function: linear; */
+  -webkit-animation: marquee 10s infinite;
+  -webkit-animation-timing-function: linear;
   }
 
 /* biblioteca */

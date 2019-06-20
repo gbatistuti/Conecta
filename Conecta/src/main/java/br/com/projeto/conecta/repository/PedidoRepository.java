@@ -28,5 +28,8 @@ public interface PedidoRepository extends JpaRepository<Pedido, Integer>{
 	@Modifying
 	@Query("update Pedido set candidatura = true where idPedido = :idPedido")
 	void atualizaCandidatura(@Param("idPedido") Integer idPedido);
+
+	@Query("select u from Pedido u join fetch u.projeto p join fetch p.cliente where u.idPedido = ?1")
+	Pedido getInformacoesEmailCandidatura(Integer idPedido);
 	
 }

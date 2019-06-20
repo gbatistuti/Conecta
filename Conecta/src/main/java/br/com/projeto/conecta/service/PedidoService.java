@@ -48,4 +48,9 @@ public class PedidoService {
 		pedidoRepository.atualizaCandidatura(idPedido);
 	}
 
+	public Pedido getInformacoesEmailCandidatura(Integer idPedido) {
+		
+		return pedidoRepository.getInformacoesEmailCandidatura(idPedido);
+	}
+
 }

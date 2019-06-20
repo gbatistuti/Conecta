@@ -24,7 +24,6 @@ public class MensagemService {
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	String hoje = LocalDate.now().format(formatter);
 	
-	@Async
 	public void emailApontamento(Disponiveis disponivel) {
 		Mensagem mensagem = new Mensagem(disponivel.getConsultor().getEmail(),
 				"Apontamento realizado | " + hoje,
@@ -39,17 +38,19 @@ public class MensagemService {
 		filaMensagemService.add(mensagem);
 	}
 	
+	
+	@Async
 	public void emailCandidatura(Disponiveis disponivel, Integer idPedido) {
-		Pedido pedido = pedidoService.getPedido(idPedido);
+		Pedido pedido = pedidoService.getInformacoesEmailCandidatura(idPedido);
 		Mensagem mensagem = new Mensagem(disponivel.getConsultor().getEmail(),
 				"Candidatura realizada | " + hoje,
 				"Olá, " + disponivel.getConsultor().getNome() 
 						+ "\nID do pedido: "	+ pedido.getIdPedido()
-//						+ "\nCliente: " + agendamento.getPedido().getProjeto().getCliente() 
-//						+ "\nProjeto: " + agendamento.getPedido().getProjeto()
-//						+ "\n Título do Pedido: " + agendamento.getPedido().getTitulo()
-//						+ "\n Descrição do Pedido: " + agendamento.getPedido().getDescricao()
-//						+ "\n Horas contratadas: " + agendamento.getPedido().getSugestaoDeHoras()
+						+ "\nCliente: " + pedido.getProjeto().getCliente().getNome() 
+						+ "\nProjeto: " + pedido.getProjeto().getNome()
+						+ "\nTítulo do Pedido: " + pedido.getTitulo()
+						+ "\nDescrição do Pedido: " + pedido.getDescricao()
+						+ "\nHoras contratadas: " + pedido.getSugestaoDeHoras()
 						+ "\n\nAtenciosamente,"
 						+ "\n\nEquipe TOTVS Conecta");
 		

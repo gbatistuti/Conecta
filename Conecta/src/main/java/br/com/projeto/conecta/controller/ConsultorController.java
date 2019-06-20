@@ -49,7 +49,7 @@ public class ConsultorController {
 			disponiveis.setConsultor(sessao.getCurrentConsultor());
 			disponivelService.salvarApontamento(disponiveis);
 			
-			mensagemService.enviarMensagemApontamento(disponiveis);
+			mensagemService.emailApontamento(disponiveis);
 			
 			return "redirect:/homeConsultor?sucesso";
 		}
@@ -70,6 +70,9 @@ public class ConsultorController {
 		
 		agendamento = new Agendamento(disponivel, usuario, pedido);
 		agendamentoService.salvarAgendamento(agendamento);
+		
+		mensagemService.emailCandidatura(disponivel, pedido.getIdPedido());
+		
 		return "redirect:/homeConsultor?candidatado";
 	}
 

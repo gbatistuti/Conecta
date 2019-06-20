@@ -2,23 +2,30 @@ package br.com.projeto.conecta.service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.LinkedList;
+import java.util.Queue;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import br.com.projeto.conecta.domain.Disponiveis;
 import br.com.projeto.conecta.domain.Mensagem;
+import br.com.projeto.conecta.domain.Pedido;
 
 @Service
-@Async
 public class MensagemService {
 	
-	private Mensagem mensagem = null;
+	@Autowired
+	private PedidoService pedidoService;
+	
+	private Queue<Mensagem> filaMensagemService = new LinkedList<Mensagem>();
 	
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	String hoje = LocalDate.now().format(formatter);
 	
-	public void enviarMensagemApontamento(Disponiveis disponivel) {
+	@Async
+	public void emailApontamento(Disponiveis disponivel) {
 		Mensagem mensagem = new Mensagem(disponivel.getConsultor().getEmail(),
 				"Apontamento realizado | " + hoje,
 				"Olá, " + disponivel.getConsultor().getNome() 
@@ -26,25 +33,35 @@ public class MensagemService {
 						+ "\nInício às: " + disponivel.getHoraInicio()
 						+ "\nFim às: " + disponivel.getHoraFim() 
 						+ "\nRealizado com sucesso!"
-						+ "\nAtenciosamente,"
+						+ "\n\nAtenciosamente,"
 						+ "\nEquipe TOTVS Conecta");
 		
-		setMensagem(mensagem);
+		filaMensagemService.add(mensagem);
 	}
+	
+	public void emailCandidatura(Disponiveis disponivel, Integer idPedido) {
+		Pedido pedido = pedidoService.getPedido(idPedido);
+		Mensagem mensagem = new Mensagem(disponivel.getConsultor().getEmail(),
+				"Candidatura realizada | " + hoje,
+				"Olá, " + disponivel.getConsultor().getNome() 
+						+ "\nID do pedido: "	+ pedido.getIdPedido()
+//						+ "\nCliente: " + agendamento.getPedido().getProjeto().getCliente() 
+//						+ "\nProjeto: " + agendamento.getPedido().getProjeto()
+//						+ "\n Título do Pedido: " + agendamento.getPedido().getTitulo()
+//						+ "\n Descrição do Pedido: " + agendamento.getPedido().getDescricao()
+//						+ "\n Horas contratadas: " + agendamento.getPedido().getSugestaoDeHoras()
+						+ "\n\nAtenciosamente,"
+						+ "\n\nEquipe TOTVS Conecta");
+		
+		filaMensagemService.add(mensagem);
+	}
+	
 	
 	public Mensagem getMensagem() {
-		if(mensagem != null) {
-			Mensagem envia = mensagem;
-			mensagem = null;
-			return envia;
+		if(filaMensagemService.isEmpty()) {
+			return null;
 		}
-		return mensagem;
+		return filaMensagemService.poll();
 	}
-
-	public void setMensagem(Mensagem mensagem) {
-		this.mensagem = mensagem;
-	}
-	
-	
 
 }

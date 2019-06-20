@@ -20,7 +20,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 		.authorizeRequests()
-			.antMatchers("/resources/**", "/webjars/**").permitAll()
+			.antMatchers("/resources/**", "/webjars/**", "/mensagem/**").permitAll()
 			.antMatchers("/css/**", "/img/**", "/bootstrap/**", "/js/**").permitAll()
 			.antMatchers("/homeCliente/**").hasRole("CLIENTE")
 			.antMatchers("/homeLider/**").hasRole("LIDER")
@@ -36,7 +36,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .clearAuthentication(true)
             .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
             .logoutSuccessUrl("/login?logout")
-            .permitAll();
+            .permitAll()
+        .and()
+        .csrf()
+        	.ignoringAntMatchers("/homeConsultor/**", "/login");
 
 	}
 

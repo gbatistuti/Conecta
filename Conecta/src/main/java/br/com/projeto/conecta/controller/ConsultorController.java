@@ -16,6 +16,7 @@ import br.com.projeto.conecta.domain.Usuarios;
 import br.com.projeto.conecta.security.ConectaUserDetailsService;
 import br.com.projeto.conecta.service.AgendamentoService;
 import br.com.projeto.conecta.service.DisponivelService;
+import br.com.projeto.conecta.service.MensagemService;
 import br.com.projeto.conecta.service.PedidoService;
 
 @Controller
@@ -30,6 +31,8 @@ public class ConsultorController {
 	private DisponivelService disponivelService;
 	@Autowired
 	private PedidoService pedidoService;
+	@Autowired
+	private MensagemService mensagemService;
 
 	@GetMapping
 	public String listarPedidos(ModelMap model, HttpServletRequest request) {
@@ -45,6 +48,9 @@ public class ConsultorController {
 		if (disponivelService.validaApontamento(sessao.getCurrentUserEmail()) == null) {
 			disponiveis.setConsultor(sessao.getCurrentConsultor());
 			disponivelService.salvarApontamento(disponiveis);
+			
+			mensagemService.enviarMensagemApontamento(disponiveis);
+			
 			return "redirect:/homeConsultor?sucesso";
 		}
 		return "redirect:/homeConsultor?falha";

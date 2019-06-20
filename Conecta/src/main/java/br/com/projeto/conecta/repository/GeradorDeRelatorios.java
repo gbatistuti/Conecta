@@ -21,7 +21,7 @@ import net.sf.jasperreports.engine.JasperReport;
 
 @Transactional
 @Repository
-public class HabilidadesPrincipaisRelatorio {
+public class GeradorDeRelatorios {
 
 	@Autowired
 	@Qualifier("jdbcTemplate")
@@ -30,12 +30,12 @@ public class HabilidadesPrincipaisRelatorio {
 	@Autowired
 	private ResourceLoader resourceLoader;
 
-	public JasperPrint exportPdfFile(String numero) throws SQLException, JRException, IOException {
+	public JasperPrint exportHabilidadesPrincipaisPorId(String numero) throws SQLException, JRException, IOException {
 		//pega o paremetro de conexao, creio que aqui pode ser nulo
 		Connection conn = jdbcTemplate.getDataSource().getConnection();
 		
 		//passa o caminho para o relatorio XML a ser convertido para jasper
-		String path = resourceLoader.getResource("classpath:habilidades_principais2.jrxml").getURI().getPath();
+		String path = resourceLoader.getResource("classpath:/relatorios/habilidades_principais2.jrxml").getURI().getPath();
 
 		//converte o relatorio para jasper
 		JasperReport jasperReport = JasperCompileManager.compileReport(path);

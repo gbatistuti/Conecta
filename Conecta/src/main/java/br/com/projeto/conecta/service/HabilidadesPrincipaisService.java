@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.projeto.conecta.domain.HabilidadesPrincipais;
-import br.com.projeto.conecta.repository.HabilidadesPrincipaisRelatorio;
+import br.com.projeto.conecta.repository.GeradorDeRelatorios;
 import br.com.projeto.conecta.repository.HabilidadesPrincipaisRepository;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -21,7 +21,7 @@ public class HabilidadesPrincipaisService {
 	@Autowired
 	private HabilidadesPrincipaisRepository habilidadesPrincipaisRepository;
 	@Autowired
-	private HabilidadesPrincipaisRelatorio habilidadesPrincipaisRelatorio;
+	private GeradorDeRelatorios geradorDeRelatorios;
 
 	@Transactional
 	public List<HabilidadesPrincipais> buscarTodos() {
@@ -29,6 +29,6 @@ public class HabilidadesPrincipaisService {
 	}
 	
 	public JasperPrint exportPdfFile(String numero) throws SQLException, JRException, IOException {
-		return habilidadesPrincipaisRelatorio.exportPdfFile(numero);
+		return geradorDeRelatorios.exportHabilidadesPrincipaisPorId(numero);
 	}
 }

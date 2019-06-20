@@ -19,7 +19,7 @@ import br.com.projeto.conecta.domain.Agendamento;
 import br.com.projeto.conecta.domain.Disponiveis;
 import br.com.projeto.conecta.domain.Pedido;
 import br.com.projeto.conecta.domain.Usuarios;
-import br.com.projeto.conecta.repository.HabilidadesPrincipaisRelatorio;
+import br.com.projeto.conecta.repository.GeradorDeRelatorios;
 import br.com.projeto.conecta.security.ConectaUserDetailsService;
 import br.com.projeto.conecta.service.AgendamentoService;
 import br.com.projeto.conecta.service.DisponivelService;
@@ -41,7 +41,7 @@ public class ConsultorController {
 	@Autowired
 	private PedidoService pedidoService;
 	@Autowired
-	private HabilidadesPrincipaisRelatorio habilidadesPrincipaisRelatorio;
+	private GeradorDeRelatorios habilidadesPrincipaisRelatorio;
 	
 	@GetMapping
 	public String listarPedidos(ModelMap model, HttpServletRequest request) {
@@ -89,7 +89,7 @@ public class ConsultorController {
 		response.setHeader("content-Disposition", String.format("attachment; filename=\"habilidadesPrincipais.pdf\""));
 		
 		OutputStream out = response.getOutputStream();
-		jasperPrint = habilidadesPrincipaisRelatorio.exportPdfFile(id);
+		jasperPrint = habilidadesPrincipaisRelatorio.exportHabilidadesPrincipaisPorId(id);
 		JasperExportManager.exportReportToPdfStream(jasperPrint, out);
 	}
 }

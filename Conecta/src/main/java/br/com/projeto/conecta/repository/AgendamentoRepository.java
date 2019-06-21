@@ -3,14 +3,11 @@ package br.com.projeto.conecta.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import br.com.projeto.conecta.domain.Agendamento;
-import br.com.projeto.conecta.domain.Consultor;
 import br.com.projeto.conecta.domain.Usuarios;
 
 @Repository
@@ -36,5 +33,5 @@ public interface AgendamentoRepository extends JpaRepository<Agendamento, Intege
 
 	@Query("select a.pedido.projeto.idProjeto from Agendamento a where a.idAgendamento = :idAgendamento")
 	Integer findIdProjeto(@Param("idAgendamento")Integer idAgendamento);
-	
+
 }

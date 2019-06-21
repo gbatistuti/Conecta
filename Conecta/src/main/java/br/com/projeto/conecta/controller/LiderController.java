@@ -82,7 +82,7 @@ public class LiderController {
 		Recusado recusadoNovo = new Recusado(recusado.getMotivo(), recusado.getData(), agendamento, sessao.getCurrentLider());
 		recusadoService.salvarRecusado(recusadoNovo);
 
-		mensagemService.emailReprovacaoLider(recusado);
+		mensagemService.emailReprovacaoLider(agendamento.getIdAgendamento(), sessao.getCurrentLider(), recusado);
 		mensagemService.emailReprovacaoCliente(recusado);
 		
 		return "redirect:/homeLider?reprovado";

@@ -6,7 +6,6 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import br.com.projeto.conecta.domain.Agendamento;
@@ -23,11 +22,15 @@ public class MensagemService {
 	
 	@Autowired
 	private PedidoService pedidoService;
+	@Autowired
+	private AgendamentoService agendamentoService;
 	
 	private Queue<Mensagem> filaMensagemService = new LinkedList<Mensagem>();
 	
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	String hoje = LocalDate.now().format(formatter);
+	
+	
 	
 	public void emailApontamento(Disponiveis disponivel) {
 		Mensagem mensagem = new Mensagem(disponivel.getConsultor().getEmail(),
@@ -44,7 +47,7 @@ public class MensagemService {
 	}
 	
 	
-	@Async
+	
 	public void emailCandidatura(Disponiveis disponivel, Integer idPedido) {
 		Pedido pedido = pedidoService.getInformacoesEmailCandidatura(idPedido);
 		Mensagem mensagem = new Mensagem(disponivel.getConsultor().getEmail(),
@@ -78,7 +81,7 @@ public class MensagemService {
 	}
 
 
-	@Async
+	
 	public void emailCriacaoAgendamento(Usuarios usuario, Agendamento agendamento) {
 		Mensagem mensagem = new Mensagem(usuario.getEmail(),
 				"Agendamento Criado | " + hoje,
@@ -95,7 +98,8 @@ public class MensagemService {
 		filaMensagemService.add(mensagem);
 	}
 
-	@Async
+
+	
 	public void emailAprovacaoConsultor(Alocacoes alocacao, Lider lider) {
 		Mensagem mensagem = new Mensagem(alocacao.getAgendamento().getDisponivel().getConsultor().getEmail(),
 				"Alocação Criada | " + hoje,
@@ -116,7 +120,8 @@ public class MensagemService {
 		filaMensagemService.add(mensagem);
 	}
 
-	@Async
+	
+
 	public void emailAprovacaoLider(Alocacoes alocacao, Lider lider) {
 		Mensagem mensagem = new Mensagem(lider.getEmail(),
 				"Alocação Criada | " + hoje,
@@ -135,25 +140,28 @@ public class MensagemService {
 		filaMensagemService.add(mensagem);
 	}
 
-	//@Async
-	public void emailReprovacaoLider(Recusado recusado) {
-		Mensagem mensagem = new Mensagem(recusado.getCriadoPor().getEmail(),
+
+	
+	public void emailReprovacaoLider(Integer idAgendamento, Lider lider, Recusado recusado) {
+		Agendamento agendamento	= agendamentoService.getAgendamento(idAgendamento);
+		Mensagem mensagem = new Mensagem(lider.getEmail(),
 				"Agendamento Recusado | " + hoje,
-				"Olá, " + recusado.getCriadoPor().getNome()
-						+ "\nVocê recusou o pedido " + recusado.getAgendamento().getPedido().getTitulo() + "."
+				"Olá, " + lider.getNome()
+						+ "\nVocê recusou o pedido " + agendamento.getPedido().getTitulo() + "."
 						+ "\n Motivo: " + recusado.getMotivo()
-						+ "\nCliente: " + recusado.getAgendamento().getPedido().getProjeto().getCliente().getNome()
-						+ "\nProjeto: " + recusado.getAgendamento().getPedido().getProjeto().getNome()
-						+ "\nID do Pedido: " + recusado.getAgendamento().getPedido().getIdPedido()
-						+ "\nID do Agendamento: " + recusado.getAgendamento().getPedido().getIdPedido()
-						+ "\nDescrição do Pedido: " + recusado.getAgendamento().getPedido().getDescricao()
+						+ "\nCliente: " + agendamento.getPedido().getProjeto().getCliente().getNome()
+						+ "\nProjeto: " +agendamento.getPedido().getProjeto().getNome()
+						+ "\nID do Pedido: " + agendamento.getPedido().getIdPedido()
+						+ "\nID do Agendamento: " + agendamento.getPedido().getIdPedido()
+						+ "\nDescrição do Pedido: " + agendamento.getPedido().getDescricao()
 						+ "\n\nAtenciosamente,"
 						+ "\n\nEquipe TOTVS Conecta");
 		
 		filaMensagemService.add(mensagem);
 	}
 
-	@Async
+
+	
 	public void emailReprovacaoCliente(Recusado recusado) {
 		Mensagem mensagem = new Mensagem(recusado.getAgendamento().getPedido().getProjeto().getCliente().getEmail(),
 				"Agendamento Recusado | " + hoje,

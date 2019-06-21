@@ -22,6 +22,7 @@ import br.com.projeto.conecta.security.ConectaUserDetailsService;
 import br.com.projeto.conecta.service.AgendamentoService;
 import br.com.projeto.conecta.service.AlocacaoService;
 import br.com.projeto.conecta.service.DisponivelService;
+import br.com.projeto.conecta.service.MensagemService;
 import br.com.projeto.conecta.service.PedidoService;
 import br.com.projeto.conecta.service.ProjetoService;
 import br.com.projeto.conecta.service.RecusadoService;
@@ -44,6 +45,8 @@ public class LiderController {
 	private RecusadoService recusadoService;
 	@Autowired
 	private ProjetoService projetoservice;
+	@Autowired
+	private MensagemService mensagemService;
 
 	@GetMapping
 	public String listarAgendamentos(ModelMap model, HttpServletRequest request) {
@@ -59,7 +62,7 @@ public class LiderController {
 	@Transactional
 	public String aprovarAgendamento(Alocacoes alocacao, Agendamento agendamento) {
 		
-		agendamento.getPedido().setStatus("aprovado");
+		agendamento.getPedido().setStatus("Aprovado");
 		agendamento.getPedido().getProjeto().setQtdCreditos(alocacaoService.creditosParaDescontar(agendamento));
 
 		alocacao.setCriadoPor(sessao.getCurrentLider());
@@ -71,6 +74,10 @@ public class LiderController {
 		agendamentoService.salvarAgendamento(agendamento);
 		Alocacoes alocacaoNova = new Alocacoes(agendamento, sessao.getCurrentLider(), horaInicio, alocacaoService.definirHoraFim(horaInicio, alocacao), alocacao.getMotivo());
 		alocacaoService.salvarAlocacao(alocacaoNova);
+		
+		mensagemService.emailAprovacaoConsultor(alocacao, sessao.getCurrentLider());
+		mensagemService.emailAprovacaoLider(alocacao, sessao.getCurrentLider());
+		
 		return "redirect:/homeLider?aprovado";
 	}
 
@@ -84,6 +91,9 @@ public class LiderController {
 
 		recusadoService.salvarRecusado(recusado);
 		agendamentoService.salvarAgendamento(agendamentoAlterado);
+		
+		mensagemService.emailReprovacaoLider(recusado);
+		mensagemService.emailReprovacaoCliente(recusado);
 
 		return "redirect:/homeLider?reprovado";
 
@@ -124,6 +134,10 @@ public class LiderController {
 		alocacao.setMotivo("Alocação criada a partir da lista de pedidos.");
 
 		alocacaoService.salvarAlocacao(alocacao);
+		
+		mensagemService.emailAprovacaoConsultor(alocacao, sessao.getCurrentLider());
+		mensagemService.emailAprovacaoLider(alocacao, sessao.getCurrentLider());
+		
 		return "redirect:/homeLider/pedidos?sucesso";
 	}
 

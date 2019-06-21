@@ -16,6 +16,7 @@ import br.com.projeto.conecta.domain.Usuarios;
 import br.com.projeto.conecta.security.ConectaUserDetailsService;
 import br.com.projeto.conecta.service.AgendamentoService;
 import br.com.projeto.conecta.service.DisponivelService;
+import br.com.projeto.conecta.service.MensagemService;
 import br.com.projeto.conecta.service.PedidoService;
 import br.com.projeto.conecta.service.ProjetoService;
 
@@ -33,6 +34,8 @@ public class ClienteController {
 	private ProjetoService projetoService;
 	@Autowired
 	private ConectaUserDetailsService sessao;
+	@Autowired
+	private MensagemService mensagemService;
 	
 	@GetMapping
 	public String listarDisponiveis(ModelMap model, HttpServletRequest request) {
@@ -51,8 +54,11 @@ public class ClienteController {
 		Usuarios usuario = sessao.getCurrentUser();
 		
 		pedido.setCriadoPor(usuario);
-		pedido.setOrigem("pedido");
+		pedido.setOrigem("Pedido");
 		pedidoService.salvarPedido(pedido);
+		
+		mensagemService.emailCriacaoPedido(pedido, usuario);
+		
 		return "redirect:/homeCliente?pedidoCriado";
 	}
 	
@@ -63,7 +69,7 @@ public class ClienteController {
 		Usuarios usuario = sessao.getCurrentUser();
 		
 		pedido.setCriadoPor(usuario);
-		pedido.setOrigem("agendamento");
+		pedido.setOrigem("Agendamento");
 		
 		agendamento.setPedido(pedido);
 		agendamento.setCriadoPor(usuario);
@@ -75,6 +81,8 @@ public class ClienteController {
 		}
 		pedidoService.salvarPedido(pedido);
 		agendamentoService.salvarAgendamento(agendamento);
+		
+		mensagemService.emailCriacaoAgendamento(usuario, agendamento);
 		
 		return "redirect:/homeCliente?agendamentoCriado";
 	}

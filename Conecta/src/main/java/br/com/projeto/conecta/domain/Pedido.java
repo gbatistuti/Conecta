@@ -129,7 +129,7 @@ public class Pedido {
 
 	@PrePersist
 	public void prePersist() {
-		this.status = "aguardando";
+		this.status = "Aguardando";
 		this.candidatura = false;
 	}
 }

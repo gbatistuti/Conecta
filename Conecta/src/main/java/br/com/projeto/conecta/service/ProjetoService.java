@@ -22,9 +22,9 @@ public class ProjetoService {
 	}
 	
 	@Cacheable(value = "projetosCache")
-	@CacheEvict(value = "idUser")
-	public List<Projeto> buscarPor(Integer id) {
-		return projetoRepository.getById(id);
+	@CacheEvict(value = "email")
+	public List<Projeto> buscarPor(String email) {
+		return projetoRepository.getByEmail(email);
 	}
 	
 	@CacheEvict(value = {"projetosTodosCache", "projetosCache"}, allEntries = true)
@@ -34,5 +34,13 @@ public class ProjetoService {
 	
 	public Projeto getProjeto(Integer id) {
 		return projetoRepository.getOne(id);
+	}
+
+	public void descontarCreditos(float creditosParaDescontar, Integer idProjeto) {
+		projetoRepository.debitarCreditos(creditosParaDescontar, idProjeto);
+	}
+
+	public void atualizarCreditos(Float qtdCreditos, Integer idProjeto) {
+		projetoRepository.atualizarCreditos(qtdCreditos, idProjeto);
 	}
 }

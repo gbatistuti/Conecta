@@ -30,7 +30,7 @@ public class Disponiveis {
 	
 	private Date data;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "idUsuario")
 	private Consultor consultor;
 	

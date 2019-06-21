@@ -42,15 +42,13 @@ public class Pedido {
 	public Pedido() {
 	}
 
-	public Pedido(Integer idPedido, String titulo, String descricao, int sugestaoDeHoras, String status, String origem,
-			boolean candidatura, Projeto projeto, Usuarios criadoPor) {
+	public Pedido(Integer idPedido, String titulo, String descricao, int sugestaoDeHoras, String status, String origem, Projeto projeto, Usuarios criadoPor) {
 		this.idPedido = idPedido;
 		this.titulo = titulo;
 		this.descricao = descricao;
 		this.sugestaoDeHoras = sugestaoDeHoras;
 		this.status = status;
 		this.origem = origem;
-		this.candidatura = candidatura;
 		this.projeto = projeto;
 		this.criadoPor = criadoPor;
 	}

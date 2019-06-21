@@ -42,8 +42,8 @@ public class ClienteController {
 		Usuarios usuario = sessao.getCurrentUser();
 		request.setAttribute("nome", usuario.getNome());
 		
+		model.addAttribute("projeto",projetoService.buscarPor(sessao.getCurrentUserEmail()));
 		model.addAttribute("disponiveis",disponivelService.buscarTodos());
-		model.addAttribute("projeto",projetoService.buscarPor(sessao.getCurrentUserId()));
 		model.addAttribute("pedido", new Pedido());
 		model.addAttribute("agendamento", new Agendamento());
 		return "homeCliente";
@@ -64,8 +64,6 @@ public class ClienteController {
 	
 	@PostMapping("/criaragendamento")
 	public String criarAgendamento(Pedido pedido, Agendamento agendamento, Model model) {
-		
-		
 		Usuarios usuario = sessao.getCurrentUser();
 		
 		pedido.setCriadoPor(usuario);
@@ -91,6 +89,7 @@ public class ClienteController {
 	public String listarPedidosEAgendamentos(Pedido pedido, Agendamento agendamento, Model model, HttpServletRequest request) {
 		Usuarios usuario = sessao.getCurrentUser();
 		request.setAttribute("nome", usuario.getNome());
+		
 		model.addAttribute("pedidosRealizados", pedidoService.buscarPedidosPorUsuario(usuario));
 		model.addAttribute("agendamentosCriados", agendamentoService.buscarAgendamentosPorUsuario(usuario));
 		return "AcompanhamentoCliente";

@@ -16,8 +16,8 @@ public class HabilidadesPrincipaisService {
 	@Autowired
 	private HabilidadesPrincipaisRepository habilidadesPrincipaisRepository;
 	
-	@Transactional
-	public List<HabilidadesPrincipais> buscarTodos(){
-		return habilidadesPrincipaisRepository.findAll();
-	}
+//	@Transactional
+//	public List<HabilidadesPrincipais> buscarTodos(){
+//		return habilidadesPrincipaisRepository.findAll();
+//	}
 }

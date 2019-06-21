@@ -71,4 +71,8 @@ public class AlocacaoService {
 				.plusHours(agendamentoService.buscarHoras(agendamento.getIdAgendamento()));
 		return horaFim;
 	}
+
+	public Alocacoes getAlocacao(Integer idAlocacao) {
+		return alocacaoRepository.getOne(idAlocacao);
+	}
 }

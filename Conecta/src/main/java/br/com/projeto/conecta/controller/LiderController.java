@@ -61,7 +61,7 @@ public class LiderController {
 	@PostMapping("/aprovar")
 	@Transactional
 	public String aprovarAgendamento(Alocacoes alocacao, Agendamento agendamento) {		
-		pedidoService.atualizarStatus("aprovado",agendamento);
+		pedidoService.atualizarStatus("Aprovado",agendamento);
 		alocacaoService.creditosParaDescontar(agendamento);
 		
 		LocalTime horaInicio = alocacaoService.buscaUltimaHoraFimDeAlocacaoDoConsultor(agendamento);
@@ -69,8 +69,8 @@ public class LiderController {
 		alocacao = new Alocacoes(agendamento, sessao.getCurrentLider(), horaInicio, alocacaoService.definirHoraFim(horaInicio, agendamento), alocacao.getMotivo());
 		alocacaoService.salvarAlocacao(alocacao);
 
-		mensagemService.emailAprovacaoConsultor(alocacao, sessao.getCurrentLider());
-		mensagemService.emailAprovacaoLider(alocacao, sessao.getCurrentLider());
+		mensagemService.emailAprovacaoConsultor(alocacao.getIdAlocacao(), agendamento.getPedido().getIdPedido());
+		mensagemService.emailAprovacaoLider(alocacao.getIdAlocacao(), agendamento.getPedido().getIdPedido());
 		
 		return "redirect:/homeLider?aprovado";
 	}
@@ -78,7 +78,7 @@ public class LiderController {
 	@PostMapping("/reprovar")
 	@Transactional
 	public String reprovarAgendamento(Recusado recusado, Agendamento agendamento) {
-		pedidoService.atualizarStatus("recusado",agendamento);
+		pedidoService.atualizarStatus("Recusado",agendamento);
 		Recusado recusadoNovo = new Recusado(recusado.getMotivo(), recusado.getData(), agendamento, sessao.getCurrentLider());
 		recusadoService.salvarRecusado(recusadoNovo);
 
@@ -100,19 +100,20 @@ public class LiderController {
 
 	@PostMapping("/pedidos/alocar")
 	@Transactional
-	public String alocarDisponivelAoPedido(Agendamento agendamento, Pedido pedido) {
-		agendamento = new Agendamento(agendamento.getDisponivel(), sessao.getCurrentLider(), pedido);
+	public String alocarDisponivelAoPedido(Agendamento agendamento, Pedido pedido, Alocacoes alocacao) {
+		agendamento.setPedido(pedido);
+		agendamento = new Agendamento(agendamento.getDisponivel(), sessao.getCurrentLider(), agendamento.getPedido());
 		agendamentoService.salvarAgendamento(agendamento);
-		pedidoService.atualizarStatus("aprovado",agendamento);
+		pedidoService.atualizarStatus("Aprovado",agendamento);
 		alocacaoService.creditosParaDescontar(agendamento);
 		
 		LocalTime horaInicio = alocacaoService.buscaUltimaHoraFimDeAlocacaoDoConsultor(agendamento);
 		
-		Alocacoes alocacao = new Alocacoes(agendamento, sessao.getCurrentLider(), horaInicio, alocacaoService.definirHoraFim(horaInicio, agendamento), "Alocação criada a partir da lista de pedidos");
+		alocacao = new Alocacoes(agendamento, sessao.getCurrentLider(), horaInicio, alocacaoService.definirHoraFim(horaInicio, agendamento), "Alocação criada a partir da lista de pedidos");
 		alocacaoService.salvarAlocacao(alocacao);
 		
-		mensagemService.emailAprovacaoConsultor(alocacao, sessao.getCurrentLider());
-		mensagemService.emailAprovacaoLider(alocacao, sessao.getCurrentLider());
+		mensagemService.emailAprovacaoConsultor(alocacao.getIdAlocacao(), pedido.getIdPedido());
+		mensagemService.emailAprovacaoLider(alocacao.getIdAlocacao(), pedido.getIdPedido());
 		
 		return "redirect:/homeLider/pedidos?sucesso";
 	}

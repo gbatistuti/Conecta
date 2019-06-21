@@ -36,10 +36,12 @@ public class ProjetoService {
 		return projetoRepository.getOne(id);
 	}
 
+	@CacheEvict(value = "projetosTodosCache", allEntries = true)
 	public void descontarCreditos(float creditosParaDescontar, Integer idProjeto) {
 		projetoRepository.debitarCreditos(creditosParaDescontar, idProjeto);
 	}
-
+	
+	@CacheEvict(value = "projetosTodosCache", allEntries = true)
 	public void atualizarCreditos(Float qtdCreditos, Integer idProjeto) {
 		projetoRepository.atualizarCreditos(qtdCreditos, idProjeto);
 	}

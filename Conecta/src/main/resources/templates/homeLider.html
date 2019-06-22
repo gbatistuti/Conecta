@@ -144,10 +144,13 @@
 						th:object="${alocacoes}">
 						<div class="formulario">
 							<label>Cód. do Agendamento</label> <br> <input
-								class="inputDadosAgendamento centralizado" name="agendamento" placeholder="Selecione um agendamento da lista" required readonly
+								class="inputDadosAgendamento centralizado" name="agendamento" 
+								placeholder="Selecione um agendamento da lista" required 
+								onkeydown="return false;"
+                				style="caret-color: transparent !important;"
 								oninvalid="this.setCustomValidity('Campo não pode ser vazio')"
 								onchange="try{setCustomValidity('')}catch(e){}"> <br>
-							<label>Motivo</label> <br> <input name="motivo">
+							<label>Motivo</label> (opcional) <br> <input name="motivo">
 							<button type="submit">Enviar</button>
 							<input type="hidden" th:name="${_csrf.parameterName}"
 								th:value="${_csrf.token}" />
@@ -164,7 +167,10 @@
 						<div class="formulario">
 
 							<label>Cód. do Agendamento</label><br> 
-							<input class="inputDadosAgendamento centralizado" name="agendamento" placeholder="Selecione um agendamento da lista" required readonly oninvalid="this.setCustomValidity('Campo não pode ser vazio')"
+							<input class="inputDadosAgendamento centralizado" name="agendamento" 
+								placeholder="Selecione um agendamento da lista" required 
+								onkeydown="return false;"
+                				style="caret-color: transparent !important;" oninvalid="this.setCustomValidity('Campo não pode ser vazio')"
 								onchange="try{setCustomValidity('')}catch(e){}"> 
 							<label>Motivo</label><br>
 							<input name="motivo" required oninvalid="this.setCustomValidity('Campo não pode ser vazio')"

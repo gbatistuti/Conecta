@@ -11,31 +11,40 @@
 	<div th:replace="fragments/menuLider :: menu"></div>
 	<div class="fundo" id="fundoUmaTabelaNaPaginaToda">
 		<h2>Agendamentos Reprovados</h2>
-	<div class="rolagem" id="rolagemUmaTabelaNaPaginaToda">
-		<table>
-			<thead>
-				<tr>
-					<th class="alinhadoADireita">Cód.</th>
-					<th class="alinhadoADireita">Data</th>
-					<th class="alinhadoAEsquerda">Consultor</th>
-					<th class="alinhadoAEsquerda">Projeto</th>
-					<th class="justificado">Título</th>
-					<th class="justificado">Motivo</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="r : ${reprovados}">
-					<td class="alinhadoADireita" th:text="${r.idRecusado}"></td>
-					<td class="alinhadoADireita" th:text="${r.data}">
-					<td class="alinhadoAEsquerda" th:text="${r.agendamento.disponivel.consultor.nome}"></td>
-					<td class="alinhadoAEsquerda" th:text="${r.agendamento.pedido.projeto.nome}"></td>
-					<td class="justificado" th:text="${r.agendamento.pedido.titulo}"></td>
-					<td class="justificado" th:text="${r.motivo}"></td>
-				</tr>
-			</tbody>
-		</table>
+		<div class="rolagem" id="rolagemUmaTabelaNaPaginaToda">
+			<table>
+				<thead>
+					<tr>
+						<th class="alinhadoADireita">Cód.</th>
+						<th class="alinhadoADireita">Data</th>
+						<th class="alinhadoAEsquerda">Consultor</th>
+						<th class="alinhadoAEsquerda">Projeto</th>
+						<th class="justificado">Título</th>
+						<th class="justificado">Motivo</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="r : ${reprovados}">
+						<td class="alinhadoADireita" th:text="${r.idRecusado}"></td>
+						<td class="alinhadoADireita" th:text="${r.data}">
+						<td class="alinhadoAEsquerda"
+							th:text="${r.agendamento.disponivel.consultor.nome}"></td>
+						<td class="alinhadoAEsquerda"
+							th:text="${r.agendamento.pedido.projeto.nome}"></td>
+						<td class="justificado" th:text="${r.agendamento.pedido.titulo}"></td>
+						<td class="justificado" th:text="${r.motivo}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
-	</div>
+	<script type="text/javascript">
+	// retorna cor menu parametrizável
+		const fundo = window.sessionStorage.getItem('fundo');
 
+		if (fundo) {
+			document.body.style.backgroundImage = fundo
+		}
+	</script>
 </body>
 </html>

@@ -4,7 +4,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Home | Consultor</title>
-<link rel="stylesheet" type="text/css" media='screen' th:href="@{/css/homeConsultor.css}"/>
+<link rel="stylesheet" type="text/css" media='screen'
+	th:href="@{/css/homeConsultor.css}" />
 
 <script th:src='@{/js/homeConsultor.js}' type="text/javascript"></script>
 
@@ -12,7 +13,8 @@
 <th:block th:replace="fragments/head :: head"></th:block>
 
 </head>
-<body onload="aberturaDoPopUp()" id="menuBody" style="background-image:url('img/menu/fundo1.png')">
+<body onload="aberturaDoPopUp()" id="menuBody"
+	style="background-image: url('img/menu/fundo1.png')">
 	<div class="modal fade" id="avisoModal">
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
@@ -32,7 +34,7 @@
 					<div th:if="${param.candidatado}">
 						<p>Candidatura realizada com sucesso!</p>
 					</div>
-					
+
 				</div>
 				<div class="modal-footer">
 					<button onclick="fecharPopUp" class="btn btn-default" value="Close"></button>
@@ -45,20 +47,28 @@
 	<!-- Todos id e class de menu começam com menuAlgumacoisa então evite usar menu na frente de seus ids ou class-->
 	<div class="aDireita col-lg-4">
 		<div id="ApontarOciosidade" class="fundo">
-			<h2 >Apontar Ociosidade</h2>
-	
-			
-			
+			<h2>Apontar Ociosidade</h2>
+
+
+
 			<div id="formularioDeOciosidade">
 				<form class="centro" action="/homeConsultor/apontar" method="POST">
-					<label class="labelHorario">Início</label> <input class="inputHorario" type="time" placeholder="Ex:08:30" name="horaInicio" required oninvalid="this.setCustomValidity('Campo não pode ser vazio')" onchange="try{setCustomValidity('')}catch(e){}">
-					<label class="labelHorario">Término</label> <input class="inputHorario" type="time" placeholder="Ex:15:20" name="horaFim" required oninvalid="this.setCustomValidity('Campo não pode ser vazio')" onchange="try{setCustomValidity('')}catch(e){}">
-					<button id="salvarOciosidade"class="botao" type="submit">Enviar</button>
-					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+					<label class="labelHorario">Início</label> <input
+						class="inputHorario" type="time" placeholder="Ex:08:30"
+						name="horaInicio" required
+						oninvalid="this.setCustomValidity('Campo não pode ser vazio')"
+						onchange="try{setCustomValidity('')}catch(e){}"> <label
+						class="labelHorario">Término</label> <input class="inputHorario"
+						type="time" placeholder="Ex:15:20" name="horaFim" required
+						oninvalid="this.setCustomValidity('Campo não pode ser vazio')"
+						onchange="try{setCustomValidity('')}catch(e){}">
+					<button id="salvarOciosidade" class="botao" type="submit">Enviar</button>
+					<input type="hidden" th:name="${_csrf.parameterName}"
+						th:value="${_csrf.token}" />
 				</form>
 			</div>
 		</div>
-	
+
 		<div id="candidaturas" class="fundo">
 			<h2>Candidaturas</h2>
 			<div id="rolagemCandidaturas" class="rolagem">
@@ -79,14 +89,12 @@
 					</tbody>
 				</table>
 			</div>
-	
+
 		</div>
-	
-		<div>
-			
-		</div>
+
+		<div></div>
 	</div>
-	
+
 	<div class="aEsquerda col-lg-8">
 		<div id="pedidosFundo" class="fundo">
 			<h2>Pedidos em Aberto</h2>
@@ -111,7 +119,7 @@
 							<td class="alinhadoAEsquerda" th:text="${p.projeto.nome}"></td>
 							<td class="alinhadoAEsquerda" th:text="${p.projeto.produto}"></td>
 							<td class="alinhadoADireita" th:text="${p.sugestaoDeHoras}"></td>
-							<td class="centralizado" >
+							<td class="centralizado">
 								<form action="/homeConsultor/candidatar" method="POST">
 									<button id="candidatarSe" class="botao" type="submit"
 										name="idPedido" th:value="${p.idPedido}">Candidatar-se</button>
@@ -126,26 +134,34 @@
 		</div>
 	</div>
 
-<script type="text/javascript">
+	<script type="text/javascript">
+		function aberturaDoPopUp() {
+			var url_atual = window.location.href
 
- function aberturaDoPopUp() {
- 	var url_atual = window.location.href
- 	
- 	var sucessoNaUrl = url_atual.indexOf("sucesso")
- 	var sucessoNaUrl2 = url_atual.indexOf("candidatado")
- 	var erroNaUrl = url_atual.indexOf("falha")
- 	var erroNaUrl2 = url_atual.indexOf("falha2")
- 	
- 	var modal = document.getElementById('avisoModal')
- 	
- 	
- 	if(sucessoNaUrl != -1 || erroNaUrl != -1 || erroNaUrl2 != -1 || sucessoNaUrl2 != -1 ){
- 		$("#avisoModal").modal('show');
- 	}
- }
- 
- function fecharPopUp(){
-	 $("#avisoModal").modal('hide');
- }
- </script>
-	
+			var sucessoNaUrl = url_atual.indexOf("sucesso")
+			var sucessoNaUrl2 = url_atual.indexOf("candidatado")
+			var erroNaUrl = url_atual.indexOf("falha")
+			var erroNaUrl2 = url_atual.indexOf("falha2")
+
+			var modal = document.getElementById('avisoModal')
+
+			if (sucessoNaUrl != -1 || erroNaUrl != -1 || erroNaUrl2 != -1
+					|| sucessoNaUrl2 != -1) {
+				$("#avisoModal").modal('show');
+			}
+		}
+
+		function fecharPopUp() {
+			$("#avisoModal").modal('hide');
+		}
+		
+		
+		// retorna cor menu parametrizável
+		const fundo = window.sessionStorage.getItem('fundo');
+
+		if (fundo) {
+			document.body.style.backgroundImage = fundo
+		}
+	</script>
+</body>
+</html>

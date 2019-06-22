@@ -1,17 +1,29 @@
 function imagem1(){
-    document.body.style.backgroundImage = 'url("../img/menu/fundo1.png")'
+	var imagem = 'url("../img/menu/fundo1.png")'
+	window.sessionStorage.removeItem('fundo')
+	window.sessionStorage.setItem('fundo', imagem)
+    document.body.style.backgroundImage = imagem
 }
 
 function imagem2(){
-    document.body.style.backgroundImage = 'url("../img/menu/fundo2.png")'
+	var imagem = 'url("../img/menu/fundo2.png")'
+	window.sessionStorage.removeItem('fundo')
+	window.sessionStorage.setItem('fundo', imagem)
+	document.body.style.backgroundImage = imagem
 }
 
 function imagem3(){
-    document.body.style.backgroundImage = 'url("../img/menu/fundo3.png")'
+	var imagem = 'url("../img/menu/fundo3.png")'
+	window.sessionStorage.removeItem('fundo')
+	window.sessionStorage.setItem('fundo', imagem)
+	document.body.style.backgroundImage = imagem
 }
 
 function imagem4(){
-    document.body.style.backgroundImage = 'url("../img/menu/fundo4.png")'
+	var imagem = 'url("../img/menu/fundo4.png")'
+	window.sessionStorage.removeItem('fundo')
+	window.sessionStorage.setItem('fundo', imagem)
+	document.body.style.backgroundImage = imagem
 }
 
 function VisibilidadePainelUser(){
@@ -23,3 +35,4 @@ function VisibilidadePainelUser(){
     }
     
 }
+

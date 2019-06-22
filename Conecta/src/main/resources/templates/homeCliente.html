@@ -303,6 +303,13 @@
 		}
 	}
 	
+	// retorna cor menu parametrizável
+	const fundo = window.sessionStorage.getItem('fundo');
+	
+	if(fundo){
+		document.body.style.backgroundImage = fundo
+	}
+	
 	</script>
 </body>
 </html>

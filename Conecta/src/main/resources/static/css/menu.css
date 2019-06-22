@@ -327,9 +327,10 @@ select{
 
 #menuSelecaoDeCor{
     display: none;
-    position: relative;
+    position: absolute;
     float: right;
-    z-index:99;
+    z-index:80;
+    margin-left: 88.8vw;
 }
 
 #menuCaixaDeSelecao{
@@ -359,11 +360,12 @@ select{
 }
 
 .menuImagenSelecaoCorDosPaines{
-	float: right;
+/* 	float: right; */
 	top:0px;
 	margin-top: -5px;
 	margin-right: -50px;
 	position:relative;
+	z-index: 100;
 }
 
 #acompanhamentoDireita{

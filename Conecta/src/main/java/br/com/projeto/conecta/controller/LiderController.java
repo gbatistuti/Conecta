@@ -145,6 +145,14 @@ public class LiderController {
 		return "gerenciaProjetos";
 	}
 	
+	@GetMapping("/relatorios")
+	public String relatorios(HttpServletRequest request) {
+		Usuarios usuario = sessao.getCurrentLider();
+		request.setAttribute("nome", usuario.getNome());
+		
+		return "relatorios";
+	}
+	
 	@PostMapping("gerenciaProjetos/atualizar")
 	@Transactional
 	public String atualizarQtdDeCreditos(Projeto projeto) {

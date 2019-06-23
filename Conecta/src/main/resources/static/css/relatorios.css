@@ -1,0 +1,10 @@
+#content{
+	align-items: center
+}
+
+.painelDeRelatorio{
+	height: 43vh;
+	width: 22%;
+	display: flex;
+	float: left;
+}

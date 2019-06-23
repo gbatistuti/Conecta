@@ -183,10 +183,12 @@
 	<script type="text/javascript">
 		// Troca de itens da pagina
 		function abreAprovar() {
+			var reprovar = document.getElementById("reprovar");
 			var aprovar = document.getElementById("aprovar");
 			var selecao = document.getElementById("selecao");
 			aprovar.style.display = "block"
 			selecao.style.display = "none"
+			reprovar.style.display = "none"
 		}
 
 		function abreReprovar() {
@@ -299,6 +301,9 @@
 			var dados = td.innerHTML
 
 			colocaInformacaoInput(dados, "inputDadosAgendamento")
+			
+			abreSeletor()
+			AbreAprovar()
 		}
 
 		function colocaInformacaoInput(dados, idInput) {

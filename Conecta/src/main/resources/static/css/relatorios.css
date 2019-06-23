@@ -1,10 +1,64 @@
 #content{
-	align-items: center
+	margin-left: 3vw;
 }
 
 .painelDeRelatorio{
 	height: 43vh;
 	width: 22%;
-	display: flex;
+	position:relative;
 	float: left;
+	align-items: center;
+	align-content: center;
+	text-align: center;
+}
+
+.iconRelatorio{
+	height: 70px;
+	width: 70px;
+	position: relative;
+	margin-bottom: 20px;
+}
+
+.nomeDoRelatorio{
+	width:100%;
+	position:relative;
+	align-self:center;
+	text-align: center;
+}
+
+.formDeInpusRela{
+	width: 100%;
+}
+
+.formDeInpusRela2{
+	margin-top: 28px;
+}
+
+.formDeInpusRela1{
+	margin-top: 50px;
+}
+
+.inputRelatorio{
+	height: 20px;
+	margin-bottom: 10px;
+}
+
+.buttonGerar{
+	padding: 0px 10px 0px 10px;
+	font-size: 20px;
+	position: relative;
+}
+
+.buttonGerar1Input{
+	padding: 0px 10px 0px 10px;
+	font-size: 20px;
+	position: relative;
+	top: 70px;
+}
+
+.buttonGerar2Input{
+	padding: 0px 10px 0px 10px;
+	font-size: 20px;
+	position: relative;
+	top: 40px;
 }

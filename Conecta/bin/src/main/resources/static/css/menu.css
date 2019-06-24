@@ -59,7 +59,7 @@
 
 #menuSelecaoDeCor{
     display: none;
-    position: relative;
+    position: absolute;
     float: right;
 }
 

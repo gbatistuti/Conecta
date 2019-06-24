@@ -60,17 +60,28 @@
 		<div id="menuLinhaInferior"></div>
 		<div id="menuSelecaoDeCor">
 		   <div id="menuCaixaDeSelecao">
-			   <span id="menuCorDosPaineis">Cor dos paineis</span>
-			   <div class="menuSelecaoCorDosPaineis" onclick="imagem1()"> <img class="menuImagenSelecaoCorDosPaines" th:src="@{/img/menu/painel1.png}"></div>
-			   <div class="menuSelecaoCorDosPaineis" onclick="imagem2()"> <img class="menuImagenSelecaoCorDosPaines" th:src="@{/img/menu/painel2.png}"></div>
-			   <div class="menuSelecaoCorDosPaineis" onclick="imagem3()"> <img class="menuImagenSelecaoCorDosPaines" th:src="@{/img/menu/painel3.png}"></div>
-			   <div class="menuSelecaoCorDosPaineis" onclick="imagem4()"> <img class="menuImagenSelecaoCorDosPaines" th:src="@{/img/menu/painel4.png}"></div>
+			   <span id="menuCorDosPaineis">Cor dos painéis</span>
+			  <label>
+			   		<input id="fundo1" name="fundo" type="radio" class="menuSelecaoCorDosPaineis" onclick="imagem1()"> 
+			   		<img class="menuImagenSelecaoCorDosPaines" th:src="@{/img/menu/painel1.png}">
+			   	</label><br>
+			   	<label>
+				   <input id="fundo2" name="fundo" type="radio" class="menuSelecaoCorDosPaineis" onclick="imagem2()"> 
+				   <img class="menuImagenSelecaoCorDosPaines" th:src="@{/img/menu/painel2.png}">
+			   	</label><br>
+			   	<label>
+				   <input id="fundo3" name="fundo" type="radio" class="menuSelecaoCorDosPaineis" onclick="imagem3()"> 
+				   <img class="menuImagenSelecaoCorDosPaines" th:src="@{/img/menu/painel3.png}">
+			   	</label><br>
+			   	<label>
+				   <input id="fundo4" name="fundo" type="radio"  class="menuSelecaoCorDosPaineis" onclick="imagem4()"> 
+				   <img class="menuImagenSelecaoCorDosPaines" th:src="@{/img/menu/painel4.png}">
+			   	</label>
 			</div>
 			<img th:src="@{/img/menu/caixaDeSelecaoDeCor.png}">
 		</div>
 	</nav>
 	<!-- MENU-->
-    
     
 </body>
 </html>

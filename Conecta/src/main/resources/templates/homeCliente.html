@@ -58,9 +58,19 @@
 		<button onclick="abreSeletor()" class="botaoDeFechar">X</button>
 		<h2>Agendamento</h2>
 		<form class="formPedidoEAgendamento" action="/homeCliente/criaragendamento" method="post">
-			<Label>Título</Label> <br> <input type="text" th:field="${pedido.titulo}" required oninvalid="this.setCustomValidity('Campo não pode ser vazio')" onchange="try{setCustomValidity('')}catch(e){}"><br>
-			<Label>Descrição</Label> <br> <input type="text"th:field="${pedido.descricao}" required oninvalid="this.setCustomValidity('Campo não pode ser vazio')" onchange="try{setCustomValidity('')}catch(e){}"><br>
-			<label>Cód. do Consultor</label><br><input class="inputNumero" type="number" placeholder="Selecione um consultor da lista" readonly th:field="${agendamento.disponivel}"><br>
+			<Label>Título</Label> <br> 
+			<input type="text" th:field="${pedido.titulo}" 
+				required oninvalid="this.setCustomValidity('Campo não pode ser vazio')" 
+				onchange="try{setCustomValidity('')}catch(e){}"><br>
+			<Label>Descrição</Label> <br> 
+			<input type="text"th:field="${pedido.descricao}" 
+				required oninvalid="this.setCustomValidity('Campo não pode ser vazio')" 
+				onchange="try{setCustomValidity('')}catch(e){}"><br>
+			<label>Cód. do Consultor</label><br>
+			<input class="inputNumero" type="text" 
+				placeholder="Selecione um consultor da lista" 
+				onkeydown="return false;"
+                style="caret-color: transparent !important;" required th:field="${agendamento.disponivel}"><br>
 			<Label>Quantidade de Horas</Label> <br> <input class="inputNumero" type="number" min="1" max="8" name="sugestaoDeHoras" required oninvalid="this.setCustomValidity('Digite um valor de 1 a 8 horas')" onchange="try{setCustomValidity('')}catch(e){}"><br>
 			<label>Projeto</label><br>
 			<select onclick="iniciaLetreiro(this)" th:field="${pedido.projeto}" name="idProjeto" required oninvalid="this.setCustomValidity('Escolha um projeto da lista')" onchange="try{setCustomValidity('')}catch(e){}">
@@ -292,6 +302,29 @@
 		}else{
 			ddl.classList.add("marquee")
 		}
+	}
+	
+	// retorna cor menu parametrizável
+	const fundo1 = window.localStorage.getItem('fundo1');
+	const fundo2 = window.localStorage.getItem('fundo2');
+	const fundo3 = window.localStorage.getItem('fundo3');
+	const fundo4 = window.localStorage.getItem('fundo4');
+	
+	if(fundo1){
+		document.body.style.backgroundImage = fundo1
+		document.getElementById("fundo1").checked = true;
+	}
+	else if(fundo2){
+		document.body.style.backgroundImage = fundo2
+		document.getElementById("fundo2").checked = true;
+	}
+	else if(fundo3){
+		document.body.style.backgroundImage = fundo3
+		document.getElementById("fundo3").checked = true;
+	}
+	else if(fundo4){
+		document.body.style.backgroundImage = fundo4
+		document.getElementById("fundo4").checked = true;
 	}
 	
 	</script>

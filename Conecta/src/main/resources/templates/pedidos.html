@@ -107,7 +107,10 @@
 						<td class="alinhadoADireita" th:text="${p.sugestaoDeHoras}"></td>
 						<td class="centralizado">
 							<form action="/homeLider/pedidos/alocar" method="POST">
-								<input class="inputPedidos centralizado" name="disponivel" readonly required placeholder="Selecione ao lado" oninvalid="this.setCustomValidity('Campo não pode ser vazio')" onchange="try{setCustomValidity('')}catch(e){}">
+								<input class="inputPedidos centralizado" name="disponivel" onkeydown="return false;"
+                					style="caret-color: transparent !important;" required 
+                					placeholder="Selecione ao lado" oninvalid="this.setCustomValidity('Campo não pode ser vazio')" 
+                					onchange="try{setCustomValidity('')}catch(e){}">
 								<button class="botaoPedidos botaoEmLista" type="submit" name="idPedido" th:value="${p.idPedido}">Alocar</button>
 								<input type="hidden" th:name="${_csrf.parameterName}"
 									th:value="${_csrf.token}" />
@@ -258,6 +261,30 @@
 		
 		return dados;
 	}
+	
+	// retorna cor menu parametrizável
+	const fundo1 = window.localStorage.getItem('fundo1');
+	const fundo2 = window.localStorage.getItem('fundo2');
+	const fundo3 = window.localStorage.getItem('fundo3');
+	const fundo4 = window.localStorage.getItem('fundo4');
+	
+	if(fundo1){
+		document.body.style.backgroundImage = fundo1
+		document.getElementById("fundo1").checked = true;
+	}
+	else if(fundo2){
+		document.body.style.backgroundImage = fundo2
+		document.getElementById("fundo2").checked = true;
+	}
+	else if(fundo3){
+		document.body.style.backgroundImage = fundo3
+		document.getElementById("fundo3").checked = true;
+	}
+	else if(fundo4){
+		document.body.style.backgroundImage = fundo4
+		document.getElementById("fundo4").checked = true;
+	}
+	
 	</script>
 </body>
 </html>

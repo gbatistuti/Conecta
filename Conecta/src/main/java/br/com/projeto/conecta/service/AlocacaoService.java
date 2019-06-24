@@ -1,20 +1,28 @@
 package br.com.projeto.conecta.service;
 
+import java.io.IOException;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.time.LocalTime;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 
 import br.com.projeto.conecta.domain.Agendamento;
 import br.com.projeto.conecta.domain.Alocacoes;
 import br.com.projeto.conecta.repository.AlocacaoRepository;
+import br.com.projeto.conecta.repository.GeradorDeRelatorios;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperPrint;
 
 @Service
 public class AlocacaoService {
@@ -25,6 +33,10 @@ public class AlocacaoService {
 	private ProjetoService projetoService;
 	@Autowired
 	private AlocacaoRepository alocacaoRepository;
+	@Autowired
+	private GeradorDeRelatorios geradorDeRelatorios;
+	@Autowired
+	private ResourceLoader resourceLoader;
 
 	@Transactional
 	@Cacheable(value = "alocacoesCache")
@@ -74,5 +86,13 @@ public class AlocacaoService {
 
 	public Alocacoes getAlocacao(Integer idAlocacao) {
 		return alocacaoRepository.getOne(idAlocacao);
+	}
+
+	public JasperPrint exportaAlocacoesPorPeriodoPdf(String dataInicio, String dataFim) throws IOException, SQLException, JRException {
+		String caminho = resourceLoader.getResource("classpath:/relatorios/alocacoesPorPeriodo.jrxml").getURI().getPath();
+		Map<String, Object> parametros = new HashMap<String, Object>();
+		parametros.put("dataInicio", dataInicio);
+		parametros.put("dataFim", dataFim);
+		return geradorDeRelatorios.exportJrxml(caminho, parametros);		
 	}
 }

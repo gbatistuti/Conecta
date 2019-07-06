@@ -1,12 +1,14 @@
 package br.com.projeto.conecta.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import br.com.projeto.conecta.domain.Grupo;
-import br.com.projeto.conecta.domain.Usuarios;
+import br.com.projeto.conecta.domain.Usuario;
 
+@Repository
 public interface GrupoRepository extends JpaRepository<Grupo, Integer> {
 
-	Usuarios findByUsuariosIn(Usuarios usuario);
+	Usuario findByUsuariosIn(Usuario usuario);
 	
 }

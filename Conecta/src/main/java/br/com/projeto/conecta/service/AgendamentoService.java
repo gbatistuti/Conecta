@@ -10,7 +10,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import br.com.projeto.conecta.domain.Agendamento;
-import br.com.projeto.conecta.domain.Usuarios;
+import br.com.projeto.conecta.domain.Usuario;
 import br.com.projeto.conecta.repository.AgendamentoRepository;
 
 @Service
@@ -38,7 +38,7 @@ public class AgendamentoService {
 	}
 
 	@Cacheable(value = "agendamentosPorUsuarioCache")
-	public List<Agendamento> buscarAgendamentosPorUsuario(Usuarios usuario) {
+	public List<Agendamento> buscarAgendamentosPorUsuario(Usuario usuario) {
 		return agendamentoRepository.findByCliente(usuario);
 	}
 
@@ -73,7 +73,7 @@ public class AgendamentoService {
 
 		float horas = Duration.between(horaFimAlocacao, horaFImDisponivel).toMinutes();
 		horas /= 60;
-		if (horas >= agendamento.getPedido().getSugestaoDeHoras()) {
+		if (horas >= agendamento.getPedido().getHorasContratadas()) {
 			return true;
 		} else {
 			return false;
@@ -81,7 +81,7 @@ public class AgendamentoService {
 	}
 
 	public boolean validaCreditos(Agendamento agendamento) {
-		float creditosASeremDescontados = agendamento.getPedido().getSugestaoDeHoras()
+		float creditosASeremDescontados = agendamento.getPedido().getHorasContratadas()
 				* agendamento.getDisponivel().getConsultor().getCreditosPorHora();
 		if (creditosASeremDescontados <= agendamento.getPedido().getProjeto().getQtdCreditos()) {
 			return true;

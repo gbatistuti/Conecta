@@ -10,21 +10,21 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "LIDERES")
 @PrimaryKeyJoinColumn(name = "idUsuario")
-public class Lider extends Usuarios {
+public class Lider extends Usuario {
 
 	private String unidade;
 
 	@OneToMany(mappedBy = "criadoPor")
-	private List<Alocacoes> alocacao;
+	private List<Alocacao> alocacao;
 
 	public Lider() {
 	}
 
-	public List<Alocacoes> getAlocacao() {
+	public List<Alocacao> getAlocacao() {
 		return alocacao;
 	}
 
-	public void setAlocacao(List<Alocacoes> alocacao) {
+	public void setAlocacao(List<Alocacao> alocacao) {
 		this.alocacao = alocacao;
 	}
 

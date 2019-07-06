@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.projeto.conecta.domain.Agendamento;
 import br.com.projeto.conecta.domain.Pedido;
-import br.com.projeto.conecta.domain.Usuarios;
+import br.com.projeto.conecta.domain.Usuario;
 import br.com.projeto.conecta.repository.PedidoRepository;
 
 @Service
@@ -37,13 +37,9 @@ public class PedidoService {
 	}
 
 	@Cacheable(value = "pedidosPorUsuarioCache")
-	public List<Pedido> buscarPedidosPorUsuario(Usuarios usuario) {
+	public List<Pedido> buscarPedidosPorUsuario(Usuario usuario) {
 		return pedidoRepository.findByCliente(usuario);
 	}
-
-//	public List<Pedido>buscarPorStatus(){
-//		return pedidoRepository.findByStatus();
-//	}
 
 	public void atualizarCandidaturaPedido(Integer idPedido) {
 		pedidoRepository.atualizaCandidatura(idPedido);

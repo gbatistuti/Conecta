@@ -1,6 +1,7 @@
 package br.com.projeto.conecta.domain;
 
 import java.sql.Date;
+import java.time.LocalTime;
 import java.util.Calendar;
 
 import javax.persistence.Entity;
@@ -15,41 +16,51 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "RECUSADOS")
-public class Recusado {
+@Table(name = "ALOCACOES")
+public class Alocacao {
 
-	@Id
+	@Id	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer idRecusado;
-
-	private String motivo;
+	private Integer idAlocacao;
 	
+	private String motivo;
+	private LocalTime horaInicio;
+	private LocalTime horaFim;
 	private Date data;
-
+	
 	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "ID_AGENDAMENTO")
 	private Agendamento agendamento;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name = "ID_CRIADO_POR")
-	private Usuarios criadoPor;
+	@JoinColumn(name = "ID_LIDER")
+	private Lider lider;
 	
-	public Recusado() {
-	}
 	
-	public Recusado(String motivo, Date data, Agendamento agendamento, Usuarios criadoPor) {
-		this.motivo = motivo;
-		this.data = data;
+	public Alocacao() {}
+	
+	public Alocacao(Agendamento agendamento, Lider criadoPor, LocalTime horaInicio, LocalTime horaFim, String motivo) {
 		this.agendamento = agendamento;
-		this.criadoPor = criadoPor;
+		this.lider = criadoPor;
+		this.horaInicio = horaInicio;
+		this.horaFim = horaFim;
+		this.motivo = motivo;
 	}
 
-	public Integer getIdRecusado() {
-		return idRecusado;
+	public Integer getIdAlocacao() {
+		return idAlocacao;
 	}
 
-	public void setIdRecusado(Integer idRecusado) {
-		this.idRecusado = idRecusado;
+	public void setIdAlocacao(Integer idAlocacao) {
+		this.idAlocacao = idAlocacao;
+	}
+
+	public Lider getCriadoPor() {
+		return lider;
+	}
+
+	public void setCriadoPor(Lider criadoPor) {
+		this.lider = criadoPor;
 	}
 
 	public String getMotivo() {
@@ -68,14 +79,22 @@ public class Recusado {
 		this.agendamento = agendamento;
 	}
 
-	public Usuarios getCriadoPor() {
-		return criadoPor;
+	public LocalTime getHoraInicio() {
+		return horaInicio;
 	}
 
-	public void setCriadoPor(Usuarios criadoPor) {
-		this.criadoPor = criadoPor;
+	public void setHoraInicio(LocalTime horaInicio) {
+		this.horaInicio = horaInicio;
 	}
-	
+
+	public LocalTime getHoraFim() {
+		return horaFim;
+	}
+
+	public void setHoraFim(LocalTime horaFim) {
+		this.horaFim = horaFim;
+	}
+
 	public Date getData() {
 		return data;
 	}

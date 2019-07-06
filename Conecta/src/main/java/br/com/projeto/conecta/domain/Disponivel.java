@@ -18,16 +18,14 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "DISPONIVEIS")
-public class Disponiveis {
+public class Disponivel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idDisponivel;
 	
 	private LocalTime horaInicio;
-	
 	private LocalTime horaFim;
-	
 	private Date data;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
@@ -37,9 +35,9 @@ public class Disponiveis {
 	@OneToMany(mappedBy = "disponivel")
 	private List<Agendamento> agendamento;
 	
-	public Disponiveis() {}
+	public Disponivel() {}
 	
-	public Disponiveis(Integer idDisponivel, LocalTime horaInicio, LocalTime horaFim, Date data, Consultor consultor) {
+	public Disponivel(Integer idDisponivel, LocalTime horaInicio, LocalTime horaFim, Date data, Consultor consultor) {
 		this.idDisponivel = idDisponivel;
 		this.horaInicio = horaInicio;
 		this.horaFim = horaFim;
@@ -91,7 +89,6 @@ public class Disponiveis {
 	public void data() {
 		Calendar calendar = Calendar.getInstance();
 		this.data = new Date(calendar.getTime().getTime());
-		
 	}
 
 }

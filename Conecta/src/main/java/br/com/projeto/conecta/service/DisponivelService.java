@@ -10,7 +10,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import br.com.projeto.conecta.domain.Disponiveis;
+import br.com.projeto.conecta.domain.Disponivel;
 import br.com.projeto.conecta.repository.DisponivelRepository;
 
 @Service
@@ -21,25 +21,25 @@ public class DisponivelService {
 	
 	@Transactional
 	@Cacheable(value = "disponiveisCache")
-	public List<Disponiveis> buscarTodos(){
+	public List<Disponivel> buscarTodos(){
 		Date data = new Date();
 		return disponivelRepository.findByDate(data);
 	}
 
 	@Transactional
 	@CacheEvict(value = {"disponiveisCache", "validaApontamentoCache"}, allEntries = true)
-	public void salvarApontamento(Disponiveis disponiveis) {
+	public void salvarApontamento(Disponivel disponiveis) {
 		disponivelRepository.save(disponiveis);
 	}
 	
 	@Transactional
 	@Cacheable(value = "validaApontamentoCache")
-	public Disponiveis validaApontamento(String email) {
+	public Disponivel validaApontamento(String email) {
 		Date data = new Date();
 		return disponivelRepository.findByUserAndDate(data, email);
 	}
 	
-	public Disponiveis getDisponivel(int id) {
+	public Disponivel getDisponivel(int id) {
 		return disponivelRepository.getOne(id);
 	}
 }

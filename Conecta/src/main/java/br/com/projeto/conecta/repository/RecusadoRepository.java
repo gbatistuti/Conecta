@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
-import br.com.projeto.conecta.domain.Recusado;
+import br.com.projeto.conecta.domain.Reprovado;
 
-public interface RecusadoRepository extends JpaRepository<Recusado, Integer> {
+@Repository
+public interface RecusadoRepository extends JpaRepository<Reprovado, Integer> {
 	
 	@Query("select r from Recusado r join fetch r.agendamento a join fetch a.pedido p join fetch p.projeto join fetch a.disponivel d join fetch d.consultor")
-	List<Recusado> findAll();
+	List<Reprovado> findAll();
 }

@@ -7,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
@@ -20,15 +19,10 @@ public class Pedido {
 	private Integer idPedido;
 
 	private String titulo;
-
 	private String descricao;
-
-	private int sugestaoDeHoras;
-
+	private int horasContratadas;
 	private String status;
-	
 	private String origem;
-	
 	private boolean candidatura;
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -37,16 +31,16 @@ public class Pedido {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ID_CRIADO_POR")
-	private Usuarios criadoPor;
+	private Usuario criadoPor;
 
 	public Pedido() {
 	}
 
-	public Pedido(Integer idPedido, String titulo, String descricao, int sugestaoDeHoras, String status, String origem, Projeto projeto, Usuarios criadoPor) {
+	public Pedido(Integer idPedido, String titulo, String descricao, int horasContratadas, String status, String origem, Projeto projeto, Usuario criadoPor) {
 		this.idPedido = idPedido;
 		this.titulo = titulo;
 		this.descricao = descricao;
-		this.sugestaoDeHoras = sugestaoDeHoras;
+		this.horasContratadas = horasContratadas;
 		this.status = status;
 		this.origem = origem;
 		this.projeto = projeto;
@@ -77,12 +71,12 @@ public class Pedido {
 		this.descricao = descricao;
 	}
 
-	public int getSugestaoDeHoras() {
-		return sugestaoDeHoras;
+	public int getHorasContratadas() {
+		return horasContratadas;
 	}
 
-	public void setSugestaoDeHoras(int sugestaoDeHoras) {
-		this.sugestaoDeHoras = sugestaoDeHoras;
+	public void setHorasContratadas(int horasContratadas) {
+		this.horasContratadas = horasContratadas;
 	}
 	
 	public String getStatus() {
@@ -109,11 +103,11 @@ public class Pedido {
 		this.projeto = projeto;
 	}
 
-	public Usuarios getCriadoPor() {
+	public Usuario getCriadoPor() {
 		return criadoPor;
 	}
 	
-	public void setCriadoPor(Usuarios criadoPor) {
+	public void setCriadoPor(Usuario criadoPor) {
 		this.criadoPor = criadoPor;
 	}
 

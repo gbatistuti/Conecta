@@ -13,7 +13,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import br.com.projeto.conecta.domain.Agendamento;
-import br.com.projeto.conecta.domain.Alocacoes;
+import br.com.projeto.conecta.domain.Alocacao;
 import br.com.projeto.conecta.repository.AlocacaoRepository;
 
 @Service
@@ -28,12 +28,12 @@ public class AlocacaoService {
 
 	@Transactional
 	@Cacheable(value = "alocacoesCache")
-	public List<Alocacoes> buscarTodos() {
+	public List<Alocacao> buscarTodos() {
 		return alocacaoRepository.findAll();
 	}
 
 	@CacheEvict(value = {"agendamentosPorStatusCache", "ultimaHoraFimDeAlocacaoDoConsultorCache", "alocacoesCache", "projetosTodosCache", "projetosCache"}, allEntries = true)
-	public void salvarAlocacao(Alocacoes alocacao) {
+	public void salvarAlocacao(Alocacao alocacao) {
 		alocacaoRepository.save(alocacao);
 	}
 
@@ -72,7 +72,7 @@ public class AlocacaoService {
 		return horaFim;
 	}
 
-	public Alocacoes getAlocacao(Integer idAlocacao) {
+	public Alocacao getAlocacao(Integer idAlocacao) {
 		return alocacaoRepository.getOne(idAlocacao);
 	}
 }

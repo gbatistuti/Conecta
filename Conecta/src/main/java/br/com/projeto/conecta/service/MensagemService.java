@@ -10,13 +10,13 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import br.com.projeto.conecta.domain.Agendamento;
-import br.com.projeto.conecta.domain.Alocacoes;
-import br.com.projeto.conecta.domain.Disponiveis;
+import br.com.projeto.conecta.domain.Alocacao;
+import br.com.projeto.conecta.domain.Disponivel;
 import br.com.projeto.conecta.domain.Lider;
 import br.com.projeto.conecta.domain.Mensagem;
 import br.com.projeto.conecta.domain.Pedido;
-import br.com.projeto.conecta.domain.Recusado;
-import br.com.projeto.conecta.domain.Usuarios;
+import br.com.projeto.conecta.domain.Reprovado;
+import br.com.projeto.conecta.domain.Usuario;
 
 @Service
 public class MensagemService {
@@ -35,7 +35,7 @@ public class MensagemService {
 	
 	
 	@Async
-	public void emailApontamento(Disponiveis disponivel) {
+	public void emailApontamento(Disponivel disponivel) {
 		Mensagem mensagem = new Mensagem(disponivel.getConsultor().getEmail(),
 				"Apontamento realizado | " + hoje,
 				"Olá, " + disponivel.getConsultor().getNome() 
@@ -50,7 +50,7 @@ public class MensagemService {
 	}
 	
 	@Async
-	public void emailCandidatura(Disponiveis disponivel, Integer idPedido) {
+	public void emailCandidatura(Disponivel disponivel, Integer idPedido) {
 		Pedido pedido = pedidoService.getInformacoesEmailCandidatura(idPedido);
 		Mensagem mensagem = new Mensagem(disponivel.getConsultor().getEmail(),
 				"Candidatura realizada | " + hoje,
@@ -60,7 +60,7 @@ public class MensagemService {
 						+ "\nProjeto: " + pedido.getProjeto().getNome()
 						+ "\nTítulo do Pedido: " + pedido.getTitulo()
 						+ "\nDescrição do Pedido: " + pedido.getDescricao()
-						+ "\nHoras contratadas: " + pedido.getSugestaoDeHoras()
+						+ "\nHoras contratadas: " + pedido.getHorasContratadas()
 						+ "\n\nAtenciosamente,"
 						+ "\n\nEquipe TOTVS Conecta");
 		
@@ -68,7 +68,7 @@ public class MensagemService {
 	}
 	
 	@Async
-	public void emailCriacaoPedido(Pedido pedido, Usuarios usuario) {
+	public void emailCriacaoPedido(Pedido pedido, Usuario usuario) {
 		Mensagem mensagem = new Mensagem(usuario.getEmail(),
 				"Pedido Criado | " + hoje,
 				"Olá, " + usuario.getNome() 
@@ -76,7 +76,7 @@ public class MensagemService {
 						+ "\nTítulo do Pedido: " + pedido.getTitulo()
 						+ "\nDescrição do Pedido: " + pedido.getDescricao()
 						+ "\nProjeto: " + pedido.getProjeto().getNome()
-						+ "\nHoras contratadas: " + pedido.getSugestaoDeHoras()
+						+ "\nHoras contratadas: " + pedido.getHorasContratadas()
 						+ "\n\nAtenciosamente,"
 						+ "\n\nEquipe TOTVS Conecta");
 		
@@ -84,7 +84,7 @@ public class MensagemService {
 	}
 
 	@Async
-	public void emailCriacaoAgendamento(Usuarios usuario, Agendamento agendamento) {
+	public void emailCriacaoAgendamento(Usuario usuario, Agendamento agendamento) {
 		Mensagem mensagem = new Mensagem(usuario.getEmail(),
 				"Agendamento Criado | " + hoje,
 				"Olá, " + usuario.getNome() 
@@ -93,7 +93,7 @@ public class MensagemService {
 						+ "\nTítulo do Agendamento: " + agendamento.getPedido().getTitulo()
 						+ "\nDescrição do Pedido: " + agendamento.getPedido().getDescricao()
 						+ "\nProjeto: " + agendamento.getPedido().getProjeto().getNome()
-						+ "\nHoras contratadas: " + agendamento.getPedido().getSugestaoDeHoras()
+						+ "\nHoras contratadas: " + agendamento.getPedido().getHorasContratadas()
 						+ "\n\nAtenciosamente,"
 						+ "\n\nEquipe TOTVS Conecta");
 		
@@ -101,7 +101,7 @@ public class MensagemService {
 	}
 
 	public void emailAprovacaoConsultor(Integer idAlocacao, Integer idPedido) {
-		Alocacoes alocacao = alocacaoService.getAlocacao(idAlocacao);
+		Alocacao alocacao = alocacaoService.getAlocacao(idAlocacao);
 		Pedido pedido = pedidoService.getInformacoesEmailCandidatura(idPedido);
 		Mensagem mensagem = new Mensagem(alocacao.getAgendamento().getDisponivel().getConsultor().getEmail(),
 				"Alocação Criada | " + hoje,
@@ -121,7 +121,7 @@ public class MensagemService {
 	}
 
 	public void emailAprovacaoLider(Integer idAlocacao, Integer idPedido) {
-		Alocacoes alocacao = alocacaoService.getAlocacao(idAlocacao);
+		Alocacao alocacao = alocacaoService.getAlocacao(idAlocacao);
 		Pedido pedido = pedidoService.getInformacoesEmailCandidatura(idPedido);
 		Mensagem mensagem = new Mensagem(alocacao.getCriadoPor().getEmail(),
 				"Alocação Criada | " + hoje,
@@ -140,7 +140,7 @@ public class MensagemService {
 		filaMensagemService.add(mensagem);
 	}
 
-	public void emailReprovacaoLider(Integer idAgendamento, Lider lider, Recusado recusado) {
+	public void emailReprovacaoLider(Integer idAgendamento, Lider lider, Reprovado recusado) {
 		Agendamento agendamento	= agendamentoService.getAgendamento(idAgendamento);
 		Mensagem mensagem = new Mensagem(lider.getEmail(),
 				"Agendamento Recusado | " + hoje,
@@ -158,7 +158,7 @@ public class MensagemService {
 		filaMensagemService.add(mensagem);
 	}
 
-	public void emailReprovacaoCliente(Recusado recusado) {
+	public void emailReprovacaoCliente(Reprovado recusado) {
 		Mensagem mensagem = new Mensagem(recusado.getAgendamento().getPedido().getProjeto().getCliente().getEmail(),
 				"Agendamento Recusado | " + hoje,
 						"Seu pedido foi recusado."

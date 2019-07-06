@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.projeto.conecta.domain.Agendamento;
-import br.com.projeto.conecta.domain.Disponiveis;
+import br.com.projeto.conecta.domain.Disponivel;
 import br.com.projeto.conecta.domain.Pedido;
-import br.com.projeto.conecta.domain.Usuarios;
+import br.com.projeto.conecta.domain.Usuario;
 import br.com.projeto.conecta.security.ConectaUserDetailsService;
 import br.com.projeto.conecta.service.AgendamentoService;
 import br.com.projeto.conecta.service.DisponivelService;
@@ -36,7 +36,7 @@ public class ConsultorController {
 
 	@GetMapping
 	public String listarPedidos(ModelMap model, HttpServletRequest request) {
-		Usuarios usuario = sessao.getCurrentUser();
+		Usuario usuario = sessao.getCurrentUser();
 		request.setAttribute("nome", usuario.getNome());
 		model.addAttribute("pedido", pedidoService.filtrarPorOrigemECandidatura());
 		model.addAttribute("pedidoCandidatado", agendamentoService.buscarCandidaturasByUsuario(sessao.getCurrentUserEmail()));
@@ -44,7 +44,7 @@ public class ConsultorController {
 	}
 
 	@PostMapping("/apontar")
-	public String salvarApontamento(Disponiveis disponiveis) {
+	public String salvarApontamento(Disponivel disponiveis) {
 		if (disponivelService.validaApontamento(sessao.getCurrentUserEmail()) == null) {
 			disponiveis.setConsultor(sessao.getCurrentConsultor());
 			disponivelService.salvarApontamento(disponiveis);
@@ -58,13 +58,13 @@ public class ConsultorController {
 
 	@PostMapping("/candidatar")
 	public String candidatarAoPedido(Agendamento agendamento, Pedido pedido) {
-		Disponiveis disponivel = disponivelService.validaApontamento(sessao.getCurrentUserEmail());
+		Disponivel disponivel = disponivelService.validaApontamento(sessao.getCurrentUserEmail());
 		
 		if (disponivel == null) {
 			return "redirect:/homeConsultor?falha2";
 		}
 
-		Usuarios usuario = disponivel.getConsultor();
+		Usuario usuario = disponivel.getConsultor();
 		
 		pedidoService.atualizarCandidaturaPedido(pedido.getIdPedido());
 		

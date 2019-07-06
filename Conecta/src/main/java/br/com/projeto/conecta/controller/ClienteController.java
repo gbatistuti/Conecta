@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.projeto.conecta.domain.Agendamento;
 import br.com.projeto.conecta.domain.Pedido;
-import br.com.projeto.conecta.domain.Usuarios;
+import br.com.projeto.conecta.domain.Usuario;
 import br.com.projeto.conecta.security.ConectaUserDetailsService;
 import br.com.projeto.conecta.service.AgendamentoService;
 import br.com.projeto.conecta.service.DisponivelService;
@@ -39,7 +39,7 @@ public class ClienteController {
 	
 	@GetMapping
 	public String listarDisponiveis(ModelMap model, HttpServletRequest request) {
-		Usuarios usuario = sessao.getCurrentUser();
+		Usuario usuario = sessao.getCurrentUser();
 		request.setAttribute("nome", usuario.getNome());
 		
 		model.addAttribute("projeto",projetoService.buscarPor(sessao.getCurrentUserEmail()));
@@ -51,7 +51,7 @@ public class ClienteController {
 	
 	@PostMapping("/criarpedido")
 	public String criarPedido(Pedido pedido, Model model) {
-		Usuarios usuario = sessao.getCurrentUser();
+		Usuario usuario = sessao.getCurrentUser();
 		
 		pedido.setCriadoPor(usuario);
 		pedido.setOrigem("Pedido");
@@ -64,7 +64,7 @@ public class ClienteController {
 	
 	@PostMapping("/criaragendamento")
 	public String criarAgendamento(Pedido pedido, Agendamento agendamento, Model model) {
-		Usuarios usuario = sessao.getCurrentUser();
+		Usuario usuario = sessao.getCurrentUser();
 		
 		pedido.setCriadoPor(usuario);
 		pedido.setOrigem("Agendamento");
@@ -87,7 +87,7 @@ public class ClienteController {
 	
 	@GetMapping("/acompanhamentoCliente")
 	public String listarPedidosEAgendamentos(Pedido pedido, Agendamento agendamento, Model model, HttpServletRequest request) {
-		Usuarios usuario = sessao.getCurrentUser();
+		Usuario usuario = sessao.getCurrentUser();
 		request.setAttribute("nome", usuario.getNome());
 		
 		model.addAttribute("pedidosRealizados", pedidoService.buscarPedidosPorUsuario(usuario));

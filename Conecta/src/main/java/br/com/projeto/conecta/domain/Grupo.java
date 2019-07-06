@@ -18,7 +18,7 @@ public class Grupo implements Serializable, GrantedAuthority {
 	private String nomeGrupo;
 	
 	@ManyToMany(mappedBy = "grupo")
-	private List<Usuarios> usuarios;
+	private List<Usuario> usuarios;
 	
 	public String getNomeGrupo() {
 		return nomeGrupo;
@@ -28,11 +28,11 @@ public class Grupo implements Serializable, GrantedAuthority {
 		this.nomeGrupo = nomeGrupo;
 	}
 
-	public List<Usuarios> getUsuarios() {
+	public List<Usuario> getUsuarios() {
 		return usuarios;
 	}
 
-	public void setUsuarios(List<Usuarios> usuarios) {
+	public void setUsuarios(List<Usuario> usuarios) {
 		this.usuarios = usuarios;
 	}
 
@@ -41,7 +41,5 @@ public class Grupo implements Serializable, GrantedAuthority {
 		// TODO Auto-generated method stub
 		return this.nomeGrupo;
 	}
-
-	
 
 }

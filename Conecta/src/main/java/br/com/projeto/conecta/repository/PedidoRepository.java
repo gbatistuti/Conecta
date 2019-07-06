@@ -10,13 +10,13 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.projeto.conecta.domain.Pedido;
-import br.com.projeto.conecta.domain.Usuarios;
+import br.com.projeto.conecta.domain.Usuario;
 
 @Repository
 public interface PedidoRepository extends JpaRepository<Pedido, Integer>{
 
 	@Query("select u from Pedido u join fetch u.projeto where u.criadoPor = :usuario and u.origem = 'pedido'")
-	List<Pedido> findByCliente(Usuarios usuario);
+	List<Pedido> findByCliente(Usuario usuario);
 	
 	@Query("select u from Pedido u join fetch u.projeto where u.candidatura=false and u.origem='pedido' and status='aguardando'")
 	List<Pedido> getPedidoFiltrado();

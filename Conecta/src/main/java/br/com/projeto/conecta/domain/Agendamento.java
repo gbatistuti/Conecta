@@ -1,6 +1,5 @@
 package br.com.projeto.conecta.domain;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -21,11 +20,11 @@ public class Agendamento {
 
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "ID_DISPONIVEL")
-	private Disponiveis disponivel;
+	private Disponivel disponivel;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "ID_CRIADO_POR")
-	private Usuarios criadoPor;
+	private Usuario criadoPor;
 	
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ID_PEDIDO")
@@ -34,7 +33,7 @@ public class Agendamento {
 	public Agendamento() {
 	}
 
-	public Agendamento(Disponiveis disponivel, Usuarios criadoPor, Pedido pedido) {
+	public Agendamento(Disponivel disponivel, Usuario criadoPor, Pedido pedido) {
 		this.disponivel= disponivel;
 		this.criadoPor = criadoPor;
 		this.pedido = pedido;
@@ -48,19 +47,19 @@ public class Agendamento {
 		this.idAgendamento = idAgendamento;
 	}
 
-	public Disponiveis getDisponivel() {
+	public Disponivel getDisponivel() {
 		return disponivel;
 	}
 
-	public void setDisponivel(Disponiveis disponivel) {
+	public void setDisponivel(Disponivel disponivel) {
 		this.disponivel = disponivel;
 	}
 
-	public Usuarios getCriadoPor() {
+	public Usuario getCriadoPor() {
 		return criadoPor;
 	}
 
-	public void setCriadoPor(Usuarios criadoPor) {
+	public void setCriadoPor(Usuario criadoPor) {
 		this.criadoPor = criadoPor;
 	}
 

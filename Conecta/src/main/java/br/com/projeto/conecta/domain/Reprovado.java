@@ -1,10 +1,8 @@
 package br.com.projeto.conecta.domain;
 
 import java.sql.Date;
-import java.time.LocalTime;
 import java.util.Calendar;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -17,54 +15,40 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ALOCACOES")
-public class Alocacoes {
+@Table(name = "REPROVADOS")
+public class Reprovado {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer idAlocacao;
-	
+	private Integer idReprovado;
+
 	private String motivo;
+	private Date data;
 
 	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "ID_AGENDAMENTO")
 	private Agendamento agendamento;
-
+	
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name = "ID_LIDER")
-	private Lider criadoPor;
+	@JoinColumn(name = "ID_CRIADO_POR")
+	private Usuario criadoPor;
 	
-	private LocalTime horaInicio;
+	public Reprovado() {
+	}
 	
-	private LocalTime horaFim;
-	
-	private Date data;
-	
-	
-	public Alocacoes() {}
-	
-	public Alocacoes(Agendamento agendamento, Lider criadoPor, LocalTime horaInicio, LocalTime horaFim, String motivo) {
+	public Reprovado(String motivo, Date data, Agendamento agendamento, Usuario criadoPor) {
+		this.motivo = motivo;
+		this.data = data;
 		this.agendamento = agendamento;
 		this.criadoPor = criadoPor;
-		this.horaInicio = horaInicio;
-		this.horaFim = horaFim;
-		this.motivo = motivo;
 	}
 
-	public Integer getIdAlocacao() {
-		return idAlocacao;
+	public Integer getIdRecusado() {
+		return idReprovado;
 	}
 
-	public void setIdAlocacao(Integer idAlocacao) {
-		this.idAlocacao = idAlocacao;
-	}
-
-	public Lider getCriadoPor() {
-		return criadoPor;
-	}
-
-	public void setCriadoPor(Lider criadoPor) {
-		this.criadoPor = criadoPor;
+	public void setIdRecusado(Integer idRecusado) {
+		this.idReprovado = idRecusado;
 	}
 
 	public String getMotivo() {
@@ -83,22 +67,14 @@ public class Alocacoes {
 		this.agendamento = agendamento;
 	}
 
-	public LocalTime getHoraInicio() {
-		return horaInicio;
+	public Usuario getCriadoPor() {
+		return criadoPor;
 	}
 
-	public void setHoraInicio(LocalTime horaInicio) {
-		this.horaInicio = horaInicio;
+	public void setCriadoPor(Usuario criadoPor) {
+		this.criadoPor = criadoPor;
 	}
-
-	public LocalTime getHoraFim() {
-		return horaFim;
-	}
-
-	public void setHoraFim(LocalTime horaFim) {
-		this.horaFim = horaFim;
-	}
-
+	
 	public Date getData() {
 		return data;
 	}
@@ -111,6 +87,5 @@ public class Alocacoes {
 	public void data() {
 		Calendar calendar = Calendar.getInstance();
 		this.data = new Date(calendar.getTime().getTime());
-		
 	}
 }

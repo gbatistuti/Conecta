@@ -2,7 +2,6 @@ package br.com.projeto.conecta.domain;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -20,6 +19,7 @@ public class Projeto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idProjeto;
+	
 	private String codigoProjeto;
 	private String nome;
 	private String produto;

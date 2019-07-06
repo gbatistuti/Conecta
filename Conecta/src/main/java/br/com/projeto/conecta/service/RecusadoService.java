@@ -9,7 +9,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import br.com.projeto.conecta.domain.Recusado;
+import br.com.projeto.conecta.domain.Reprovado;
 import br.com.projeto.conecta.repository.RecusadoRepository;
 
 @Service
@@ -20,12 +20,12 @@ public class RecusadoService{
 	
 	@Transactional
 	@CacheEvict(value = {"agendamentosPorStatusCache", "reprovacoesCache"}, allEntries = true)
-	public void salvarRecusado(Recusado recusado) {
+	public void salvarRecusado(Reprovado recusado) {
 		recusadoRepository.save(recusado);
 	}
 
 	@Cacheable(value = "reprovacoesCache")
-	public List<Recusado> buscarTodos() {
+	public List<Reprovado> buscarTodos() {
 		return recusadoRepository.findAll();
 	}
 }

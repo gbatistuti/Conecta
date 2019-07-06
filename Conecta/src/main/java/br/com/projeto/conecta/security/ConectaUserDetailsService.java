@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 
 import br.com.projeto.conecta.domain.Consultor;
 import br.com.projeto.conecta.domain.Lider;
-import br.com.projeto.conecta.domain.Usuarios;
+import br.com.projeto.conecta.domain.Usuario;
 import br.com.projeto.conecta.repository.ConsultorRepository;
 import br.com.projeto.conecta.repository.LiderRepository;
 import br.com.projeto.conecta.repository.UsuariosRepository;
@@ -33,7 +33,7 @@ public class ConectaUserDetailsService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-		Usuarios usuario = usuariosRepository.findByEmail(userName);
+		Usuario usuario = usuariosRepository.findByEmail(userName);
 
 		if (usuario == null) {
 			throw new UsernameNotFoundException("Usuário não encontrado!!");
@@ -57,7 +57,7 @@ public class ConectaUserDetailsService implements UserDetailsService {
 	}
 	
 	@Cacheable(value = "user")
-	public Usuarios getCurrentUser() {
+	public Usuario getCurrentUser() {
 		String email = getCurrentUserEmail();
 		return usuariosRepository.findByEmail(email);
 	}

@@ -13,7 +13,4 @@ public interface ConsultorRepository extends JpaRepository<Consultor, Integer>{
 	Consultor getById(Integer currentUserId);
 
 	Consultor findByEmail(String email);
-	
-	
-	
 }

@@ -14,19 +14,19 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "CONSULTORES")
 @PrimaryKeyJoinColumn(name = "idUsuario")
-public class Consultor extends Usuarios {
+public class Consultor extends Usuario {
 
 	private String unidade;
 	private String cargo;
 	private Float creditosPorHora;
 
 	@OneToMany(mappedBy = "consultor")
-	private List<Disponiveis> disponiveis;
+	private List<Disponivel> disponiveis;
 
 	@ManyToMany
 	@JoinTable(name = "HABILIDADES_ESPECIFICAS_TEM_RECURSOS", joinColumns = {
 			@JoinColumn(name = "idUsuario") }, inverseJoinColumns = { @JoinColumn(name = "idHabilidadeEspecifica") })
-	private List<HabilidadesEspecificas> habilidadesEspecificas;
+	private List<HabilidadeEspecifica> habilidadesEspecificas;
 
 	public Consultor() {
 	}
@@ -66,19 +66,19 @@ public class Consultor extends Usuarios {
 		this.creditosPorHora = creditosPorHora;
 	}
 
-	public List<Disponiveis> getDisponiveis() {
+	public List<Disponivel> getDisponiveis() {
 		return disponiveis;
 	}
 
-	public void setDisponiveis(List<Disponiveis> disponiveis) {
+	public void setDisponiveis(List<Disponivel> disponiveis) {
 		this.disponiveis = disponiveis;
 	}
 
-	public List<HabilidadesEspecificas> getHabilidadesEspecificas() {
+	public List<HabilidadeEspecifica> getHabilidadesEspecificas() {
 		return habilidadesEspecificas;
 	}
 
-	public void setHabilidadesEspecificas(List<HabilidadesEspecificas> habilidadesEspecificas) {
+	public void setHabilidadesEspecificas(List<HabilidadeEspecifica> habilidadesEspecificas) {
 		this.habilidadesEspecificas = habilidadesEspecificas;
 	}
 }

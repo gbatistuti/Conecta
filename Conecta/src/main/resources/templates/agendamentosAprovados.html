@@ -40,5 +40,30 @@
 			</table>
 		</div>
 	</div>
+	<script type="text/javascript">
+	// retorna cor menu parametrizável
+	const fundo1 = window.localStorage.getItem('fundo1');
+	const fundo2 = window.localStorage.getItem('fundo2');
+	const fundo3 = window.localStorage.getItem('fundo3');
+	const fundo4 = window.localStorage.getItem('fundo4');
+	
+	if(fundo1){
+		document.body.style.backgroundImage = fundo1
+		document.getElementById("fundo1").checked = true;
+	}
+	else if(fundo2){
+		document.body.style.backgroundImage = fundo2
+		document.getElementById("fundo2").checked = true;
+	}
+	else if(fundo3){
+		document.body.style.backgroundImage = fundo3
+		document.getElementById("fundo3").checked = true;
+	}
+	else if(fundo4){
+		document.body.style.backgroundImage = fundo4
+		document.getElementById("fundo4").checked = true;
+	}
+	
+	</script>
 </body>
 </html>

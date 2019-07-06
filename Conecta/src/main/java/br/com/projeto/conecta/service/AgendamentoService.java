@@ -1,17 +1,25 @@
 package br.com.projeto.conecta.service;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.time.Duration;
 import java.time.LocalTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 
 import br.com.projeto.conecta.domain.Agendamento;
 import br.com.projeto.conecta.domain.Usuario;
 import br.com.projeto.conecta.repository.AgendamentoRepository;
+import br.com.projeto.conecta.repository.GeradorDeRelatorios;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperPrint;
 
 @Service
 public class AgendamentoService {
@@ -20,6 +28,10 @@ public class AgendamentoService {
 	private AgendamentoRepository agendamentoRepository;
 	@Autowired
 	private AlocacaoService alocacaoService;
+	@Autowired
+	private GeradorDeRelatorios geradorDeRelatorios;
+	@Autowired
+	private ResourceLoader resourceLoader;
 
 	public List<Agendamento> BuscarTodos() {
 		return agendamentoRepository.findAll();
@@ -89,4 +101,29 @@ public class AgendamentoService {
 			return false;
 		}
 	}
+	
+	public JasperPrint exportaAgendamentosPorPeriodoPdf(String dataInicio, String dataFim) throws SQLException, JRException, IOException {
+		String caminho = resourceLoader.getResource("classpath:/relatorios/agendamentosPorPeriodo.jrxml").getURI().getPath();
+		Map<String, Object> parametros = new HashMap<String, Object>();
+		parametros.put("dataInicio", dataInicio);
+		parametros.put("dataFim", dataFim);
+		return geradorDeRelatorios.exportJrxml(caminho, parametros);		
+	}
+
+	public JasperPrint exportaAgendamentosCriadoPorPdf(String usuario) throws IOException, SQLException, JRException {
+		String caminho = resourceLoader.getResource("classpath:/relatorios/agendamentosCriadoPor.jrxml").getURI().getPath();
+		Map<String, Object> parametros = new HashMap<String, Object>();
+		parametros.put("criadoPor", usuario);
+		return geradorDeRelatorios.exportJrxml(caminho, parametros);
+	}
+
+	public JasperPrint exportaAgendamentosCriadoPorEPeriodoPdf(String usuario, String dataInicio, String dataFim) throws IOException, SQLException, JRException {
+		String caminho = resourceLoader.getResource("classpath:/relatorios/agendamentosPorPeriodoECliente.jrxml").getURI().getPath();
+		Map<String, Object> parametros = new HashMap<String, Object>();
+		parametros.put("CriadoPor", usuario);
+		parametros.put("dataInicio", dataInicio);
+		parametros.put("dataFim", dataFim);
+		return geradorDeRelatorios.exportJrxml(caminho, parametros);
+	}
+	
 }

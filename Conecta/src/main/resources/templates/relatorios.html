@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<title>Relatórios | Líder</title>
+<link rel="stylesheet" type="text/css" media="screen"
+	th:href="@{/css/relatorios.css}" />
+<!--Sera substituido pelo fragmento head que contem associaçoes para menu funcionar-->
+<th:block th:replace="fragments/head :: head"></th:block>
+</head>
+<body id="menuBody">
+	<!--Sera substituido pelo fragmento do menu-->
+	<div th:replace="fragments/menuLider :: menu"></div>
+
+	<div id="content">
+		<div class="fundo painelDeRelatorio">
+			<img class="iconRelatorio" th:src="@{/img/relatorio/barChart.png}"
+				alt="Relatorio" />
+			<h3 class="nomeDoRelatorio">Disponibilidade</h3>
+			<br />
+			<p>Disponibilidades de um consultor em um período.</p>
+			<form action="/homeLider/relatorios/gerarDisponiveisPorPeridoEConsultor" class="formDeInpusRela" method="POST">
+				<span class="span">Consultor</span><br><input type="text" name="consultor" class="inputRelatorio"><br>
+				<span class="span">Data Início</span><br><input type="date" name="dataInicio" class="inputRelatorio"><br>
+				<span class="span">Data Fim</span><br><input type="date" name="dataFim" class="inputRelatorio">
+				<br>
+				<button class="buttonGerar">Gerar</button>
+				<input type="hidden" th:name="${_csrf.parameterName}"
+										th:value="${_csrf.token}" />
+			</form>
+		</div>
+
+		<div class="fundo painelDeRelatorio">
+			<img class="iconRelatorio" th:src="@{/img/relatorio/barChart.png}"
+				alt="Relatorio" />
+			<h3 class="nomeDoRelatorio">Agendamentos</h3>
+			<br />
+			<p>Agendamentos de um usuário em um período.</p>
+			<form action="/homeLider/relatorios/gerarAgendamentosPorPeriodoECliente" class="formDeInpusRela" method="POST">
+				<span class="span">Usuário</span><br><input type="text" name="usuario" class="inputRelatorio"><br>
+				<span class="span">Data Início</span><br><input type="date" name="dataInicio" class="inputRelatorio"><br>
+				<span class="span">Data Fim</span><br><input type="date" name="dataFim" class="inputRelatorio">
+				<br>
+				<button class="buttonGerar">Gerar</button>
+				<input type="hidden" th:name="${_csrf.parameterName}"
+										th:value="${_csrf.token}" />
+			</form>
+		</div>
+
+		<div class="fundo painelDeRelatorio">
+			<img class="iconRelatorio" th:src="@{/img/relatorio/barChart.png}"
+				alt="Relatorio" />
+			<h3 class="nomeDoRelatorio">Disponibilidade Por Período</h3>
+			<br />
+			<p>Consultores disponiveis em um determinado período.</p>
+			<form action="/homeLider/relatorios/gerarDisponiveisPorPeriodo" class="formDeInpusRela formDeInpusRela2" method="POST">
+				<span class="span">Data Início</span><br><input type="date" name="dataInicio" class="inputRelatorio"/><br>
+				<span class="span">Data Fim</span><br><input type="date" name="dataFim" class="inputRelatorio"/><br>
+				<button type="submit" class="buttonGerar2Input">Gerar</button>
+				<input type="hidden" th:name="${_csrf.parameterName}"
+										th:value="${_csrf.token}" />
+			</form>
+		</div>
+
+		<div class="fundo painelDeRelatorio">
+			<img class="iconRelatorio" th:src="@{/img/relatorio/barChart.png}"
+				alt="Relatorio" />
+			<h3 class="nomeDoRelatorio">Agendamentos Por Período</h3>
+			<br />
+			<p>Agendamentos criados em um determinado período.</p>
+			<form action="/homeLider/relatorios/gerarAgendamentosPorPeriodo" class="formDeInpusRela formDeInpusRela2" method="POST">
+				<span class="span">Data Início</span><br><input type="date" name="dataInicio" class="inputRelatorio"/><br>
+				<span class="span">Data Fim</span><br><input type="date" name="dataFim" class="inputRelatorio"/><br>
+				<button class="buttonGerar2Input">Gerar</button>
+				<input type="hidden" th:name="${_csrf.parameterName}"
+								th:value="${_csrf.token}" />
+			</form>			
+		</div>
+
+		<div class="fundo painelDeRelatorio">
+			<img class="iconRelatorio" th:src="@{/img/relatorio/barChart.png}"
+				alt="Relatorio" />
+			<h3 class="nomeDoRelatorio">Alocações Por Período</h3>
+			<br />
+			<p>Alocações realizadas em um determinado período.</p>
+			<form action="/homeLider/relatorios/gerarAlocacoesPorPeriodo" class="formDeInpusRela formDeInpusRela2" method="POST">
+				<span class="span">Data Início</span><br><input type="date" name="dataInicio" class="inputRelatorio"/><br>
+				<span class="span">Data Fim</span><br><input type="date" name="dataFim" class="inputRelatorio"/><br>
+				<button class="buttonGerar2Input">Gerar</button>
+				<input type="hidden" th:name="${_csrf.parameterName}"
+										th:value="${_csrf.token}" />
+			</form>
+		</div>
+
+		<div class="fundo painelDeRelatorio">
+			<img class="iconRelatorio" th:src="@{/img/relatorio/barChart.png}"
+				alt="Relatorio" />
+			<h3 class="nomeDoRelatorio">Alocações Por Projeto</h3>
+			<br />
+			<p>Alocações realizadas para um projeto especificado.</p>
+			<form action="/homeLider/relatorios/gerarAlocacoesPorProjeto" class="formDeInpusRela formDeInpusRela1" method="POST">
+				<span class="span">Projeto</span><br><input type="text" name="projeto" class="inputRelatorio"><br>
+				<button class="buttonGerar1Input">Gerar</button>
+				<input type="hidden" th:name="${_csrf.parameterName}"
+										th:value="${_csrf.token}" />
+			</form>	
+		</div>
+
+		<div class="fundo painelDeRelatorio">
+			<img class="iconRelatorio" th:src="@{/img/relatorio/barChart.png}"
+				alt="Relatorio" />
+			<h3 class="nomeDoRelatorio">Disponibilidade Por Consultor</h3>
+			<br />
+			<p>Disponibilidade referente a um determinado consultor.</p>
+			<form action="/homeLider/relatorios/gerarDisponiveisPorConsultor" class="formDeInpusRela formDeInpusRela1" method="POST">
+				<span class="span">Consultor</span><br><input type="text" name="consultor" class="inputRelatorio"><br>
+				<button class="buttonGerar1Input">Gerar</button>
+				<input type="hidden" th:name="${_csrf.parameterName}"
+										th:value="${_csrf.token}" />
+			</form>		
+		</div>
+
+		<div class="fundo painelDeRelatorio">
+			<img class="iconRelatorio" th:src="@{/img/relatorio/barChart.png}"
+				alt="Relatorio" />
+			<h3 class="nomeDoRelatorio">Agendamentos Por Usuário</h3>
+			<br />
+			<p>Agendamentos criados por um determinado usuário.</p>
+			<form action="/homeLider/relatorios/gerarAgendamentosCriadoPor" class="formDeInpusRela formDeInpusRela1" method="POST">
+				<span class="span">Usuário</span><br><input type="text" name ="usuario" class="inputRelatorio"><br>
+				<button class="buttonGerar1Input">Gerar</button>
+				<input type="hidden" th:name="${_csrf.parameterName}"
+										th:value="${_csrf.token}" />
+			</form>
+		</div>
+		</div>
+		<script type="text/javascript">
+		// retorna cor menu parametrizável
+		const fundo1 = window.localStorage.getItem('fundo1');
+		const fundo2 = window.localStorage.getItem('fundo2');
+		const fundo3 = window.localStorage.getItem('fundo3');
+		const fundo4 = window.localStorage.getItem('fundo4');
+		
+		if(fundo1){
+			document.body.style.backgroundImage = fundo1
+			document.getElementById("fundo1").checked = true;
+		}
+		else if(fundo2){
+			document.body.style.backgroundImage = fundo2
+			document.getElementById("fundo2").checked = true;
+		}
+		else if(fundo3){
+			document.body.style.backgroundImage = fundo3
+			document.getElementById("fundo3").checked = true;
+		}
+		else if(fundo4){
+			document.body.style.backgroundImage = fundo4
+			document.getElementById("fundo4").checked = true;
+		}
+		
+		</script>
+</body>
+</html>

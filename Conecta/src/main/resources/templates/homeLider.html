@@ -189,10 +189,12 @@
 	<script type="text/javascript">
 		// Troca de itens da pagina
 		function abreAprovar() {
+			var reprovar = document.getElementById("reprovar");
 			var aprovar = document.getElementById("aprovar");
 			var selecao = document.getElementById("selecao");
 			aprovar.style.display = "block"
 			selecao.style.display = "none"
+			reprovar.style.display = "none"
 		}
 
 		function abreReprovar() {
@@ -305,6 +307,9 @@
 			var dados = td.innerHTML
 
 			colocaInformacaoInput(dados, "inputDadosAgendamento")
+			
+			abreSeletor()
+			AbreAprovar()
 		}
 
 		function colocaInformacaoInput(dados, idInput) {
@@ -314,6 +319,31 @@
 				input[i].value = dados
 			}
 		}
+		
+		// retorna cor menu parametrizável
+		const fundo1 = window.localStorage.getItem('fundo1');
+		const fundo2 = window.localStorage.getItem('fundo2');
+		const fundo3 = window.localStorage.getItem('fundo3');
+		const fundo4 = window.localStorage.getItem('fundo4');
+		
+		if(fundo1){
+			document.body.style.backgroundImage = fundo1
+			document.getElementById("fundo1").checked = true;
+		}
+		else if(fundo2){
+			document.body.style.backgroundImage = fundo2
+			document.getElementById("fundo2").checked = true;
+		}
+		else if(fundo3){
+			document.body.style.backgroundImage = fundo3
+			document.getElementById("fundo3").checked = true;
+		}
+		else if(fundo4){
+			document.body.style.backgroundImage = fundo4
+			document.getElementById("fundo4").checked = true;
+		}
+		
+		
 	</script>
 </body>
 </html>

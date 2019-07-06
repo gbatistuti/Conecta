@@ -2,6 +2,7 @@ package br.com.projeto.conecta.domain;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -16,15 +17,20 @@ import javax.persistence.Table;
 @PrimaryKeyJoinColumn(name = "idUsuario")
 public class Consultor extends Usuario {
 
+	@Column(nullable = false)
 	private String unidade;
+	
+	@Column(nullable = false)
 	private String cargo;
+	
+	@Column(nullable = false)
 	private Float creditosPorHora;
 
 	@OneToMany(mappedBy = "consultor")
 	private List<Disponivel> disponiveis;
 
 	@ManyToMany
-	@JoinTable(name = "CONSULTOR_TEM_HABILIDADES_ESPECIFICAS", joinColumns = {
+	@JoinTable(name = "CONSULTORES_TEM_HABILIDADES_ESPECIFICAS", joinColumns = {
 			@JoinColumn(name = "idUsuario") }, inverseJoinColumns = { @JoinColumn(name = "idHabilidadeEspecifica") })
 	private List<HabilidadeEspecifica> habilidadesEspecificas;
 

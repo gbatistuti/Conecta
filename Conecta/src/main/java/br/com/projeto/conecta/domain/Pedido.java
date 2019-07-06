@@ -1,5 +1,9 @@
 package br.com.projeto.conecta.domain;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -18,12 +22,29 @@ public class Pedido {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idPedido;
 
+	@Column(nullable = false)
 	private String titulo;
+	
+	@Column(nullable = false)
 	private String descricao;
+	
+	@Column(nullable = false)
 	private int horasContratadas;
+	
+	@Column(nullable = false)
 	private String status;
+	
+	@Column(nullable = false)
 	private String origem;
+	
+	@Column(nullable = false)
 	private boolean candidatura;
+	
+	@Column(nullable = false)
+	private LocalDate logData;
+	
+	@Column(nullable = false)
+	private LocalTime logHora;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ID_PROJETO")
@@ -118,10 +139,20 @@ public class Pedido {
 	public void setCandidatura(boolean candidatura) {
 		this.candidatura = candidatura;
 	}
+	
+	public LocalDate getLogData() {
+		return logData;
+	}
+	
+	public LocalTime getLogHora() {
+		return logHora;
+	}
 
 	@PrePersist
 	public void prePersist() {
 		this.status = "Aguardando";
 		this.candidatura = false;
+		this.logData = LocalDate.now();
+		this.logHora = LocalTime.now();
 	}
 }

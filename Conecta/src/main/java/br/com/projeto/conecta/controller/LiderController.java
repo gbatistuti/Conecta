@@ -90,7 +90,7 @@ public class LiderController {
 	@Transactional
 	public String reprovarAgendamento(Reprovado recusado, Agendamento agendamento) {
 		pedidoService.atualizarStatus("Recusado",agendamento);
-		Reprovado recusadoNovo = new Reprovado(recusado.getMotivo(), recusado.getData(), agendamento, sessao.getCurrentLider());
+		Reprovado recusadoNovo = new Reprovado(recusado.getMotivo(), agendamento, sessao.getCurrentLider());
 		recusadoService.salvarRecusado(recusadoNovo);
 
 		mensagemService.emailReprovacaoLider(agendamento.getIdAgendamento(), sessao.getCurrentLider(), recusado);

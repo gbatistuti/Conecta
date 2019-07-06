@@ -2,6 +2,7 @@ package br.com.projeto.conecta.domain;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,6 +18,7 @@ public class HabilidadePrincipal {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idHabilidadePrincipal;
 	
+	@Column(nullable = false)
 	private String nomeHabilidadePrincipal;
 
 	@OneToMany(mappedBy = "habilidadesPrincipais")

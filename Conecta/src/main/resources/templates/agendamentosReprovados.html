@@ -25,8 +25,8 @@
 				</thead>
 				<tbody>
 					<tr th:each="r : ${reprovados}">
-						<td class="alinhadoADireita" th:text="${r.idRecusado}"></td>
-						<td class="alinhadoADireita" th:text="${r.data}">
+						<td class="alinhadoADireita" th:text="${r.idReprovado}"></td>
+						<td class="alinhadoADireita" th:text="${r.logData}">
 						<td class="alinhadoAEsquerda"
 							th:text="${r.agendamento.disponivel.consultor.nome}"></td>
 						<td class="alinhadoAEsquerda"

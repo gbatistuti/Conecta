@@ -9,7 +9,7 @@
     agendamentos.id_agendamento,
     usu.nome as nome_consultor,
     u.nome as criado_por,
-    disponiveis.data,
+    disponiveis.log_data,
     pedidos.horas_contratadas
 from
    disponiveis
@@ -28,8 +28,8 @@ where u.nome =  $P{criadoPor}]]>
 	<field name="criado_por" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="criado_por"/>
 	</field>
-	<field name="data" class="java.sql.Date">
-		<property name="com.jaspersoft.studio.field.label" value="data"/>
+	<field name="log_data" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="log_data"/>
 	</field>
 	<field name="horas_contratadas" class="java.lang.Integer">
 		<property name="com.jaspersoft.studio.field.label" value="horas_contratadas"/>
@@ -152,7 +152,7 @@ where u.nome =  $P{criadoPor}]]>
 				<textElement textAlignment="Center">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{data}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{log_data}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="444" y="0" width="111" height="20" uuid="2b58295d-af61-4ec6-a86a-0e38f800a975">

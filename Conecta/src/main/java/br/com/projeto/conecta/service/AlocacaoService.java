@@ -1,10 +1,9 @@
 package br.com.projeto.conecta.service;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -56,8 +55,7 @@ public class AlocacaoService {
 
 	@Cacheable(value = "ultimaHoraFimDeAlocacaoDoConsultorCache")
 	public LocalTime buscaUltimaHoraFimDeAlocacaoDoConsultor(Agendamento agendamento) {
-		Calendar calendar = Calendar.getInstance();
-		Date data = new Date(calendar.getTime().getTime());
+		LocalDate data = LocalDate.now();
 		LocalTime ultimaHora = alocacaoRepository.findbyUltimaHora(data, agendamento.getDisponivel().getIdDisponivel());
 
 		if (ultimaHora == null || ultimaHora.isBefore(LocalTime.now())) {

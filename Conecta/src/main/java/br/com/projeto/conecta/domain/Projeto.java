@@ -2,6 +2,7 @@ package br.com.projeto.conecta.domain;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -20,11 +21,22 @@ public class Projeto {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idProjeto;
 	
+	@Column(nullable = false, unique = true)
 	private String codigoProjeto;
+	
+	@Column(nullable = false)
 	private String nome;
+	
+	@Column(nullable = false)
 	private String produto;
+	
+	@Column(nullable = false)
 	private String modulo;
+	
+	@Column(nullable = false)
 	private String coordenador;
+	
+	@Column(nullable = false)
 	private Float qtdCreditos;
 	
 	@ManyToOne(fetch=FetchType.LAZY)

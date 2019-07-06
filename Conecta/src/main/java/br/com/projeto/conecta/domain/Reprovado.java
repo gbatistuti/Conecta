@@ -1,8 +1,9 @@
 package br.com.projeto.conecta.domain;
 
-import java.sql.Date;
-import java.util.Calendar;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -22,8 +23,14 @@ public class Reprovado {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idReprovado;
 
+	@Column(nullable = false)
 	private String motivo;
-	private Date data;
+	
+	@Column(nullable = false)
+	private LocalDate logData;
+	
+	@Column(nullable = false)
+	private LocalTime logHora;
 
 	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "ID_AGENDAMENTO")
@@ -36,14 +43,13 @@ public class Reprovado {
 	public Reprovado() {
 	}
 	
-	public Reprovado(String motivo, Date data, Agendamento agendamento, Usuario criadoPor) {
+	public Reprovado(String motivo, Agendamento agendamento, Usuario criadoPor) {
 		this.motivo = motivo;
-		this.data = data;
 		this.agendamento = agendamento;
 		this.criadoPor = criadoPor;
 	}
 
-	public Integer getIdRecusado() {
+	public Integer getIdReprovado() {
 		return idReprovado;
 	}
 
@@ -75,17 +81,17 @@ public class Reprovado {
 		this.criadoPor = criadoPor;
 	}
 	
-	public Date getData() {
-		return data;
+	public LocalDate getLogData() {
+		return logData;
 	}
 
-	public void setData(Date data) {
-		this.data = data;
+	public LocalTime getLogHora() {
+		return logHora;
 	}
-	
+
 	@PrePersist
-	public void data() {
-		Calendar calendar = Calendar.getInstance();
-		this.data = new Date(calendar.getTime().getTime());
+	public void prePersist() {
+		this.logData = LocalDate.now();
+		this.logHora = LocalTime.now();
 	}
 }

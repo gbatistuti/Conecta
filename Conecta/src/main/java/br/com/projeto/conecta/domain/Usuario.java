@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,17 +25,24 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Usuario implements Serializable, UserDetails {
 
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idUsuario;
+	
+	@Column(nullable = false)
 	private String nome;
+	
+	@Column(nullable = false, unique = true)
 	private String email;
+	
+	@Column(nullable = false)
 	private String senha;
+	
+	@Column(nullable = false, unique = true)
 	private String codigo;
 
 	@ManyToMany
-	@JoinTable(name = "GRUPOS_USUARIOS", joinColumns = @JoinColumn(name = "idUsuario", referencedColumnName = "idUsuario"), inverseJoinColumns = @JoinColumn(name = "idGrupo", referencedColumnName = "nomeGrupo"))
+	@JoinTable(name = "USUARIOS_TEM_GRUPOS", joinColumns = @JoinColumn(name = "idUsuario", referencedColumnName = "idUsuario"), inverseJoinColumns = @JoinColumn(name = "idGrupo", referencedColumnName = "nomeGrupo"))
 	private List<Grupo> grupo;
 	
 	@OneToMany(mappedBy = "criadoPor")

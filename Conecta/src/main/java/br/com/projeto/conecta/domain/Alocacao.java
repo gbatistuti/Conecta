@@ -1,9 +1,9 @@
 package br.com.projeto.conecta.domain;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Calendar;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -23,10 +23,20 @@ public class Alocacao {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idAlocacao;
 	
+	@Column(nullable = true, length = 200)
 	private String motivo;
+	
+	@Column(nullable = false)
 	private LocalTime horaInicio;
+	
+	@Column(nullable = false)
 	private LocalTime horaFim;
-	private Date data;
+	
+	@Column(nullable = false)
+	private LocalDate logData;
+	
+	@Column(nullable = false)
+	private LocalTime logHora;
 	
 	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "ID_AGENDAMENTO")
@@ -95,18 +105,17 @@ public class Alocacao {
 		this.horaFim = horaFim;
 	}
 
-	public Date getData() {
-		return data;
+	public LocalDate getLogData() {
+		return logData;
 	}
 
-	public void setData(Date data) {
-		this.data = data;
+	public LocalTime getLogHora() {
+		return logHora;
 	}
 	
 	@PrePersist
-	public void data() {
-		Calendar calendar = Calendar.getInstance();
-		this.data = new Date(calendar.getTime().getTime());
-		
+	public void prePersist() {
+		this.logData = LocalDate.now();
+		this.logHora = LocalTime.now();
 	}
 }

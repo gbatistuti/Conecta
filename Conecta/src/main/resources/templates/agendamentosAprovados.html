@@ -28,7 +28,7 @@
 				<tbody>
 					<tr th:each="a : ${aprovados}">
 						<td class="alinhadoADireita" th:text="${a.idAlocacao}"></td>
-						<td class="alinhadoADireita" th:text="${a.data}"></td>
+						<td class="alinhadoADireita" th:text="${a.logData}"></td>
 						<td class="alinhadoADireita" th:text="${a.horaInicio}"></td>
 						<td class="alinhadoADireita" th:text="${a.horaFim}"></td>
 						<td class="alinhadoAEsquerda" th:text="${a.agendamento.disponivel.consultor.nome}"></td>

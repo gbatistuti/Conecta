@@ -2,6 +2,7 @@ package br.com.projeto.conecta.domain;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -12,6 +13,7 @@ import javax.persistence.Table;
 @PrimaryKeyJoinColumn(name="idUsuario")
 public class Cliente extends Usuario{
 
+	@Column(nullable = false)
 	private String telefone;
 	
 	@OneToMany(mappedBy = "cliente")

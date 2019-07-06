@@ -2,6 +2,7 @@ package br.com.projeto.conecta.domain;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -20,6 +21,7 @@ public class HabilidadeEspecifica {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idHabilidadeEspecifica;
 
+	@Column(nullable = false)
 	private String nomeHabilidadeEspecifica;
 
 	@ManyToOne(fetch=FetchType.LAZY)

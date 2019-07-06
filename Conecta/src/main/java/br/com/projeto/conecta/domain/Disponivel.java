@@ -1,10 +1,10 @@
 package br.com.projeto.conecta.domain;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Calendar;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -24,9 +24,17 @@ public class Disponivel {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idDisponivel;
 	
+	@Column(nullable = false)
 	private LocalTime horaInicio;
+	
+	@Column(nullable = false)
 	private LocalTime horaFim;
-	private Date data;
+
+	@Column(nullable = false)
+	private LocalDate logData;
+	
+	@Column(nullable = false)
+	private LocalTime logHora;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "idUsuario")
@@ -37,11 +45,10 @@ public class Disponivel {
 	
 	public Disponivel() {}
 	
-	public Disponivel(Integer idDisponivel, LocalTime horaInicio, LocalTime horaFim, Date data, Consultor consultor) {
+	public Disponivel(Integer idDisponivel, LocalTime horaInicio, LocalTime horaFim, Consultor consultor) {
 		this.idDisponivel = idDisponivel;
 		this.horaInicio = horaInicio;
 		this.horaFim = horaFim;
-		this.data = data;
 		this.consultor = consultor;
 	}
 
@@ -69,13 +76,6 @@ public class Disponivel {
 		this.horaFim = horaFim;
 	}
 
-	public Date getData() {
-		return data;
-	}
-
-	public void setData(Date data) {
-		this.data = data;
-	}
 
 	public Consultor getConsultor() {
 		return consultor;
@@ -84,11 +84,27 @@ public class Disponivel {
 	public void setConsultor(Consultor consultor) {
 		this.consultor = consultor;
 	}	
+	
+	public List<Agendamento> getAgendamento() {
+		return agendamento;
+	}
+
+	public void setAgendamento(List<Agendamento> agendamento) {
+		this.agendamento = agendamento;
+	}
+
+	public LocalDate getLogData() {
+		return logData;
+	}
+
+	public LocalTime getLogHora() {
+		return logHora;
+	}
 
 	@PrePersist
-	public void data() {
-		Calendar calendar = Calendar.getInstance();
-		this.data = new Date(calendar.getTime().getTime());
+	public void prePersist() {
+		this.logData = LocalDate.now();
+		this.logHora = LocalTime.now();
 	}
 
 }

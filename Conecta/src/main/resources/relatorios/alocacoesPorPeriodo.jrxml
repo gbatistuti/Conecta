@@ -8,7 +8,7 @@
 	<queryString language="SQL">
 		<![CDATA[select 
     alocacoes.id_alocacao,
-    alocacoes.data,
+    alocacoes.log_data,
     alocacoes.hora_inicio,
     alocacoes.hora_fim,
     usuarios.nome as nomeConsultor,
@@ -26,8 +26,8 @@ where alocacoes.data BETWEEN  $P{dataInicio}  and  $P{dataFim}]]>
 	<field name="id_alocacao" class="java.lang.Integer">
 		<property name="com.jaspersoft.studio.field.label" value="id_alocacao"/>
 	</field>
-	<field name="data" class="java.sql.Date">
-		<property name="com.jaspersoft.studio.field.label" value="data"/>
+	<field name="log_data" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="log_data"/>
 	</field>
 	<field name="hora_inicio" class="java.sql.Time">
 		<property name="com.jaspersoft.studio.field.label" value="hora_inicio"/>
@@ -162,7 +162,7 @@ where alocacoes.data BETWEEN  $P{dataInicio}  and  $P{dataFim}]]>
 				<textElement textAlignment="Center">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{data}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{log_data}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="HH:mm a">
 				<reportElement x="158" y="0" width="79" height="20" uuid="065049aa-88bf-4d8e-88f0-164d430558ca">

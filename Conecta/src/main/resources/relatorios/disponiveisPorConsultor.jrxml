@@ -10,7 +10,7 @@
 	usuarios.nome,
 	usuarios.email,
     usuarios.id_usuario,
-	disponiveis.data,
+	disponiveis.log_data,
 	disponiveis.hora_inicio,
 	disponiveis.hora_fim
 FROM disponiveis INNER JOIN usuarios on disponiveis.id_usuario = usuarios.id_usuario
@@ -31,8 +31,8 @@ where usuarios.nome = $P{consultor}]]>
 	<field name="COLUMN_5" class="java.lang.Integer">
 		<property name="com.jaspersoft.studio.field.label" value="id_usuario"/>
 	</field>
-	<field name="data" class="java.sql.Date">
-		<property name="com.jaspersoft.studio.field.label" value="data"/>
+	<field name="log_data" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="log_data"/>
 	</field>
 	<field name="hora_inicio" class="java.sql.Time">
 		<property name="com.jaspersoft.studio.field.label" value="hora_inicio"/>
@@ -182,7 +182,7 @@ where usuarios.nome = $P{consultor}]]>
 				<textElement textAlignment="Center">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{data}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{log_data}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="HH:mm a">
 				<reportElement x="411" y="0" width="66" height="20" uuid="d966cf0b-c2e5-43c1-b8a2-b180586e77af">

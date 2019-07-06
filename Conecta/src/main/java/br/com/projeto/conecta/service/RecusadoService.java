@@ -19,7 +19,7 @@ public class RecusadoService{
 	private ReprovadoRepository recusadoRepository;
 	
 	@Transactional
-	@CacheEvict(value = {"agendamentosPorStatusCache", "reprovacoesCache"}, allEntries = true)
+	@CacheEvict(value = {"agendamentosPorStatusCache", "reprovacoesCache", "candidaturasPorUsuarioCache"}, allEntries = true)
 	public void salvarRecusado(Reprovado recusado) {
 		recusadoRepository.save(recusado);
 	}

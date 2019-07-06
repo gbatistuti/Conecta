@@ -1,6 +1,6 @@
 package br.com.projeto.conecta.repository;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,10 +13,10 @@ import br.com.projeto.conecta.domain.Disponivel;
 @Repository
 public interface DisponivelRepository extends JpaRepository<Disponivel, Integer>{
 
-	@Query("select u from Disponivel u where u.data = :hoje")
-	List<Disponivel> findByDate(@Param("hoje") Date data);
+	@Query("select u from Disponivel u where u.logData = :hoje")
+	List<Disponivel> findByDate(@Param("hoje") LocalDate data);
 	
 
-	@Query("select u from Disponivel u join fetch u.consultor where u.data = :data and u.consultor.email = :email")
-	Disponivel findByUserAndDate(@Param("data")Date data, @Param("email") String email);
+	@Query("select u from Disponivel u join fetch u.consultor where u.logData = :data and u.consultor.email = :email")
+	Disponivel findByUserAndDate(@Param("data")LocalDate data, @Param("email") String email);
 }

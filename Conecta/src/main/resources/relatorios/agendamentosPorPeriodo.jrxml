@@ -10,7 +10,7 @@
     agendamentos.id_agendamento,
     usu.nome as nome_consultor,
     u.nome as criado_por,
-    disponiveis.data,
+    disponiveis.log_data,
     pedidos.horas_contratadas
 from
    disponiveis
@@ -18,7 +18,7 @@ join usuarios as usu on disponiveis.id_usuario = usu.id_usuario
 join agendamentos on disponiveis.id_disponivel = agendamentos.id_disponivel
 join usuarios as u on agendamentos.id_criado_por = u.id_usuario
 join pedidos on agendamentos.id_pedido = pedidos.id_pedido
-where disponiveis.data BETWEEN  $P{dataInicio}  and  $P{dataFim}]]>
+where disponiveis.log_data BETWEEN  $P{dataInicio}  and  $P{dataFim}]]>
 	</queryString>
 	<field name="id_agendamento" class="java.lang.Integer">
 		<property name="com.jaspersoft.studio.field.label" value="id_agendamento"/>
@@ -29,8 +29,8 @@ where disponiveis.data BETWEEN  $P{dataInicio}  and  $P{dataFim}]]>
 	<field name="criado_por" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="criado_por"/>
 	</field>
-	<field name="data" class="java.sql.Date">
-		<property name="com.jaspersoft.studio.field.label" value="data"/>
+	<field name="data" class="java.time.LocalDate">
+		<property name="com.jaspersoft.studio.field.label" value="log_data"/>
 	</field>
 	<field name="horas_contratadas" class="java.lang.Integer">
 		<property name="com.jaspersoft.studio.field.label" value="horas_contratadas"/>
@@ -153,7 +153,7 @@ where disponiveis.data BETWEEN  $P{dataInicio}  and  $P{dataFim}]]>
 				<textElement textAlignment="Center">
 					<font size="14"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{data}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{log_data}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="444" y="0" width="111" height="20" uuid="06474b44-847f-46c6-97d2-4044d1ad2ae6">

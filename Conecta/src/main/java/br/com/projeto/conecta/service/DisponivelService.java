@@ -2,7 +2,7 @@ package br.com.projeto.conecta.service;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,7 +34,7 @@ public class DisponivelService {
 	@Transactional
 	@Cacheable(value = "disponiveisCache")
 	public List<Disponivel> buscarTodos(){
-		Date data = new Date();
+		LocalDate data = LocalDate.now();
 		return disponivelRepository.findByDate(data);
 	}
 
@@ -47,7 +47,7 @@ public class DisponivelService {
 	@Transactional
 	@Cacheable(value = "validaApontamentoCache")
 	public Disponivel validaApontamento(String email) {
-		Date data = new Date();
+		LocalDate data = LocalDate.now();
 		return disponivelRepository.findByUserAndDate(data, email);
 	}
 	

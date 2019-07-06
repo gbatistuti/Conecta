@@ -41,7 +41,7 @@ insert into usuarios(email, senha, codigo, nome) values
 
 
 
-insert into grupos_usuarios (id_usuario, id_grupo) values
+insert into usuarios_tem_grupos (id_usuario, id_grupo) values
 (1, 'ROLE_CLIENTE'),
 (2, 'ROLE_CLIENTE'),
 (3, 'ROLE_CLIENTE'),
@@ -134,7 +134,7 @@ insert into habilidades_especificas(nome_habilidade_especifica, id_habilidades_p
 ('Educacional',1),
 ('Manufatura',2);
 
-insert into consultor_tem_habilidades_especificas(id_usuario, id_habilidade_especifica) values 
+insert into consultores_tem_habilidades_especificas(id_usuario, id_habilidade_especifica) values 
 (11, 1), 
 (11, 5),
 (11, 6),  

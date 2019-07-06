@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import br.com.projeto.conecta.domain.HabilidadePrincipal;
 
 @Repository
-public interface HabilidadesPrincipaisRepository extends JpaRepository<HabilidadePrincipal, Integer> {
+public interface HabilidadePrincipalRepository extends JpaRepository<HabilidadePrincipal, Integer> {
 
 }

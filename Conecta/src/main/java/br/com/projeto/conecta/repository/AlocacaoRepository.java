@@ -12,10 +12,10 @@ import br.com.projeto.conecta.domain.Alocacao;
 
 public interface AlocacaoRepository extends JpaRepository<Alocacao, Integer> {
 
-	@Query("select a from Alocacoes a join fetch a.agendamento u join fetch u.pedido p join fetch p.projeto join fetch u.disponivel d join fetch d.consultor join fetch a.criadoPor")
+	@Query("select a from Alocacao a join fetch a.agendamento u join fetch u.pedido p join fetch p.projeto join fetch u.disponivel d join fetch d.consultor join fetch a.lider")
 	List<Alocacao> findAll();
 	
-	@Query("select max(u.horaFim) from Alocacoes u where u.agendamento.disponivel.idDisponivel = :disponiveis and u.data = :data")
+	@Query("select max(u.horaFim) from Alocacao u where u.agendamento.disponivel.idDisponivel = :disponiveis and u.data = :data")
 	LocalTime findbyUltimaHora(Date data, Integer disponiveis);
 	
 }

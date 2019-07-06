@@ -17,14 +17,14 @@ import br.com.projeto.conecta.domain.Lider;
 import br.com.projeto.conecta.domain.Usuario;
 import br.com.projeto.conecta.repository.ConsultorRepository;
 import br.com.projeto.conecta.repository.LiderRepository;
-import br.com.projeto.conecta.repository.UsuariosRepository;
+import br.com.projeto.conecta.repository.UsuarioRepository;
 
 @Repository
 @Transactional
 public class ConectaUserDetailsService implements UserDetailsService {
 
 	@Autowired
-	private UsuariosRepository usuariosRepository;
+	private UsuarioRepository UsuarioRepository;
 	@Autowired
 	private ConsultorRepository consultorRepository;
 	@Autowired
@@ -33,7 +33,7 @@ public class ConectaUserDetailsService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-		Usuario usuario = usuariosRepository.findByEmail(userName);
+		Usuario usuario = UsuarioRepository.findByEmail(userName);
 
 		if (usuario == null) {
 			throw new UsernameNotFoundException("Usuário não encontrado!!");
@@ -52,14 +52,14 @@ public class ConectaUserDetailsService implements UserDetailsService {
 
 	@Cacheable(value = "idUser")
 	public Integer getCurrentUserId() {
-		Integer usuarioLogado = usuariosRepository.findByEmail(getCurrentUserEmail()).getIdUsuario();
+		Integer usuarioLogado = UsuarioRepository.findByEmail(getCurrentUserEmail()).getIdUsuario();
 		return usuarioLogado;
 	}
 	
 	@Cacheable(value = "user")
 	public Usuario getCurrentUser() {
 		String email = getCurrentUserEmail();
-		return usuariosRepository.findByEmail(email);
+		return UsuarioRepository.findByEmail(email);
 	}
 	
 	@Cacheable(value = "consultor")

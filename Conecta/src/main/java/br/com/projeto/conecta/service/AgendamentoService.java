@@ -37,7 +37,7 @@ public class AgendamentoService {
 		return agendamentoRepository.findAll();
 	}
 
-	@CacheEvict(value = { "agendamentosPorUsuarioCache", "candidaturasPorUsuarioCache",
+	@CacheEvict(value = { "agendamentosPorUsuarioCache", "agendamentosPorStatusCache", "candidaturasPorUsuarioCache",
 			"pedidosFiltradosPorOrigemECandidaturaCache" }, allEntries = true)
 	public boolean salvarAgendamento(Agendamento agendamento) {
 		agendamentoRepository.save(agendamento);
@@ -72,7 +72,7 @@ public class AgendamentoService {
 	}
 
 	public float calculaCreditosParaDescontar(Agendamento agendamento) {
-		return agendamentoRepository.calcularCreditosPorHoraVezesSugestaoDeHoras(agendamento.getIdAgendamento());
+		return agendamentoRepository.calcularCreditosPorHoraVezeshorasContratadas(agendamento.getIdAgendamento());
 	}
 
 	public Integer buscarProjeto(Agendamento agendamento) {

@@ -34,7 +34,7 @@ public class Usuario implements Serializable, UserDetails {
 	private String codigo;
 
 	@ManyToMany
-	@JoinTable(name = "usuarios_grupos", joinColumns = @JoinColumn(name = "idUsuario", referencedColumnName = "idUsuario"), inverseJoinColumns = @JoinColumn(name = "idGrupo", referencedColumnName = "nomeGrupo"))
+	@JoinTable(name = "Usuario_grupos", joinColumns = @JoinColumn(name = "idUsuario", referencedColumnName = "idUsuario"), inverseJoinColumns = @JoinColumn(name = "idGrupo", referencedColumnName = "nomeGrupo"))
 	private List<Grupo> grupo;
 	
 	@OneToMany(mappedBy = "criadoPor")

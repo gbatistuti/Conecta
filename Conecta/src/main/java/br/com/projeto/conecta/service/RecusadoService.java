@@ -10,13 +10,13 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import br.com.projeto.conecta.domain.Reprovado;
-import br.com.projeto.conecta.repository.RecusadoRepository;
+import br.com.projeto.conecta.repository.ReprovadoRepository;
 
 @Service
 public class RecusadoService{
 
 	@Autowired
-	private RecusadoRepository recusadoRepository;
+	private ReprovadoRepository recusadoRepository;
 	
 	@Transactional
 	@CacheEvict(value = {"agendamentosPorStatusCache", "reprovacoesCache"}, allEntries = true)

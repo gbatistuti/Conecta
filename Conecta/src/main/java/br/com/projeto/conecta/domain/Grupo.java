@@ -28,12 +28,12 @@ public class Grupo implements Serializable, GrantedAuthority {
 		this.nomeGrupo = nomeGrupo;
 	}
 
-	public List<Usuario> getUsuarios() {
+	public List<Usuario> getUsuario() {
 		return usuarios;
 	}
 
-	public void setUsuarios(List<Usuario> usuarios) {
-		this.usuarios = usuarios;
+	public void setUsuario(List<Usuario> Usuario) {
+		this.usuarios = Usuario;
 	}
 
 	@Override

@@ -7,12 +7,12 @@ import org.springframework.stereotype.Repository;
 import br.com.projeto.conecta.domain.Usuario;
 
 @Repository
-public interface UsuariosRepository extends JpaRepository<Usuario, Integer>{
+public interface UsuarioRepository extends JpaRepository<Usuario, Integer>{
 
-	@Query("select u from Usuarios u join fetch u.grupo where u.email = :userName")
+	@Query("select u from Usuario u join fetch u.grupo where u.email = :userName")
 	Usuario findByEmail(String userName);
 
-	@Query("select u from Usuarios u where u.idUsuario = :currentUserId")
+	@Query("select u from Usuario u where u.idUsuario = :currentUserId")
 	Usuario getById(Integer currentUserId);
 	
 }

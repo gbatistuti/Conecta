@@ -53,7 +53,7 @@ public class ProjetoService {
 		projetoRepository.debitarCreditos(creditosParaDescontar, idProjeto);
 	}
 	
-	@CacheEvict(value = "projetosTodosCache", allEntries = true)
+	@CacheEvict(value = {"projetosTodosCache","projetosCache"}, allEntries = true)
 	public void atualizarCreditos(Float qtdCreditos, Integer idProjeto) {
 		projetoRepository.atualizarCreditos(qtdCreditos, idProjeto);
 	}

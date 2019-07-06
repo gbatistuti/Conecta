@@ -12,7 +12,7 @@
     usu.nome as nome_consultor,
     u.nome as criado_por,
     disponiveis.data,
-    pedidos.sugestao_de_horas
+    pedidos.horas_contratadas
 from
    disponiveis
 join usuarios as usu on disponiveis.id_usuario = usu.id_usuario
@@ -34,8 +34,8 @@ and u.nome = $P{CriadoPor}]]>
 	<field name="data" class="java.sql.Date">
 		<property name="com.jaspersoft.studio.field.label" value="data"/>
 	</field>
-	<field name="sugestao_de_horas" class="java.lang.Integer">
-		<property name="com.jaspersoft.studio.field.label" value="sugestao_de_horas"/>
+	<field name="horas_contratadas" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="horas_contratadas"/>
 	</field>
 	<background>
 		<band/>
@@ -164,7 +164,7 @@ and u.nome = $P{CriadoPor}]]>
 				<textElement textAlignment="Right">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{sugestao_de_horas}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{horas_contratadas}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

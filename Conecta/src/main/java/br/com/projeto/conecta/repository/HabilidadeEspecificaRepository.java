@@ -8,9 +8,9 @@ import org.springframework.stereotype.Repository;
 import br.com.projeto.conecta.domain.HabilidadeEspecifica;
 
 @Repository
-public interface HabilidadesEspecificasRepository extends JpaRepository<HabilidadeEspecifica, Integer>{
+public interface HabilidadeEspecificaRepository extends JpaRepository<HabilidadeEspecifica, Integer>{
 
-	@Query(value="select u.nomeHabilidadeEspecifica from HabilidadesEspecificas u where u.consultor = :idDisponivel")
+	@Query(value="select u.nomeHabilidadeEspecifica from HabilidadeEspecifica u where u.consultor = :idDisponivel")
 	String buscaHabilidadesEspecificasPorIdDisponivel(@Param("idDisponivel") Integer idDisponivel);
 	
 }

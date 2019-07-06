@@ -25,11 +25,11 @@ public interface AgendamentoRepository extends JpaRepository<Agendamento, Intege
 	@Query("select a.disponivel.consultor.creditosPorHora from Agendamento a where a.idAgendamento = :idAgendamento")
 	float findCreditosPorHora(@Param("idAgendamento")Integer idAgendamento);
 
-	@Query("select a.pedido.sugestaoDeHoras from Agendamento a where a.idAgendamento = :idAgendamento")
+	@Query("select a.pedido.horasContratadas from Agendamento a where a.idAgendamento = :idAgendamento")
 	int findHoras(@Param("idAgendamento")Integer idAgendamento);
 
-	@Query("select (a.pedido.sugestaoDeHoras * a.disponivel.consultor.creditosPorHora) from Agendamento a where a.idAgendamento = :idAgendamento")
-	float calcularCreditosPorHoraVezesSugestaoDeHoras(@Param("idAgendamento")Integer idAgendamento);
+	@Query("select (a.pedido.horasContratadas * a.disponivel.consultor.creditosPorHora) from Agendamento a where a.idAgendamento = :idAgendamento")
+	float calcularCreditosPorHoraVezeshorasContratadas(@Param("idAgendamento")Integer idAgendamento);
 
 	@Query("select a.pedido.projeto.idProjeto from Agendamento a where a.idAgendamento = :idAgendamento")
 	Integer findIdProjeto(@Param("idAgendamento")Integer idAgendamento);

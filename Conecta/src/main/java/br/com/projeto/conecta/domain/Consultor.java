@@ -24,7 +24,7 @@ public class Consultor extends Usuario {
 	private List<Disponivel> disponiveis;
 
 	@ManyToMany
-	@JoinTable(name = "HABILIDADES_ESPECIFICAS_TEM_RECURSOS", joinColumns = {
+	@JoinTable(name = "CONSULTOR_TEM_HABILIDADES_ESPECIFICAS", joinColumns = {
 			@JoinColumn(name = "idUsuario") }, inverseJoinColumns = { @JoinColumn(name = "idHabilidadeEspecifica") })
 	private List<HabilidadeEspecifica> habilidadesEspecificas;
 
